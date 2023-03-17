@@ -15,8 +15,8 @@ LOG   := printf "[$(CYAN)INFO$(RESET)] %s\n"
 OBJ_DIR   := obj
 LIBFT_DIR := libft
 INC_DIRS  := include $(LIBFT_DIR)
-# SRC_DIRS  :=
-# SRC_DIRS  := $(addprefix src/, $(SRC_DIRS))
+SRC_DIRS  := tuples
+SRC_DIRS  := $(addprefix src/, $(SRC_DIRS))
 SRC_DIRS  += src
 
 vpath %.h $(INC_DIRS)
@@ -24,9 +24,9 @@ vpath %.c $(SRC_DIRS)
 
 LIBFT   := $(LIBFT_DIR)/libft.a
 
-# HEADERS :=
+HEADERS := tuples.h
 
-SOURCES := main.c
+SOURCES := main.c models.c basic_math.c vector_math.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
@@ -71,6 +71,6 @@ fclean: clean
 	@$(LOG) "Removing $(NAME)"
 	@make fclean -C $(LIBFT_DIR) --no-print-directory --silent
 
-re: fclean all
+re: clean all
 
 .PHONY: all clean fclean re

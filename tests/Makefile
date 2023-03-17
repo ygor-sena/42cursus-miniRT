@@ -1,4 +1,4 @@
-TESTS := build
+TESTS := tuples
 
 CYAN  := \33[1;36m
 RESET := \033[0m
@@ -10,19 +10,19 @@ LIBFT_DIR := ../libft
 INC_DIRS  := ../include $(LIBFT_DIR)
 
 # Insert each new directory here
-# SRC_DIRS := new_ones
-# SRC_DIRS := $(addprefix $(SRC_DIR)/, $(SRC_DIRS))
-# SRC_DIRS += $(SRC_DIR)
+SRC_DIRS := tuples
+SRC_DIRS := $(addprefix $(SRC_DIR)/, $(SRC_DIRS))
+SRC_DIRS += $(SRC_DIR)
 
 vpath %.h $(INC_DIRS)
 vpath %.c $(SRC_DIRS)
 
-SOURCES :=
+SOURCES := models.c basic_math.c vector_math.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
 CFLAGS  := -Wall -Werror -Wextra -g $(addprefix -I,$(INC_DIRS))
-LDFLAGS := -L $(LIBFT_DIR) -lft -lcriterion
+LDFLAGS := -L $(LIBFT_DIR) -lft -lcriterion -lm
 
 define run
  	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@ && ./$@ --verbose
@@ -34,8 +34,8 @@ endef
 
 all: $(TESTS) clean
 
-.PHONY: build
-build: $(OBJS) test_build.c
+.PHONY: tuples
+tuples: $(OBJS) test_tuples.c
 	@$(call run, "$^")
 
 # Makefile rules to clean stdin/stdout/stderr test's files

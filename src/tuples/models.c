@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_build.c                                       :+:      :+:    :+:   */
+/*   models.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/10 15:05:46 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/03/10 15:19:14 by mdias-ma         ###   ########.fr       */
+/*   Created: 2023/03/17 12:53:44 by mdias-ma          #+#    #+#             */
+/*   Updated: 2023/03/17 12:54:07 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <criterion/criterion.h>
-#include <criterion/new/assert.h>
+#include "tuples.h"
 
-Test(framework, test_build)
+t_tuple	tuple(float x, float y, float z, float w)
 {
-	cr_assert(eq(int, 42, 42));
+	return ((t_tuple){x, y, z, w});
+}
+
+t_tuple	point(float x, float y, float z)
+{
+	return (tuple(x, y, z, 1.0));
+}
+
+t_tuple	vector(float x, float y, float z)
+{
+	return (tuple(x, y, z, 0.0));
 }
