@@ -6,7 +6,7 @@ LOG   := printf "[$(CYAN)INFO$(RESET)] %s\n"
 
 OBJ_DIR   := ../obj
 SRC_DIR   := ../src
-LIBFT_DIR := ../libft
+LIBFT_DIR := ../lib/libft
 INC_DIRS  := ../include $(LIBFT_DIR)
 
 # Insert each new directory here
@@ -22,10 +22,11 @@ SOURCES := models.c basic_math.c vector_math.c
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
 CFLAGS  := -Wall -Werror -Wextra -g $(addprefix -I,$(INC_DIRS))
-LDFLAGS := -L $(LIBFT_DIR) -lft -lcriterion -lm
+LDFLAGS := -L $(LIBFT_DIR)
+LDLIBS  := -lft -lcriterion -lm
 
 define run
- 	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@ && ./$@ --verbose
+ 	$(CC) $(CFLAGS) $^ $(LDFLAGS) $(LDLIBS) -o $@ && ./$@ --verbose
 endef
 
 ################################################################################

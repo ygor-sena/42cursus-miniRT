@@ -13,7 +13,9 @@ LOG   := printf "[$(CYAN)INFO$(RESET)] %s\n"
 ################################################################################
 
 OBJ_DIR   := obj
-LIBFT_DIR := libft
+LIB_DIR   := lib
+LIBFT_DIR := $(LIB_DIR)/libft
+MLX_DIR   := $(LIB_DIR)/mlx_linux
 INC_DIRS  := include $(LIBFT_DIR)
 SRC_DIRS  := tuples
 SRC_DIRS  := $(addprefix src/, $(SRC_DIRS))
@@ -23,6 +25,7 @@ vpath %.h $(INC_DIRS)
 vpath %.c $(SRC_DIRS)
 
 LIBFT   := $(LIBFT_DIR)/libft.a
+MLX     := $(MLX_DIR)/libmlx_Linux.a
 
 HEADERS := tuples.h
 
@@ -35,16 +38,20 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 ################################################################################
 
 CFLAGS  := -Wall -Werror -Wextra -g $(addprefix -I,$(INC_DIRS))
-LDFLAGS := -L $(LIBFT_DIR) -lm
+LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
+LDLIBS  := -lft -lmlx -lXext -lX11 -lm
 
 all: $(NAME)
+
+r:
+	@make $(TEST) -C tests --no-print-directory
 
 test: $(NAME)
 	@make -C tests --no-print-directory
 
-$(NAME):	$(OBJS) | $(LIBFT)
+$(NAME): $(OBJS) | $(LIBFT) $(MLX)
 	@$(LOG) "Linking objects to $@"
-	$(CC) $^ $(LDFLAGS) -o $@
+	$(CC) $^ $(LDFLAGS) $(LDLIBS) -o $@
 
 $(OBJ_DIR)/%.o: %.c $(HEADERS) | $(OBJ_DIR)
 	@$(LOG) "Compiling $@"
@@ -56,6 +63,9 @@ $(OBJ_DIR):
 
 $(LIBFT):
 	@make bonus -C $(LIBFT_DIR) --no-print-directory
+
+$(MLX):
+	@make -C $(MLX_DIR) --no-print-directory
 
 checks: $(NAME)
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
@@ -69,7 +79,10 @@ clean:
 fclean: clean
 	@$(RM) -r $(NAME)
 	@$(LOG) "Removing $(NAME)"
+	@$(LOG) "Removing libft"
 	@make fclean -C $(LIBFT_DIR) --no-print-directory --silent
+	@$(LOG) "Removing mlx"
+	@make clean -C $(MLX_DIR) --no-print-directory --silent
 
 re: clean all
 
