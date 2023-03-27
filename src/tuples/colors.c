@@ -6,11 +6,11 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:24:30 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/03/18 10:25:55 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/03/22 12:35:22 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "canvas.h"
+#include "tuples.h"
 
 t_color	new_color(float red, float green, float blue)
 {

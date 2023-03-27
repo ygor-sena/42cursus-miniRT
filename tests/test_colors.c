@@ -6,14 +6,14 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:41:36 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/03/17 23:33:19 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/03/22 12:36:15 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
 
-#include "canvas.h"
+#include "tuples.h"
 
 Test(colors, create_colors)
 {

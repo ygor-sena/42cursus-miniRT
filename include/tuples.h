@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:09:16 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/03/17 14:02:59 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/03/22 12:35:09 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ typedef struct s_tuple
 	float	z;
 	float	w;
 }	t_tuple;
+
+typedef struct s_color
+{
+	float	red;
+	float	green;
+	float	blue;
+}	t_color;
 
 t_tuple	tuple(float x, float y, float z, float w);
 t_tuple	point(float x, float y, float z);
@@ -45,5 +52,11 @@ float	dot(t_tuple a, t_tuple b);
 
 /* Get a new vector perpendicular to both of the original vectors. */
 t_tuple	cross(t_tuple a, t_tuple b);
+
+t_color	new_color(float red, float green, float blue);
+t_color	add_color(t_color a, t_color b);
+t_color	subtract_color(t_color a, t_color b);
+t_color	multiply_color(t_color color, float scalar);
+t_color	hadamard_product(t_color a, t_color b);
 
 #endif
