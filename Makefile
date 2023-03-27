@@ -16,7 +16,7 @@ OBJ_DIR   := obj
 LIB_DIR   := lib
 LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR   := $(LIB_DIR)/mlx_linux
-INC_DIRS  := include $(LIBFT_DIR)
+INC_DIRS  := include $(LIBFT_DIR) $(MLX_DIR)
 SRC_DIRS  := tuples canvas
 SRC_DIRS  := $(addprefix src/, $(SRC_DIRS))
 SRC_DIRS  += src
@@ -29,7 +29,7 @@ MLX     := $(MLX_DIR)/libmlx_Linux.a
 
 HEADERS := tuples.h canvas.h
 
-SOURCES := main.c models.c basic_math.c vector_math.c colors.c
+SOURCES := main.c models.c basic_math.c vector_math.c colors.c canvas.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
