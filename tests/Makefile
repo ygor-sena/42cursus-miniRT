@@ -1,23 +1,24 @@
-TESTS := tuples colors
+TESTS := tuples colors matrices transformations
 
 CYAN  := \33[1;36m
 RESET := \033[0m
 LOG   := printf "[$(CYAN)INFO$(RESET)] %s\n"
 
-OBJ_DIR   := ../obj
 SRC_DIR   := ../src
+OBJ_DIR   := ../obj
 LIBFT_DIR := ../lib/libft
 INC_DIRS  := ../include $(LIBFT_DIR)
 
 # Insert each new directory here
-SRC_DIRS := tuples canvas
-SRC_DIRS := $(addprefix $(SRC_DIR)/, $(SRC_DIRS))
+SRC_DIRS := tuples canvas matrices
+SRC_DIRS += $(addprefix $(SRC_DIR)/, $(SRC_DIRS))
 SRC_DIRS += $(SRC_DIR)
 
 vpath %.h $(INC_DIRS)
 vpath %.c $(SRC_DIRS)
 
 SOURCES := models.c basic_math.c vector_math.c colors.c
+SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c mx_utils.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
@@ -41,6 +42,14 @@ tuples: $(OBJS) test_tuples.c
 
 .PHONY: colors
 colors: $(OBJS) test_colors.c
+	@$(call run, "$^")
+
+.PHONY: matrices
+matrices: $(OBJS) test_matrices.c
+	@$(call run, "$^")
+
+.PHONY: transformations
+transformations: $(OBJS) test_transformations.c
 	@$(call run, "$^")
 
 # Makefile rules to clean stdin/stdout/stderr test's files
