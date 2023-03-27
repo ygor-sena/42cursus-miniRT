@@ -15,7 +15,7 @@ LOG   := printf "[$(CYAN)INFO$(RESET)] %s\n"
 OBJ_DIR   := obj
 LIBFT_DIR := libft
 INC_DIRS  := include $(LIBFT_DIR)
-SRC_DIRS  := tuples matrices
+SRC_DIRS  := tuples
 SRC_DIRS  := $(addprefix src/, $(SRC_DIRS))
 SRC_DIRS  += src
 
@@ -24,10 +24,9 @@ vpath %.c $(SRC_DIRS)
 
 LIBFT   := $(LIBFT_DIR)/libft.a
 
-HEADERS := tuples.h matrices.h
+HEADERS := tuples.h
 
 SOURCES := main.c models.c basic_math.c vector_math.c
-SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c mx_utils.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
@@ -36,7 +35,7 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 ################################################################################
 
 CFLAGS  := -Wall -Werror -Wextra -g $(addprefix -I,$(INC_DIRS))
-LDFLAGS := -L $(LIBFT_DIR) -lft -lm
+LDFLAGS := -L $(LIBFT_DIR) -lm
 
 all: $(NAME)
 
