@@ -28,7 +28,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Set up Criterion framework on Ubuntu 22.04
         run: |
-          sudo apt-get install libcriterion-dev
+          sudo apt-get install libcriterion-dev libbsd-dev -y
           python3 -m pip install --upgrade pip setuptools
           python3 -m pip install norminette
       # Runs a single command using the runners shell
