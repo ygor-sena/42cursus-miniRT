@@ -17,7 +17,7 @@ LIB_DIR   := lib
 LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR   := $(LIB_DIR)/mlx_linux
 INC_DIRS  := include $(LIBFT_DIR) $(MLX_DIR)
-SRC_DIRS  := tuples canvas matrices
+SRC_DIRS  := tuples canvas matrices rays shapes
 SRC_DIRS  := $(addprefix src/, $(SRC_DIRS))
 SRC_DIRS  += src
 
@@ -31,6 +31,7 @@ HEADERS := tuples.h canvas.h matrices.h
 
 SOURCES := main.c models.c basic_math.c vector_math.c colors.c canvas.c
 SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c mx_utils.c
+SOURCES += rays.c intersections.c spheres.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
