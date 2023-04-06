@@ -1,4 +1,4 @@
-TESTS := tuples colors matrices transformations
+TESTS := tuples colors matrices transformations rays spheres intersections
 
 CYAN  := \33[1;36m
 RESET := \033[0m
@@ -10,7 +10,7 @@ LIBFT_DIR := ../lib/libft
 INC_DIRS  := ../include $(LIBFT_DIR)
 
 # Insert each new directory here
-SRC_DIRS := tuples canvas matrices
+SRC_DIRS := tuples canvas matrices rays shapes tests
 SRC_DIRS += $(addprefix $(SRC_DIR)/, $(SRC_DIRS))
 SRC_DIRS += $(SRC_DIR)
 
@@ -19,8 +19,11 @@ vpath %.c $(SRC_DIRS)
 
 SOURCES := models.c basic_math.c vector_math.c colors.c
 SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c mx_utils.c
+SOURCES += rays.c intersections.c spheres.c
 
-OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
+UTILS := utils.c
+OBJS  := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
+OBJS  += $(UTILS:.c=.o)
 
 CFLAGS  := -Wall -Werror -Wextra -g $(addprefix -I,$(INC_DIRS))
 LDFLAGS := -L $(LIBFT_DIR)
@@ -50,6 +53,18 @@ matrices: $(OBJS) test_matrices.c
 
 .PHONY: transformations
 transformations: $(OBJS) test_transformations.c
+	@$(call run, "$^")
+
+.PHONY: rays
+rays: $(OBJS) test_rays.c
+	@$(call run, "$^")
+
+.PHONY: spheres
+spheres: $(OBJS) test_spheres.c
+	@$(call run, "$^")
+
+.PHONY: intersections
+intersections: $(OBJS) test_intersections.c
 	@$(call run, "$^")
 
 # Makefile rules to clean stdin/stdout/stderr test's files
