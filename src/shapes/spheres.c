@@ -6,11 +6,11 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/06 09:19:55 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/06 10:38:52 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "spheres.h"
+#include "shapes.h"
 
 static t_hit_points	calculate_hit_points(t_sphere sphere, t_ray ray);
 

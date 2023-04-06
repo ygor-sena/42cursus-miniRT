@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rays.c                                             :+:      :+:    :+:   */
+/*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 18:16:46 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/06 10:39:56 by mdias-ma         ###   ########.fr       */
+/*   Created: 2023/04/06 10:17:15 by mdias-ma          #+#    #+#             */
+/*   Updated: 2023/04/06 10:32:27 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shapes.h"
+#ifndef RAYS_H
+# define RAYS_H
 
-t_ray	new_ray(t_point origin, t_vector direction)
-{
-	return ((t_ray){
-		origin, direction
-	});
-}
+# include "tuples.h"
+# include "matrices.h"
 
-t_point	position(t_ray ray, float distance)
+typedef struct s_ray
 {
-	return (add(ray.origin, multiply(ray.direction, distance)));
-}
+	t_point		origin;
+	t_vector	direction;
+}	t_ray;
 
-t_ray	transform(t_ray r, t_matrix m)
-{
-	return (
-		new_ray(
-			multiply_tuple_matrix(m, r.origin),
-			multiply_tuple_matrix(m, r.direction))
-	);
-}
+t_ray	new_ray(t_point origin, t_vector direction);
+t_point	position(t_ray ray, float distance);
+t_ray	transform(t_ray ray, t_matrix matrix);
+
+#endif

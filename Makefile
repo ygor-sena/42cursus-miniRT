@@ -27,7 +27,7 @@ vpath %.c $(SRC_DIRS)
 LIBFT   := $(LIBFT_DIR)/libft.a
 MLX     := $(MLX_DIR)/libmlx_Linux.a
 
-HEADERS := tuples.h canvas.h matrices.h
+HEADERS := tuples.h canvas.h matrices.h rays.h shapes.h
 
 SOURCES := main.c models.c basic_math.c vector_math.c colors.c canvas.c
 SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c mx_utils.c

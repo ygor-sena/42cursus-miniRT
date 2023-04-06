@@ -6,11 +6,11 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:36:20 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/06 09:06:38 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/06 10:37:11 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "spheres.h"
+#include "shapes.h"
 
 void	insert_intersection(t_intersection **xs, t_intersection *isect)
 {

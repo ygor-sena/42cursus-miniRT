@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   spheres.h                                          :+:      :+:    :+:   */
+/*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/06 09:20:16 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/06 10:36:54 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SPHERES_H
-# define SPHERES_H
+#ifndef SHAPES_H
+# define SHAPES_H
 
-# include "matrices.h"
-# include "tuples.h"
-
-typedef t_tuple	t_point;
-typedef t_tuple	t_vector;
-
-typedef struct s_ray
-{
-	t_point		origin;
-	t_vector	direction;
-}	t_ray;
+# include "rays.h"
 
 typedef struct s_sphere
 {
@@ -50,11 +40,6 @@ typedef struct s_hit_points
 	float	t2;
 	float	delta;
 }	t_hit_points;
-
-/* rays.c */
-t_ray			new_ray(t_point origin, t_vector direction);
-t_point			position(t_ray ray, float distance);
-t_ray			transform(t_ray ray, t_matrix matrix);
 
 /* spheres.c */
 t_intersection	*intersect(t_sphere sphere, t_ray ray);
