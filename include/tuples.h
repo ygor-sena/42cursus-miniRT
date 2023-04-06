@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:09:16 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/03/22 12:35:09 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/06 10:18:20 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ typedef struct s_tuple
 	float	z;
 	float	w;
 }	t_tuple;
+
+typedef t_tuple	t_point;
+typedef t_tuple	t_vector;
 
 typedef struct s_color
 {
