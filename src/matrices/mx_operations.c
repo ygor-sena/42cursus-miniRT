@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 10:44:17 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/03/27 11:56:08 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:23:00 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*	WARNING: Maybe refactor 4x4 multiplication, 
 *	same case of the function below
 */
-t_matrix	multiply_matrix(t_matrix a, t_matrix b)
+t_matrix	multiply_mx_mx(t_matrix a, t_matrix b)
 {
 	float		m[MAX][MAX];
 	size_t		row;
@@ -42,7 +42,7 @@ t_matrix	multiply_matrix(t_matrix a, t_matrix b)
 *	MAX --> t.size
 *	aux variable to multiply row/columns
 */
-t_tuple	multiply_tuple_matrix(t_matrix a, t_tuple b)
+t_tuple	multiply_tp_mx(t_matrix a, t_tuple b)
 {
 	float		t[MAX];
 	size_t		row;
@@ -63,7 +63,7 @@ t_tuple	multiply_tuple_matrix(t_matrix a, t_tuple b)
 *	If it's a 3x3 or 2x2, maybe it'll generate a bug...
 *	ft_bzero(m, sizeof(float) * SIZE); line 70
 */
-t_matrix	transpose_matrix(t_matrix	t)
+t_matrix	transpose(t_matrix	t)
 {
 	size_t		row;
 	size_t		col;
@@ -88,7 +88,7 @@ t_matrix	transpose_matrix(t_matrix	t)
 *	Is five precision points suficient? Ow do we need 9?
 	ft_bzero(inverted, sizeof(float) * SIZE); line 99
  */
-t_matrix	inverted_matrix(t_matrix t)
+t_matrix	inverse(t_matrix t)
 {	
 	float	inverted[MAX][MAX];
 	float	determinant;	

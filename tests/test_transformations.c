@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 10:59:12 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/03/23 17:09:33 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:31:38 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <criterion/new/assert.h>
 
 #include "matrices.h"
-#include "tuples.h"
+#include "utils.h"
 
 /*	Multiplying by a translation matrix */
 Test(transformations, mult_by_translation_matrix)
@@ -26,7 +26,7 @@ Test(transformations, mult_by_translation_matrix)
 	transform = translation(5.0, -3.0, 2.0);
 	p = point(-3.0, 4.0, 5.0);
 
-	result = multiply_tuple_matrix(transform, p);
+	result = multiply_tp_mx(transform, p);
 	cr_assert(eq(flt, result.x, 2));
 	cr_assert(eq(flt, result.y, 1));
 	cr_assert(eq(flt, result.z, 7));
@@ -41,10 +41,10 @@ Test(transformations, mult_by_inv_of_transl_matrix)
 	t_tuple		result;
 
 	transform = translation(5.0, -3.0, 2.0);
-	inv = inverted_matrix(transform);
+	inv = inverse(transform);
 	p = point(-3.0, 4.0, 5.0);
 
-	result = multiply_tuple_matrix(inv, p);
+	result = multiply_tp_mx(inv, p);
 	cr_assert(eq(flt, result.x, -8));
 	cr_assert(eq(flt, result.y, 7));
 	cr_assert(eq(flt, result.z, 3));
@@ -60,7 +60,7 @@ Test(transformations, transl_doesnt_affect_vectors)
 	transform = translation(5.0, -3.0, 2.0);
 	v = vector(-3.0, 4.0, 5.0);
 
-	result = multiply_tuple_matrix(transform, v);
+	result = multiply_tp_mx(transform, v);
 	cr_assert(eq(flt, result.x, v.x));
 	cr_assert(eq(flt, result.y, v.y));
 	cr_assert(eq(flt, result.z, v.z));
@@ -76,7 +76,7 @@ Test(transformations, scaling_matrix_to_point)
 	transform = scaling(2.0, 3.0, 4.0);
 	p = point(-4.0, 6.0, 8.0);
 
-	result = multiply_tuple_matrix(transform, p);
+	result = multiply_tp_mx(transform, p);
 	cr_assert(eq(flt, result.x, -8));
 	cr_assert(eq(flt, result.y, 18));
 	cr_assert(eq(flt, result.z, 32));
@@ -92,7 +92,7 @@ Test(transformations, scaling_matrix_to_vector)
 	transform = scaling(2.0, 3.0, 4.0);
 	v = vector(-4.0, 6.0, 8.0);
 
-	result = multiply_tuple_matrix(transform, v);
+	result = multiply_tp_mx(transform, v);
 	cr_assert(eq(flt, result.x, -8));
 	cr_assert(eq(flt, result.y, 18));
 	cr_assert(eq(flt, result.z, 32));
@@ -107,10 +107,10 @@ Test(transformations, mult_by_inv_of_scaling_mat)
 	t_tuple		result;
 
 	transform = scaling(2.0, 3.0, 4.0);
-	inv = inverted_matrix(transform);
+	inv = inverse(transform);
 	v = vector(-4.0, 6.0, 8.0);
 
-	result = multiply_tuple_matrix(inv, v);
+	result = multiply_tp_mx(inv, v);
 	cr_assert(eq(flt, result.x, -2));
 	cr_assert(eq(flt, result.y, 2));
 	cr_assert(eq(flt, result.z, 2));
@@ -126,7 +126,7 @@ Test(transformations, scaling_by_neg_value)
 	transform = scaling(-1.0, 1.0, 1.0);
 	p = point(2.0, 3.0, 4.0);
 
-	result = multiply_tuple_matrix(transform, p);
+	result = multiply_tp_mx(transform, p);
 	cr_assert(eq(flt, result.x, -2));
 	cr_assert(eq(flt, result.y, 3));
 	cr_assert(eq(flt, result.z, 4));
@@ -144,15 +144,15 @@ Test(transformations, rotation_around_x_axis)
 	half_quarter = rotation_x(M_PI_4);
 	full_quarter = rotation_x(M_PI_2);
 
-	result = multiply_tuple_matrix(half_quarter, p);
-	cr_assert_float_eq(result.x, 0, 0.00001);
-	cr_assert_float_eq(result.y, sqrt(2)/2, 0.00001);
-	cr_assert_float_eq(result.z, sqrt(2)/2, 0.00001);
+	result = multiply_tp_mx(half_quarter, p);
+	cr_assert_float_eq(result.x, 0, EPSILON);
+	cr_assert_float_eq(result.y, sqrt(2)/2, EPSILON);
+	cr_assert_float_eq(result.z, sqrt(2)/2, EPSILON);
 
-	result = multiply_tuple_matrix(full_quarter, p);
-	cr_assert_float_eq(result.x, 0, 0.00001);
-	cr_assert_float_eq(result.y, 0, 0.00001);
-	cr_assert_float_eq(result.z, 1, 0.00001);
+	result = multiply_tp_mx(full_quarter, p);
+	cr_assert_float_eq(result.x, 0, EPSILON);
+	cr_assert_float_eq(result.y, 0, EPSILON);
+	cr_assert_float_eq(result.z, 1, EPSILON);
 }
 
 /* The inverse of an x-rotation rotates in the opposite direction */
@@ -165,12 +165,12 @@ Test(transformations, inv_x_rotation)
 
 	p = point(0.0, 1.0, 0.0);
 	half_quarter = rotation_x(M_PI_4);
-	inv = inverted_matrix(half_quarter);
+	inv = inverse(half_quarter);
 
-	result = multiply_tuple_matrix(inv, p);
-	cr_assert_float_eq(result.x, 0, 0.00001);
-	cr_assert_float_eq(result.y, sqrt(2)/2, 0.00001);
-	cr_assert_float_eq(result.z, -sqrt(2)/2, 0.00001);
+	result = multiply_tp_mx(inv, p);
+	cr_assert_float_eq(result.x, 0, EPSILON);
+	cr_assert_float_eq(result.y, sqrt(2)/2, EPSILON);
+	cr_assert_float_eq(result.z, -sqrt(2)/2, EPSILON);
 }
 
 /*	Rotating a point around the z axis */
@@ -185,15 +185,15 @@ Test(transformations, rotation_around_y_axis)
 	half_quarter = rotation_y(M_PI_4);
 	full_quarter = rotation_y(M_PI_2);
 
-	result = multiply_tuple_matrix(half_quarter, p);
-	cr_assert_float_eq(result.x, sqrt(2)/2, 0.00001);
-	cr_assert_float_eq(result.y, 0, 0.00001);
-	cr_assert_float_eq(result.z, sqrt(2)/2, 0.00001);
+	result = multiply_tp_mx(half_quarter, p);
+	cr_assert_float_eq(result.x, sqrt(2)/2, EPSILON);
+	cr_assert_float_eq(result.y, 0, EPSILON);
+	cr_assert_float_eq(result.z, sqrt(2)/2, EPSILON);
 
-	result = multiply_tuple_matrix(full_quarter, p);
-	cr_assert_float_eq(result.x, 1, 0.00001);
-	cr_assert_float_eq(result.y, 0, 0.00001);
-	cr_assert_float_eq(result.z, 0, 0.00001);
+	result = multiply_tp_mx(full_quarter, p);
+	cr_assert_float_eq(result.x, 1, EPSILON);
+	cr_assert_float_eq(result.y, 0, EPSILON);
+	cr_assert_float_eq(result.z, 0, EPSILON);
 }
 
 /*	A shearing transformation moves x in proportion to y */
@@ -208,15 +208,15 @@ Test(transformations, rotation_around_z_axis)
 	half_quarter = rotation_z(M_PI_4);
 	full_quarter = rotation_z(M_PI_2);
 
-	result = multiply_tuple_matrix(half_quarter, p);
-	cr_assert_float_eq(result.x, -sqrt(2)/2, 0.00001);
-	cr_assert_float_eq(result.y, sqrt(2)/2, 0.00001);
-	cr_assert_float_eq(result.z, 0, 0.00001);
+	result = multiply_tp_mx(half_quarter, p);
+	cr_assert_float_eq(result.x, -sqrt(2)/2, EPSILON);
+	cr_assert_float_eq(result.y, sqrt(2)/2, EPSILON);
+	cr_assert_float_eq(result.z, 0, EPSILON);
 
-	result = multiply_tuple_matrix(full_quarter, p);
-	cr_assert_float_eq(result.x, -1, 0.00001);
-	cr_assert_float_eq(result.y, 0, 0.00001);
-	cr_assert_float_eq(result.z, 0, 0.00001);
+	result = multiply_tp_mx(full_quarter, p);
+	cr_assert_float_eq(result.x, -1, EPSILON);
+	cr_assert_float_eq(result.y, 0, EPSILON);
+	cr_assert_float_eq(result.z, 0, EPSILON);
 }
 
 /*	A shearing transformation moves x in proportion to z */
@@ -229,10 +229,10 @@ Test(transformations, shearing_x_in_y)
 	p = point(2.0, 3.0, 4.0);
 	transform = shearing((t_shearing){1, 0}, (t_shearing){0}, (t_shearing){0});
 
-	result = multiply_tuple_matrix(transform, p);
-	cr_assert_float_eq(result.x, 5, 0.00001);
-	cr_assert_float_eq(result.y, 3, 0.00001);
-	cr_assert_float_eq(result.z, 4, 0.00001);
+	result = multiply_tp_mx(transform, p);
+	cr_assert_float_eq(result.x, 5, EPSILON);
+	cr_assert_float_eq(result.y, 3, EPSILON);
+	cr_assert_float_eq(result.z, 4, EPSILON);
 }
 
 /*	A shearing transformation moves y in proportion to x */
@@ -245,10 +245,10 @@ Test(transformations, shearing_x_in_z)
 	p = point(2.0, 3.0, 4.0);
 	transform = shearing((t_shearing){0, 1}, (t_shearing){0}, (t_shearing){0});
 
-	result = multiply_tuple_matrix(transform, p);
-	cr_assert_float_eq(result.x, 6, 0.00001);
-	cr_assert_float_eq(result.y, 3, 0.00001);
-	cr_assert_float_eq(result.z, 4, 0.00001);
+	result = multiply_tp_mx(transform, p);
+	cr_assert_float_eq(result.x, 6, EPSILON);
+	cr_assert_float_eq(result.y, 3, EPSILON);
+	cr_assert_float_eq(result.z, 4, EPSILON);
 }
 
 /*	A shearing transformation moves y in proportion to z */
@@ -261,10 +261,10 @@ Test(transformations, shearing_y_in_x)
 	p = point(2.0, 3.0, 4.0);
 	transform = shearing((t_shearing){0}, (t_shearing){1, 0}, (t_shearing){0});
 
-	result = multiply_tuple_matrix(transform, p);
-	cr_assert_float_eq(result.x, 2, 0.00001);
-	cr_assert_float_eq(result.y, 5, 0.00001);
-	cr_assert_float_eq(result.z, 4, 0.00001);
+	result = multiply_tp_mx(transform, p);
+	cr_assert_float_eq(result.x, 2, EPSILON);
+	cr_assert_float_eq(result.y, 5, EPSILON);
+	cr_assert_float_eq(result.z, 4, EPSILON);
 }
 
 /*	A shearing transformation moves z in proportion to x */
@@ -277,10 +277,10 @@ Test(transformations, shearing_y_in_z)
 	p = point(2.0, 3.0, 4.0);
 	transform = shearing((t_shearing){0}, (t_shearing){0, 1}, (t_shearing){0});
 
-	result = multiply_tuple_matrix(transform, p);
-	cr_assert_float_eq(result.x, 2, 0.00001);
-	cr_assert_float_eq(result.y, 7, 0.00001);
-	cr_assert_float_eq(result.z, 4, 0.00001);
+	result = multiply_tp_mx(transform, p);
+	cr_assert_float_eq(result.x, 2, EPSILON);
+	cr_assert_float_eq(result.y, 7, EPSILON);
+	cr_assert_float_eq(result.z, 4, EPSILON);
 }
 
 /*	A shearing transformation moves z in proportion to y */
@@ -293,10 +293,10 @@ Test(transformations, shearing_z_in_x)
 	p = point(2.0, 3.0, 4.0);
 	transform = shearing((t_shearing){0}, (t_shearing){0}, (t_shearing){1, 0});
 
-	result = multiply_tuple_matrix(transform, p);
-	cr_assert_float_eq(result.x, 2, 0.00001);
-	cr_assert_float_eq(result.y, 3, 0.00001);
-	cr_assert_float_eq(result.z, 6, 0.00001);
+	result = multiply_tp_mx(transform, p);
+	cr_assert_float_eq(result.x, 2, EPSILON);
+	cr_assert_float_eq(result.y, 3, EPSILON);
+	cr_assert_float_eq(result.z, 6, EPSILON);
 }
 
 /*	Individual transformations are applied in sequence */
@@ -309,10 +309,10 @@ Test(transformations, shearing_z_in_y)
 	p = point(2.0, 3.0, 4.0);
 	transform = shearing((t_shearing){0}, (t_shearing){0}, (t_shearing){0, 1});
 
-	result = multiply_tuple_matrix(transform, p);
-	cr_assert_float_eq(result.x, 2, 0.00001);
-	cr_assert_float_eq(result.y, 3, 0.00001);
-	cr_assert_float_eq(result.z, 7, 0.00001);
+	result = multiply_tp_mx(transform, p);
+	cr_assert_float_eq(result.x, 2, EPSILON);
+	cr_assert_float_eq(result.y, 3, EPSILON);
+	cr_assert_float_eq(result.z, 7, EPSILON);
 }
 
 /*	Individual transformations are applied in sequence */
@@ -332,22 +332,22 @@ Test(transformations, transf_in_sequence)
 	c = translation(10.0, 5.0, 7.0);
 
 	// Apply rotation first
-	p2 = multiply_tuple_matrix(a, p);
-	cr_assert_float_eq(p2.x, 1, 0.00001);
-	cr_assert_float_eq(p2.y, -1, 0.00001);
-	cr_assert_float_eq(p2.z, 0, 0.00001);
+	p2 = multiply_tp_mx(a, p);
+	cr_assert_float_eq(p2.x, 1, EPSILON);
+	cr_assert_float_eq(p2.y, -1, EPSILON);
+	cr_assert_float_eq(p2.z, 0, EPSILON);
 
 	// Then apply scaling
-	p3 = multiply_tuple_matrix(b, p2);
-	cr_assert_float_eq(p3.x, 5, 0.00001);
-	cr_assert_float_eq(p3.y, -5, 0.00001);
-	cr_assert_float_eq(p3.z, 0, 0.00001);
+	p3 = multiply_tp_mx(b, p2);
+	cr_assert_float_eq(p3.x, 5, EPSILON);
+	cr_assert_float_eq(p3.y, -5, EPSILON);
+	cr_assert_float_eq(p3.z, 0, EPSILON);
 
 	// Then apply translation
-	p4 = multiply_tuple_matrix(c, p3);
-	cr_assert_float_eq(p4.x, 15, 0.00001);
-	cr_assert_float_eq(p4.y, 0, 0.00001);
-	cr_assert_float_eq(p4.z, 7, 0.00001);
+	p4 = multiply_tp_mx(c, p3);
+	cr_assert_float_eq(p4.x, 15, EPSILON);
+	cr_assert_float_eq(p4.y, 0, EPSILON);
+	cr_assert_float_eq(p4.z, 7, EPSILON);
 }
 
 /*	Chained transformations must be applied in reverse order */
@@ -365,9 +365,9 @@ Test(transformations, chained_transf_in_reverse)
 	b = scaling(5.0, 5.0, 5.0);
 	c = translation(10.0, 5.0, 7.0);
 
-	t = multiply_matrix(multiply_matrix(c, b), a);
-	result = multiply_tuple_matrix(t, p);
-	cr_assert_float_eq(result.x, 15, 0.00001);
-	cr_assert_float_eq(result.y, 0, 0.00001);
-	cr_assert_float_eq(result.z, 7, 0.00001);
+	t = multiply_mx_mx(multiply_mx_mx(c, b), a);
+	result = multiply_tp_mx(t, p);
+	cr_assert_float_eq(result.x, 15, EPSILON);
+	cr_assert_float_eq(result.y, 0, EPSILON);
+	cr_assert_float_eq(result.z, 7, EPSILON);
 }

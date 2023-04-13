@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:16:46 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/06 10:39:56 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:19:09 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_ray	transform(t_ray r, t_matrix m)
 {
 	return (
 		new_ray(
-			multiply_tuple_matrix(m, r.origin),
-			multiply_tuple_matrix(m, r.direction))
+			multiply_tp_mx(m, r.origin),
+			multiply_tp_mx(m, r.direction))
 	);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_tuples.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:13:02 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/03/17 12:38:11 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/11 10:47:39 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <criterion/new/assert.h>
 
 #include "tuples.h"
+#include "utils.h"
 
 Test(tuples, create_a_tuple)
 {
@@ -199,4 +200,42 @@ Test(tuples, cross_product)
 	cr_assert(eq(flt, result.x, 1));
 	cr_assert(eq(flt, result.y, -2));
 	cr_assert(eq(flt, result.z, 1));
+}
+
+/*	Reflecting a vector approaching at 45° */
+Test(tuples, reflect_vector_45)
+{
+	t_tuple	v;
+	t_tuple	n;
+	t_tuple result;
+	t_tuple	expect;
+
+	v = vector(1, -1, 0);
+	n = vector(0, 1, 0);
+	result = reflect(v, n);
+	expect = vector(1, 1, 0);
+
+	cr_assert_float_eq(result.x, expect.x, EPSILON);
+	cr_assert_float_eq(result.y, expect.y, EPSILON);
+	cr_assert_float_eq(result.z, expect.z, EPSILON);
+}
+
+/*	Reflecting a vector off a slanted surface */
+Test(tuples, reflect_vector_slanted_surface)
+{
+	t_tuple	v;
+	t_tuple	n;
+	t_tuple result;
+	t_tuple	expect;
+	float	coord;
+
+	coord = sqrtf(2)/2.0;
+	v = vector(0, -1, 0);
+	n = vector(coord, coord, 0);
+	result = reflect(v, n);
+	expect = vector(1, 0, 0);
+
+	cr_assert_float_eq(result.x, expect.x, EPSILON);
+	cr_assert_float_eq(result.y, expect.y, EPSILON);
+	cr_assert_float_eq(result.z, expect.z, EPSILON);
 }

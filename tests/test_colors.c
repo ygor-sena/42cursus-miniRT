@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_colors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:41:36 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/03/22 12:36:15 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/11 09:28:53 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <criterion/new/assert.h>
 
 #include "tuples.h"
+#include "utils.h"
 
 Test(colors, create_colors)
 {
@@ -34,9 +35,9 @@ Test(colors, add_colors)
 	c1 = new_color(0.9, 0.6, 0.75);
 	c2 = new_color(0.7, 0.1, 0.25);
 	result = add_color(c1, c2);
-	cr_assert(epsilon_eq(flt, result.red, 1.6, FLT_EPSILON));
-	cr_assert(epsilon_eq(flt, result.green, 0.7, FLT_EPSILON));
-	cr_assert(epsilon_eq(flt, result.blue, 1.0, FLT_EPSILON));
+	cr_assert_float_eq(result.red, 1.6, EPSILON);
+	cr_assert_float_eq(result.green, 0.7, EPSILON);
+	cr_assert_float_eq(result.blue, 1.0, EPSILON);
 }
 
 Test(colors, subtract_colors)
@@ -48,9 +49,9 @@ Test(colors, subtract_colors)
 	c1 = new_color(0.9, 0.6, 0.75);
 	c2 = new_color(0.7, 0.1, 0.25);
 	result = subtract_color(c1, c2);
-	cr_assert(epsilon_eq(flt, result.red, 0.2, FLT_EPSILON));
-	cr_assert(epsilon_eq(flt, result.green, 0.5, FLT_EPSILON));
-	cr_assert(epsilon_eq(flt, result.blue, 0.50, FLT_EPSILON));
+	cr_assert_float_eq(result.red, 0.2, EPSILON);
+	cr_assert_float_eq(result.green, 0.5, EPSILON);
+	cr_assert_float_eq(result.blue, 0.50, EPSILON);
 }
 
 Test(colors, multiply_colors_by_scalar)
@@ -62,7 +63,7 @@ Test(colors, multiply_colors_by_scalar)
 	c1 = new_color(1, 0.2, 0.4);
 	c2 = new_color(0.9, 1, 0.1);
 	result = hadamard_product(c1, c2);
-	cr_assert(epsilon_eq(flt, result.red, 0.9, FLT_EPSILON));
-	cr_assert(epsilon_eq(flt, result.green, 0.2, FLT_EPSILON));
-	cr_assert(epsilon_eq(flt, result.blue, 0.04, FLT_EPSILON));
+	cr_assert_float_eq(result.red, 0.9, EPSILON);
+	cr_assert_float_eq(result.green, 0.2, EPSILON);
+	cr_assert_float_eq(result.blue, 0.04, EPSILON);
 }

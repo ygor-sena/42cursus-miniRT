@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spheres.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/06 10:38:52 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:58:00 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_intersection	*intersect(t_sphere sphere, t_ray r)
 	t_intersection	*xs;
 	t_hit_points	c;
 
-	ray = transform(r, inverted_matrix(sphere.transform));
+	ray = transform(r, inverse(sphere.transform));
 	c = calculate_hit_points(sphere, ray);
 	xs = NULL;
 	if (c.delta < 0)
@@ -53,4 +53,23 @@ static t_hit_points	calculate_hit_points(t_sphere sphere, t_ray ray)
 		.t2 = (-b + sqrtf(delta)) / (2 * a),
 		.delta = (b * b) - 4 * a * c,
 	});
+}
+
+/**
+ *	Hack, to ensure we have a clean vector, as due the inverse transpose 
+ *	the w component could be affected if the transformation matrix included
+ *	a translation.
+ */
+t_tuple	normal_at(t_sphere sphere, t_tuple world_point)
+{
+	t_tuple	object_point;
+	t_tuple	object_normal;
+	t_tuple	world_normal;
+
+	object_point = multiply_tp_mx(inverse(sphere.transform), world_point);
+	object_normal = subtract(object_point, point(0, 0, 0));
+	world_normal = multiply_tp_mx(transpose(\
+					inverse(sphere.transform)), object_normal);
+	world_normal.w = 0.0;
+	return (normalize(world_normal));
 }
