@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:11:46 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/13 10:55:35 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:42:54 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ t_color	lighting(t_material m, t_light light, t_tuple point, t_sight sight)
 	e.lightv = normalize(subtract(light.position, point));
 	e.light_dot_normal = dot(e.lightv, sight.normalv);
 	if (e.light_dot_normal < 0)
-		return (dark_exposure(m, exposure));
-	return (light_exposure(m, light, exposure, sight));
+		return (dark_exposure(m, e));
+	return (light_exposure(m, light, e, sight));
 }
 
 static t_color	dark_exposure(t_material m, t_exposure e)
