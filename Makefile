@@ -32,7 +32,7 @@ HEADERS := tuples.h canvas.h matrices.h rays.h shapes.h lights.h materials.h
 SOURCES := main.c models.c basic_math.c vector_math.c colors.c canvas.c
 SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c mx_utils.c
 SOURCES += rays.c intersections.c spheres.c
-SOURCES += reflections.c lights.c materials.c
+SOURCES += lights.c materials.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
