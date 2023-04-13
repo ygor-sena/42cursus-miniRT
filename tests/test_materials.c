@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:46:43 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/12 16:36:25 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/13 20:07:15 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ Test(materials, eye_between_lt_surface)
 {
 	t_sight	sight;
 	t_light	light;
-	t_color result;
+	t_color	result;
 	t_color	expected;
 
 	t_material	m;
@@ -68,7 +68,7 @@ Test(materials, eye_between_lt_surface)
 	
 	sight.eyev = vector(0, 0, -1);
 	sight.normalv = vector(0, 0, -1);
-	light = point_light(point(0, 0, -10), new_color(1, 1, 1));
+	light = *point_light(point(0, 0, -10), new_color(1, 1, 1));
 	result = lighting(m, light, position, sight);
 	expected = new_color(1.9, 1.9, 1.9);
 
@@ -95,7 +95,7 @@ Test(materials, eye_between_lt_surface_offset_45)
 	coord = sqrtf(2)/2.0;
 	sight.eyev = vector(0, coord, -coord);
 	sight.normalv = vector(0, 0, -1);
-	light = point_light(point(0, 0, -10), new_color(1, 1, 1));
+	light = *point_light(point(0, 0, -10), new_color(1, 1, 1));
 	result = lighting(m, light, position, sight);
 	expected = new_color(1.0, 1.0, 1.0);
 
@@ -120,7 +120,7 @@ Test(materials, eye_opposite_surface_lt_offset_45)
 
 	sight.eyev = vector(0, 0, -1);
 	sight.normalv = vector(0, 0, -1);
-	light = point_light(point(0, 10, -10), new_color(1, 1, 1));
+	light = *point_light(point(0, 10, -10), new_color(1, 1, 1));
 	result = lighting(m, light, position, sight);
 	expected = new_color(0.7364, 0.7364, 0.7364);
 
@@ -147,7 +147,7 @@ Test(materials, eye_reflection_light_path)
 	coord = sqrtf(2)/2.0;
 	sight.eyev = vector(0, -coord, -coord);
 	sight.normalv = vector(0, 0, -1);
-	light = point_light(point(0, 10, -10), new_color(1, 1, 1));
+	light = *point_light(point(0, 10, -10), new_color(1, 1, 1));
 	result = lighting(m, light, position, sight);
 	expected = new_color(1.63639, 1.63639, 1.63639);
 
@@ -172,7 +172,7 @@ Test(materials, eye_light_behind_surface)
 	
 	sight.eyev = vector(0, 0, -1);
 	sight.normalv = vector(0, 0, -1);
-	light = point_light(point(0, 0, 10), new_color(1, 1, 1));
+	light = *point_light(point(0, 0, 10), new_color(1, 1, 1));
 	result = lighting(m, light, position, sight);
 	expected = new_color(0.1, 0.1, 0.1);
 
