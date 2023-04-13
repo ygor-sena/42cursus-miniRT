@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:46:43 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/13 20:07:15 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/13 20:21:47 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ Test(materials, create_a_default_material)
 Test(materials, eye_between_lt_surface)
 {
 	t_sight	sight;
-	t_light	light;
+	t_light	*light;
 	t_color	result;
 	t_color	expected;
 
@@ -65,12 +65,13 @@ Test(materials, eye_between_lt_surface)
 
 	m = material();
 	position = point(0, 0, 0);
-	
+
 	sight.eyev = vector(0, 0, -1);
 	sight.normalv = vector(0, 0, -1);
-	light = *point_light(point(0, 0, -10), new_color(1, 1, 1));
-	result = lighting(m, light, position, sight);
+	light = point_light(point(0, 0, -10), new_color(1, 1, 1));
+	result = lighting(m, *light, position, sight);
 	expected = new_color(1.9, 1.9, 1.9);
+	free(light);
 
 	cr_assert_float_eq(result.red, expected.red, EPSILON);
 	cr_assert_float_eq(result.green, expected.green, EPSILON);
@@ -81,7 +82,7 @@ Test(materials, eye_between_lt_surface)
 Test(materials, eye_between_lt_surface_offset_45)
 {
 	t_sight	sight;
-	t_light	light;
+	t_light	*light;
 	t_color result;
 	t_color	expected;
 	float	coord;
@@ -95,9 +96,10 @@ Test(materials, eye_between_lt_surface_offset_45)
 	coord = sqrtf(2)/2.0;
 	sight.eyev = vector(0, coord, -coord);
 	sight.normalv = vector(0, 0, -1);
-	light = *point_light(point(0, 0, -10), new_color(1, 1, 1));
-	result = lighting(m, light, position, sight);
+	light = point_light(point(0, 0, -10), new_color(1, 1, 1));
+	result = lighting(m, *light, position, sight);
 	expected = new_color(1.0, 1.0, 1.0);
+	free(light);
 
 	cr_assert_float_eq(result.red, expected.red, EPSILON);
 	cr_assert_float_eq(result.green, expected.green, EPSILON);
@@ -108,7 +110,7 @@ Test(materials, eye_between_lt_surface_offset_45)
 Test(materials, eye_opposite_surface_lt_offset_45)
 {
 	t_sight	sight;
-	t_light	light;
+	t_light	*light;
 	t_color result;
 	t_color	expected;
 
@@ -120,9 +122,10 @@ Test(materials, eye_opposite_surface_lt_offset_45)
 
 	sight.eyev = vector(0, 0, -1);
 	sight.normalv = vector(0, 0, -1);
-	light = *point_light(point(0, 10, -10), new_color(1, 1, 1));
-	result = lighting(m, light, position, sight);
+	light = point_light(point(0, 10, -10), new_color(1, 1, 1));
+	result = lighting(m, *light, position, sight);
 	expected = new_color(0.7364, 0.7364, 0.7364);
+	free(light);
 
 	cr_assert_float_eq(result.red, expected.red, EPSILON);
 	cr_assert_float_eq(result.green, expected.green, EPSILON);
@@ -133,7 +136,7 @@ Test(materials, eye_opposite_surface_lt_offset_45)
 Test(materials, eye_reflection_light_path)
 {
 	t_sight	sight;
-	t_light	light;
+	t_light	*light;
 	t_color result;
 	t_color	expected;
 	float	coord;
@@ -143,13 +146,14 @@ Test(materials, eye_reflection_light_path)
 
 	m = material();
 	position = point(0, 0, 0);
-	
+
 	coord = sqrtf(2)/2.0;
 	sight.eyev = vector(0, -coord, -coord);
 	sight.normalv = vector(0, 0, -1);
-	light = *point_light(point(0, 10, -10), new_color(1, 1, 1));
-	result = lighting(m, light, position, sight);
+	light = point_light(point(0, 10, -10), new_color(1, 1, 1));
+	result = lighting(m, *light, position, sight);
 	expected = new_color(1.63639, 1.63639, 1.63639);
+	free(light);
 
 	cr_assert_float_eq(result.red, expected.red, EPSILON);
 	cr_assert_float_eq(result.green, expected.green, EPSILON);
@@ -160,21 +164,22 @@ Test(materials, eye_reflection_light_path)
 Test(materials, eye_light_behind_surface)
 {
 	t_sight	sight;
-	t_light	light;
+	t_light	*light;
 	t_color result;
 	t_color	expected;
-	
+
 	t_material	m;
 	t_tuple		position;
 
 	m = material();
 	position = point(0, 0, 0);
-	
+
 	sight.eyev = vector(0, 0, -1);
 	sight.normalv = vector(0, 0, -1);
-	light = *point_light(point(0, 0, 10), new_color(1, 1, 1));
-	result = lighting(m, light, position, sight);
+	light = point_light(point(0, 0, 10), new_color(1, 1, 1));
+	result = lighting(m, *light, position, sight);
 	expected = new_color(0.1, 0.1, 0.1);
+	free(light);
 
 	cr_assert_float_eq(result.red, expected.red, EPSILON);
 	cr_assert_float_eq(result.green, expected.green, EPSILON);
