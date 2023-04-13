@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:46:27 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/12 15:38:30 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:00:33 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 /*	Checks if a point light has the position and intensity given as parameter */
 Test(lights, create_point_light)
 {
-	t_light	light;
+	t_light	*light;
 	t_color	intensity;
 	t_tuple	position;
 
@@ -40,11 +40,12 @@ Test(lights, create_point_light)
 	position = point(0, 0, 0);
 	light = point_light(position, intensity);
 
-	cr_assert(eq(flt, light.position.x, position.x));
-	cr_assert(eq(flt, light.position.y, position.y));
-	cr_assert(eq(flt, light.position.z, position.z));
-	cr_assert(eq(flt, light.position.w, position.w));
-	cr_assert(eq(flt, light.intensity.red, intensity.red));
-	cr_assert(eq(flt, light.intensity.green, intensity.green));
-	cr_assert(eq(flt, light.intensity.blue, intensity.blue));
+	cr_assert(eq(flt, light->position.x, position.x));
+	cr_assert(eq(flt, light->position.y, position.y));
+	cr_assert(eq(flt, light->position.z, position.z));
+	cr_assert(eq(flt, light->position.w, position.w));
+	cr_assert(eq(flt, light->intensity.red, intensity.red));
+	cr_assert(eq(flt, light->intensity.green, intensity.green));
+	cr_assert(eq(flt, light->intensity.blue, intensity.blue));
+	free(light);
 }
