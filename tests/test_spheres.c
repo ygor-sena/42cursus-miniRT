@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_spheres.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:22:45 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/06 10:47:08 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:43:42 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include "shapes.h"
 #include "utils.h"
+#include "tuples.h"
+#include "matrices.h"
 
 Test(spheres, a_ray_intersect_a_sphere_at_two_points)
 {
@@ -155,4 +157,161 @@ Test(spheres, intersect_a_translated_sphere_with_a_ray)
 	xs = intersect(s, r);
 	cr_assert(eq(ptr, xs, NULL));
 	erase_intersections(&xs);
+}
+
+/*	Checks the normal on a sphere at a point on the x axis */
+Test(spheres, normal_at_x_axis)
+{
+	t_sphere	s;
+	t_vector	n;
+	t_tuple		res;
+
+	s = sphere_stub();
+	n = normal_at(s, point(1, 0, 0));
+	res = vector(1, 0, 0);
+
+	cr_assert(eq(flt, n.x, res.x));
+	cr_assert(eq(flt, n.y, res.y));
+	cr_assert(eq(flt, n.z, res.z));
+	cr_assert(eq(flt, n.w, res.w));
+}
+
+/*	Checks the normal on a sphere at a point on the y axis */
+Test(spheres, normal_at_y_axis)
+{
+	t_sphere	s;
+	t_vector	n;
+	t_tuple		res;
+
+	s = sphere_stub();
+	n = normal_at(s, point(0, 1, 0));
+	res = vector(0, 1, 0);
+
+	cr_assert(eq(flt, n.x, res.x));
+	cr_assert(eq(flt, n.y, res.y));
+	cr_assert(eq(flt, n.z, res.z));
+	cr_assert(eq(flt, n.w, res.w));
+}
+
+/*	Checks the normal on a sphere at a point on the z axis */
+Test(spheres, normal_at_z_axis)
+{
+	t_sphere	s;
+	t_vector	n;
+	t_tuple		res;
+
+	s = sphere_stub();
+	n = normal_at(s, point(0, 0, 1));
+	res = vector(0, 0, 1);
+
+	cr_assert(eq(flt, n.x, res.x));
+	cr_assert(eq(flt, n.y, res.y));
+	cr_assert(eq(flt, n.z, res.z));
+	cr_assert(eq(flt, n.w, res.w));
+}
+
+/*	Checks the normal on a sphere at a nonaxial point */
+/*	IMPORTANT NOTE: maybe convertion to double is needed */
+Test(spheres, normal_at_nonaxial_pt)
+{
+	t_sphere	s;
+	t_vector	n;
+	t_tuple		res;
+	float		coord;
+
+	s = sphere_stub();
+	coord = sqrtf(3.0)/3.0;
+	n = normal_at(s, point(coord, coord, coord));
+	res = vector(coord, coord, coord);
+
+	cr_assert_float_eq(n.x, res.x, EPSILON);
+	cr_assert_float_eq(n.y, res.y, EPSILON);
+	cr_assert_float_eq(n.z, res.z, EPSILON);
+	cr_assert_float_eq(n.w, res.w, EPSILON);
+}
+
+/**	
+ *	Checks the feature of a normal vector which states 
+ *	that surface/normal vector should always be normalized.
+ *	Refer to the book TRTC on p.78
+ */
+Test(spheres, normal_is_normalized_vector)
+{
+	t_sphere	s;
+	t_vector	n;
+	t_tuple		res;
+	float		coord;
+
+	s = sphere_stub();
+	coord = sqrtf(3.0)/3.0;
+	n = normal_at(s, point(coord, coord, coord));
+	res = normalize(n);
+	
+	cr_assert_float_eq(n.x, res.x, EPSILON);
+	cr_assert_float_eq(n.y, res.y, EPSILON);
+	cr_assert_float_eq(n.z, res.z, EPSILON);
+	cr_assert_float_eq(n.w, res.w, EPSILON);
+}
+
+/**	
+ *	Checks the normal/surface vector when the sphere's
+ *	origin is not longer at the world origin.
+ */
+Test(spheres, normal_on_a_translated_sphere)
+{
+	t_sphere	s;
+	t_vector	n;
+	t_tuple		res;
+
+	s = sphere_stub();
+	set_transform(&s, translation(0.0, 1.0, 0.0));
+	n = normal_at(s, point(0, 1.70711, -0.70711));
+	res = vector(0, 0.70711, -0.70711);
+
+	cr_assert_float_eq(n.x, res.x, EPSILON);
+	cr_assert_float_eq(n.y, res.y, EPSILON);
+	cr_assert_float_eq(n.z, res.z, EPSILON);
+	cr_assert_float_eq(n.w, res.w, EPSILON);
+}
+
+/**	
+ *	Checks the normal/surface vector when the sphere's
+ *	origin is not longer at the world origin.
+ */
+Test(spheres, normal_on_a_transformed_sphere)
+{
+	t_sphere	s;
+	t_vector	n;
+	t_matrix	m;
+	t_tuple		res;
+	float		coord;
+
+	s = sphere_stub();
+	m = multiply_mx_mx(scaling(1, 0.5, 1), \
+			rotation_z((float) M_PI/5.0));
+	set_transform(&s, m);
+	coord = sqrtf(2)/2.0;
+	n = normal_at(s, point(0, coord, -coord));
+	res = vector(0, 0.97014, -0.24254);
+	cr_assert_float_eq(n.x, res.x, EPSILON);
+	cr_assert_float_eq(n.y, res.y, EPSILON);
+	cr_assert_float_eq(n.z, res.z, EPSILON);
+	cr_assert_float_eq(n.w, res.w, EPSILON);
+}
+
+/*	Checks if the default values of a sphere instance */
+Test(spheres, sphere_default_material)
+{
+	t_sphere	s;
+	t_material	m;
+
+	s = sphere_stub();
+	m = material();
+	m.ambient = 1;
+	s.material = m;
+
+	cr_assert(eq(flt, s.material.ambient, m.ambient));
+	cr_assert(eq(flt, s.material.diffuse, m.diffuse));
+	cr_assert(eq(flt, s.material.specular, m.specular));
+	cr_assert(eq(flt, s.material.shininess, m.shininess));
 }

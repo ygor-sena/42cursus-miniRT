@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/06 11:02:36 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:45:22 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes.h"
+#include "materials.h"
 
 t_sphere	sphere_stub(void)
 {
@@ -18,6 +19,7 @@ t_sphere	sphere_stub(void)
 		.origin = point(0, 0, 0),
 		.radius = 1.0,
 		.transform = get_identity_matrix(),
+		.material = material()
 	});
 }
 

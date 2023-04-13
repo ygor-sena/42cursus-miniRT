@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:33:50 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/03/23 16:36:46 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:29:37 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "matrices.h"
 #include "tuples.h"
+#include "utils.h"
 
 /*	Constructing and inspecting a 4x4 matrix */
 Test(matrices, create_matrix_4x4)
@@ -149,7 +150,7 @@ Test(matrices, is_not_equal_matrix)
 }
 
 /*	Multiplying two matrices */
-Test(matrices, multiply_matrix)
+Test(matrices, multiply_mx_mx)
 {
 	t_matrix	a;
 	t_matrix	b;
@@ -171,7 +172,7 @@ Test(matrices, multiply_matrix)
 
 	a = create_matrix(table_a, MAX);
 	b = create_matrix(table_b, MAX);
-	c = multiply_matrix(a, b);
+	c = multiply_mx_mx(a, b);
 
 	cr_assert(eq(flt, c.matrix[0][0], 20));
 	cr_assert(eq(flt, c.matrix[0][1], 22));
@@ -195,7 +196,7 @@ Test(matrices, multiply_matrix)
 }
 
 /*	Multipliying 4x4 matrix by a tuple */
-Test(matrices, multiply_tuple_matrix)
+Test(matrices, multiply_tp_mx)
 {
 	t_matrix	a;
 	t_tuple		b;
@@ -210,7 +211,7 @@ Test(matrices, multiply_tuple_matrix)
 
 	a = create_matrix(table_a, MAX);
 	b = tuple(1, 2, 3, 1);
-	c = multiply_tuple_matrix(a, b);
+	c = multiply_tp_mx(a, b);
 
 	cr_assert(eq(flt, c.x, 18));
 	cr_assert(eq(flt, c.y, 24));
@@ -241,7 +242,7 @@ Test(matrices, multiply_by_identity_matrix)
 
 	a = create_matrix(table_a, MAX);
 	id = create_matrix(table_id, MAX);
-	c = multiply_matrix(a, id);
+	c = multiply_mx_mx(a, id);
 
 	cr_assert(eq(flt, c.matrix[0][0], 0));
 	cr_assert(eq(flt, c.matrix[0][1], 1));
@@ -265,7 +266,7 @@ Test(matrices, multiply_by_identity_matrix)
 }
 
 /*	Transposing a matrix */
-Test(matrices, transpose_matrix)
+Test(matrices, transpose)
 {
 	t_matrix	a;
 	t_matrix	c;
@@ -278,9 +279,9 @@ Test(matrices, transpose_matrix)
 	};
 
 	a = create_matrix(table_a, MAX);
-	c = transpose_matrix(a);
+	c = transpose(a);
 	//c = create_matrix(table_a, MAX);
-	//transpose_matrix(&c);
+	//transpose(&c);
 
 	cr_assert(eq(flt, c.matrix[0][0], 0));
 	cr_assert(eq(flt, c.matrix[0][1], 9));
@@ -320,8 +321,7 @@ Test(matrices, transpose_of_identity_matrix)
 	};
 
 	a = create_matrix(table_id, MAX);
-	//transpose_matrix(&id);
-	id = transpose_matrix(a);
+	id = transpose(a);
 
 	cr_assert(eq(flt, id.matrix[0][0], 1));
 	cr_assert(eq(flt, id.matrix[0][1], 0));
@@ -553,7 +553,7 @@ Test(matrices, is_not_invertible_4x4)
 }
 
 /*	Calculating the inverse of a matrix */
-Test(matrices, get_inverted_matrix_1)
+Test(matrices, get_inverse_1)
 {
 	t_matrix	a;
 	t_matrix	b;
@@ -567,7 +567,7 @@ Test(matrices, get_inverted_matrix_1)
 	};
 	
 	a = create_matrix(table_a, 4);
-	b = inverted_matrix(a);
+	b = inverse(a);
 	
 	result = get_determinant(a);
 	cr_assert(eq(flt, result, 532));
@@ -580,29 +580,29 @@ Test(matrices, get_inverted_matrix_1)
 	cr_assert(eq(flt, result, 105));
 	cr_assert(eq(flt, b.matrix[2][3], (float) 105/532));
 
-	cr_assert_float_eq(b.matrix[0][0], 0.21805, 0.00001);
-	cr_assert_float_eq(b.matrix[0][1], 0.45113, 0.00001);
-	cr_assert_float_eq(b.matrix[0][2], 0.24060, 0.00001);
-	cr_assert_float_eq(b.matrix[0][3], -0.04511, 0.00001);
+	cr_assert_float_eq(b.matrix[0][0], 0.21805, EPSILON);
+	cr_assert_float_eq(b.matrix[0][1], 0.45113, EPSILON);
+	cr_assert_float_eq(b.matrix[0][2], 0.24060, EPSILON);
+	cr_assert_float_eq(b.matrix[0][3], -0.04511, EPSILON);
 
-	cr_assert_float_eq(b.matrix[1][0], -0.80827, 0.00001);
-	cr_assert_float_eq(b.matrix[1][1], -1.45677, 0.00001);
-	cr_assert_float_eq(b.matrix[1][2], -0.44361, 0.00001);
-	cr_assert_float_eq(b.matrix[1][3], 0.52068, 0.00001);
+	cr_assert_float_eq(b.matrix[1][0], -0.80827, EPSILON);
+	cr_assert_float_eq(b.matrix[1][1], -1.45677, EPSILON);
+	cr_assert_float_eq(b.matrix[1][2], -0.44361, EPSILON);
+	cr_assert_float_eq(b.matrix[1][3], 0.52068, EPSILON);
 
-	cr_assert_float_eq(b.matrix[2][0], -0.07895, 0.00001);
-	cr_assert_float_eq(b.matrix[2][1], -0.22368, 0.00001);
-	cr_assert_float_eq(b.matrix[2][2], -0.05263, 0.00001);
-	cr_assert_float_eq(b.matrix[2][3], 0.19737, 0.00001);
+	cr_assert_float_eq(b.matrix[2][0], -0.07895, EPSILON);
+	cr_assert_float_eq(b.matrix[2][1], -0.22368, EPSILON);
+	cr_assert_float_eq(b.matrix[2][2], -0.05263, EPSILON);
+	cr_assert_float_eq(b.matrix[2][3], 0.19737, EPSILON);
 
-	cr_assert_float_eq(b.matrix[3][0], -0.52256, 0.00001);
-	cr_assert_float_eq(b.matrix[3][1], -0.81391, 0.00001);
-	cr_assert_float_eq(b.matrix[3][2], -0.30075, 0.00001);
-	cr_assert_float_eq(b.matrix[3][3], 0.30639, 0.00001);
+	cr_assert_float_eq(b.matrix[3][0], -0.52256, EPSILON);
+	cr_assert_float_eq(b.matrix[3][1], -0.81391, EPSILON);
+	cr_assert_float_eq(b.matrix[3][2], -0.30075, EPSILON);
+	cr_assert_float_eq(b.matrix[3][3], 0.30639, EPSILON);
 }
 
 /*	Calculating the inverse of another matrix */
-Test(matrices, get_inverted_matrix_2)
+Test(matrices, get_inverse_2)
 {
 	t_matrix	a;
 	t_matrix	b;
@@ -615,31 +615,31 @@ Test(matrices, get_inverted_matrix_2)
 	};
 	
 	a = create_matrix(table_a, 4);
-	b = inverted_matrix(a);
+	b = inverse(a);
 
-	cr_assert_float_eq(b.matrix[0][0], -0.15385, 0.00001);
-	cr_assert_float_eq(b.matrix[0][1], -0.15385, 0.00001);
-	cr_assert_float_eq(b.matrix[0][2], -0.28205, 0.00001);
-	cr_assert_float_eq(b.matrix[0][3], -0.53846, 0.00001);
+	cr_assert_float_eq(b.matrix[0][0], -0.15385, EPSILON);
+	cr_assert_float_eq(b.matrix[0][1], -0.15385, EPSILON);
+	cr_assert_float_eq(b.matrix[0][2], -0.28205, EPSILON);
+	cr_assert_float_eq(b.matrix[0][3], -0.53846, EPSILON);
 
-	cr_assert_float_eq(b.matrix[1][0], -0.07692, 0.00001);
-	cr_assert_float_eq(b.matrix[1][1], 0.12308, 0.00001);
-	cr_assert_float_eq(b.matrix[1][2], 0.02564, 0.00001);
-	cr_assert_float_eq(b.matrix[1][3], 0.03077, 0.00001);
+	cr_assert_float_eq(b.matrix[1][0], -0.07692, EPSILON);
+	cr_assert_float_eq(b.matrix[1][1], 0.12308, EPSILON);
+	cr_assert_float_eq(b.matrix[1][2], 0.02564, EPSILON);
+	cr_assert_float_eq(b.matrix[1][3], 0.03077, EPSILON);
 
-	cr_assert_float_eq(b.matrix[2][0], 0.35897, 0.00001);
-	cr_assert_float_eq(b.matrix[2][1], 0.35897, 0.00001);
-	cr_assert_float_eq(b.matrix[2][2], 0.43590, 0.00001);
-	cr_assert_float_eq(b.matrix[2][3], 0.92308, 0.00001);
+	cr_assert_float_eq(b.matrix[2][0], 0.35897, EPSILON);
+	cr_assert_float_eq(b.matrix[2][1], 0.35897, EPSILON);
+	cr_assert_float_eq(b.matrix[2][2], 0.43590, EPSILON);
+	cr_assert_float_eq(b.matrix[2][3], 0.92308, EPSILON);
 
-	cr_assert_float_eq(b.matrix[3][0], -0.69231, 0.00001);
-	cr_assert_float_eq(b.matrix[3][1], -0.69231, 0.00001);
-	cr_assert_float_eq(b.matrix[3][2], -0.76923, 0.00001);
-	cr_assert_float_eq(b.matrix[3][3], -1.92308, 0.00001);
+	cr_assert_float_eq(b.matrix[3][0], -0.69231, EPSILON);
+	cr_assert_float_eq(b.matrix[3][1], -0.69231, EPSILON);
+	cr_assert_float_eq(b.matrix[3][2], -0.76923, EPSILON);
+	cr_assert_float_eq(b.matrix[3][3], -1.92308, EPSILON);
 }
 
 /*	Calculating the inverse of a third matrix */
-Test(matrices, get_inverted_matrix_3)
+Test(matrices, get_inverse_3)
 {
 	t_matrix	a;
 	t_matrix	b;
@@ -652,27 +652,27 @@ Test(matrices, get_inverted_matrix_3)
 	};
 	
 	a = create_matrix(table_a, 4);
-	b = inverted_matrix(a);
+	b = inverse(a);
 
-	cr_assert_float_eq(b.matrix[0][0], -0.04074, 0.00001);
-	cr_assert_float_eq(b.matrix[0][1], -0.07778, 0.00001);
-	cr_assert_float_eq(b.matrix[0][2], 0.14444, 0.00001);
-	cr_assert_float_eq(b.matrix[0][3], -0.22222, 0.00001);
+	cr_assert_float_eq(b.matrix[0][0], -0.04074, EPSILON);
+	cr_assert_float_eq(b.matrix[0][1], -0.07778, EPSILON);
+	cr_assert_float_eq(b.matrix[0][2], 0.14444, EPSILON);
+	cr_assert_float_eq(b.matrix[0][3], -0.22222, EPSILON);
 
-	cr_assert_float_eq(b.matrix[1][0], -0.07778, 0.00001);
-	cr_assert_float_eq(b.matrix[1][1], 0.03333, 0.00001);
-	cr_assert_float_eq(b.matrix[1][2], 0.36667, 0.00001);
-	cr_assert_float_eq(b.matrix[1][3], -0.33333, 0.00001);
+	cr_assert_float_eq(b.matrix[1][0], -0.07778, EPSILON);
+	cr_assert_float_eq(b.matrix[1][1], 0.03333, EPSILON);
+	cr_assert_float_eq(b.matrix[1][2], 0.36667, EPSILON);
+	cr_assert_float_eq(b.matrix[1][3], -0.33333, EPSILON);
 
-	cr_assert_float_eq(b.matrix[2][0], -0.02901, 0.00001);
-	cr_assert_float_eq(b.matrix[2][1], -0.14630, 0.00001);
-	cr_assert_float_eq(b.matrix[2][2], -0.10926, 0.00001);
-	cr_assert_float_eq(b.matrix[2][3], 0.12963, 0.00001);
+	cr_assert_float_eq(b.matrix[2][0], -0.02901, EPSILON);
+	cr_assert_float_eq(b.matrix[2][1], -0.14630, EPSILON);
+	cr_assert_float_eq(b.matrix[2][2], -0.10926, EPSILON);
+	cr_assert_float_eq(b.matrix[2][3], 0.12963, EPSILON);
 
-	cr_assert_float_eq(b.matrix[3][0], 0.17778, 0.00001);
-	cr_assert_float_eq(b.matrix[3][1], 0.06667, 0.00001);
-	cr_assert_float_eq(b.matrix[3][2], -0.26667, 0.00001);
-	cr_assert_float_eq(b.matrix[3][3], 0.33333, 0.00001);
+	cr_assert_float_eq(b.matrix[3][0], 0.17778, EPSILON);
+	cr_assert_float_eq(b.matrix[3][1], 0.06667, EPSILON);
+	cr_assert_float_eq(b.matrix[3][2], -0.26667, EPSILON);
+	cr_assert_float_eq(b.matrix[3][3], 0.33333, EPSILON);
 }
 
 /*	Multiplying a product by its inverse */
@@ -699,26 +699,26 @@ Test(matrices, mult_product_by_its_inverse)
 	
 	a = create_matrix(table_a, 4);
 	b = create_matrix(table_b, 4);
-	c = multiply_matrix(a, b);
-	result = multiply_matrix(c, inverted_matrix(b));
+	c = multiply_mx_mx(a, b);
+	result = multiply_mx_mx(c, inverse(b));
 
-	cr_assert_float_eq(result.matrix[0][0], 3, 0.00001);
-	cr_assert_float_eq(result.matrix[0][1], -9, 0.00001);
-	cr_assert_float_eq(result.matrix[0][2], 7, 0.00001);
-	cr_assert_float_eq(result.matrix[0][3], 3, 0.00001);
+	cr_assert_float_eq(result.matrix[0][0], 3, EPSILON);
+	cr_assert_float_eq(result.matrix[0][1], -9, EPSILON);
+	cr_assert_float_eq(result.matrix[0][2], 7, EPSILON);
+	cr_assert_float_eq(result.matrix[0][3], 3, EPSILON);
 
-	cr_assert_float_eq(result.matrix[1][0], 3, 0.00001);
-	cr_assert_float_eq(result.matrix[1][1], -8, 0.00001);
-	cr_assert_float_eq(result.matrix[1][2], 2, 0.00001);
-	cr_assert_float_eq(result.matrix[1][3], -9, 0.00001);
+	cr_assert_float_eq(result.matrix[1][0], 3, EPSILON);
+	cr_assert_float_eq(result.matrix[1][1], -8, EPSILON);
+	cr_assert_float_eq(result.matrix[1][2], 2, EPSILON);
+	cr_assert_float_eq(result.matrix[1][3], -9, EPSILON);
 
-	cr_assert_float_eq(result.matrix[2][0], -4, 0.00001);
-	cr_assert_float_eq(result.matrix[2][1], 4, 0.00001);
-	cr_assert_float_eq(result.matrix[2][2], 4, 0.00001);
-	cr_assert_float_eq(result.matrix[2][3], 1, 0.00001);
+	cr_assert_float_eq(result.matrix[2][0], -4, EPSILON);
+	cr_assert_float_eq(result.matrix[2][1], 4, EPSILON);
+	cr_assert_float_eq(result.matrix[2][2], 4, EPSILON);
+	cr_assert_float_eq(result.matrix[2][3], 1, EPSILON);
 
-	cr_assert_float_eq(result.matrix[3][0], -6, 0.00001);
-	cr_assert_float_eq(result.matrix[3][1], 5, 0.00001);
-	cr_assert_float_eq(result.matrix[3][2], -1, 0.00001);
-	cr_assert_float_eq(result.matrix[3][3], 1, 0.00001);
+	cr_assert_float_eq(result.matrix[3][0], -6, EPSILON);
+	cr_assert_float_eq(result.matrix[3][1], 5, EPSILON);
+	cr_assert_float_eq(result.matrix[3][2], -1, EPSILON);
+	cr_assert_float_eq(result.matrix[3][3], 1, EPSILON);
 }

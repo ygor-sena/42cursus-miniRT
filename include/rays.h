@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 10:17:15 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/06 10:32:27 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:05:12 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYS_H
 # define RAYS_H
 
-# include "tuples.h"
 # include "matrices.h"
 
 typedef struct s_ray

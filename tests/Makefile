@@ -1,4 +1,4 @@
-TESTS := tuples colors matrices transformations rays spheres intersections
+TESTS := tuples colors matrices transformations rays spheres intersections lights materials
 
 CYAN  := \33[1;36m
 RESET := \033[0m
@@ -10,7 +10,7 @@ LIBFT_DIR := ../lib/libft
 INC_DIRS  := ../include $(LIBFT_DIR)
 
 # Insert each new directory here
-SRC_DIRS := tuples canvas matrices rays shapes tests
+SRC_DIRS := tuples canvas matrices rays shapes tests lights materials
 SRC_DIRS += $(addprefix $(SRC_DIR)/, $(SRC_DIRS))
 SRC_DIRS += $(SRC_DIR)
 
@@ -20,6 +20,7 @@ vpath %.c $(SRC_DIRS)
 SOURCES := models.c basic_math.c vector_math.c colors.c
 SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c mx_utils.c
 SOURCES += rays.c intersections.c spheres.c
+SOURCES += lights.c materials.c
 
 UTILS := utils.c
 OBJS  := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
@@ -65,6 +66,14 @@ spheres: $(OBJS) test_spheres.c
 
 .PHONY: intersections
 intersections: $(OBJS) test_intersections.c
+	@$(call run, "$^")
+
+.PHONY: lights
+lights: $(OBJS) test_lights.c
+	@$(call run, "$^")
+
+.PHONY: materials
+materials: $(OBJS) test_materials.c
 	@$(call run, "$^")
 
 # Makefile rules to clean stdin/stdout/stderr test's files

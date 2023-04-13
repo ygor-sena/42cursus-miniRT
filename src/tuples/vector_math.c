@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_math.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:01:27 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/03/17 13:01:54 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:09:08 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,12 @@ t_tuple	cross(t_tuple a, t_tuple b)
 			a.z * b.x - a.x * b.z,
 			a.x * b.y - a.y * b.x)
 	);
+}
+
+t_tuple	reflect(t_tuple in, t_tuple normal)
+{
+	return (
+		subtract(
+			in, multiply(
+				multiply(normal, 2.0), dot(in, normal))));
 }
