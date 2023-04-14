@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:28:46 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/06 10:47:25 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:27:47 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@
 
 Test(intersections, an_intersection_encapsulates_t_and_object)
 {
-	t_sphere		sphere;
+	t_sphere		*sphere;
 	t_intersection	*i;
 
 	sphere = sphere_stub();
 	i = intersection(3.5, sphere);
 	cr_assert(eq(flt, i->t, 3.5));
-	cr_assert(eq(flt, i->object.sphere.radius, sphere.radius));
+	cr_assert(eq(flt, i->object.sphere->radius, sphere->radius));
+	free(sphere);
 }
 
 Test(intersections, aggregating_intersections)
@@ -46,7 +47,7 @@ Test(intersections, aggregating_intersections)
 
 Test(intersections, hit_when_all_intersections_have_positive_t)
 {
-	t_sphere		sphere;
+	t_sphere		*sphere;
 	t_intersection	*i1;
 	t_intersection	*i2;
 	t_intersection	*xs;
@@ -62,11 +63,12 @@ Test(intersections, hit_when_all_intersections_have_positive_t)
 	cr_assert(eq(i32, intersection_count(xs), 2));
 	cr_assert(eq(i32, compare_spheres(i->object.sphere, sphere), TRUE));
 	erase_intersections(&xs);
+	free(sphere);
 }
 
 Test(intersections, hit_when_all_intersections_have_negative_t)
 {
-	t_sphere		sphere;
+	t_sphere		*sphere;
 	t_intersection	*result;
 	t_intersection	*expected;
 	t_intersection	*xs;
@@ -81,11 +83,12 @@ Test(intersections, hit_when_all_intersections_have_negative_t)
 	cr_assert(eq(i32, intersection_count(xs), 2));
 	cr_assert(eq(ptr, expected, NULL));
 	erase_intersections(&xs);
+	free(sphere);
 }
 
 Test(intersections, the_hit_is_always_the_lowest_nonnegative_intersection)
 {
-	t_sphere		sphere;
+	t_sphere		*sphere;
 	t_intersection	*i1;
 	t_intersection	*xs;
 	t_intersection	*i;
@@ -104,4 +107,5 @@ Test(intersections, the_hit_is_always_the_lowest_nonnegative_intersection)
 	cr_assert(eq(i32, intersection_count(xs), 4));
 	cr_assert(eq(flt, i->t, 2));
 	erase_intersections(&xs);
+	free(sphere);
 }

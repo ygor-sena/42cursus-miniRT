@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   spheres.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/11 14:58:00 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/14 14:38:08 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes.h"
 
-static t_hit_points	calculate_hit_points(t_sphere sphere, t_ray ray);
+static t_hit_points	calculate_hit_points(t_sphere *sphere, t_ray ray);
 
-t_intersection	*intersect(t_sphere sphere, t_ray r)
+t_intersection	*intersect(t_sphere *sphere, t_ray r)
 {
 	t_ray			ray;
 	t_intersection	*xs;
 	t_hit_points	c;
 
-	ray = transform(r, inverse(sphere.transform));
+	ray = transform(r, inverse(sphere->transform));
 	c = calculate_hit_points(sphere, ray);
 	xs = NULL;
 	if (c.delta < 0)
@@ -35,7 +35,7 @@ void	set_transform(t_sphere *sphere, t_matrix transform)
 	sphere->transform = transform;
 }
 
-static t_hit_points	calculate_hit_points(t_sphere sphere, t_ray ray)
+static t_hit_points	calculate_hit_points(t_sphere *sphere, t_ray ray)
 {
 	float		a;
 	float		b;
@@ -43,7 +43,7 @@ static t_hit_points	calculate_hit_points(t_sphere sphere, t_ray ray)
 	float		delta;
 	t_vector	sphere_to_ray;
 
-	sphere_to_ray = subtract(ray.origin, sphere.origin);
+	sphere_to_ray = subtract(ray.origin, sphere->origin);
 	a = dot(ray.direction, ray.direction);
 	b = 2 * dot(ray.direction, sphere_to_ray);
 	c = dot(sphere_to_ray, sphere_to_ray) - 1;
@@ -68,8 +68,8 @@ t_tuple	normal_at(t_sphere sphere, t_tuple world_point)
 
 	object_point = multiply_tp_mx(inverse(sphere.transform), world_point);
 	object_normal = subtract(object_point, point(0, 0, 0));
-	world_normal = multiply_tp_mx(transpose(\
-					inverse(sphere.transform)), object_normal);
+	world_normal = multiply_tp_mx(transpose(
+				inverse(sphere.transform)), object_normal);
 	world_normal.w = 0.0;
 	return (normalize(world_normal));
 }
