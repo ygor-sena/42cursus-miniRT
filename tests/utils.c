@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/14 13:34:56 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/14 16:38:12 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ t_world	default_world(void)
 
 	w = world_stub();
 	s1 = sphere_stub();
+	s1->material.color = new_color(0.8, 1.0, 0.6);
+	s1->material.diffuse = 0.7;
+	s1->material.specular = 0.2;
 	s2 = sphere_stub();
+	s2->transform = scaling(0.5, 0.5, 0.5);
 	light = point_light(point(-10, 10, -10), new_color(1, 1, 1));
 	s1->radius = 0.5;
 	s2->radius = 1.0;
