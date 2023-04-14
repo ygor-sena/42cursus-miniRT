@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:09:16 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/14 15:39:16 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:50:29 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,7 +245,7 @@ t_tuple	reflect(t_tuple in, t_tuple normal);
 /* ************************************************************************** */
 /*                                COLORS.C                                    */
 /* ************************************************************************** */
- 
+
 /**
  * @brief The function new_color() instances a new color of struct type s_color
  *	with the given values passed as parameter.
