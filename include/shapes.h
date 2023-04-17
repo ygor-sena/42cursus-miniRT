@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/14 11:49:28 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/17 20:10:41 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ typedef struct s_intersection
 	struct s_intersection	*next;
 }	t_intersection;
 
-typedef struct s_hit_points
+typedef struct s_distance
 {
 	float	t1;
 	float	t2;
-	float	delta;
-}	t_hit_points;
+	float	determinant;
+}	t_distance;
 
 /* ************************************************************************** */
 /*                                SPHERES.C                                   */

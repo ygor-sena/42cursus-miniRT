@@ -31,8 +31,8 @@ HEADERS := tuples.h canvas.h matrices.h rays.h shapes.h lights.h materials.h
 HEADERS += world.h helpers.h
 
 SOURCES := main.c models.c basic_math.c vector_math.c colors.c canvas.c
-SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c mx_utils.c
-SOURCES += rays.c intersections.c spheres.c
+SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c
+SOURCES += mx_utils.c rays.c intersections.c spheres.c
 SOURCES += lights.c materials.c guards.c world.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
@@ -47,7 +47,7 @@ LDLIBS  := -lft -lmlx -lXext -lX11 -lm
 
 all: $(NAME)
 
-r:
+r: $(NAME)
 	@make $(TEST) -C tests --no-print-directory
 
 test: $(NAME)

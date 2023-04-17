@@ -6,27 +6,27 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/14 14:38:08 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/15 11:47:57 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes.h"
 
-static t_hit_points	calculate_hit_points(t_sphere *sphere, t_ray ray);
+static t_distance	calculate_distance(t_sphere *sphere, t_ray ray);
 
 t_intersection	*intersect(t_sphere *sphere, t_ray r)
 {
 	t_ray			ray;
 	t_intersection	*xs;
-	t_hit_points	c;
+	t_distance		d;
 
 	ray = transform(r, inverse(sphere->transform));
-	c = calculate_hit_points(sphere, ray);
+	d = calculate_distance(sphere, ray);
 	xs = NULL;
-	if (c.delta < 0)
+	if (d.determinant < 0)
 		return (NULL);
-	insert_intersection(&xs, intersection(c.t1, sphere));
-	insert_intersection(&xs, intersection(c.t2, sphere));
+	insert_intersection(&xs, intersection(d.t1, sphere));
+	insert_intersection(&xs, intersection(d.t2, sphere));
 	return (xs);
 }
 
@@ -35,7 +35,7 @@ void	set_transform(t_sphere *sphere, t_matrix transform)
 	sphere->transform = transform;
 }
 
-static t_hit_points	calculate_hit_points(t_sphere *sphere, t_ray ray)
+static t_distance	calculate_distance(t_sphere *sphere, t_ray ray)
 {
 	float		a;
 	float		b;
@@ -48,15 +48,15 @@ static t_hit_points	calculate_hit_points(t_sphere *sphere, t_ray ray)
 	b = 2 * dot(ray.direction, sphere_to_ray);
 	c = dot(sphere_to_ray, sphere_to_ray) - 1;
 	delta = (b * b) - 4 * a * c;
-	return ((t_hit_points){
+	return ((t_distance){
 		.t1 = (-b - sqrtf(delta)) / (2 * a),
 		.t2 = (-b + sqrtf(delta)) / (2 * a),
-		.delta = (b * b) - 4 * a * c,
+		.determinant = (b * b) - 4 * a * c,
 	});
 }
 
 /**
- *	Hack, to ensure we have a clean vector, as due the inverse transpose 
+ *	Hack, to ensure we have a clean vector, as due the inverse transpose
  *	the w component could be affected if the transformation matrix included
  *	a translation.
  */

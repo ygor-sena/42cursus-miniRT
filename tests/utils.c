@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/14 16:38:12 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/17 18:39:49 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,14 @@ t_bool	compare_spheres(t_sphere *a, t_sphere *b)
 		&& a->origin.y == b->origin.y
 		&& a->origin.z == b->origin.z
 		&& a->radius == b->radius
+	);
+}
+
+t_bool	compare_tuples(t_tuple a, t_tuple b)
+{
+	return (
+		a.x == b.x
+		&& a.y == b.y
+		&& a.z == b.z
 	);
 }
