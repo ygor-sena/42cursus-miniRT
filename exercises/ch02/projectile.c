@@ -67,13 +67,6 @@ t_environment	environment(t_vector gravity, t_vector wind)
 
 static int	render_scene(t_canvas *canvas)
 {
-	static t_bool	init;
-
-	if (init == FALSE)
-	{
-		init = TRUE;
-		return (EXIT_SUCCESS);
-	}
 	render_background(canvas);
 	render_projectile_motion(canvas);
 	mlx_put_image_to_window(canvas->mlx_ptr, canvas->win_ptr,
