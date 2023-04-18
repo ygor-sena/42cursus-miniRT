@@ -5,6 +5,10 @@
 #include "tuples.h"
 #include "canvas.h"
 
+#define MLX_WIDTH 900
+#define MLX_HEIGHT 550
+#define MLX_TITLE "Projectile from Chapter 2"
+
 typedef t_tuple	t_vector;
 typedef t_tuple	t_point;
 
@@ -37,7 +41,7 @@ int	main(void)
 {
 	t_canvas	rt;
 
-	if (!new_canvas(&rt, 900, 550))
+	if (!new_canvas(&rt, MLX_WIDTH, MLX_HEIGHT, MLX_TITLE))
 		return (EXIT_FAILURE);
 	mlx_expose_hook(rt.win_ptr, render_scene, &rt);
 	mlx_hook(rt.win_ptr, DESTROYNOTIFY, NOEVENTMASK, quit, &rt);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   canvas.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 11:42:43 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/03/24 17:26:58 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/18 16:39:25 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static t_bool	init_window(t_canvas *canvas, char *title);
 static t_bool	init_canvas(t_canvas *canvas);
 
-t_bool	new_canvas(t_canvas *canvas, int width, int height)
+t_bool	new_canvas(t_canvas *canvas, int width, int height, char *title)
 {
 	canvas->width = width;
 	canvas->height = height;
-	if (!init_window(canvas, "MiniRT"))
+	if (!init_window(canvas, title))
 		return (FALSE);
 	if (!init_canvas(canvas))
 		return (FALSE);

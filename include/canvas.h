@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   canvas.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:28:08 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/03/24 15:38:44 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/18 16:38:59 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_canvas
 	void	*win_ptr;
 }	t_canvas;
 
-t_bool	new_canvas(t_canvas *canvas, int width, int height);
+t_bool	new_canvas(t_canvas *canvas, int width, int height, char *title);
 int		handle_keypress(int keysym, t_canvas *canvas);
 int		quit(t_canvas *canvas);
 
