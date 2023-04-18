@@ -25,7 +25,6 @@ vpath %.c $(SRC_DIRS)
 LIBFT   := $(LIBFT_DIR)/libft.a
 MLX     := $(MLX_DIR)/libmlx_Linux.a
 
-#SOURCES := models.c basic_math.c vector_math.c colors.c canvas.c
 SOURCES := models.c basic_math.c vector_math.c colors.c canvas.c
 SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c mx_utils.c
 SOURCES += rays.c intersections.c spheres.c
