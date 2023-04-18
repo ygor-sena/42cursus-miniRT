@@ -1,5 +1,5 @@
 TESTS := tuples colors matrices transformations rays spheres intersections
-TESTS += lights materials world
+TESTS += lights materials world view_transform
 
 CYAN  := \33[1;36m
 RESET := \033[0m
@@ -12,6 +12,7 @@ INC_DIRS  := ../include $(LIBFT_DIR)
 
 # Insert each new directory here
 SRC_DIRS := tuples canvas matrices rays shapes tests lights materials helpers
+SRC_DIRS += camera
 SRC_DIRS += $(addprefix $(SRC_DIR)/, $(SRC_DIRS))
 SRC_DIRS += $(SRC_DIR)
 
@@ -21,7 +22,7 @@ vpath %.c $(SRC_DIRS)
 SOURCES := models.c basic_math.c vector_math.c colors.c
 SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c mx_utils.c
 SOURCES += rays.c intersections.c spheres.c
-SOURCES += lights.c materials.c guards.c world.c
+SOURCES += lights.c materials.c guards.c world.c view_transform.c
 
 UTILS := utils.c
 OBJS  := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
@@ -79,6 +80,10 @@ materials: $(OBJS) test_materials.c
 
 .PHONY: world
 world: $(OBJS) test_world.c
+	@$(call run, "$^")
+
+.PHONY: view_transform
+view_transform: $(OBJS) test_view_transform.c
 	@$(call run, "$^")
 
 # Makefile rules to clean stdin/stdout/stderr test's files
