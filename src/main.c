@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:29:58 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/18 16:39:33 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:22:54 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(void)
 {
 	t_canvas	rt;
 
-	if (!new_canvas(&rt, 800, 600, "MiniRT"))
+	if (!new_canvas(&rt, 800, 600))
 		return (EXIT_FAILURE);
 	mlx_expose_hook(rt.win_ptr, render, &rt);
 	mlx_hook(rt.win_ptr, DESTROYNOTIFY, NOEVENTMASK, quit, &rt);

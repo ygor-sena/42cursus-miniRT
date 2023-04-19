@@ -12,11 +12,11 @@ MLX_DIR   := $(LIB_DIR)/mlx_linux
 INC_DIRS  := ../include $(LIBFT_DIR) $(MLX_DIR)
 
 # Insert each new directory here
-SRC_DIRS := tuples canvas matrices shapes rays materials lights
+SRC_DIRS := tuples canvas matrices
 SRC_DIRS += $(addprefix $(SRC_DIR)/, $(SRC_DIRS))
 SRC_DIRS += $(SRC_DIR)
 
-CHAPTERS := ch02 ch05 ch06
+CHAPTERS := ch02
 SRC_DIRS += $(CHAPTERS)
 
 vpath %.h $(INC_DIRS)
@@ -26,9 +26,6 @@ LIBFT   := $(LIBFT_DIR)/libft.a
 MLX     := $(MLX_DIR)/libmlx_Linux.a
 
 SOURCES := models.c basic_math.c vector_math.c colors.c canvas.c
-SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c mx_utils.c
-SOURCES += rays.c intersections.c spheres.c
-SOURCES += lights.c materials.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
@@ -51,14 +48,6 @@ $(OBJS):
 
 .PHONY: projectile
 projectile: $(OBJS) projectile.c
-	@$(call run, "$^")
-
-.PHONY: sun
-sun: $(OBJS) sun.c
-	@$(call run, "$^")
-
-.PHONY: volume
-volume: $(OBJS) volume.c
 	@$(call run, "$^")
 
 clean:
