@@ -117,7 +117,7 @@ static void	build_world(t_canvas *canvas)
 			// 2) Describe the point on the wall that the ray will target
 			pos = point(wall.world_x, wall.world_y, wall.wall_z);
 			r = new_ray(ray_origin, normalize(subtract(pos, ray_origin)));	
-			xs = intersect(shape, r);
+			xs = intersect(&shape, r);
 
 			i = hit(xs);
 
@@ -132,11 +132,11 @@ static void	build_world(t_canvas *canvas)
 				// Normalizing the ray is fundamental to find the normal vector
 				// at the hit (the closest intersection) and calculate the eye vector
 				p = position(r, i->t);
-				eye.normalv = normal_at(i->object.sphere, p);
+				eye.normalv = normal_at(*(i->object.sphere), p);
 				eye.eyev = negate(r.direction);
 
 				// Calculate the final color with lighting() functior
-				final = lighting(i->object.sphere.material, *light, p, eye);
+				final = lighting(i->object.sphere->material, *light, p, eye);
 				color = rgb(final);
 				write_pixel(canvas, x, y, color);
 			}

@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 15:56:20 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/19 14:27:06 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:40:43 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ static void	build_world(t_canvas *canvas)
 			// 2) Describe the point on the wall that the ray will target
 			pos = point(wall.world_x, wall.world_y, wall.wall_z);
 			r = new_ray(ray_origin, normalize(subtract(pos, ray_origin)));	
-			xs = intersect(shape, r);
+			xs = intersect(&shape, r);
 			xs = hit(xs);
 
 			// If the ray passed though the sphere, render the sphere, else

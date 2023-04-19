@@ -12,7 +12,7 @@ MLX_DIR   := $(LIB_DIR)/mlx_linux
 INC_DIRS  := ../include $(LIBFT_DIR) $(MLX_DIR)
 
 # Insert each new directory here
-SRC_DIRS := tuples canvas matrices shapes rays materials lights
+SRC_DIRS := tuples canvas matrices shapes rays materials lights helpers
 SRC_DIRS += $(addprefix $(SRC_DIR)/, $(SRC_DIRS))
 SRC_DIRS += $(SRC_DIR)
 
@@ -28,7 +28,7 @@ MLX     := $(MLX_DIR)/libmlx_Linux.a
 SOURCES := models.c basic_math.c vector_math.c colors.c canvas.c
 SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c mx_utils.c
 SOURCES += rays.c intersections.c spheres.c
-SOURCES += lights.c materials.c
+SOURCES += lights.c materials.c guards.c world.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
