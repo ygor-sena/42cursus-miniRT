@@ -53,3 +53,8 @@ dkms.conf
 
 # Specifics of the project
 compile_flags.txt
+compile_commands.json
+
+.cache
+projectile
+dynarray
