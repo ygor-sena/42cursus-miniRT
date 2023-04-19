@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 12:28:50 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/18 16:01:24 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/18 17:08:36 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,5 @@ Test(view_transformation, arbitrary_transformation)
 	up = vector(1, 1, 0);
 	t = view_transform(from, to, up);
 
-	for (size_t i = 0; i < t.size; i++)
-	{
-		for (size_t j = 0; j < t.size; j++)
-			cr_assert_float_eq(t.matrix[i][j], expected[i][j], EPSILON);
-	}
+	assert_matrix_equal(t, create_matrix(expected, MAX));
 }

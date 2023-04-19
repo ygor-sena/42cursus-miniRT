@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/17 14:42:01 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:42:56 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include "shapes.h"
 
 // PERF: use arrays
-// t_object	*objects;
-// t_light		*lights;
 typedef struct s_world
 {
 	t_list	*objects;
@@ -31,8 +29,6 @@ typedef struct s_comps
 	t_object	object;
 	t_point		point;
 	t_sight		sight;
-	t_vector	eyev;
-	t_vector	normalv;
 	t_bool		inside;
 }	t_comps;
 
