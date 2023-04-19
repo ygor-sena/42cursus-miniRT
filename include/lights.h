@@ -6,16 +6,15 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:06:23 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/13 17:00:09 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/13 20:29:51 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIGHTS_H
 # define LIGHTS_H
 
-# include <stdlib.h>
-
 # include "tuples.h"
+# include "helpers.h"
 
 /** 
  *	ABOUT THE HEADER LIGHTS.H
@@ -69,6 +68,6 @@ typedef struct s_sight
  * @return (t_light) Returns a light's source with a given location in space
  *	and a color intensity in RGB values.
  */
-t_light	*point_light(t_tuple	position, t_color intensity);
+t_light	*point_light(t_tuple position, t_color intensity);
 
 #endif

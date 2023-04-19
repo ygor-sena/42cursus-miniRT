@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lights.c                                           :+:      :+:    :+:   */
+/*   guards.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 11:11:56 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/13 20:29:13 by mdias-ma         ###   ########.fr       */
+/*   Created: 2023/04/13 20:26:40 by mdias-ma          #+#    #+#             */
+/*   Updated: 2023/04/14 10:35:54 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lights.h"
+#include "helpers.h"
 
-t_light	*point_light(t_tuple point, t_color intensity)
+void	*oom(void *ptr)
 {
-	t_light	*light;
-
-	light = oom(malloc(sizeof(t_light)));
-	light->position = point;
-	light->intensity = intensity;
-	return (light);
+	if (ptr == NULL)
+	{
+		perror("minirt");
+		exit(EXIT_FAILURE);
+	}
+	return (ptr);
 }

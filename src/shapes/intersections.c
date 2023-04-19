@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:36:20 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/06 10:37:11 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/14 13:35:30 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,15 @@ void	insert_intersection(t_intersection **xs, t_intersection *isect)
 	aux->next = isect;
 }
 
-t_intersection	*intersection(float t, t_sphere sphere)
+t_intersection	*intersection(float t, t_sphere *sphere)
 {
-	t_intersection	*isect;
+	t_intersection	*hit;
 
-	isect = malloc(sizeof(t_intersection));
-	if (isect == NULL)
-		return (NULL);
-	isect->t = t;
-	isect->object.sphere = sphere;
-	isect->next = NULL;
-	return (isect);
+	hit = oom(malloc(sizeof(t_intersection)));
+	hit->t = t;
+	hit->object.sphere = sphere;
+	hit->next = NULL;
+	return (hit);
 }
 
 t_intersection	*hit(t_intersection *xs)

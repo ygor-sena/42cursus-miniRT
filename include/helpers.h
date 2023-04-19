@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lights.c                                           :+:      :+:    :+:   */
+/*   helpers.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 11:11:56 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/13 20:29:13 by mdias-ma         ###   ########.fr       */
+/*   Created: 2023/03/31 14:48:10 by mdias-ma          #+#    #+#             */
+/*   Updated: 2023/04/14 10:37:50 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lights.h"
+#ifndef HELPERS_H
+# define HELPERS_H
 
-t_light	*point_light(t_tuple point, t_color intensity)
-{
-	t_light	*light;
+# include <stdio.h>
+# include <stdlib.h>
 
-	light = oom(malloc(sizeof(t_light)));
-	light->position = point;
-	light->intensity = intensity;
-	return (light);
-}
+/* Out of memory guard. Check if ptr is null, if so, terminate the program. */
+void	*oom(void *ptr);
+
+#endif
