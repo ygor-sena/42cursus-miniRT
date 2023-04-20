@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:06 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/12 15:11:13 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/20 10:58:34 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_matrix
 typedef struct s_shearing
 {
 	float	p1;
-	float	p2;	
+	float	p2;
 }	t_shearing;
 
 /* ************************************************************************** */
