@@ -29,12 +29,13 @@ LIBFT   := $(LIBFT_DIR)/libft.a
 MLX     := $(MLX_DIR)/libmlx_Linux.a
 
 HEADERS := tuples.h canvas.h matrices.h rays.h shapes.h lights.h materials.h
-HEADERS += world.h helpers.h camera.h
+HEADERS += world.h helpers.h camera.h mlx.h
 
 SOURCES := main.c models.c basic_math.c vector_math.c colors.c canvas.c
 SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c
 SOURCES += mx_utils.c rays.c intersections.c spheres.c
 SOURCES += lights.c materials.c guards.c world.c view_transform.c camera.c
+SOURCES += render.c controls.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
@@ -42,7 +43,7 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 ##                                 COMPILATION                                ##
 ################################################################################
 
-CFLAGS  := -Wall -Werror -Wextra -g $(addprefix -I,$(INC_DIRS))
+CFLAGS  := -O2 -Wall -Werror -Wextra -g $(addprefix -I,$(INC_DIRS))
 LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
 LDLIBS  := -lft -lmlx -lXext -lX11 -lm
 

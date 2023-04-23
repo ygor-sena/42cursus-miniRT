@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:16:40 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/19 19:27:36 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/22 19:54:53 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_camera	new_camera(float hsize, float vsize, float field_of_view)
 	return (camera);
 }
 
+// PERF: Cache the inverse transformations of the matrix
 t_ray	ray_for_pixel(t_camera *camera, float px, float py)
 {
 	float	world_x;
