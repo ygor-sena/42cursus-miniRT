@@ -100,7 +100,7 @@ void	add_spheres(t_world *world)
 	left->material.color = new_color(1, 0.8, 0.1);
 	left->material.diffuse = 0.7;
 	left->material.specular = 0.3;
-	
+
 	add_object(world, middle);
 	add_object(world, right);
 	add_object(world, left);
