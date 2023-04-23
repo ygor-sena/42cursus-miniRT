@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:31:28 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/18 16:32:38 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/23 13:31:18 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "shapes.h"
 # include "helpers.h"
 # include "camera.h"
+# include "canvas.h"
 
 # define EPSILON 0.00001
 
