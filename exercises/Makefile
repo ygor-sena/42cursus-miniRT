@@ -1,4 +1,4 @@
-TESTS := projectile sun volume
+TESTS := projectile sun volume background
 
 CYAN  := \33[1;36m
 RESET := \033[0m
@@ -12,11 +12,11 @@ MLX_DIR   := $(LIB_DIR)/mlx_linux
 INC_DIRS  := ../include $(LIBFT_DIR) $(MLX_DIR)
 
 # Insert each new directory here
-SRC_DIRS := tuples canvas matrices shapes rays materials lights
+SRC_DIRS := tuples canvas matrices shapes rays materials lights helpers
 SRC_DIRS += $(addprefix $(SRC_DIR)/, $(SRC_DIRS))
 SRC_DIRS += $(SRC_DIR)
 
-CHAPTERS := ch02 ch05 ch06
+CHAPTERS := ch02 ch05 ch06 ch07
 SRC_DIRS += $(CHAPTERS)
 
 vpath %.h $(INC_DIRS)
@@ -26,9 +26,10 @@ LIBFT   := $(LIBFT_DIR)/libft.a
 MLX     := $(MLX_DIR)/libmlx_Linux.a
 
 SOURCES := models.c basic_math.c vector_math.c colors.c canvas.c
-SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c mx_utils.c
-SOURCES += rays.c intersections.c spheres.c
-SOURCES += lights.c materials.c
+SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c
+SOURCES += mx_utils.c rays.c intersections.c spheres.c
+SOURCES += lights.c materials.c guards.c world.c view_transform.c camera.c
+SOURCES += render.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
@@ -37,7 +38,7 @@ LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
 LDLIBS  := -lft -lmlx -lXext -lX11 -lm
 
 define run
- 	$(CC) $(CFLAGS) $^ $(LDFLAGS) $(LDLIBS) -o $@ && ./$@ --verbose
+ 	$(CC) -O3 $(CFLAGS) $^ $(LDFLAGS) $(LDLIBS) -o $@ && ./$@
 endef
 
 ################################################################################
@@ -59,6 +60,10 @@ sun: $(OBJS) sun.c
 
 .PHONY: volume
 volume: $(OBJS) volume.c
+	@$(call run, "$^")
+
+.PHONY: background
+background: $(OBJS) background.c
 	@$(call run, "$^")
 
 clean:

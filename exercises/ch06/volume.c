@@ -13,27 +13,8 @@
 # define MLX_HEIGHT 500
 # define MLX_TITLE "Rendering a whole roundy sphere from chapter 6!"
 
-static int	rgb(t_color color)
-{
-	return (
-		(int)(color.red * 255 + 0.5) << 16 |
-		(int)(color.green * 255 + 0.5) << 8 |
-		(int)(color.blue * 255 + 0.5)
-	);
-}
-
-static void	write_pixel(const t_canvas *canvas, int x, int y, int color)
-{
-	char	*pixel;
-
-	if (x < 0 || x >= canvas->width || y < 0 || y >= canvas->height)
-		return ;
-	pixel = canvas->addr + (y * canvas->line_len + x * (canvas->bpp / 8));
-	*(int *)pixel = color;
-}
-
 /*
-	This structure is world's wall to render the projections on it. 
+	This structure is world's wall to render the projections on it.
 	Moving the ray origin closer to the sphere will make the sphere in the
 	drawing larger. Moving it farther away will make the sphere smaller.
 	Moving the wall will do similarly.
@@ -116,8 +97,8 @@ static void	build_world(t_canvas *canvas)
 
 			// 2) Describe the point on the wall that the ray will target
 			pos = point(wall.world_x, wall.world_y, wall.wall_z);
-			r = new_ray(ray_origin, normalize(subtract(pos, ray_origin)));	
-			xs = intersect(shape, r);
+			r = new_ray(ray_origin, normalize(subtract(pos, ray_origin)));
+			xs = intersect(&shape, r);
 
 			i = hit(xs);
 
@@ -132,11 +113,11 @@ static void	build_world(t_canvas *canvas)
 				// Normalizing the ray is fundamental to find the normal vector
 				// at the hit (the closest intersection) and calculate the eye vector
 				p = position(r, i->t);
-				eye.normalv = normal_at(i->object.sphere, p);
+				eye.normalv = normal_at(*i->object.sphere, p);
 				eye.eyev = negate(r.direction);
 
 				// Calculate the final color with lighting() functior
-				final = lighting(i->object.sphere.material, *light, p, eye);
+				final = lighting(i->object.sphere->material, *light, p, eye);
 				color = rgb(final);
 				write_pixel(canvas, x, y, color);
 			}
@@ -148,21 +129,15 @@ static void	build_world(t_canvas *canvas)
 	free(light);
 }
 
-static int	render_scene(t_canvas *canvas)
-{
-	build_world(canvas);
-	mlx_put_image_to_window(canvas->mlx_ptr, canvas->win_ptr,
-		canvas->img_ptr, 0, 0);
-	return (EXIT_SUCCESS);
-}
-
 int main(void)
 {
 	t_canvas	rt;
 
-	if (!new_canvas(&rt, MLX_WIDTH, MLX_HEIGHT, MLX_TITLE))
+	if (!new_canvas(&rt, MLX_WIDTH, MLX_HEIGHT))
 		return (EXIT_FAILURE);
-	mlx_expose_hook(rt.win_ptr, render_scene, &rt);
+	build_world(&rt);
+	put_on_window(&rt, MLX_TITLE);
+	mlx_expose_hook(rt.win_ptr, show_window, &rt);
 	mlx_hook(rt.win_ptr, DESTROYNOTIFY, NOEVENTMASK, quit, &rt);
 	mlx_key_hook(rt.win_ptr, handle_keypress, &rt);
 	mlx_loop(rt.mlx_ptr);

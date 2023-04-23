@@ -29,10 +29,7 @@ t_projectile		projectile(t_point position, t_vector velocity);
 t_environment		environment(t_vector gravity, t_vector wind);
 
 static void			write_dot(const t_canvas *canvas, int x, int y, int color);
-static void			write_pixel(const t_canvas *canvas, int x, int y, int color);
-static int			rgb(t_color color);
 
-static int			render_scene(t_canvas *canvas);
 static void			render_background(t_canvas *canvas);
 static void			render_projectile_motion(t_canvas *canvas);
 static void			display_position(t_projectile p);
@@ -41,9 +38,12 @@ int	main(void)
 {
 	t_canvas	rt;
 
-	if (!new_canvas(&rt, MLX_WIDTH, MLX_HEIGHT, MLX_TITLE))
+	if (!new_canvas(&rt, MLX_WIDTH, MLX_HEIGHT))
 		return (EXIT_FAILURE);
-	mlx_expose_hook(rt.win_ptr, render_scene, &rt);
+	render_background(&rt);
+	render_projectile_motion(&rt);
+	put_on_window(&rt, MLX_TITLE);
+	mlx_expose_hook(rt.win_ptr, show_window, &rt);
 	mlx_hook(rt.win_ptr, DESTROYNOTIFY, NOEVENTMASK, quit, &rt);
 	mlx_key_hook(rt.win_ptr, handle_keypress, &rt);
 	mlx_loop(rt.mlx_ptr);
@@ -67,15 +67,6 @@ t_projectile	projectile(t_point position, t_vector velocity)
 t_environment	environment(t_vector gravity, t_vector wind)
 {
 	return ((t_environment){gravity, wind});
-}
-
-static int	render_scene(t_canvas *canvas)
-{
-	render_background(canvas);
-	render_projectile_motion(canvas);
-	mlx_put_image_to_window(canvas->mlx_ptr, canvas->win_ptr,
-		canvas->img_ptr, 0, 0);
-	return (EXIT_SUCCESS);
 }
 
 static void	render_projectile_motion(t_canvas *canvas)
@@ -134,23 +125,4 @@ static void	write_dot(const t_canvas *canvas, int x, int y, int color)
 static void	display_position(t_projectile p)
 {
 	printf("x: %d - y: %d\n", (int)p.position.x, (int)p.position.y);
-}
-
-static void	write_pixel(const t_canvas *canvas, int x, int y, int color)
-{
-	char	*pixel;
-
-	if (x < 0 || x >= canvas->width || y < 0 || y >= canvas->height)
-		return ;
-	pixel = canvas->addr + (y * canvas->line_len + x * (canvas->bpp / 8));
-	*(int *)pixel = color;
-}
-
-static int	rgb(t_color color)
-{
-	return (
-		(int)(color.red * 255 + 0.5) << 16 |
-		(int)(color.green * 255 + 0.5) << 8 |
-		(int)(color.blue * 255 + 0.5)
-	);
 }
