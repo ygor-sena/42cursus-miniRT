@@ -7,7 +7,7 @@
 
 #define MLX_WIDTH 800
 #define MLX_HEIGHT 600
-#define MLX_TITLE "Background from Chapter 7"
+#define MLX_TITLE "Scene from Chapter 7"
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Prototypes
