@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:09:16 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/20 10:58:07 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/24 09:23:00 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,9 +284,9 @@ t_color	subtract_color(t_color a, t_color b);
 
 /**
  * @brief The function multiply_color() scales the intensities of each RGB color
- * component of the parameter color by a constant parameter scalar. For example,
- * multiply (1, 0, 0) by 0.5 or 1.5 result in (0.5, 0, 0) or (1.5, 0, 0). In
- * other words, the red components were halved or doubled.
+ *	component of the parameter color by a constant parameter scalar. For
+ *	example, multiplying (1, 0, 0) by 0.5 or 1.5 result in (0.5, 0, 0) or
+ *	(1.5, 0, 0). In other words, the red components were halved or doubled.
  *
  * @param color Receives the color to be scaled.
  * @param scalar Receives the scale factor to be applied for each color value.
@@ -297,10 +297,10 @@ t_color	multiply_color(t_color color, float scalar);
 
 /**
  * @brief The function hadamard_product() blends two color together by
- * multipling corresponding components of each color. This process is known as
- * Hadamard product or Schur product. For example, to view a yellow-green
- * surface under reddish-purple light would result in a red-like because the
- * red component would be highest among the RGB values.
+ *	multiplying corresponding components of each color. This process is known as
+ *	Hadamard product or Schur product. For example, to view a yellow-green
+ *	surface under reddish-purple light would result in a red-like color because
+ *	the red component would be highest among the RGB values.
  *
  * @param a Receives the first color to be blended.
  * @param b Receives the second color to be blended.
