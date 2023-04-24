@@ -46,7 +46,7 @@ typedef struct s_matrix
 typedef struct s_shearing
 {
 	float	p1;
-	float	p2;	
+	float	p2;
 }	t_shearing;
 
 /* ************************************************************************** */

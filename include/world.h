@@ -17,8 +17,6 @@
 # include "shapes.h"
 
 // PERF: use arrays
-// t_object	*objects;
-// t_light		*lights;
 typedef struct s_world
 {
 	t_list	*objects;

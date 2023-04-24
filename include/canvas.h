@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   canvas.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:28:08 by mdias-ma          #+#    #+#             */
 /*   Updated: 2023/04/24 09:22:11 by yde-goes         ###   ########.fr       */
@@ -15,6 +15,8 @@
 
 # include "libft.h"
 # include "mlx.h"
+# include "camera.h"
+# include "world.h"
 
 # define K_ESCAPE        0xff1b
 # define K_Q             0x0071
@@ -108,5 +110,10 @@ int		handle_keypress(int keysym, t_canvas *canvas);
  *               0, i.e., EXIT_SUCCESS identifier.
  */
 int		quit(t_canvas *canvas);
+
+t_bool	render_scene(t_canvas *canvas, t_world *world, t_camera *camera);
+int		rgb(t_color color);
+void	write_pixel(const t_canvas *canvas, int x, int y, int color);
+int		pixel_at(t_canvas *image, int x, int y);
 
 #endif
