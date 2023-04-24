@@ -111,6 +111,9 @@ int		handle_keypress(int keysym, t_canvas *canvas);
  */
 int		quit(t_canvas *canvas);
 
+void	init_mlx_connection(t_canvas *canvas);
+t_bool	put_on_window(t_canvas *canvas, char *title);
+int		show_window(t_canvas *canvas);
 t_bool	render_scene(t_canvas *canvas, t_world *world, t_camera *camera);
 int		rgb(t_color color);
 void	write_pixel(const t_canvas *canvas, int x, int y, int color);
