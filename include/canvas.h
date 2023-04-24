@@ -81,7 +81,7 @@ typedef struct s_canvas
  *         information on it, the function returns TRUE. Otherwise, if one of
  *         the four aforementioned steps fail, the function returns FALSE.
  */
-t_bool	new_canvas(t_canvas *canvas, int width, int height, char *title);
+// t_bool	new_canvas(t_canvas *canvas, int width, int height, char *title);
 
 /**
  * @brief This function is to be used as the second parameter of the MLX library
@@ -112,8 +112,10 @@ int		handle_keypress(int keysym, t_canvas *canvas);
 int		quit(t_canvas *canvas);
 
 void	init_mlx_connection(t_canvas *canvas);
+t_bool	new_canvas(t_canvas *canvas, int width, int height);
 t_bool	put_on_window(t_canvas *canvas, char *title);
 int		show_window(t_canvas *canvas);
+
 t_bool	render_scene(t_canvas *canvas, t_world *world, t_camera *camera);
 int		rgb(t_color color);
 void	write_pixel(const t_canvas *canvas, int x, int y, int color);
