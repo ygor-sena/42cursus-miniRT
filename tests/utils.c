@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/18 16:32:07 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/24 19:47:58 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_world	world_stub(void)
 	return ((t_world){
 		.objects = NULL,
 		.lights = NULL,
+		.object_count = 0,
 	});
 }
 
@@ -37,6 +38,8 @@ t_world	default_world(void)
 	t_light		*light;
 
 	w = world_stub();
+	w.objects = ft_calloc(sizeof(t_shape), 3);
+	w.object_count = 2;
 	s1 = sphere_stub();
 	s1->material.color = new_color(0.8, 1.0, 0.6);
 	s1->material.diffuse = 0.7;
@@ -47,8 +50,8 @@ t_world	default_world(void)
 	s1->radius = 0.5;
 	s2->radius = 1.0;
 	ft_lstadd_back(&w.lights, ft_lstnew(light));
-	ft_lstadd_back(&w.objects, ft_lstnew(s1));
-	ft_lstadd_back(&w.objects, ft_lstnew(s2));
+	w.objects[0].sphere = *s1;
+	w.objects[1].sphere = *s2;
 	return (w);
 }
 

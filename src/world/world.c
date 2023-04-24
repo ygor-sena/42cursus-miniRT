@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:29:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/23 12:55:30 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/24 19:47:36 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,23 @@ t_intersection	*intersect_world(t_world *world, t_ray ray)
 {
 	t_intersection	*xs;
 	t_intersection	*aux;
-	t_list			*objects;
+	t_shape			*objects;
 	void			*next;
+	int				n;
 
+	n = 0;
 	xs = NULL;
 	objects = world->objects;
-	while (objects)
+	while (n < world->object_count)
 	{
-		aux = intersect(objects->content, ray);
+		aux = intersect(&objects[n].sphere, ray);
 		while (aux)
 		{
 			next = aux->next;
 			insert_intersection(&xs, aux);
 			aux = next;
 		}
-		objects = objects->next;
+		n++;
 	}
 	return (xs);
 }

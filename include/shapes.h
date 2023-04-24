@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 15:16:27 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/24 19:45:44 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 # include "rays.h"
 # include "materials.h"
+
+typedef enum e_type
+{
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	SHAPE_COUNT
+}	t_type;
 
 typedef struct s_sphere
 {
@@ -29,11 +37,22 @@ typedef union u_object
 	t_sphere	*sphere;
 }	t_object;
 
+typedef struct s_shape
+{
+	union {
+		t_sphere	sphere;
+	};
+	t_matrix	transform;
+	t_material	material;
+	t_type		id;
+}	t_shape;
+
+typedef struct s_intersection	t_intersection;
 typedef struct s_intersection
 {
-	float					t;
-	t_object				object;
-	struct s_intersection	*next;
+	float			t;
+	t_object		object;
+	t_intersection	*next;
 }	t_intersection;
 
 typedef struct s_distance
@@ -124,5 +143,9 @@ int				intersection_count(t_intersection *xs);
 void			erase_intersections(t_intersection **xs);
 
 t_sphere		*new_sphere(void);
+
+// TESTING:
+t_shape			new_shape(void);
+t_shape			sphere(void);
 
 #endif

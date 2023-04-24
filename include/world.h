@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 09:23:14 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/24 21:30:00 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 // PERF: use arrays
 typedef struct s_world
 {
-	t_list	*objects;
-	t_list	*lights;
+	int				object_count;
+	t_shape			*objects;
+	t_list			*lights;
 }	t_world;
 
 typedef struct s_comps

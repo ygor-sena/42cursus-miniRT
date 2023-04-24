@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:55:26 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/17 20:10:50 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/24 19:43:02 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ Test(world, the_default_world)
 	cr_assert(eq(flt, w_light->intensity.green, light->intensity.green));
 	cr_assert(eq(flt, w_light->intensity.blue, light->intensity.blue));
 
-	s1 = w.objects->content;
+	s1 = &w.objects[0].sphere;
 	cr_assert(eq(flt, s1->radius, 0.5));
-	s2 = w.objects->next->content;
+	s2 = &w.objects[1].sphere;
 	cr_assert(eq(flt, s2->radius, 1.0));
 }
 
@@ -140,7 +140,7 @@ Test(world, shading_intersection)
 	t_color			expected;
 
 	w = default_world();
-	shape = w.objects->content;
+	shape = &w.objects[0].sphere;
 	i = intersection(4, shape);
 	r = new_ray(point(0, 0, -5), vector(0, 0, 1));
 	comps = prepare_computations(i, r);
@@ -166,7 +166,7 @@ Test(world, shading_intersection_from_inside)
 	w = default_world();
 	w.lights->content = point_light(point(0,0.25, 0), new_color(1, 1, 1));
 	r = new_ray(point(0, 0, 0), vector(0, 0, 1));
-	shape = w.objects->next->content;
+	shape = &w.objects[1].sphere;
 	i = intersection(0.5, shape);
 	comps = prepare_computations(i, r);
 	c = shade_hit(w, comps);
@@ -221,9 +221,9 @@ Test(world, color_with_an_intersection_behind_the_ray)
 	t_color		c;
 
 	w = default_world();
-	outter = w.objects->content;
+	outter = &w.objects[0].sphere;
 	outter->material.ambient = 1;
-	inner = w.objects->next->content;
+	inner = &w.objects[1].sphere;
 	inner->material.ambient = 1;
 	r = new_ray(point(0, 0, 0.75), vector(0, 0, -1));
 	c = color_at(w, r);
