@@ -6,12 +6,13 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:29:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/17 18:39:23 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/23 12:55:30 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
 
+// PERF: add a static list to keep all memory allocated
 t_intersection	*intersect_world(t_world *world, t_ray ray)
 {
 	t_intersection	*xs;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sun.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 15:56:20 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/19 18:40:43 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/21 19:55:44 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,6 @@
 # define MLX_WIDTH 500
 # define MLX_HEIGHT 500
 # define MLX_TITLE "Rendering the sun from chapter 5"
-
-static int	rgb(t_color color)
-{
-	return (
-		(int)(color.red * 255 + 0.5) << 16 |
-		(int)(color.green * 255 + 0.5) << 8 |
-		(int)(color.blue * 255 + 0.5)
-	);
-}
-
-static void	write_pixel(const t_canvas *canvas, int x, int y, int color)
-{
-	char	*pixel;
-
-	if (x < 0 || x >= canvas->width || y < 0 || y >= canvas->height)
-		return ;
-	pixel = canvas->addr + (y * canvas->line_len + x * (canvas->bpp / 8));
-	*(int *)pixel = color;
-}
 
 /*
 	This structure is world's wall to render the projections on it. 
@@ -135,21 +116,15 @@ static void	build_world(t_canvas *canvas)
 	}
 }
 
-static int	render_scene(t_canvas *canvas)
-{
-	build_world(canvas);
-	mlx_put_image_to_window(canvas->mlx_ptr, canvas->win_ptr,
-		canvas->img_ptr, 0, 0);
-	return (EXIT_SUCCESS);
-}
-
 int main(void)
 {
 	t_canvas	rt;
 
-	if (!new_canvas(&rt, MLX_WIDTH, MLX_HEIGHT, MLX_TITLE))
+	if (!new_canvas(&rt, MLX_WIDTH, MLX_HEIGHT))
 		return (EXIT_FAILURE);
-	mlx_expose_hook(rt.win_ptr, render_scene, &rt);
+	build_world(&rt);
+	put_on_window(&rt, MLX_TITLE);
+	mlx_expose_hook(rt.win_ptr, show_window, &rt);
 	mlx_hook(rt.win_ptr, DESTROYNOTIFY, NOEVENTMASK, quit, &rt);
 	mlx_key_hook(rt.win_ptr, handle_keypress, &rt);
 	mlx_loop(rt.mlx_ptr);

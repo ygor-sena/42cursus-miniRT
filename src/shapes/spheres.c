@@ -6,13 +6,25 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/15 11:47:57 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/23 12:03:08 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes.h"
 
 static t_distance	calculate_distance(t_sphere *sphere, t_ray ray);
+
+t_sphere	*new_sphere(void)
+{
+	t_sphere	*s;
+
+	s = oom(malloc(sizeof(t_sphere)));
+	s->origin = point(0, 0, 0);
+	s->radius = 1.0;
+	s->transform = get_identity_matrix();
+	s->material = material();
+	return (s);
+}
 
 t_intersection	*intersect(t_sphere *sphere, t_ray r)
 {

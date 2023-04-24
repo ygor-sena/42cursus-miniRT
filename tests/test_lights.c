@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:46:27 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/13 17:00:33 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:55:06 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
  *	reflection of the source light itself. The last one, depends only on the
  *	angle between the reflection vector and the eye vector and is controlled
  *	by a parameter that's called shininess. The higher the shininess, the
- *	smaller and tigher the specular highlight is.
+ *	smaller and tighter the specular highlight is.
  */
 
 /*	Checks if a point light has the position and intensity given as parameter */

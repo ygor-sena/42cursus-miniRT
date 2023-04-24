@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/19 11:39:11 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/24 13:36:53 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include "shapes.h"
 
 // PERF: use arrays
-// t_object	*objects;
-// t_light		*lights;
 typedef struct s_world
 {
 	t_list	*objects;
@@ -41,7 +39,7 @@ typedef struct s_comps
  * @param ray The ray to check for intersections.
  *
  * @return A pointer to the first intersection in the sorted linked list of
- * intersections, or NULL if no intersections are found.
+ *         intersections, or NULL if no intersections are found.
  */
 t_intersection	*intersect_world(t_world *world, t_ray ray);
 
@@ -93,7 +91,7 @@ t_color			shade_hit(t_world world, t_comps comps);
  * @param world The world in which the intersection occurred.
  * @param ray The ray that intersected with the shapes in the world.
  * @return The color of the intersection point, or black if there is no such
- * intersection.
+ *         intersection.
  */
 t_color			color_at(t_world world, t_ray ray);
 

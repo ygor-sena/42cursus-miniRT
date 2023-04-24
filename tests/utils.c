@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/17 18:39:49 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/18 16:32:07 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ t_world	world_stub(void)
 		.objects = NULL,
 		.lights = NULL,
 	});
+}
+
+void	assert_matrix_equal(t_matrix a, t_matrix b)
+{
+	for (size_t i = 0; i < a.size; i++)
+	{
+		for (size_t j = 0; j < a.size; j++)
+			cr_assert_float_eq(a.matrix[i][j], b.matrix[i][j], EPSILON);
+	}
 }
 
 t_world	default_world(void)
