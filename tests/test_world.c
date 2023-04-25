@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:55:26 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/25 11:55:27 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 12:29:38 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@ Test(world, the_default_world)
 	t_world		w;
 	t_sphere	*s1;
 	t_sphere	*s2;
-	t_light		*light;
-	t_light		*w_light;
+	t_light		light;
+	t_light		w_light;
 
 	light = point_light(point(-10, 10, -10), new_color(1, 1, 1));
 	w = default_world();
-	w_light = w.lights->content;
+	w_light = w.lights[0];
 
-	cr_assert(eq(flt, w_light->position.x, light->position.x));
-	cr_assert(eq(flt, w_light->position.y, light->position.y));
-	cr_assert(eq(flt, w_light->position.z, light->position.z));
-	cr_assert(eq(flt, w_light->intensity.red, light->intensity.red));
-	cr_assert(eq(flt, w_light->intensity.green, light->intensity.green));
-	cr_assert(eq(flt, w_light->intensity.blue, light->intensity.blue));
+	cr_assert(eq(flt, w_light.position.x, light.position.x));
+	cr_assert(eq(flt, w_light.position.y, light.position.y));
+	cr_assert(eq(flt, w_light.position.z, light.position.z));
+	cr_assert(eq(flt, w_light.intensity.red, light.intensity.red));
+	cr_assert(eq(flt, w_light.intensity.green, light.intensity.green));
+	cr_assert(eq(flt, w_light.intensity.blue, light.intensity.blue));
 
 	s1 = &w.objects[0].sphere;
 	cr_assert(eq(flt, s1->radius, 0.5));
@@ -159,7 +159,7 @@ Test(world, shading_intersection_from_inside)
 	t_color			expected;
 
 	w = default_world();
-	w.lights->content = point_light(point(0,0.25, 0), new_color(1, 1, 1));
+	w.lights[0] = point_light(point(0,0.25, 0), new_color(1, 1, 1));
 	r = new_ray(point(0, 0, 0), vector(0, 0, 1));
 	shape = &w.objects[1].sphere;
 	i = intersection(0.5, shape);

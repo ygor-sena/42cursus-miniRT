@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 21:26:31 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 12:31:23 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ t_world	default_world(void)
 	t_world		w;
 	t_sphere	*s1;
 	t_sphere	*s2;
-	t_light		*light;
 
 	w = world_stub();
 	w.xs = NULL;
+	w.lights = ft_calloc(sizeof(t_light), 1);
 	w.objects = ft_calloc(sizeof(t_shape), 3);
 	w.object_count = 2;
 	s1 = sphere_stub();
@@ -47,10 +47,9 @@ t_world	default_world(void)
 	s1->material.specular = 0.2;
 	s2 = sphere_stub();
 	s2->transform = scaling(0.5, 0.5, 0.5);
-	light = point_light(point(-10, 10, -10), new_color(1, 1, 1));
+	w.lights[0] = point_light(point(-10, 10, -10), new_color(1, 1, 1));
 	s1->radius = 0.5;
 	s2->radius = 1.0;
-	ft_lstadd_back(&w.lights, ft_lstnew(light));
 	w.objects[0].sphere = *s1;
 	w.objects[1].sphere = *s2;
 	return (w);

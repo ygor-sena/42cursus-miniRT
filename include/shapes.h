@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/25 11:44:54 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 12:09:01 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ void			insert_intersection(t_intersection **xs, t_intersection *i);
 t_intersection	*hit(t_intersection *xs);
 
 int				intersection_count(t_intersection *xs);
-void			erase_intersections(t_intersection **xs);
 
 t_sphere		*new_sphere(void);
 

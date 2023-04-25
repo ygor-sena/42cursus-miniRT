@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 21:30:10 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 12:35:51 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@
 # include "lights.h"
 # include "shapes.h"
 
-// PERF: use arrays
 typedef struct s_world
 {
 	int				object_count;
 	t_shape			*objects;
-	t_list			*lights;
+	t_light			*lights;
 	t_intersection	*xs;
 }	t_world;
 

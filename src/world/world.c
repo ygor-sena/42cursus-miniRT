@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:29:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/25 11:37:26 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 12:20:50 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_color	shade_hit(t_world world, t_comps comps)
 	return (
 		lighting(
 			comps.object.sphere->material,
-			*(t_light *)world.lights->content,
+			world.lights[0],
 			comps.point,
 			comps.sight
 		));

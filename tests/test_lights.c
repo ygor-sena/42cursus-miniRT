@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_lights.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:46:27 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/17 11:55:06 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 12:26:49 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 /*	Checks if a point light has the position and intensity given as parameter */
 Test(lights, create_point_light)
 {
-	t_light	*light;
+	t_light	light;
 	t_color	intensity;
 	t_tuple	position;
 
@@ -40,12 +40,11 @@ Test(lights, create_point_light)
 	position = point(0, 0, 0);
 	light = point_light(position, intensity);
 
-	cr_assert(eq(flt, light->position.x, position.x));
-	cr_assert(eq(flt, light->position.y, position.y));
-	cr_assert(eq(flt, light->position.z, position.z));
-	cr_assert(eq(flt, light->position.w, position.w));
-	cr_assert(eq(flt, light->intensity.red, intensity.red));
-	cr_assert(eq(flt, light->intensity.green, intensity.green));
-	cr_assert(eq(flt, light->intensity.blue, intensity.blue));
-	free(light);
+	cr_assert(eq(flt, light.position.x, position.x));
+	cr_assert(eq(flt, light.position.y, position.y));
+	cr_assert(eq(flt, light.position.z, position.z));
+	cr_assert(eq(flt, light.position.w, position.w));
+	cr_assert(eq(flt, light.intensity.red, intensity.red));
+	cr_assert(eq(flt, light.intensity.green, intensity.green));
+	cr_assert(eq(flt, light.intensity.blue, intensity.blue));
 }
