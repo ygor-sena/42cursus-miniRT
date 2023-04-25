@@ -6,36 +6,26 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:29:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 19:47:36 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:37:26 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
 
-// PERF: add a static list to keep all memory allocated
 t_intersection	*intersect_world(t_world *world, t_ray ray)
 {
-	t_intersection	*xs;
-	t_intersection	*aux;
-	t_shape			*objects;
-	void			*next;
-	int				n;
+	int		n;
+	t_shape	*objects;
 
 	n = 0;
-	xs = NULL;
+	world->xs = NULL;
 	objects = world->objects;
 	while (n < world->object_count)
 	{
-		aux = intersect(&objects[n].sphere, ray);
-		while (aux)
-		{
-			next = aux->next;
-			insert_intersection(&xs, aux);
-			aux = next;
-		}
+		intersect(&world->xs, &objects[n].sphere, ray);
 		n++;
 	}
-	return (xs);
+	return (world->xs);
 }
 
 t_comps	prepare_computations(t_intersection *intersection, t_ray ray)
@@ -78,12 +68,8 @@ t_color	color_at(t_world world, t_ray ray)
 	xs = intersect_world(&world, ray);
 	x = hit(xs);
 	if (x == NULL)
-	{
-		erase_intersections(&xs);
 		return (new_color(0, 0, 0));
-	}
 	comps = prepare_computations(x, ray);
 	color = shade_hit(world, comps);
-	erase_intersections(&xs);
 	return (color);
 }

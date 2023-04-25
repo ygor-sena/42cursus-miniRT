@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:55:26 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 19:43:02 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:55:27 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ Test(world, intersect_a_world_with_a_ray)
 	cr_assert(eq(flt, s->t, 5.5));
 	s = s->next;
 	cr_assert(eq(flt, s->t, 6));
-	erase_intersections(&xs);
 }
 
 Test(world, precomputing_intersections)
@@ -91,7 +90,6 @@ Test(world, precomputing_intersections)
 	cr_assert(eq(i32, compare_tuples(comps.point, point(0, 0, -1)), TRUE));
 	cr_assert(eq(i32, compare_tuples(comps.sight.eyev, point(0, 0, -1)), TRUE));
 	cr_assert(eq(i32, compare_tuples(comps.sight.normalv, point(0, 0, -1)), TRUE));
-	erase_intersections(&i);
 }
 
 Test(world, intersection_outside)
@@ -107,7 +105,6 @@ Test(world, intersection_outside)
 	comps = prepare_computations(i, r);
 
 	cr_assert(eq(i32, comps.inside, FALSE));
-	erase_intersections(&i);
 }
 
 Test(world, intersection_inside)
@@ -126,7 +123,6 @@ Test(world, intersection_inside)
 	cr_assert(eq(i32, compare_tuples(comps.sight.eyev, point(0, 0, -1)), TRUE));
 	cr_assert(eq(i32, comps.inside, TRUE));
 	cr_assert(eq(i32, compare_tuples(comps.sight.normalv, point(0, 0, -1)), TRUE));
-	erase_intersections(&i);
 }
 
 Test(world, shading_intersection)
@@ -150,7 +146,6 @@ Test(world, shading_intersection)
 	cr_assert_float_eq(c.red, expected.red, EPSILON);
 	cr_assert_float_eq(c.green, expected.green, EPSILON);
 	cr_assert_float_eq(c.blue, expected.blue, EPSILON);
-	erase_intersections(&i);
 }
 
 Test(world, shading_intersection_from_inside)
@@ -175,7 +170,6 @@ Test(world, shading_intersection_from_inside)
 	cr_assert_float_eq(c.red, expected.red, EPSILON);
 	cr_assert_float_eq(c.green, expected.green, EPSILON);
 	cr_assert_float_eq(c.blue, expected.blue, EPSILON);
-	erase_intersections(&i);
 }
 
 Test(world, color_for_missed_ray)

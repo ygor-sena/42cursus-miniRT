@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/23 12:03:08 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:35:53 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,18 @@ t_sphere	*new_sphere(void)
 	return (s);
 }
 
-t_intersection	*intersect(t_sphere *sphere, t_ray r)
+t_bool	intersect(t_intersection **xs, t_sphere *sphere, t_ray r)
 {
-	t_ray			ray;
-	t_intersection	*xs;
-	t_distance		d;
+	t_ray		ray;
+	t_distance	d;
 
 	ray = transform(r, inverse(sphere->transform));
 	d = calculate_distance(sphere, ray);
-	xs = NULL;
 	if (d.determinant < 0)
-		return (NULL);
-	insert_intersection(&xs, intersection(d.t1, sphere));
-	insert_intersection(&xs, intersection(d.t2, sphere));
-	return (xs);
+		return (FALSE);
+	insert_intersection(xs, intersection(d.t1, sphere));
+	insert_intersection(xs, intersection(d.t2, sphere));
+	return (TRUE);
 }
 
 void	set_transform(t_sphere *sphere, t_matrix transform)

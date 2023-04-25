@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 19:47:58 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/24 21:26:31 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_world	default_world(void)
 	t_light		*light;
 
 	w = world_stub();
+	w.xs = NULL;
 	w.objects = ft_calloc(sizeof(t_shape), 3);
 	w.object_count = 2;
 	s1 = sphere_stub();

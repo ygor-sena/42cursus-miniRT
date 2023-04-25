@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 19:45:44 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:44:54 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_distance
  * @return (t_intersection *) Returns the collection of t values where the ray
  *         intersects the sphere.
  */
-t_intersection	*intersect(t_sphere *sphere, t_ray ray);
+// t_intersection	*intersect(t_sphere *sphere, t_ray ray);
 
 /**
  * @brief The function set_transform() allows a transformation obtained from the
@@ -147,5 +147,6 @@ t_sphere		*new_sphere(void);
 // TESTING:
 t_shape			new_shape(void);
 t_shape			sphere(void);
+t_bool			intersect(t_intersection **xs, t_sphere *sphere, t_ray r);
 
 #endif
