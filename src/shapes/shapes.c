@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lights.c                                           :+:      :+:    :+:   */
+/*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 11:11:56 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/25 12:39:43 by mdias-ma         ###   ########.fr       */
+/*   Created: 2023/04/24 16:47:49 by mdias-ma          #+#    #+#             */
+/*   Updated: 2023/04/24 17:00:08 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lights.h"
+#include "shapes.h"
 
-t_light	point_light(t_tuple position, t_color intensity)
+t_shape	new_shape(void)
 {
-	return ((t_light){
-		.position = position,
-		.intensity = intensity,
+	return ((t_shape){
+		.transform = get_identity_matrix(),
+		.material = material(),
 	});
+}
+
+t_shape	sphere(void)
+{
+	t_shape	object;
+
+	object = new_shape();
+	object.id = SPHERE;
+	object.sphere.origin = point(0, 0, 0);
+	object.sphere.radius = 1.0;
+	return (object);
 }

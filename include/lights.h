@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:06:23 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/21 11:36:35 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 12:39:32 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_sight
  * @return (t_light) Returns a light's source with a given location in space
  * and a color intensity in RGB values.
  */
-t_light	*point_light(t_tuple position, t_color intensity);
+
+t_light	point_light(t_tuple position, t_color intensity);
 
 #endif

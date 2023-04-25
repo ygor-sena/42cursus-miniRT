@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 15:16:27 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/25 12:09:01 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 # include "rays.h"
 # include "materials.h"
+
+typedef enum e_type
+{
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	SHAPE_COUNT
+}	t_type;
 
 typedef struct s_sphere
 {
@@ -29,11 +37,22 @@ typedef union u_object
 	t_sphere	*sphere;
 }	t_object;
 
+typedef struct s_shape
+{
+	union {
+		t_sphere	sphere;
+	};
+	t_matrix	transform;
+	t_material	material;
+	t_type		id;
+}	t_shape;
+
+typedef struct s_intersection	t_intersection;
 typedef struct s_intersection
 {
-	float					t;
-	t_object				object;
-	struct s_intersection	*next;
+	float			t;
+	t_object		object;
+	t_intersection	*next;
 }	t_intersection;
 
 typedef struct s_distance
@@ -60,7 +79,7 @@ typedef struct s_distance
  * @return (t_intersection *) Returns the collection of t values where the ray
  *         intersects the sphere.
  */
-t_intersection	*intersect(t_sphere *sphere, t_ray ray);
+// t_intersection	*intersect(t_sphere *sphere, t_ray ray);
 
 /**
  * @brief The function set_transform() allows a transformation obtained from the
@@ -121,8 +140,12 @@ void			insert_intersection(t_intersection **xs, t_intersection *i);
 t_intersection	*hit(t_intersection *xs);
 
 int				intersection_count(t_intersection *xs);
-void			erase_intersections(t_intersection **xs);
 
 t_sphere		*new_sphere(void);
+
+// TESTING:
+t_shape			new_shape(void);
+t_shape			sphere(void);
+t_bool			intersect(t_intersection **xs, t_sphere *sphere, t_ray r);
 
 #endif

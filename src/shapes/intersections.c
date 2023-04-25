@@ -6,11 +6,26 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:36:20 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/14 13:35:30 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:40:54 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes.h"
+
+#define NODE_MAX 32
+
+t_intersection	*intersection(float t, t_sphere *sphere)
+{
+	static t_intersection	pool[NODE_MAX];
+	static size_t			node;
+	t_intersection			*hit;
+
+	hit = pool + (node++ % NODE_MAX);
+	hit->t = t;
+	hit->object.sphere = sphere;
+	hit->next = NULL;
+	return (hit);
+}
 
 void	insert_intersection(t_intersection **xs, t_intersection *isect)
 {
@@ -27,17 +42,6 @@ void	insert_intersection(t_intersection **xs, t_intersection *isect)
 		aux = aux->next;
 	isect->next = aux->next;
 	aux->next = isect;
-}
-
-t_intersection	*intersection(float t, t_sphere *sphere)
-{
-	t_intersection	*hit;
-
-	hit = oom(malloc(sizeof(t_intersection)));
-	hit->t = t;
-	hit->object.sphere = sphere;
-	hit->next = NULL;
-	return (hit);
 }
 
 t_intersection	*hit(t_intersection *xs)
@@ -62,18 +66,4 @@ int	intersection_count(t_intersection *xs)
 		count++;
 	}
 	return (count);
-}
-
-void	erase_intersections(t_intersection **xs)
-{
-	t_intersection	*aux;
-
-	aux = *xs;
-	while (aux)
-	{
-		aux = aux->next;
-		free(*xs);
-		*xs = aux;
-	}
-	*xs = NULL;
 }
