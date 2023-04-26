@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_world.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:55:26 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/25 12:29:38 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 17:31:26 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <criterion/new/assert.h>
 
 #include "utils.h"
+#include "world.h"
 
 /* Should return a empty world, containing no objects and no light source. */
 Test(world, creating_a_world)
@@ -159,7 +160,7 @@ Test(world, shading_intersection_from_inside)
 	t_color			expected;
 
 	w = default_world();
-	w.lights[0] = point_light(point(0,0.25, 0), new_color(1, 1, 1));
+	w.lights[0] = point_light(point(0, 0.25, 0), new_color(1, 1, 1));
 	r = new_ray(point(0, 0, 0), vector(0, 0, 1));
 	shape = &w.objects[1].sphere;
 	i = intersection(0.5, shape);
@@ -223,4 +224,94 @@ Test(world, color_with_an_intersection_behind_the_ray)
 	c = color_at(w, r);
 
 	cr_assert_float_eq(c.red, inner->material.color.red, EPSILON);
+}
+
+/*	There is no shadow when nothing is collinear with point and light */
+Test(world, no_shadow_collinear)
+{
+	t_world	w;
+	t_tuple	p;
+	t_bool	result;
+
+	w = default_world();
+	p = point(0, 10, 0);
+	result = is_shadowed(&w, p);
+
+	cr_assert(eq(int, result, FALSE));
+}
+
+/*	The shadow when an object is between the point and the light */
+Test(world, is_shadow_obj_between_point_and_light)
+{
+	t_world	w;
+	t_tuple	p;
+	t_bool	result;
+
+	w = default_world();
+	p = point(10, -10, 10);
+	result = is_shadowed(&w, p);
+
+	cr_assert(eq(int, result, TRUE));
+}
+
+/*	There is no shadow when an object is behind the light */
+Test(world, no_shadow_obj_behind_light)
+{
+	t_world	w;
+	t_tuple	p;
+	t_bool	result;
+
+	w = default_world();
+	p = point(-20, 20, -20);
+	result = is_shadowed(&w, p);
+
+	cr_assert(eq(int, result, FALSE));
+}
+
+/*	There is no shadow when an object is behind the point */
+Test(world, no_shadow_obj_behind_pointcd)
+{
+	t_world	w;
+	t_tuple	p;
+	t_bool	result;
+
+	w = default_world();
+	p = point(-2, 2, -2);
+	result = is_shadowed(&w, p);
+
+	cr_assert(eq(int, result, FALSE));
+}
+
+/*	shade_hit() is given an intersection in shadow */
+Test(world, shade_hit_intersection_in_shadow)
+{
+	t_world			w;
+	t_sphere		*s1;
+	t_sphere		*s2;
+	t_ray			r;
+	t_intersection	*i;
+	t_comps			comps;
+	t_color			c;
+	t_color			expected;
+
+	w = default_world();
+	w.xs = NULL;
+	w.lights = ft_calloc(sizeof(t_light), 2);
+	w.objects = ft_calloc(sizeof(t_shape), 3);
+	w.object_count = 2;
+	w.lights[0] = point_light(point(0, 0, -10), new_color(1, 1, 1));
+	s1 = new_sphere();
+	s2 = new_sphere();
+	s2->transform = translation(0, 0, 10);
+	w.objects[0].sphere = *s1;
+	w.objects[1].sphere = *s2;
+	r = new_ray(point(0, 0, 5), vector(0, 0, 1));
+	i = intersection(4, s2);
+	comps = prepare_computations(i, r);
+	c = shade_hit(w, comps);
+	expected = new_color(0.1, 0.1, 0.1);
+
+	cr_assert_float_eq(c.red, expected.red, EPSILON);
+	cr_assert_float_eq(c.green, expected.green, EPSILON);
+	cr_assert_float_eq(c.blue, expected.blue, EPSILON);
 }
