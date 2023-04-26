@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_materials.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:46:43 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/25 12:27:59 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 15:22:08 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ Test(materials, create_a_default_material)
 /*	Lighting with the eye between the light and the surface */
 Test(materials, eye_between_lt_surface)
 {
-	t_sight	sight;
-	t_light	light;
-	t_color	result;
-	t_color	expected;
+	t_sight		sight;
+	t_light		light;
+	t_color		result;
+	t_color		expected;
 
 	t_material	m;
 	t_tuple		position;
@@ -80,11 +80,11 @@ Test(materials, eye_between_lt_surface)
 /*	Lighting with the eye between light and surface, eye offset 45º */
 Test(materials, eye_between_lt_surface_offset_45)
 {
-	t_sight	sight;
-	t_light	light;
-	t_color result;
-	t_color	expected;
-	float	coord;
+	t_sight		sight;
+	t_light		light;
+	t_color		result;
+	t_color		expected;
+	float		coord;
 
 	t_material	m;
 	t_tuple		position;
@@ -107,10 +107,10 @@ Test(materials, eye_between_lt_surface_offset_45)
 /*	Lighting with eye opposite surface, light offset 45° */
 Test(materials, eye_opposite_surface_lt_offset_45)
 {
-	t_sight	sight;
-	t_light	light;
-	t_color result;
-	t_color	expected;
+	t_sight		sight;
+	t_light		light;
+	t_color		result;
+	t_color		expected;
 
 	t_material	m;
 	t_tuple		position;
@@ -132,11 +132,11 @@ Test(materials, eye_opposite_surface_lt_offset_45)
 /*	Lighting with eye in the path of the reflection vector */
 Test(materials, eye_reflection_light_path)
 {
-	t_sight	sight;
-	t_light	light;
-	t_color result;
-	t_color	expected;
-	float	coord;
+	t_sight		sight;
+	t_light		light;
+	t_color		result;
+	t_color		expected;
+	float		coord;
 
 	t_material	m;
 	t_tuple		position;
@@ -159,10 +159,10 @@ Test(materials, eye_reflection_light_path)
 /*	Lighting with the light behind the surface */
 Test(materials, eye_light_behind_surface)
 {
-	t_sight	sight;
-	t_light	light;
-	t_color result;
-	t_color	expected;
+	t_sight		sight;
+	t_light		light;
+	t_color		result;
+	t_color		expected;
 
 	t_material	m;
 	t_tuple		position;
@@ -175,6 +175,33 @@ Test(materials, eye_light_behind_surface)
 	light = point_light(point(0, 0, 10), new_color(1, 1, 1));
 	result = lighting(m, light, position, sight);
 	expected = new_color(0.1, 0.1, 0.1);
+
+	cr_assert_float_eq(result.red, expected.red, EPSILON);
+	cr_assert_float_eq(result.green, expected.green, EPSILON);
+	cr_assert_float_eq(result.blue, expected.blue, EPSILON);
+}
+
+/*	Lighting with the surface in shadow */
+Test(materials, lighting_surface_in_shadow)
+{
+	t_sight		eye;
+	t_light		light;
+	t_color		result;
+	t_color		expected;
+
+	t_material	m;
+	t_tuple		position;
+
+	m = material();
+	position = point(0, 0, 0);
+
+	expected = new_color(0.1, 0.1, 0.1);
+	eye.eyev = vector(0, 0, 1);
+	eye.normalv = vector(0, 0, -1);
+	position = point(0, 0, 0);
+	light = point_light(point(0, 0, -10), new_color(1, 1, 1));
+	light.in_shadow = TRUE;
+	result = lighting(m, light, position, eye);
 
 	cr_assert_float_eq(result.red, expected.red, EPSILON);
 	cr_assert_float_eq(result.green, expected.green, EPSILON);
