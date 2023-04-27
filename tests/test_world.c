@@ -6,11 +6,10 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:55:26 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/26 16:05:10 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:50:23 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape_funcions.h"
 #include "shapes.h"
 #include "utils.h"
 
@@ -51,10 +50,10 @@ Test(world, the_default_world)
 
 Test(world, intersect_a_world_with_a_ray)
 {
-	t_world			w;
-	t_ray			r;
-	t_intersection	*xs;
-	t_intersection	*s;
+	t_world	w;
+	t_ray	r;
+	t_hit	*xs;
+	t_hit	*s;
 
 	xs = NULL;
 	w = default_world();
@@ -74,10 +73,10 @@ Test(world, intersect_a_world_with_a_ray)
 
 Test(world, precomputing_intersections)
 {
-	t_shape			shape;
-	t_ray			r;
-	t_intersection	*i;
-	t_comps			comps;
+	t_shape	shape;
+	t_ray	r;
+	t_hit	*i;
+	t_comps	comps;
 
 	r = new_ray(point(0, 0, -5), vector(0, 0, 1));
 	shape = new_shape();
@@ -93,10 +92,10 @@ Test(world, precomputing_intersections)
 
 Test(world, intersection_outside)
 {
-	t_ray			r;
-	t_shape			shape;
-	t_intersection	*i;
-	t_comps			comps;
+	t_ray	r;
+	t_shape	shape;
+	t_hit	*i;
+	t_comps	comps;
 
 	r = new_ray(point(0, 0, -5), vector(0, 0, 1));
 	shape = new_sphere();
@@ -108,10 +107,10 @@ Test(world, intersection_outside)
 
 Test(world, intersection_inside)
 {
-	t_ray			r;
-	t_shape			shape;
-	t_intersection	*i;
-	t_comps			comps;
+	t_ray	r;
+	t_shape	shape;
+	t_hit	*i;
+	t_comps	comps;
 
 	r = new_ray(point(0, 0, 0), vector(0, 0, 1));
 	shape = new_sphere();
@@ -126,12 +125,12 @@ Test(world, intersection_inside)
 
 Test(world, shading_intersection)
 {
-	t_world			w;
-	t_ray			r;
-	t_intersection	*i;
-	t_comps			comps;
-	t_color			c;
-	t_color			expected;
+	t_world	w;
+	t_ray	r;
+	t_hit	*i;
+	t_comps	comps;
+	t_color	c;
+	t_color	expected;
 
 	w = default_world();
 	i = intersection(4, w.objects);
@@ -147,13 +146,13 @@ Test(world, shading_intersection)
 
 Test(world, shading_intersection_from_inside)
 {
-	t_world			w;
-	t_ray			r;
-	t_shape			shape;
-	t_intersection	*i;
-	t_comps			comps;
-	t_color			c;
-	t_color			expected;
+	t_world	w;
+	t_ray	r;
+	t_shape	shape;
+	t_hit	*i;
+	t_comps	comps;
+	t_color	c;
+	t_color	expected;
 
 	w = default_world();
 	w.lights[0] = point_light(point(0,0.25, 0), new_color(1, 1, 1));
@@ -205,11 +204,11 @@ Test(world, color_when_a_ray_hits)
 
 Test(world, color_with_an_intersection_behind_the_ray)
 {
-	t_world		w;
-	t_ray		r;
-	t_shape		*outter;
-	t_shape		*inner;
-	t_color		c;
+	t_world	w;
+	t_ray	r;
+	t_shape	*outter;
+	t_shape	*inner;
+	t_color	c;
 
 	w = default_world();
 	outter = w.objects;

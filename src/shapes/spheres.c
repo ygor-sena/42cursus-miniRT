@@ -6,14 +6,14 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/27 12:42:38 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:47:31 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes.h"
 
 t_distance	calculate_distance(t_sphere *sphere, t_ray ray);
-t_bool		intersect_sphere(t_intersection **xs, t_shape *shape, t_ray ray);
+t_bool		intersect_sphere(t_hit **xs, t_shape *shape, t_ray ray);
 
 t_shape	new_sphere(void)
 {
@@ -26,7 +26,7 @@ t_shape	new_sphere(void)
 	return (object);
 }
 
-t_bool	intersect_sphere(t_intersection **xs, t_shape *shape, t_ray ray)
+t_bool	intersect_sphere(t_hit **xs, t_shape *shape, t_ray ray)
 {
 	t_distance	d;
 
@@ -38,7 +38,7 @@ t_bool	intersect_sphere(t_intersection **xs, t_shape *shape, t_ray ray)
 	return (TRUE);
 }
 
-t_bool	intersect(t_intersection **xs, t_shape *shape, t_ray ray)
+t_bool	intersect(t_hit **xs, t_shape *shape, t_ray ray)
 {
 	t_ray	local_ray;
 

@@ -6,14 +6,13 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/27 13:02:40 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:53:15 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHAPES_H
 # define SHAPES_H
 
-# include "shape_funcions.h"
 # include "rays.h"
 # include "materials.h"
 
@@ -22,6 +21,10 @@ typedef struct s_sphere
 	t_point		origin;
 	float		radius;
 }	t_sphere;
+
+typedef struct s_shape	t_shape;
+typedef struct s_hit	t_hit;
+typedef t_bool			(*t_hit_record)(t_hit **, t_shape *, t_ray);
 
 typedef struct s_shape
 {
@@ -33,13 +36,12 @@ typedef struct s_shape
 	t_hit_record	intersect;
 }	t_shape;
 
-typedef struct s_intersection	t_intersection;
-typedef struct s_intersection
+typedef struct s_hit
 {
-	float			t;
-	t_shape			*object;
-	t_intersection	*next;
-}	t_intersection;
+	float	t;
+	t_shape	*object;
+	t_hit	*next;
+}	t_hit;
 
 typedef struct s_distance
 {
@@ -66,7 +68,7 @@ typedef struct s_distance
  * @return (t_intersection *) Returns the collection of t values where the ray
  *         intersects the sphere.
  */
-t_bool			intersect(t_intersection **xs, t_shape *shape, t_ray ray);
+t_bool	intersect(t_hit **xs, t_shape *shape, t_ray ray);
 
 // TODO: document this
 /**
@@ -76,7 +78,7 @@ t_bool			intersect(t_intersection **xs, t_shape *shape, t_ray ray);
  * @param sphere A struct of type t_sphere storing the sphere to be transformed.
  * @param transform A matrix containing the transformation's values to be set.
  */
-void			set_transform(t_shape *body, t_matrix transform);
+void	set_transform(t_shape *body, t_matrix transform);
 
 // TODO: document this
 /**
@@ -92,7 +94,7 @@ void			set_transform(t_shape *body, t_matrix transform);
  * @return (t_tuple) A normal vector perpendicular to the given world point on
  * a given sphere's surface.
  */
-t_tuple			normal_at(t_shape *shape, t_tuple world_point);
+t_tuple	normal_at(t_shape *shape, t_tuple world_point);
 
 /* ************************************************************************** */
 /*                             INTERSECTIONS.C                                */
@@ -110,9 +112,9 @@ t_tuple			normal_at(t_shape *shape, t_tuple world_point);
  * @return (t_intersection *) Returns a structure which aggregates the two
  *         arguments passed as parameter.
  */
-t_intersection	*intersection(float t, t_shape *shape);
+t_hit	*intersection(float t, t_shape *shape);
 
-void			insert_intersection(t_intersection **xs, t_intersection *i);
+void	insert_intersection(t_hit **xs, t_hit *i);
 
 /**
  * @brief By hit, we mean the visible intersections from ray's origin. After
@@ -126,10 +128,10 @@ void			insert_intersection(t_intersection **xs, t_intersection *i);
  * @return (t_intersection *) Returns the hit from a collection of intersection
  *         records.
  */
-t_intersection	*hit(t_intersection *xs);
+t_hit	*hit(t_hit *xs);
 
-int				intersection_count(t_intersection *xs);
-t_shape			new_shape(void);
-t_shape			new_sphere(void);
+int		intersection_count(t_hit *xs);
+t_shape	new_shape(void);
+t_shape	new_sphere(void);
 
 #endif

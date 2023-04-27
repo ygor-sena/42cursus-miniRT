@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/25 21:38:13 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:52:28 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@
 
 typedef struct s_world
 {
-	int				object_count;
-	t_shape			*objects;
-	t_light			*lights;
-	t_intersection	*xs;
+	int		object_count;
+	t_shape	*objects;
+	t_light	*lights;
+	t_hit	*xs;
 }	t_world;
 
 typedef struct s_comps
 {
-	float		t;
-	t_shape		*object;
-	t_point		point;
-	t_sight		sight;
-	t_bool		inside;
+	float	t;
+	t_shape	*object;
+	t_point	point;
+	t_sight	sight;
+	t_bool	inside;
 }	t_comps;
 
 /**
@@ -42,7 +42,7 @@ typedef struct s_comps
  * @return (t_intersection) A pointer to the first intersection in the sorted
  * linked list of intersections or NULL if no intersections are found.
  */
-t_intersection	*intersect_world(t_world *world, t_ray ray);
+t_hit	*intersect_world(t_world *world, t_ray ray);
 
 /**
  * @brief Precomputes information related to an intersection.
@@ -60,7 +60,7 @@ t_intersection	*intersect_world(t_world *world, t_ray ray);
  * @param ray The ray that intersected with the shape.
  * @return (t_comps) A new data structure containing the precomputed information.
  */
-t_comps			prepare_computations(t_intersection *intersection, t_ray ray);
+t_comps	prepare_computations(t_hit *intersection, t_ray ray);
 
 /**
  * @brief Computes the color at an intersection in the given world.
@@ -75,7 +75,7 @@ t_comps			prepare_computations(t_intersection *intersection, t_ray ray);
  * @param comps The precomputed information about the intersection.
  * @return (t_color) The color of the intersection point.
  */
-t_color			shade_hit(t_world world, t_comps comps);
+t_color	shade_hit(t_world world, t_comps comps);
 
 /**
  * @brief Computes the color at the intersection of a given ray with a world.
@@ -94,6 +94,6 @@ t_color			shade_hit(t_world world, t_comps comps);
  * @return (t_color) The color of the intersection point, or black if there is
  * no such intersection.
  */
-t_color			color_at(t_world world, t_ray ray);
+t_color	color_at(t_world world, t_ray ray);
 
 #endif

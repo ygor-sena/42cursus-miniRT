@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:22:45 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/26 15:11:08 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:49:38 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
  * expected number of intersections and their respective values. */
 Test(spheres, a_ray_intersect_a_sphere_at_two_points)
 {
-	t_ray			ray;
-	t_shape			shape;
-	t_intersection	*xs;
+	t_ray	ray;
+	t_shape	shape;
+	t_hit	*xs;
 
 	xs = NULL;
 	ray = new_ray(point(0, 0, -5), vector(0, 0, 1));
@@ -35,9 +35,9 @@ Test(spheres, a_ray_intersect_a_sphere_at_two_points)
  * number of intersections and their values. */
 Test(spheres, a_ray_intersects_a_sphere_at_a_tangent)
 {
-	t_ray			ray;
-	t_shape			shape;
-	t_intersection	*xs;
+	t_ray	ray;
+	t_shape	shape;
+	t_hit	*xs;
 
 	xs = NULL;
 	ray = new_ray(point(0, 1, -5), vector(0, 0, 1));
@@ -50,9 +50,9 @@ Test(spheres, a_ray_intersects_a_sphere_at_a_tangent)
 /* Test if a ray missing a sphere completely results in no intersections. */
 Test(spheres, a_ray_misses_a_sphere)
 {
-	t_ray			ray;
-	t_shape			shape;
-	t_intersection	*xs;
+	t_ray	ray;
+	t_shape	shape;
+	t_hit	*xs;
 
 	xs = NULL;
 	ray = new_ray(point(0, 2, -5), vector(0, 0, 1));
@@ -65,9 +65,9 @@ Test(spheres, a_ray_misses_a_sphere)
  * different points, with one point behind the ray and the other in front of it. */
 Test(spheres, a_ray_originates_inside_a_sphere)
 {
-	t_ray			ray;
-	t_shape			shape;
-	t_intersection	*xs;
+	t_ray	ray;
+	t_shape	shape;
+	t_hit	*xs;
 
 	xs = NULL;
 	ray = new_ray(point(0, 0, 0), vector(0, 0, 1));
@@ -83,9 +83,9 @@ Test(spheres, a_ray_originates_inside_a_sphere)
  * is two, with negative values */
 Test(spheres, a_sphere_is_behind_a_ray)
 {
-	t_ray			ray;
-	t_shape			shape;
-	t_intersection	*xs;
+	t_ray	ray;
+	t_shape	shape;
+	t_hit	*xs;
 
 	xs = NULL;
 	ray = new_ray(point(0, 0, 5), vector(0, 0, 1));
@@ -101,9 +101,9 @@ Test(spheres, a_sphere_is_behind_a_ray)
  * objects are correctly set to the sphere. */
 Test(spheres, intersect_sets_the_object_on_the_intersection)
 {
-	t_ray			ray;
-	t_shape			shape;
-	t_intersection	*xs;
+	t_ray	ray;
+	t_shape	shape;
+	t_hit	*xs;
 
 	xs = NULL;
 	ray = new_ray(point(0, 0, -5), vector(0, 0, 1));
@@ -116,9 +116,9 @@ Test(spheres, intersect_sets_the_object_on_the_intersection)
 /* Tests the ability to intersect a ray with a scaled sphere */
 Test(spheres, intersect_a_scaled_sphere_with_a_ray)
 {
-	t_ray			r;
-	t_shape			s;
-	t_intersection	*xs;
+	t_ray	r;
+	t_shape	s;
+	t_hit	*xs;
 
 	xs = NULL;
 	r = new_ray(point(0, 0, -5), vector(0, 0, 1));
@@ -132,9 +132,9 @@ Test(spheres, intersect_a_scaled_sphere_with_a_ray)
 /* Tests the ability to intersect a ray with a translated sphere */
 Test(spheres, intersect_a_translated_sphere_with_a_ray)
 {
-	t_ray			r;
-	t_shape			s;
-	t_intersection	*xs;
+	t_ray	r;
+	t_shape	s;
+	t_hit	*xs;
 
 	xs = NULL;
 	r = new_ray(point(0, 0, -5), vector(0, 0, 1));

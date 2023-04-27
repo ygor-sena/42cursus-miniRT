@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:28:46 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/26 15:41:33 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:48:57 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 Test(intersections, an_intersection_encapsulates_t_and_object)
 {
-	t_shape			shape;
-	t_intersection	*i;
+	t_shape	shape;
+	t_hit	*i;
 
 	shape = new_sphere();
 	i = intersection(3.5, &shape);
@@ -26,11 +26,11 @@ Test(intersections, an_intersection_encapsulates_t_and_object)
 
 Test(intersections, aggregating_intersections)
 {
-	t_shape			s1;
-	t_shape			s2;
-	t_intersection	*i1;
-	t_intersection	*i2;
-	t_intersection	*xs;
+	t_shape	s1;
+	t_shape	s2;
+	t_hit	*i1;
+	t_hit	*i2;
+	t_hit	*xs;
 
 	xs = NULL;
 	s1 = new_sphere();
@@ -47,10 +47,10 @@ Test(intersections, aggregating_intersections)
 
 Test(intersections, hit_when_all_intersections_have_positive_t)
 {
-	t_shape			s1;
-	t_shape			s2;
-	t_intersection	*xs;
-	t_intersection	*i;
+	t_shape	s1;
+	t_shape	s2;
+	t_hit	*xs;
+	t_hit	*i;
 
 	xs = NULL;
 	s1 = new_sphere();
@@ -65,9 +65,9 @@ Test(intersections, hit_when_all_intersections_have_positive_t)
 
 Test(intersections, hit_when_all_intersections_have_negative_t)
 {
-	t_shape			shape;
-	t_intersection	*xs;
-	t_intersection	*expected;
+	t_shape	shape;
+	t_hit	*xs;
+	t_hit	*expected;
 
 	xs = NULL;
 	shape = new_sphere();
@@ -81,9 +81,9 @@ Test(intersections, hit_when_all_intersections_have_negative_t)
 
 Test(intersections, the_hit_is_always_the_lowest_nonnegative_intersection)
 {
-	t_shape			shape;
-	t_intersection	*xs;
-	t_intersection	*i;
+	t_shape	shape;
+	t_hit	*xs;
+	t_hit	*i;
 
 	xs = NULL;
 	shape = new_sphere();

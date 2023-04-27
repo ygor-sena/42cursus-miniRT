@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:36:20 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/25 22:43:58 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:50:46 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 #define NODE_MAX 32
 
-t_intersection	*intersection(float t, t_shape *shape)
+t_hit	*intersection(float t, t_shape *shape)
 {
-	static t_intersection	pool[NODE_MAX];
-	static size_t			node;
-	t_intersection			*hit;
+	static t_hit	pool[NODE_MAX];
+	static size_t	node;
+	t_hit			*hit;
 
 	hit = pool + (node++ % NODE_MAX);
 	hit->t = t;
@@ -27,10 +27,10 @@ t_intersection	*intersection(float t, t_shape *shape)
 	return (hit);
 }
 
-void	insert_intersection(t_intersection **xs, t_intersection *isect)
+void	insert_intersection(t_hit **xs, t_hit *isect)
 {
-	t_intersection	*prev;
-	t_intersection	*curr;
+	t_hit	*prev;
+	t_hit	*curr;
 
 	prev = NULL;
 	curr = *xs;
@@ -50,14 +50,14 @@ void	insert_intersection(t_intersection **xs, t_intersection *isect)
 }
 
 // TODO: rename to nearest_hit
-t_intersection	*hit(t_intersection *xs)
+t_hit	*hit(t_hit *xs)
 {
 	while (xs != NULL && xs->t < 0)
 		xs = xs->next;
 	return (xs);
 }
 
-int	intersection_count(t_intersection *xs)
+int	intersection_count(t_hit *xs)
 {
 	int	count;
 
