@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:31:28 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/26 10:28:46 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:49:00 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 # define EPSILON 0.00001
 
+t_bool		compare_spheres(t_sphere *a, t_sphere *b);
 t_world		world_stub(void);
 t_world		default_world(void);
 t_sphere	*sphere_stub(void);

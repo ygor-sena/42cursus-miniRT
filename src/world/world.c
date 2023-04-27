@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:29:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/25 17:29:55 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:58:13 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
 
-t_intersection	*intersect_world(t_world *world, t_ray ray)
+t_hit	*intersect_world(t_world *world, t_ray ray)
 {
 	int		n;
 	t_shape	*objects;
@@ -22,13 +22,13 @@ t_intersection	*intersect_world(t_world *world, t_ray ray)
 	objects = world->objects;
 	while (n < world->object_count)
 	{
-		intersect(&world->xs, &objects[n].sphere, ray);
+		intersect(&world->xs, objects + n, ray);
 		n++;
 	}
 	return (world->xs);
 }
 
-t_comps	prepare_computations(t_intersection *intersection, t_ray ray)
+t_comps	prepare_computations(t_hit *intersection, t_ray ray)
 {
 	t_comps	comps;
 
@@ -36,7 +36,7 @@ t_comps	prepare_computations(t_intersection *intersection, t_ray ray)
 	comps.object = intersection->object;
 	comps.point = position(ray, comps.t);
 	comps.sight.eyev = negate(ray.direction);
-	comps.sight.normalv = normal_at(*comps.object.sphere, comps.point);
+	comps.sight.normalv = normal_at(comps.object, comps.point);
 	if (dot(comps.sight.normalv, comps.sight.eyev) < 0)
 	{
 		comps.inside = TRUE;
@@ -55,22 +55,21 @@ t_color	shade_hit(t_world world, t_comps comps)
 	world.lights->in_shadow = is_shadowed(&world, comps.over_point);
 	return (
 		lighting(
-			comps.object.sphere->material,
-			*(world).lights,
-			comps.over_point,
+			comps.object->material,
+			world.lights[0],
+			comps.point,
 			comps.sight
 		));
 }
 
 t_color	color_at(t_world world, t_ray ray)
 {
-	t_intersection	*xs;
-	t_intersection	*x;
-	t_comps			comps;
-	t_color			color;
+	t_hit	*x;
+	t_comps	comps;
+	t_color	color;
 
-	xs = intersect_world(&world, ray);
-	x = hit(xs);
+	intersect_world(&world, ray);
+	x = hit(world.xs);
 	if (x == NULL)
 		return (new_color(0, 0, 0));
 	comps = prepare_computations(x, ray);

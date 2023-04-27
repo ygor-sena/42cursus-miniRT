@@ -3,121 +3,113 @@
 /*                                                        :::      ::::::::   */
 /*   test_intersections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:28:46 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/25 14:48:10 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:36:37 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <criterion/criterion.h>
-#include <criterion/new/assert.h>
 
 #include "shapes.h"
 #include "utils.h"
 
 Test(intersections, an_intersection_encapsulates_t_and_object)
 {
-	t_sphere		*sphere;
-	t_intersection	*i;
+	t_shape	shape;
+	t_hit	*i;
 
-	sphere = sphere_stub();
-	i = intersection(3.5, sphere);
+	shape = new_sphere();
+	i = intersection(3.5, &shape);
+
 	cr_assert(eq(flt, i->t, 3.5));
-	cr_assert(eq(flt, i->object.sphere->radius, sphere->radius));
-	free(sphere);
+	cr_assert(eq(flt, i->object->sphere.radius, shape.sphere.radius));
 }
 
 Test(intersections, aggregating_intersections)
 {
-	t_intersection	*i1;
-	t_intersection	*i2;
-	t_intersection	*xs;
+	t_shape	s1;
+	t_shape	s2;
+	t_hit	*i1;
+	t_hit	*i2;
+	t_hit	*xs;
 
 	xs = NULL;
-	i1 = intersection(1, sphere_stub());
-	i2 = intersection(2, sphere_stub());
+	s1 = new_sphere();
+	s2 = new_sphere();
+	i1 = intersection(1, &s1);
+	i2 = intersection(2, &s2);
 
 	insert_intersection(&xs, i1);
 	insert_intersection(&xs, i2);
+
 	cr_assert(eq(flt, xs->t, 1));
 	cr_assert(eq(flt, xs->next->t, 2));
 }
 
 Test(intersections, hit_when_all_intersections_have_positive_t)
 {
-	t_sphere		*sphere;
-	t_intersection	*i1;
-	t_intersection	*i2;
-	t_intersection	*xs;
-	t_intersection	*i;
+	t_shape	s1;
+	t_shape	s2;
+	t_hit	*xs;
+	t_hit	*i;
 
 	xs = NULL;
-	sphere = sphere_stub();
-	i1 = intersection(1, sphere);
-	i2 = intersection(2, sphere);
-	insert_intersection(&xs, i1);
-	insert_intersection(&xs, i2);
+	s1 = new_sphere();
+	s2 = new_sphere();
+	insert_intersection(&xs, intersection(1, &s1));
+	insert_intersection(&xs, intersection(2, &s2));
+
 	i = hit(xs);
 	cr_assert(eq(i32, intersection_count(xs), 2));
-	cr_assert(eq(i32, compare_spheres(i->object.sphere, sphere), TRUE));
-	free(sphere);
+	cr_assert(eq(i32, compare_spheres(&i->object[0].sphere, &s1.sphere), TRUE));
 }
 
 Test(intersections, hit_when_all_intersections_have_negative_t)
 {
-	t_sphere		*sphere;
-	t_intersection	*result;
-	t_intersection	*expected;
-	t_intersection	*xs;
+	t_shape	shape;
+	t_hit	*xs;
+	t_hit	*expected;
 
 	xs = NULL;
-	sphere = sphere_stub();
-	result = intersection(-2, sphere);
-	insert_intersection(&xs, result);
-	result = intersection(-1, sphere);
-	insert_intersection(&xs, result);
+	shape = new_sphere();
+	insert_intersection(&xs, intersection(-2, &shape));
+	insert_intersection(&xs, intersection(-3, &shape));
+
 	expected = hit(xs);
 	cr_assert(eq(i32, intersection_count(xs), 2));
 	cr_assert(eq(ptr, expected, NULL));
-	free(sphere);
 }
 
 Test(intersections, the_hit_is_always_the_lowest_nonnegative_intersection)
 {
-	t_sphere		*sphere;
-	t_intersection	*i1;
-	t_intersection	*xs;
-	t_intersection	*i;
+	t_shape	shape;
+	t_hit	*xs;
+	t_hit	*i;
 
 	xs = NULL;
-	sphere = sphere_stub();
-	i1 = intersection(5, sphere);
-	insert_intersection(&xs, i1);
-	i1 = intersection(7, sphere);
-	insert_intersection(&xs, i1);
-	i1 = intersection(-3, sphere);
-	insert_intersection(&xs, i1);
-	i1 = intersection(2, sphere);
-	insert_intersection(&xs, i1);
+	shape = new_sphere();
+	insert_intersection(&xs, intersection(5, &shape));
+	insert_intersection(&xs, intersection(7, &shape));
+	insert_intersection(&xs, intersection(-3, &shape));
+	insert_intersection(&xs, intersection(2, &shape));
+
 	i = hit(xs);
 	cr_assert(eq(i32, intersection_count(xs), 4));
 	cr_assert(eq(flt, i->t, 2));
-	free(sphere);
 }
 
 /*	The hit should offset the point */
-/* Test(intersections, hit_should_offset_point)
+Test(intersections, hit_should_offset_point)
 {
-	t_ray			r;
-	t_sphere		*shape;
-	t_intersection	*i;
-	t_comps			comps;
+	t_ray		r;
+	t_shape		shape;
+	t_hit		*i;
+	t_comps		comps;
 
 	r = new_ray(point(0, 0, -5), vector(0, 0, 1));
-	shape = sphere_stub();
-	shape->transform = translation(0, 0, 1);
-	i = intersection(5, shape);
+	shape = new_sphere();
+	shape.transform = translation(0, 0, 1);
+	i = intersection(5, &shape);
 	comps = prepare_computations(i, r);
 
 	//comps.over_point.z < -EPSILON/2
@@ -125,4 +117,3 @@ Test(intersections, the_hit_is_always_the_lowest_nonnegative_intersection)
 	//comps.point.z > comps.over_point.z
 	cr_assert(gt(flt, comps.point.z, comps.over_point.z));
 }
- */

@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/26 10:28:35 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:03:08 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 t_world	world_stub(void)
 {
 	return ((t_world){
+		.object_count = 0,
 		.objects = NULL,
 		.lights = NULL,
-		.object_count = 0,
+		.xs = NULL
 	});
 }
 
@@ -33,38 +34,28 @@ void	assert_matrix_equal(t_matrix a, t_matrix b)
 t_world	default_world(void)
 {
 	t_world		w;
-	t_sphere	*s1;
-	t_sphere	*s2;
+	t_shape		s1;
+	t_shape		s2;
 
 	w = world_stub();
-	w.xs = NULL;
-	w.lights = ft_calloc(sizeof(t_light), 1);
-	w.objects = ft_calloc(sizeof(t_shape), 3);
+	w.lights = malloc(sizeof(t_light) * 1);
+	w.objects = malloc(sizeof(t_shape) * 2);
 	w.object_count = 2;
-	s1 = sphere_stub();
-	s1->material.color = new_color(0.8, 1.0, 0.6);
-	s1->material.diffuse = 0.7;
-	s1->material.specular = 0.2;
-	s2 = sphere_stub();
-	s2->transform = scaling(0.5, 0.5, 0.5);
+
+	s1 = new_sphere();
+	s1.material.color = new_color(0.8, 1.0, 0.6);
+	s1.material.diffuse = 0.7;
+	s1.material.specular = 0.2;
+	s1.sphere.radius = 0.5;
+
+	s2 = new_sphere();
+	s2.transform = scaling(0.5, 0.5, 0.5);
+	s2.sphere.radius = 1.0;
+
 	w.lights[0] = point_light(point(-10, 10, -10), new_color(1, 1, 1));
-	s1->radius = 0.5;
-	s2->radius = 1.0;
-	w.objects[0].sphere = *s1;
-	w.objects[1].sphere = *s2;
+	w.objects[0] = s1;
+	w.objects[1] = s2;
 	return (w);
-}
-
-t_sphere	*sphere_stub()
-{
-	t_sphere	*s;
-
-	s = oom(malloc(sizeof(t_sphere)));
-	s->origin = point(0, 0, 0);
-	s->radius = 1.0;
-	s->transform = get_identity_matrix();
-	s->material = material();
-	return (s);
 }
 
 t_bool	compare_spheres(t_sphere *a, t_sphere *b)

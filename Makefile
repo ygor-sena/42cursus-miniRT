@@ -43,7 +43,7 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 ##                                 COMPILATION                                ##
 ################################################################################
 
-CFLAGS  := -O2 -Wall -Werror -Wextra -g $(addprefix -I,$(INC_DIRS))
+CFLAGS  := -Wall -Werror -Wextra -g $(addprefix -I,$(INC_DIRS))
 LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
 LDLIBS  := -lft -lmlx -lXext -lX11 -lm
 
