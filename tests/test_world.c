@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:55:26 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/27 14:50:23 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:13:47 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ Test(world, creating_a_world)
 	cr_assert(eq(ptr, w.lights, NULL));
 }
 
+/* Checks if the default world is correctly configured */
 Test(world, the_default_world)
 {
 	t_world		w;
@@ -48,6 +49,8 @@ Test(world, the_default_world)
 	cr_assert(eq(flt, s2.sphere.radius, 1.0));
 }
 
+/* Test if a list of intersections is correctly returned for a ray passing
+ * through the center of two spheres in the default world. */
 Test(world, intersect_a_world_with_a_ray)
 {
 	t_world	w;
@@ -71,6 +74,9 @@ Test(world, intersect_a_world_with_a_ray)
 	cr_assert(eq(flt, s->t, 6));
 }
 
+/* Test if the function prepare_computations accurately precomputes the
+ * intersection point, eye vector, and normal vector in world space for
+ * a given ray-object intersection. */
 Test(world, precomputing_intersections)
 {
 	t_shape	shape;
@@ -90,6 +96,10 @@ Test(world, precomputing_intersections)
 	cr_assert(eq(i32, compare_tuples(comps.sight.normalv, point(0, 0, -1)), TRUE));
 }
 
+/* Test if the prepare_computations function correctly determines if an
+ * intersection occurs on the inside or outside of an object for a given
+ * ray and intersection by checking the "inside" attribute of the
+ * returned Computations object. */
 Test(world, intersection_outside)
 {
 	t_ray	r;
@@ -105,6 +115,9 @@ Test(world, intersection_outside)
 	cr_assert(eq(i32, comps.inside, FALSE));
 }
 
+/* Test if the prepare_computations function accurately precomputes the
+ * intersection point, eye vector, and normal vector in world space for
+ * a given ray-object intersection on the inside of an object. */
 Test(world, intersection_inside)
 {
 	t_ray	r;
@@ -123,6 +136,7 @@ Test(world, intersection_inside)
 	cr_assert(eq(i32, compare_tuples(comps.sight.normalv, point(0, 0, -1)), TRUE));
 }
 
+/* Test shading an intersection with a ray outside an object and a point light. */
 Test(world, shading_intersection)
 {
 	t_world	w;
@@ -144,6 +158,7 @@ Test(world, shading_intersection)
 	cr_assert_float_eq(c.blue, expected.blue, EPSILON);
 }
 
+/* Test shading an intersection with a ray inside an object and a point light. */
 Test(world, shading_intersection_from_inside)
 {
 	t_world	w;
@@ -168,6 +183,8 @@ Test(world, shading_intersection_from_inside)
 	cr_assert_float_eq(c.blue, expected.blue, EPSILON);
 }
 
+/* Checks that when a ray misses all objects in a world, the color returned
+ * is black (RGB value of 0, 0, 0). */
 Test(world, color_for_missed_ray)
 {
 	t_world	w;
@@ -185,6 +202,8 @@ Test(world, color_for_missed_ray)
 	cr_assert_float_eq(c.blue, expected.blue, EPSILON);
 }
 
+/* Checks that when a ray hits an object in a world, the color returned
+ * is the correct color for that object */
 Test(world, color_when_a_ray_hits)
 {
 	t_world	w;
@@ -202,6 +221,9 @@ Test(world, color_when_a_ray_hits)
 	cr_assert_float_eq(c.blue, expected.blue, EPSILON);
 }
 
+/*  Test if the color_at function computes the color correctly when a ray
+ *  intersects with an object. It verifies that the inner sphere is
+ *  identified as the hit object and its color is returned. */
 Test(world, color_with_an_intersection_behind_the_ray)
 {
 	t_world	w;
