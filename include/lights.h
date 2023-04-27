@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lights.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:06:23 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/25 12:39:32 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 14:57:57 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "tuples.h"
 # include "helpers.h"
+# include "libft.h"
 
 /**
  * ABOUT THE HEADER LIGHTS.H
@@ -38,6 +39,7 @@ typedef struct s_light
 {
 	t_tuple	position;
 	t_color	intensity;
+	t_bool	in_shadow;
 }	t_light;
 
 /**

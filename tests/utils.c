@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
 /*   Updated: 2023/04/26 16:03:08 by mdias-ma         ###   ########.fr       */

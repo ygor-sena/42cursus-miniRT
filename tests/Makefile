@@ -24,7 +24,7 @@ SOURCES := models.c basic_math.c vector_math.c colors.c
 SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c
 SOURCES += mx_utils.c rays.c intersections.c spheres.c
 SOURCES += lights.c materials.c guards.c world.c view_transform.c camera.c
-SOURCES += canvas.c render.c controls.c shapes.c
+SOURCES += canvas.c render.c controls.c shadows.c shapes.c
 
 UTILS := utils.c
 OBJS  := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))

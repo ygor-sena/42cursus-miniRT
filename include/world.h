@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/27 14:52:28 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 18:33:47 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WORLD_H
 # define WORLD_H
+
+// After project is done, check where is the better header to define EPSILON.
+// Identifier is needed by prepare_computations()
+# define EPSILON 0.00001
 
 # include "lights.h"
 # include "shapes.h"
@@ -32,6 +36,10 @@ typedef struct s_comps
 	t_sight	sight;
 	t_bool	inside;
 }	t_comps;
+
+/* ************************************************************************** */
+/*                                  WORLD.C                                   */
+/* ************************************************************************** */
 
 /**
  * @brief Finds all intersections between a ray and all objects in the world.
@@ -95,5 +103,25 @@ t_color	shade_hit(t_world world, t_comps comps);
  * no such intersection.
  */
 t_color	color_at(t_world world, t_ray ray);
+
+/* ************************************************************************** */
+/*                                 SHADOWS.C                                  */
+/* ************************************************************************** */
+
+/**
+ * @brief This function works the following way: a ray tracer computes shadows
+ *        by casting a ray, called a shadow ray, from each point of intersection
+ *        toward the light source. If something intersects that shadow ray
+ *        between the point and the light source, then the point is considered
+ *        to be in shadow. About the function calculations, magnitude(v) means
+ *        the distance between the light's position and the given point. In
+ *        turn, normalize(v) means its direction.
+ * 
+ * @param world Receives a world containing objects and light sources.
+ * @param point Receives a point location of the world.
+ * @return (t_bool) Returns TRUE is the point is in shadow. Otherwise, returns
+ *         FALSE if the point isn't in shadow.
+ */
+t_bool			is_shadowed(t_world *world, t_tuple point);
 
 #endif
