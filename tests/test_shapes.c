@@ -6,12 +6,14 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:09:12 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/26 15:41:15 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:15:11 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+/* Test if a newly created shape has a default transformation
+ * matrix set to the identity matrix. */
 Test(shapes, the_default_transformation)
 {
 	t_shape	s;
@@ -20,6 +22,7 @@ Test(shapes, the_default_transformation)
 	assert_matrix_equal(s.transform, get_identity_matrix());
 }
 
+/* Test if the transformation matrix of a shape can be successfully changed. */
 Test(shapes, assigning_a_transformation)
 {
 	t_shape		s;
@@ -31,6 +34,7 @@ Test(shapes, assigning_a_transformation)
 	assert_matrix_equal(s.transform, expected);
 }
 
+/* Test that when a shape is created, it has a default material assigned to it. */
 Test(shapes, the_default_material)
 {
 	t_shape		s;
@@ -50,6 +54,7 @@ Test(shapes, the_default_material)
 	cr_assert_float_eq(result.shininess, expected.shininess, EPSILON);
 }
 
+/* Test if a material can be successfully assigned to a shape. */
 Test(shapes, assigning_a_material)
 {
 	t_shape		s;
@@ -70,7 +75,7 @@ Test(shapes, assigning_a_material)
 }
 
 /* Tests the ability to compute the normal of a geometric shape that has been
- * translated to a specific position */
+ * translated to a specific position. */
 Test(shapes, normal_on_a_translated_shape)
 {
 	t_shape		s;
@@ -86,7 +91,7 @@ Test(shapes, normal_on_a_translated_shape)
 }
 
 /* Tests the ability to compute the normal of a geometric shape that has been
- * transformed through a sequence of transformations */
+ * transformed through a sequence of transformations. */
 Test(shapes, normal_on_a_transformed_shape)
 {
 	t_shape		s;
