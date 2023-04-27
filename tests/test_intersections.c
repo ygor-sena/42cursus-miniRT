@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   test_intersections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:28:46 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/27 14:48:57 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:36:37 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shapes.h"
 #include "utils.h"
 
 Test(intersections, an_intersection_encapsulates_t_and_object)
@@ -98,17 +99,17 @@ Test(intersections, the_hit_is_always_the_lowest_nonnegative_intersection)
 }
 
 /*	The hit should offset the point */
-/* Test(intersections, hit_should_offset_point)
+Test(intersections, hit_should_offset_point)
 {
-	t_ray			r;
-	t_sphere		*shape;
-	t_intersection	*i;
-	t_comps			comps;
+	t_ray		r;
+	t_shape		shape;
+	t_hit		*i;
+	t_comps		comps;
 
 	r = new_ray(point(0, 0, -5), vector(0, 0, 1));
-	shape = sphere_stub();
-	shape->transform = translation(0, 0, 1);
-	i = intersection(5, shape);
+	shape = new_sphere();
+	shape.transform = translation(0, 0, 1);
+	i = intersection(5, &shape);
 	comps = prepare_computations(i, r);
 
 	//comps.over_point.z < -EPSILON/2

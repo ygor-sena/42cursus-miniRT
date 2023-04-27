@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_world.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:55:26 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/27 16:13:47 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:42:49 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,14 +303,14 @@ Test(world, no_shadow_obj_behind_pointcd)
 /*	shade_hit() is given an intersection in shadow */
 Test(world, shade_hit_intersection_in_shadow)
 {
-	t_world			w;
-	t_sphere		*s1;
-	t_sphere		*s2;
-	t_ray			r;
-	t_intersection	*i;
-	t_comps			comps;
-	t_color			c;
-	t_color			expected;
+	t_world	w;
+	t_shape	s1;
+	t_shape	s2;
+	t_ray	r;
+	t_hit	*i;
+	t_comps	comps;
+	t_color	c;
+	t_color	expected;
 
 	w = default_world();
 	w.xs = NULL;
@@ -320,11 +320,11 @@ Test(world, shade_hit_intersection_in_shadow)
 	w.lights[0] = point_light(point(0, 0, -10), new_color(1, 1, 1));
 	s1 = new_sphere();
 	s2 = new_sphere();
-	s2->transform = translation(0, 0, 10);
-	w.objects[0].sphere = *s1;
-	w.objects[1].sphere = *s2;
+	s2.transform = translation(0, 0, 10);
+	w.objects[0] = s1;
+	w.objects[1] = s2;
 	r = new_ray(point(0, 0, 5), vector(0, 0, 1));
-	i = intersection(4, s2);
+	i = intersection(4, &s2);
 	comps = prepare_computations(i, r);
 	c = shade_hit(w, comps);
 	expected = new_color(0.1, 0.1, 0.1);

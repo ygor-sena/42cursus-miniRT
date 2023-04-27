@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/25 18:33:47 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:58:43 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_comps
 	t_point	point;
 	t_sight	sight;
 	t_bool	inside;
+	t_tuple	over_point;
 }	t_comps;
 
 /* ************************************************************************** */
@@ -122,6 +123,6 @@ t_color	color_at(t_world world, t_ray ray);
  * @return (t_bool) Returns TRUE is the point is in shadow. Otherwise, returns
  *         FALSE if the point isn't in shadow.
  */
-t_bool			is_shadowed(t_world *world, t_tuple point);
+t_bool	is_shadowed(t_world *world, t_tuple point);
 
 #endif
