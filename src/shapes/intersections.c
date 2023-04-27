@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:36:20 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/25 11:40:54 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 22:43:58 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define NODE_MAX 32
 
-t_intersection	*intersection(float t, t_sphere *sphere)
+t_intersection	*intersection(float t, t_shape *shape)
 {
 	static t_intersection	pool[NODE_MAX];
 	static size_t			node;
@@ -22,37 +22,39 @@ t_intersection	*intersection(float t, t_sphere *sphere)
 
 	hit = pool + (node++ % NODE_MAX);
 	hit->t = t;
-	hit->object.sphere = sphere;
+	hit->object = shape;
 	hit->next = NULL;
 	return (hit);
 }
 
 void	insert_intersection(t_intersection **xs, t_intersection *isect)
 {
-	t_intersection	*aux;
+	t_intersection	*prev;
+	t_intersection	*curr;
 
-	if (*xs == NULL || isect->t < (*xs)->t)
+	prev = NULL;
+	curr = *xs;
+	while (curr && curr->t < isect->t)
+	{
+		prev = curr;
+		curr = curr->next;
+	}
+	if (prev == NULL)
 	{
 		isect->next = *xs;
 		*xs = isect;
 		return ;
 	}
-	aux = *xs;
-	while (aux->next && aux->next->t < isect->t)
-		aux = aux->next;
-	isect->next = aux->next;
-	aux->next = isect;
+	prev->next = isect;
+	isect->next = curr;
 }
 
+// TODO: rename to nearest_hit
 t_intersection	*hit(t_intersection *xs)
 {
-	while (xs)
-	{
-		if (xs->t >= 0)
-			return (xs);
+	while (xs != NULL && xs->t < 0)
 		xs = xs->next;
-	}
-	return (NULL);
+	return (xs);
 }
 
 int	intersection_count(t_intersection *xs)

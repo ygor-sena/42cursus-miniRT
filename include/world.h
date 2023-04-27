@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/25 12:35:51 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 21:38:13 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_world
 typedef struct s_comps
 {
 	float		t;
-	t_object	object;
+	t_shape		*object;
 	t_point		point;
 	t_sight		sight;
 	t_bool		inside;

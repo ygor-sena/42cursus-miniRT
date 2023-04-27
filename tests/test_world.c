@@ -6,13 +6,12 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:55:26 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/25 12:29:38 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:05:10 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <criterion/criterion.h>
-#include <criterion/new/assert.h>
-
+#include "shape_funcions.h"
+#include "shapes.h"
 #include "utils.h"
 
 /* Should return a empty world, containing no objects and no light source. */
@@ -28,8 +27,8 @@ Test(world, creating_a_world)
 Test(world, the_default_world)
 {
 	t_world		w;
-	t_sphere	*s1;
-	t_sphere	*s2;
+	t_shape		s1;
+	t_shape		s2;
 	t_light		light;
 	t_light		w_light;
 
@@ -44,10 +43,10 @@ Test(world, the_default_world)
 	cr_assert(eq(flt, w_light.intensity.green, light.intensity.green));
 	cr_assert(eq(flt, w_light.intensity.blue, light.intensity.blue));
 
-	s1 = &w.objects[0].sphere;
-	cr_assert(eq(flt, s1->radius, 0.5));
-	s2 = &w.objects[1].sphere;
-	cr_assert(eq(flt, s2->radius, 1.0));
+	s1 = w.objects[0];
+	cr_assert(eq(flt, s1.sphere.radius, 0.5));
+	s2 = w.objects[1];
+	cr_assert(eq(flt, s2.sphere.radius, 1.0));
 }
 
 Test(world, intersect_a_world_with_a_ray)
@@ -75,18 +74,18 @@ Test(world, intersect_a_world_with_a_ray)
 
 Test(world, precomputing_intersections)
 {
+	t_shape			shape;
 	t_ray			r;
-	t_sphere		*shape;
 	t_intersection	*i;
 	t_comps			comps;
 
 	r = new_ray(point(0, 0, -5), vector(0, 0, 1));
-	shape = sphere_stub();
-	i = intersection(4, shape);
+	shape = new_shape();
+	i = intersection(4, &shape);
 	comps = prepare_computations(i, r);
 
 	cr_assert(eq(flt, comps.t, i->t));
-	cr_assert(eq(i32, compare_spheres(comps.object.sphere, i->object.sphere), TRUE));
+	cr_assert(eq(i32, compare_spheres(&comps.object->sphere, &i->object->sphere), TRUE));
 	cr_assert(eq(i32, compare_tuples(comps.point, point(0, 0, -1)), TRUE));
 	cr_assert(eq(i32, compare_tuples(comps.sight.eyev, point(0, 0, -1)), TRUE));
 	cr_assert(eq(i32, compare_tuples(comps.sight.normalv, point(0, 0, -1)), TRUE));
@@ -95,13 +94,13 @@ Test(world, precomputing_intersections)
 Test(world, intersection_outside)
 {
 	t_ray			r;
-	t_sphere		*shape;
+	t_shape			shape;
 	t_intersection	*i;
 	t_comps			comps;
 
 	r = new_ray(point(0, 0, -5), vector(0, 0, 1));
-	shape = sphere_stub();
-	i = intersection(4, shape);
+	shape = new_sphere();
+	i = intersection(4, &shape);
 	comps = prepare_computations(i, r);
 
 	cr_assert(eq(i32, comps.inside, FALSE));
@@ -110,13 +109,13 @@ Test(world, intersection_outside)
 Test(world, intersection_inside)
 {
 	t_ray			r;
-	t_sphere		*shape;
+	t_shape			shape;
 	t_intersection	*i;
 	t_comps			comps;
 
 	r = new_ray(point(0, 0, 0), vector(0, 0, 1));
-	shape = sphere_stub();
-	i = intersection(1, shape);
+	shape = new_sphere();
+	i = intersection(1, &shape);
 	comps = prepare_computations(i, r);
 
 	cr_assert(eq(i32, compare_tuples(comps.point, point(0, 0, 1)), TRUE));
@@ -129,15 +128,13 @@ Test(world, shading_intersection)
 {
 	t_world			w;
 	t_ray			r;
-	t_sphere		*shape;
 	t_intersection	*i;
 	t_comps			comps;
 	t_color			c;
 	t_color			expected;
 
 	w = default_world();
-	shape = &w.objects[0].sphere;
-	i = intersection(4, shape);
+	i = intersection(4, w.objects);
 	r = new_ray(point(0, 0, -5), vector(0, 0, 1));
 	comps = prepare_computations(i, r);
 	c = shade_hit(w, comps);
@@ -152,7 +149,7 @@ Test(world, shading_intersection_from_inside)
 {
 	t_world			w;
 	t_ray			r;
-	t_sphere		*shape;
+	t_shape			shape;
 	t_intersection	*i;
 	t_comps			comps;
 	t_color			c;
@@ -161,8 +158,8 @@ Test(world, shading_intersection_from_inside)
 	w = default_world();
 	w.lights[0] = point_light(point(0,0.25, 0), new_color(1, 1, 1));
 	r = new_ray(point(0, 0, 0), vector(0, 0, 1));
-	shape = &w.objects[1].sphere;
-	i = intersection(0.5, shape);
+	shape = w.objects[1];
+	i = intersection(0.5, &shape);
 	comps = prepare_computations(i, r);
 	c = shade_hit(w, comps);
 	expected = new_color(0.90498, 0.90498, 0.90498);
@@ -210,14 +207,14 @@ Test(world, color_with_an_intersection_behind_the_ray)
 {
 	t_world		w;
 	t_ray		r;
-	t_sphere	*outter;
-	t_sphere	*inner;
+	t_shape		*outter;
+	t_shape		*inner;
 	t_color		c;
 
 	w = default_world();
-	outter = &w.objects[0].sphere;
+	outter = w.objects;
 	outter->material.ambient = 1;
-	inner = &w.objects[1].sphere;
+	inner = w.objects + 1;
 	inner->material.ambient = 1;
 	r = new_ray(point(0, 0, 0.75), vector(0, 0, -1));
 	c = color_at(w, r);

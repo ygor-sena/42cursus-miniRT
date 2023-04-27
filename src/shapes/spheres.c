@@ -6,46 +6,48 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/25 11:35:53 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:42:38 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes.h"
 
-static t_distance	calculate_distance(t_sphere *sphere, t_ray ray);
+t_distance	calculate_distance(t_sphere *sphere, t_ray ray);
+t_bool		intersect_sphere(t_intersection **xs, t_shape *shape, t_ray ray);
 
-t_sphere	*new_sphere(void)
+t_shape	new_sphere(void)
 {
-	t_sphere	*s;
+	t_shape	object;
 
-	s = oom(malloc(sizeof(t_sphere)));
-	s->origin = point(0, 0, 0);
-	s->radius = 1.0;
-	s->transform = get_identity_matrix();
-	s->material = material();
-	return (s);
+	object = new_shape();
+	object.sphere.origin = point(0, 0, 0);
+	object.sphere.radius = 1.0;
+	object.intersect = intersect_sphere;
+	return (object);
 }
 
-t_bool	intersect(t_intersection **xs, t_sphere *sphere, t_ray r)
+t_bool	intersect_sphere(t_intersection **xs, t_shape *shape, t_ray ray)
 {
-	t_ray		ray;
 	t_distance	d;
 
-	ray = transform(r, inverse(sphere->transform));
-	d = calculate_distance(sphere, ray);
+	d = calculate_distance(&shape->sphere, ray);
 	if (d.determinant < 0)
 		return (FALSE);
-	insert_intersection(xs, intersection(d.t1, sphere));
-	insert_intersection(xs, intersection(d.t2, sphere));
+	insert_intersection(xs, intersection(d.t1, shape));
+	insert_intersection(xs, intersection(d.t2, shape));
 	return (TRUE);
 }
 
-void	set_transform(t_sphere *sphere, t_matrix transform)
+t_bool	intersect(t_intersection **xs, t_shape *shape, t_ray ray)
 {
-	sphere->transform = transform;
+	t_ray	local_ray;
+
+	local_ray = transform(ray, inverse(shape->transform));
+	shape->intersect(xs, shape, local_ray);
+	return (TRUE);
 }
 
-static t_distance	calculate_distance(t_sphere *sphere, t_ray ray)
+t_distance	calculate_distance(t_sphere *sphere, t_ray ray)
 {
 	float		a;
 	float		b;
@@ -66,20 +68,20 @@ static t_distance	calculate_distance(t_sphere *sphere, t_ray ray)
 }
 
 /**
- *	Hack, to ensure we have a clean vector, as due the inverse transpose
- *	the w component could be affected if the transformation matrix included
- *	a translation.
+ * Hack, to ensure we have a clean vector, as due the inverse transpose
+ * the w component could be affected if the transformation matrix included
+ * a translation.
  */
-t_tuple	normal_at(t_sphere sphere, t_tuple world_point)
+t_tuple	normal_at(t_shape *shape, t_tuple world_point)
 {
 	t_tuple	object_point;
 	t_tuple	object_normal;
 	t_tuple	world_normal;
 
-	object_point = multiply_tp_mx(inverse(sphere.transform), world_point);
+	object_point = multiply_tp_mx(inverse(shape->transform), world_point);
 	object_normal = subtract(object_point, point(0, 0, 0));
 	world_normal = multiply_tp_mx(transpose(
-				inverse(sphere.transform)), object_normal);
+				inverse(shape->transform)), object_normal);
 	world_normal.w = 0.0;
 	return (normalize(world_normal));
 }

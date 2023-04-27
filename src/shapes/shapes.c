@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 16:47:49 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 17:00:08 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/25 21:59:19 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,7 @@ t_shape	new_shape(void)
 	});
 }
 
-t_shape	sphere(void)
+void	set_transform(t_shape *shape, t_matrix transform)
 {
-	t_shape	object;
-
-	object = new_shape();
-	object.id = SPHERE;
-	object.sphere.origin = point(0, 0, 0);
-	object.sphere.radius = 1.0;
-	return (object);
+	shape->transform = transform;
 }

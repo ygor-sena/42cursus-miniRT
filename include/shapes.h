@@ -6,52 +6,38 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/25 12:09:01 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:02:40 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHAPES_H
 # define SHAPES_H
 
+# include "shape_funcions.h"
 # include "rays.h"
 # include "materials.h"
-
-typedef enum e_type
-{
-	SPHERE,
-	PLANE,
-	CYLINDER,
-	SHAPE_COUNT
-}	t_type;
 
 typedef struct s_sphere
 {
 	t_point		origin;
 	float		radius;
-	t_matrix	transform;
-	t_material	material;
 }	t_sphere;
-
-typedef union u_object
-{
-	t_sphere	*sphere;
-}	t_object;
 
 typedef struct s_shape
 {
 	union {
 		t_sphere	sphere;
 	};
-	t_matrix	transform;
-	t_material	material;
-	t_type		id;
+	t_matrix		transform;
+	t_material		material;
+	t_hit_record	intersect;
 }	t_shape;
 
 typedef struct s_intersection	t_intersection;
 typedef struct s_intersection
 {
 	float			t;
-	t_object		object;
+	t_shape			*object;
 	t_intersection	*next;
 }	t_intersection;
 
@@ -66,6 +52,7 @@ typedef struct s_distance
 /*                                SPHERES.C                                   */
 /* ************************************************************************** */
 
+// TODO: document this
 /**
  * @brief This function gets sphere's intersection from ray's origin. If the ray
  *        is inside the sphere, there is one intersection in front of the ray
@@ -79,8 +66,9 @@ typedef struct s_distance
  * @return (t_intersection *) Returns the collection of t values where the ray
  *         intersects the sphere.
  */
-// t_intersection	*intersect(t_sphere *sphere, t_ray ray);
+t_bool			intersect(t_intersection **xs, t_shape *shape, t_ray ray);
 
+// TODO: document this
 /**
  * @brief The function set_transform() allows a transformation obtained from the
  *        function transform() to be assigned to a sphere.
@@ -88,8 +76,9 @@ typedef struct s_distance
  * @param sphere A struct of type t_sphere storing the sphere to be transformed.
  * @param transform A matrix containing the transformation's values to be set.
  */
-void			set_transform(t_sphere *sphere, t_matrix transform);
+void			set_transform(t_shape *body, t_matrix transform);
 
+// TODO: document this
 /**
  * @brief A surface normal or normal vector is a vector that points
  * perpendicular to a surface at a given point. This function calculates the
@@ -103,7 +92,7 @@ void			set_transform(t_sphere *sphere, t_matrix transform);
  * @return (t_tuple) A normal vector perpendicular to the given world point on
  * a given sphere's surface.
  */
-t_tuple			normal_at(t_sphere sphere, t_tuple world_point);
+t_tuple			normal_at(t_shape *shape, t_tuple world_point);
 
 /* ************************************************************************** */
 /*                             INTERSECTIONS.C                                */
@@ -121,7 +110,7 @@ t_tuple			normal_at(t_sphere sphere, t_tuple world_point);
  * @return (t_intersection *) Returns a structure which aggregates the two
  *         arguments passed as parameter.
  */
-t_intersection	*intersection(float t, t_sphere *sphere);
+t_intersection	*intersection(float t, t_shape *shape);
 
 void			insert_intersection(t_intersection **xs, t_intersection *i);
 
@@ -140,12 +129,7 @@ void			insert_intersection(t_intersection **xs, t_intersection *i);
 t_intersection	*hit(t_intersection *xs);
 
 int				intersection_count(t_intersection *xs);
-
-t_sphere		*new_sphere(void);
-
-// TESTING:
 t_shape			new_shape(void);
-t_shape			sphere(void);
-t_bool			intersect(t_intersection **xs, t_sphere *sphere, t_ray r);
+t_shape			new_sphere(void);
 
 #endif

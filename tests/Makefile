@@ -1,5 +1,5 @@
 TESTS := tuples colors matrices transformations rays spheres intersections
-TESTS += lights materials world view_transform camera
+TESTS += lights materials world view_transform camera shapes
 
 CYAN  := \33[1;36m
 RESET := \033[0m
@@ -24,7 +24,7 @@ SOURCES := models.c basic_math.c vector_math.c colors.c
 SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c
 SOURCES += mx_utils.c rays.c intersections.c spheres.c
 SOURCES += lights.c materials.c guards.c world.c view_transform.c camera.c
-SOURCES += canvas.c render.c controls.c
+SOURCES += canvas.c render.c controls.c shapes.c
 
 UTILS := utils.c
 OBJS  := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
@@ -32,7 +32,7 @@ OBJS  += $(UTILS:.c=.o)
 
 CFLAGS  := -Wall -Werror -Wextra -g $(addprefix -I,$(INC_DIRS))
 LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
-LDLIBS  := -lft -lmlx -lXext -lX11 -lm -lcriterion 
+LDLIBS  := -lft -lmlx -lXext -lX11 -lm -lcriterion
 
 define run
  	$(CC) $(CFLAGS) $^ $(LDFLAGS) $(LDLIBS) -o $@ && ./$@ --verbose
@@ -90,6 +90,10 @@ view_transform: $(OBJS) test_view_transform.c
 
 .PHONY: camera
 camera: $(OBJS) test_camera.c
+	@$(call run, "$^")
+
+.PHONY: shapes
+shapes: $(OBJS) test_shapes.c
 	@$(call run, "$^")
 
 # Makefile rules to clean stdin/stdout/stderr test's files
