@@ -6,14 +6,13 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/27 14:47:31 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:23:06 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes.h"
 
-t_distance	calculate_distance(t_sphere *sphere, t_ray ray);
-t_bool		intersect_sphere(t_hit **xs, t_shape *shape, t_ray ray);
+static t_distance	calculate_distance(t_sphere *sphere, t_ray ray);
 
 t_shape	new_sphere(void)
 {
@@ -22,6 +21,7 @@ t_shape	new_sphere(void)
 	object = new_shape();
 	object.sphere.origin = point(0, 0, 0);
 	object.sphere.radius = 1.0;
+	object.normal_at = normal_at_sphere;
 	object.intersect = intersect_sphere;
 	return (object);
 }
@@ -47,7 +47,7 @@ t_bool	intersect(t_hit **xs, t_shape *shape, t_ray ray)
 	return (TRUE);
 }
 
-t_distance	calculate_distance(t_sphere *sphere, t_ray ray)
+static t_distance	calculate_distance(t_sphere *sphere, t_ray ray)
 {
 	float		a;
 	float		b;
@@ -72,7 +72,7 @@ t_distance	calculate_distance(t_sphere *sphere, t_ray ray)
  * the w component could be affected if the transformation matrix included
  * a translation.
  */
-t_tuple	normal_at(t_shape *shape, t_tuple world_point)
+t_tuple	normal_at_sphere(t_shape *shape, t_tuple world_point)
 {
 	t_tuple	object_point;
 	t_tuple	object_normal;

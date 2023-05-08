@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:55:26 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/27 16:42:49 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/07 19:23:52 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,14 @@ Test(world, intersect_a_world_with_a_ray)
  * a given ray-object intersection. */
 Test(world, precomputing_intersections)
 {
-	t_shape	shape;
+	t_shape	sphere;
 	t_ray	r;
 	t_hit	*i;
 	t_comps	comps;
 
 	r = new_ray(point(0, 0, -5), vector(0, 0, 1));
-	shape = new_shape();
-	i = intersection(4, &shape);
+	sphere = new_sphere();
+	i = intersection(4, &sphere);
 	comps = prepare_computations(i, r);
 
 	cr_assert(eq(flt, comps.t, i->t));

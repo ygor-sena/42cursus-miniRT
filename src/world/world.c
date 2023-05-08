@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:29:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/27 16:58:13 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/07 19:08:31 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_comps	prepare_computations(t_hit *intersection, t_ray ray)
 	comps.object = intersection->object;
 	comps.point = position(ray, comps.t);
 	comps.sight.eyev = negate(ray.direction);
-	comps.sight.normalv = normal_at(comps.object, comps.point);
+	comps.sight.normalv = comps.object->normal_at(comps.object, comps.point);
 	if (dot(comps.sight.normalv, comps.sight.eyev) < 0)
 	{
 		comps.inside = TRUE;
