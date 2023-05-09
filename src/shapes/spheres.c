@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/08 16:23:06 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 10:34:13 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,6 @@ t_bool	intersect_sphere(t_hit **xs, t_shape *shape, t_ray ray)
 		return (FALSE);
 	insert_intersection(xs, intersection(d.t1, shape));
 	insert_intersection(xs, intersection(d.t2, shape));
-	return (TRUE);
-}
-
-t_bool	intersect(t_hit **xs, t_shape *shape, t_ray ray)
-{
-	t_ray	local_ray;
-
-	local_ray = transform(ray, inverse(shape->transform));
-	shape->intersect(xs, shape, local_ray);
 	return (TRUE);
 }
 

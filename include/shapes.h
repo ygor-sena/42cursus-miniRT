@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 09:08:12 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 10:45:00 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,20 +111,20 @@ t_hit	*intersection(float t, t_shape *shape);
 void	insert_intersection(t_hit **xs, t_hit *i);
 
 /**
- * @brief Determines the visible intersections from the ray's origin.
+ * @brief Determines the first visible intersection from a list of intersections.
  *
- * By "hit", we mean the visible intersections from the ray's origin. It is
- * possible to have intersections that are behind the ray or that were hidden
- * behind (or occluded by) other objects. The `hit()` function gets the visible
- * intersections from a collection of intersection records passed as a parameter
- * to the function.
+ * By "visible intersection", we mean the first intersection that is visible
+ * from the ray's origin. It is possible to have intersections that are behind
+ * the ray or that were hidden behind (or occluded by) other objects. The
+ * `visible_hit()` function takes a list of intersection records as a parameter
+ * and returns the first visible intersection from the list.
  *
- * @param xs A pointer to a structure of type `t_hit` that stores a collection
- *           of intersection records.
- * @return A pointer to a structure of type `t_hit` that represents the visible
- *         intersection from the collection of intersection records.
+ * @param xs A pointer to a structure of type `t_hit` that stores a list of
+ *           intersection records.
+ * @return A pointer to a structure of type `t_hit` that represents the first
+ *         visible intersection from the list of intersection records.
  */
-t_hit	*hit(t_hit *xs);
+t_hit	*visible_hit(t_hit *xs);
 
 // TODO: move to utils.c
 int		intersection_count(t_hit *xs);

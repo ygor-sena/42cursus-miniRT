@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:28:46 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/27 16:36:37 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 10:40:01 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ Test(intersections, hit_when_all_intersections_have_positive_t)
 	insert_intersection(&xs, intersection(1, &s1));
 	insert_intersection(&xs, intersection(2, &s2));
 
-	i = hit(xs);
+	i = visible_hit(xs);
 	cr_assert(eq(i32, intersection_count(xs), 2));
 	cr_assert(eq(i32, compare_spheres(&i->object[0].sphere, &s1.sphere), TRUE));
 }
@@ -75,7 +75,7 @@ Test(intersections, hit_when_all_intersections_have_negative_t)
 	insert_intersection(&xs, intersection(-2, &shape));
 	insert_intersection(&xs, intersection(-3, &shape));
 
-	expected = hit(xs);
+	expected = visible_hit(xs);
 	cr_assert(eq(i32, intersection_count(xs), 2));
 	cr_assert(eq(ptr, expected, NULL));
 }
@@ -93,7 +93,7 @@ Test(intersections, the_hit_is_always_the_lowest_nonnegative_intersection)
 	insert_intersection(&xs, intersection(-3, &shape));
 	insert_intersection(&xs, intersection(2, &shape));
 
-	i = hit(xs);
+	i = visible_hit(xs);
 	cr_assert(eq(i32, intersection_count(xs), 4));
 	cr_assert(eq(flt, i->t, 2));
 }

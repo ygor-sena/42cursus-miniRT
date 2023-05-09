@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:29:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/07 19:08:31 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 10:40:00 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_color	color_at(t_world world, t_ray ray)
 	t_color	color;
 
 	intersect_world(&world, ray);
-	x = hit(world.xs);
+	x = visible_hit(world.xs);
 	if (x == NULL)
 		return (new_color(0, 0, 0));
 	comps = prepare_computations(x, ray);
