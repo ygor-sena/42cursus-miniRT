@@ -1,4 +1,7 @@
-TESTS := projectile sun volume background
+###############################################################################
+### Just replace the filename and the current chapter
+EXERCISE := add_planes
+CHAP_DIR := ch9
 
 CYAN  := \33[1;36m
 RESET := \033[0m
@@ -11,13 +14,8 @@ LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR   := $(LIB_DIR)/mlx_linux
 INC_DIRS  := ../include $(LIBFT_DIR) $(MLX_DIR)
 
-# Insert each new directory here
-SRC_DIRS := tuples canvas matrices shapes rays materials lights helpers
-SRC_DIRS += $(addprefix $(SRC_DIR)/, $(SRC_DIRS))
-SRC_DIRS += $(SRC_DIR)
-
-CHAPTERS := ch02 ch05 ch06 ch07
-SRC_DIRS += $(CHAPTERS)
+SRC_DIRS := $(shell find $(SRC) -type d)
+SRC_DIRS += $(CHAP_DIR)
 
 vpath %.h $(INC_DIRS)
 vpath %.c $(SRC_DIRS)
@@ -25,53 +23,28 @@ vpath %.c $(SRC_DIRS)
 LIBFT   := $(LIBFT_DIR)/libft.a
 MLX     := $(MLX_DIR)/libmlx_Linux.a
 
-SOURCES := models.c basic_math.c vector_math.c colors.c canvas.c
-SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c
-SOURCES += mx_utils.c rays.c intersections.c spheres.c
-SOURCES += lights.c materials.c guards.c world.c view_transform.c camera.c
-SOURCES += render.c controls.c
-
-OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
+SOURCES := $(shell find $(SRC_DIR) -name '*.c' -exec basename {} \;)
+SOURCES := $(filter-out main.c, $(SOURCES))
+OBJS    := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
 CFLAGS  := -Wall -Werror -Wextra -g $(addprefix -I,$(INC_DIRS))
 LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
 LDLIBS  := -lft -lmlx -lXext -lX11 -lm
 
-define run
- 	$(CC) -O3 $(CFLAGS) $^ $(LDFLAGS) $(LDLIBS) -o $@ && ./$@
-endef
-
-################################################################################
-##                                 EXERCISES                                  ##
-################################################################################
-
-all: $(TESTS) clean
+all: $(EXERCISE)
 
 $(OBJS):
-	@make -C ..
+	@make -C .. --no-print-directory
 
-.PHONY: projectile
-projectile: $(OBJS) projectile.c
-	@$(call run, "$^")
-
-.PHONY: sun
-sun: $(OBJS) sun.c
-	@$(call run, "$^")
-
-.PHONY: volume
-volume: $(OBJS) volume.c
-	@$(call run, "$^")
-
-.PHONY: background
-background: $(OBJS) background.c
-	@$(call run, "$^")
+$(EXERCISE): $(OBJS) $(EXERCISE).c
+	@$(CC) -O3 $(CFLAGS) $^ $(LDFLAGS) $(LDLIBS) -o $@ && ./$@
 
 clean:
-	@$(RM) -r $(TESTS)
+	@$(RM) -r $(EXERCISE)
 	@$(LOG) "Removing objects"
 
 fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re $(EXERCISE)
