@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/08 16:39:26 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 09:08:12 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,25 @@
 
 typedef struct s_sphere
 {
-	t_point		origin;
-	float		radius;
+	t_point	origin;
+	float	radius;
 }	t_sphere;
 
 typedef struct s_shape	t_shape;
 typedef struct s_hit	t_hit;
 typedef t_bool			(*t_hit_record)(t_hit **, t_shape *, t_ray);
-typedef t_tuple			(*t_normal_at)(t_shape *shape, t_tuple world_point);
+typedef t_tuple			(*t_normal_at)(t_shape *, t_tuple);
 
 /**
  * @struct t_shape
  * @brief Represents a shape in a scene.
+ *
+ * @param transform The transformation matrix for the shape.
+ * @param material The material of the shape.
+ * @param intersect The function used to calculate the intersection of a ray
+ *        with the shape.
+ * @param normal_at The function used to calculate the normal at a point on
+ *                  the shape.
  */
 typedef struct s_shape
 {
@@ -150,7 +157,7 @@ t_shape	new_shape(void);
  * @param transform A matrix of type `t_matrix` containing the transformation
  *                  values to be set.
  */
-void set_transform(t_shape *shape, t_matrix transform);
+void	set_transform(t_shape *shape, t_matrix transform);
 
 /* ************************************************************************** */
 /*                                SPHERES.C                                   */
@@ -207,7 +214,7 @@ t_tuple	normal_at_sphere(t_shape *shape, t_tuple world_point);
  *            with the sphere.
  * @return Returns `true` if an intersection was found, `false` otherwise.
  */
-t_bool intersect_sphere(t_hit **xs, t_shape *shape, t_ray ray);
+t_bool	intersect_sphere(t_hit **xs, t_shape *shape, t_ray ray);
 
 /* ************************************************************************** */
 /*                                PLANES.C                                    */
@@ -238,22 +245,24 @@ t_shape	new_plane(void);
  *                    coordinates.
  * @return Returns a tuple representing the normal vector at the given point.
  */
-t_tuple normal_at_plane(t_shape *shape, t_tuple world_point);
+t_tuple	normal_at_plane(t_shape *shape, t_tuple world_point);
 
 /**
  * @brief Calculates the intersection of a ray with a plane.
  *
  * This function calculates the intersection of a ray with a plane that extends
- * infinitely in the xz plane and passes through the origin. The function returns
- * a boolean value indicating whether the ray intersects the plane. If the ray
- * intersects the plane, the function adds a hit record to the list of
- * intersections.
+ * infinitely in the xz plane and passes through the origin. The function
+ * returns a boolean value indicating whether the ray intersects the plane.
+ * If the ray intersects the plane, the function adds a hit record to the list
+ * of intersections.
  *
  * @param xs A pointer to a pointer to a structure of type `t_hit` representing
  *           the list of intersections.
- * @param shape A pointer to a structure of type `t_shape` representing the plane.
+ * @param shape A pointer to a structure of type `t_shape` representing the
+ *              plane.
  * @param ray A structure of type `t_ray` representing the ray.
- * @return Returns a boolean value indicating whether the ray intersects the plane.
+ * @return Returns a boolean value indicating whether the ray intersects the
+ *         plane.
  */
 t_bool	intersect_plane(t_hit **xs, t_shape *shape, t_ray ray);
 
