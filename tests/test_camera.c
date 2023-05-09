@@ -6,12 +6,16 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:13:05 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 12:38:09 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:32:48 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+/*
+ * This test checks if the function "new_camera" correctly creates a new
+ * camera with the given horizontal size, vertical size, and field of view.
+ */
 Test(camera, new_camera)
 {
 	int			hsize;
@@ -30,6 +34,10 @@ Test(camera, new_camera)
 	assert_matrix_equal(c.transform, identity);
 }
 
+/*
+ * This test checks if the function "new_camera" correctly calculates the
+ * size of a pixel on the horizontal canvas.
+ */
 Test(camera, pixel_size_on_horizontal_canvas)
 {
 	t_camera	c;
@@ -38,6 +46,10 @@ Test(camera, pixel_size_on_horizontal_canvas)
 	cr_assert_float_eq(c.pixel_size, 0.01, EPSILON);
 }
 
+/*
+ * This test checks if the function "new_camera" correctly calculates the
+ * size of a pixel on the vertical canvas.
+ */
 Test(camera, pixel_size_on_vertical_canvas)
 {
 	t_camera	c;
@@ -46,6 +58,10 @@ Test(camera, pixel_size_on_vertical_canvas)
 	cr_assert_float_eq(c.pixel_size, 0.01, EPSILON);
 }
 
+/*
+ * This test checks if the function "ray_for_pixel" correctly calculates the
+ * ray that passes through the center of the canvas.
+ */
 Test(camera, ray_through_the_center_of_the_canvas)
 {
 	t_camera	c;
@@ -61,6 +77,10 @@ Test(camera, ray_through_the_center_of_the_canvas)
 	cr_assert_float_eq(r.direction.z, -1, EPSILON);
 }
 
+/*
+ * This test checks if the function "ray_for_pixel" correctly calculates the
+ * ray that passes through the corner of the canvas.
+ */
 Test(camera, ray_through_the_corner_of_the_canvas)
 {
 	t_camera	c;
@@ -76,6 +96,11 @@ Test(camera, ray_through_the_corner_of_the_canvas)
 	cr_assert_float_eq(r.direction.z, -0.66851, EPSILON);
 }
 
+/*
+ * This test checks if the function "ray_for_pixel" correctly calculates the
+ * ray for a camera that has been transformed with a rotation and translation
+ * matrix.
+ */
 Test(camera, ray_with_transformed_camera)
 {
 	t_camera	c;
