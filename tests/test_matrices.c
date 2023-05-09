@@ -3,18 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   test_matrices.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:33:50 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/11 14:29:37 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:38:36 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <criterion/criterion.h>
-#include <criterion/new/assert.h>
-
-#include "matrices.h"
-#include "tuples.h"
 #include "utils.h"
 
 /*	Constructing and inspecting a 4x4 matrix */

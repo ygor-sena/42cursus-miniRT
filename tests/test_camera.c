@@ -6,11 +6,10 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:13:05 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 11:52:26 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:38:09 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tuples.h"
 #include "utils.h"
 
 Test(camera, new_camera)

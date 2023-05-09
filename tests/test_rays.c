@@ -6,14 +6,10 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:19:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/06 10:47:04 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:38:43 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <criterion/criterion.h>
-#include <criterion/new/assert.h>
-
-#include "shapes.h"
 #include "utils.h"
 
 Test(rays, creating_a_new_ray)

@@ -6,14 +6,11 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:46:27 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/25 12:26:49 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:38:25 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <criterion/criterion.h>
-#include <criterion/new/assert.h>
-
-#include "lights.h"
+#include "utils.h"
 
 /** 
  *	ABOUT THIS MODULE TEST_LIGHTS.C

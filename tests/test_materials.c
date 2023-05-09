@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   test_materials.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:46:43 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/25 15:22:08 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:38:31 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <criterion/criterion.h>
-#include <criterion/new/assert.h>
-
 #include "utils.h"
-#include "materials.h"
-#include "lights.h"
 
 /**
  *	ABOUT THIS MODULE TEST_MATERIALS.C

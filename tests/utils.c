@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/26 16:03:08 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/07 19:22:16 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ t_world	default_world(void)
 	t_shape		s2;
 
 	w = world_stub();
-	w.lights = malloc(sizeof(t_light) * 1);
-	w.objects = malloc(sizeof(t_shape) * 2);
+	w.lights = calloc(sizeof(t_light), 1);
+	w.objects = calloc(sizeof(t_shape), 2);
 	w.object_count = 2;
 
 	s1 = new_sphere();

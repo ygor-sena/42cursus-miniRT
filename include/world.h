@@ -6,16 +6,12 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/27 16:58:43 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:48:57 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WORLD_H
 # define WORLD_H
-
-// After project is done, check where is the better header to define EPSILON.
-// Identifier is needed by prepare_computations()
-# define EPSILON 0.00001
 
 # include "lights.h"
 # include "shapes.h"
@@ -48,7 +44,7 @@ typedef struct s_comps
  * @param world The world of objects to check for intersections.
  * @param ray The ray to check for intersections.
  *
- * @return (t_intersection) A pointer to the first intersection in the sorted
+ * @return A pointer to the first intersection in the sorted
  * linked list of intersections or NULL if no intersections are found.
  */
 t_hit	*intersect_world(t_world *world, t_ray ray);
@@ -67,7 +63,7 @@ t_hit	*intersect_world(t_world *world, t_ray ray);
  *
  * @param intersection The intersection between the ray and a shape.
  * @param ray The ray that intersected with the shape.
- * @return (t_comps) A new data structure containing the precomputed information.
+ * @return A new data structure containing the precomputed information.
  */
 t_comps	prepare_computations(t_hit *intersection, t_ray ray);
 
@@ -82,7 +78,7 @@ t_comps	prepare_computations(t_hit *intersection, t_ray ray);
  *
  * @param world The world in which the intersection occurred.
  * @param comps The precomputed information about the intersection.
- * @return (t_color) The color of the intersection point.
+ * @return The color of the intersection point.
  */
 t_color	shade_hit(t_world world, t_comps comps);
 
@@ -100,8 +96,8 @@ t_color	shade_hit(t_world world, t_comps comps);
  *
  * @param world The world in which the intersection occurred.
  * @param ray The ray that intersected with the shapes in the world.
- * @return (t_color) The color of the intersection point, or black if there is
- * no such intersection.
+ * @return The color of the intersection point, or black if there is
+ *         no such intersection.
  */
 t_color	color_at(t_world world, t_ray ray);
 
@@ -110,18 +106,21 @@ t_color	color_at(t_world world, t_ray ray);
 /* ************************************************************************** */
 
 /**
- * @brief This function works the following way: a ray tracer computes shadows
- *        by casting a ray, called a shadow ray, from each point of intersection
- *        toward the light source. If something intersects that shadow ray
- *        between the point and the light source, then the point is considered
- *        to be in shadow. About the function calculations, magnitude(v) means
- *        the distance between the light's position and the given point. In
- *        turn, normalize(v) means its direction.
- * 
- * @param world Receives a world containing objects and light sources.
- * @param point Receives a point location of the world.
- * @return (t_bool) Returns TRUE is the point is in shadow. Otherwise, returns
- *         FALSE if the point isn't in shadow.
+ * @brief Determines whether a point in a world is in shadow or not.
+ *
+ * This function works by casting a shadow ray from the given point towards each
+ * light source in the world. If the shadow ray intersects any objects in the
+ * world before reaching the light source, the point is considered to be in
+ * shadow. The function calculates the distance between the light source and
+ * the given point using the magnitude of the vector between them, and normalizes
+ * the vector to get its direction.
+ *
+ * @param world A pointer to a structure of type `t_world` representing the
+ *              world containing objects and light sources.
+ * @param point A structure of type `t_tuple` representing the location of the
+ *              point in the world.
+ * @return Returns `TRUE` if the point is in shadow. Otherwise, returns `FALSE`
+ *         if the point is not in shadow.
  */
 t_bool	is_shadowed(t_world *world, t_tuple point);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:36:20 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/27 14:50:46 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:13:15 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ t_hit	*intersection(float t, t_shape *shape)
 	hit->object = shape;
 	hit->next = NULL;
 	return (hit);
+}
+
+t_bool	intersect(t_hit **xs, t_shape *shape, t_ray ray)
+{
+	t_ray	local_ray;
+
+	local_ray = transform(ray, inverse(shape->transform));
+	shape->intersect(xs, shape, local_ray);
+	return (TRUE);
 }
 
 void	insert_intersection(t_hit **xs, t_hit *isect)
@@ -49,7 +58,6 @@ void	insert_intersection(t_hit **xs, t_hit *isect)
 	isect->next = curr;
 }
 
-// TODO: rename to nearest_hit
 t_hit	*hit(t_hit *xs)
 {
 	while (xs != NULL && xs->t < 0)

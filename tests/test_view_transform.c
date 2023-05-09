@@ -6,12 +6,9 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 12:28:50 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/18 17:08:36 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:39:01 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <criterion/criterion.h>
-#include <criterion/new/assert.h>
 
 #include "utils.h"
 
