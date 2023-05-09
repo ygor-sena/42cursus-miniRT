@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 11:58:06 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:13:17 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	insert_intersection(t_hit **xs, t_hit *i);
  * @return A pointer to a structure of type `t_hit` that represents the first
  *         visible intersection from the list of intersection records.
  */
-t_hit	*visible_hit(t_hit *xs);
+t_hit	*hit(t_hit *xs);
 
 // TODO: move to utils.c
 int		intersection_count(t_hit *xs);

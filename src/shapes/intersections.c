@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:36:20 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 10:47:25 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:13:15 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	insert_intersection(t_hit **xs, t_hit *isect)
 	isect->next = curr;
 }
 
-t_hit	*visible_hit(t_hit *xs)
+t_hit	*hit(t_hit *xs)
 {
 	while (xs != NULL && xs->t < 0)
 		xs = xs->next;
