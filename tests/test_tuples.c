@@ -6,12 +6,16 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:13:02 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 12:38:57 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:10:21 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+/*
+ * Test if the function "tuple" correctly creates a tuple with the
+ * given values.
+ */
 Test(tuples, create_a_tuple)
 {
 	t_tuple	a;
@@ -29,6 +33,10 @@ Test(tuples, create_a_tuple)
 	cr_assert(eq(flt, a.w, 0.0));
 }
 
+/*
+ * Test if the function "point" correctly creates a tuple with the
+ * given values and a w value of 1.0.
+ */
 Test(tuples, create_a_point)
 {
 	t_tuple	a;
@@ -40,6 +48,10 @@ Test(tuples, create_a_point)
 	cr_assert(eq(flt, a.w, 1.0));
 }
 
+/*
+ * Test if the function "vector" correctly creates a tuple with the
+ * given values and a w value of 0.0.
+ */
 Test(tuples, create_a_vector)
 {
 	t_tuple	a;
@@ -51,6 +63,7 @@ Test(tuples, create_a_vector)
 	cr_assert(eq(flt, a.w, 0.0));
 }
 
+/* Test if the function "add" correctly adds two tuples. */
 Test(tuples, adding_tuples)
 {
 	t_tuple	a;
@@ -66,6 +79,7 @@ Test(tuples, adding_tuples)
 	cr_assert(eq(flt, result.w, 1));
 }
 
+/* Test if the function "subtract" correctly subtract two tuples. */
 Test(tuples, subtracting_tuples)
 {
 	t_tuple	a;
@@ -94,6 +108,7 @@ Test(tuples, subtracting_tuples)
 	cr_assert(eq(flt, result.z, -6));
 }
 
+/* Test if the function "negate" correctly negates a tuple. */
 Test(tuples, negating_tuples)
 {
 	t_tuple	result;
@@ -105,6 +120,7 @@ Test(tuples, negating_tuples)
 	cr_assert(eq(flt, result.w, 4));
 }
 
+/* Test if the function "multiply" correctly multiplies a tuple by a scalar. */
 Test(tuples, multiplying_tuples)
 {
 	t_tuple	result;
@@ -122,6 +138,7 @@ Test(tuples, multiplying_tuples)
 	cr_assert(eq(flt, result.w, -2));
 }
 
+/* Test if the function "divide" correctly divides a tuple by a scalar. */
 Test(tuples, dividing_tuples)
 {
 	t_tuple	result;
@@ -133,6 +150,11 @@ Test(tuples, dividing_tuples)
 	cr_assert(eq(flt, result.w, -2));
 }
 
+/*
+ * Test if the function "magnitude" correctly calculates the magnitude
+ * of a vector. The test creates several vectors and checks if the
+ * function returns the expected magnitude for each one.
+ */
 Test(tuples, get_magnitude)
 {
 	float	length;
@@ -153,6 +175,7 @@ Test(tuples, get_magnitude)
 	cr_assert(eq(flt, length, sqrtf(14)));
 }
 
+/* Test if the function "normalize" correctly normalizes a vector. */
 Test(tuples, normalizing_vectors)
 {
 	t_tuple	v;
@@ -167,6 +190,10 @@ Test(tuples, normalizing_vectors)
 	cr_assert(epsilon_eq(flt, magnitude(normal), 1, FLT_EPSILON));
 }
 
+/*
+ * Test if the function "dot" correctly calculates the dot product
+ * of two vectors.
+ */
 Test(tuples, dot_product)
 {
 	t_tuple	a;
@@ -179,6 +206,10 @@ Test(tuples, dot_product)
 	cr_assert(eq(flt, result, 20));
 }
 
+/*
+ * Test if the function "cross" correctly calculates the cross
+ * product of two vectors.
+ */
 Test(tuples, cross_product)
 {
 	t_tuple	a;
@@ -198,7 +229,7 @@ Test(tuples, cross_product)
 	cr_assert(eq(flt, result.z, 1));
 }
 
-/*	Reflecting a vector approaching at 45° */
+/* Reflecting a vector approaching at 45° */
 Test(tuples, reflect_vector_45)
 {
 	t_tuple	v;
@@ -216,7 +247,7 @@ Test(tuples, reflect_vector_45)
 	cr_assert_float_eq(result.z, expect.z, EPSILON);
 }
 
-/*	Reflecting a vector off a slanted surface */
+/* Reflecting a vector off a slanted surface */
 Test(tuples, reflect_vector_slanted_surface)
 {
 	t_tuple	v;
