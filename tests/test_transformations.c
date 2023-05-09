@@ -3,17 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   test_transformations.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 10:59:12 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/11 14:31:38 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:38:51 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <criterion/criterion.h>
-#include <criterion/new/assert.h>
-
-#include "matrices.h"
 #include "utils.h"
 
 /*	Multiplying by a translation matrix */

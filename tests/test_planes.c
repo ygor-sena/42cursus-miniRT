@@ -6,13 +6,10 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:52:01 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/05 16:47:26 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:38:40 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rays.h"
-#include "shapes.h"
-#include "tuples.h"
 #include "utils.h"
 
 /* The normal of a plane is constant everywhere */

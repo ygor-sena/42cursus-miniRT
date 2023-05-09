@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 10:45:00 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 11:58:06 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef t_tuple			(*t_normal_at)(t_shape *, t_tuple);
  * @param transform The transformation matrix for the shape.
  * @param material The material of the shape.
  * @param intersect The function used to calculate the intersection of a ray
- *        with the shape.
+ *                  with the shape.
  * @param normal_at The function used to calculate the normal at a point on
  *                  the shape.
  */

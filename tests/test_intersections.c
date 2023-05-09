@@ -6,13 +6,18 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:28:46 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 10:40:01 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:23:29 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes.h"
 #include "utils.h"
 
+/*
+ * This test checks if the intersection returned by the "intersection"
+ * function correctly encapsulates the value of "t" and the object of
+ * the spherical shape.
+ */
 Test(intersections, an_intersection_encapsulates_t_and_object)
 {
 	t_shape	shape;
@@ -25,6 +30,12 @@ Test(intersections, an_intersection_encapsulates_t_and_object)
 	cr_assert(eq(flt, i->object->sphere.radius, shape.sphere.radius));
 }
 
+/*
+ * This test checks if the function "insert_intersection" correctly aggregates
+ * two intersections into a list of intersections. The test creates two spheres
+ * and two intersections, inserts them into the list, and checks if the list
+ * contains the expected intersections.
+ */
 Test(intersections, aggregating_intersections)
 {
 	t_shape	s1;
@@ -46,6 +57,13 @@ Test(intersections, aggregating_intersections)
 	cr_assert(eq(flt, xs->next->t, 2));
 }
 
+/*
+ * This test checks if the function "visible_hit" correctly returns the first
+ * visible intersection from a list of intersections when all intersections
+ * have positive "t" values. The test creates two spheres and two intersections,
+ * inserts them into the list, and checks if the function returns the expected
+ * intersection.
+ */
 Test(intersections, hit_when_all_intersections_have_positive_t)
 {
 	t_shape	s1;
@@ -64,6 +82,12 @@ Test(intersections, hit_when_all_intersections_have_positive_t)
 	cr_assert(eq(i32, compare_spheres(&i->object[0].sphere, &s1.sphere), TRUE));
 }
 
+/*
+ * This test checks if the function "visible_hit" correctly returns NULL when
+ * all intersections in the list have negative "t" values. The test creates a
+ * sphere and two intersections with negative "t" values, inserts them into the
+ * list, and checks if the function returns NULL as expected.
+ */
 Test(intersections, hit_when_all_intersections_have_negative_t)
 {
 	t_shape	shape;
@@ -80,6 +104,12 @@ Test(intersections, hit_when_all_intersections_have_negative_t)
 	cr_assert(eq(ptr, expected, NULL));
 }
 
+/*
+ * This test checks if the function "visible_hit" correctly returns the lowest
+ * non-negative intersection from a list of intersections. The test creates a
+ * sphere and four intersections with different "t" values, inserts them into
+ * the list, and checks if the function returns the expected intersection.
+ */
 Test(intersections, the_hit_is_always_the_lowest_nonnegative_intersection)
 {
 	t_shape	shape;
@@ -98,7 +128,7 @@ Test(intersections, the_hit_is_always_the_lowest_nonnegative_intersection)
 	cr_assert(eq(flt, i->t, 2));
 }
 
-/*	The hit should offset the point */
+/* The hit should offset the point */
 Test(intersections, hit_should_offset_point)
 {
 	t_ray		r;

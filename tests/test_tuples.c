@@ -3,17 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   test_tuples.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:13:02 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/11 10:47:39 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:38:57 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <criterion/criterion.h>
-#include <criterion/new/assert.h>
-
-#include "tuples.h"
 #include "utils.h"
 
 Test(tuples, create_a_tuple)

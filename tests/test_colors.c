@@ -3,17 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   test_colors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:41:36 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/11 09:28:53 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:38:04 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <criterion/criterion.h>
-#include <criterion/new/assert.h>
-
-#include "tuples.h"
 #include "utils.h"
 
 Test(colors, create_colors)
