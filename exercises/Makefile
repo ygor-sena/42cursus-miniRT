@@ -1,7 +1,6 @@
 ###############################################################################
-### Just replace the filename and the current chapter
-EXERCISE := add_planes
-CHAP_DIR := ch9
+### Just replace the current chapter
+EXERCISE := ch09
 
 CYAN  := \33[1;36m
 RESET := \033[0m
@@ -13,9 +12,7 @@ LIB_DIR   := ../lib
 LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR   := $(LIB_DIR)/mlx_linux
 INC_DIRS  := ../include $(LIBFT_DIR) $(MLX_DIR)
-
-SRC_DIRS := $(shell find $(SRC) -type d)
-SRC_DIRS += $(CHAP_DIR)
+SRC_DIRS  := $(shell find $(SRC) -type d)
 
 vpath %.h $(INC_DIRS)
 vpath %.c $(SRC_DIRS)
