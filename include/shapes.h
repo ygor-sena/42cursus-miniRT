@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/12 11:27:42 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:33:27 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,6 @@ t_bool	intersect_plane(t_hit **xs, t_shape *shape, t_ray ray);
 /*                               TEXTURES.C                                   */
 /* ************************************************************************** */
 
-void		glassy_shape(t_shape *shape);
+void	glassy_shape(t_shape *shape);
 
 #endif
