@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/12 10:34:56 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:50:45 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_comps
 	t_sight	sight;
 	t_bool	inside;
 	t_tuple	over_point;
-	t_tuple reflectv;
+	t_tuple	reflectv;
 }	t_comps;
 
 /* ************************************************************************** */
@@ -125,7 +125,7 @@ t_color	color_at(t_world world, t_ray ray, size_t remaining);
  *         function returns a color equivalent to black. Otherwise, it returns
  *         the reflected color from a reflective material.
  */
-t_color reflected_color(t_world world, t_comps comps, size_t remaining);
+t_color	reflected_color(t_world world, t_comps comps, size_t remaining);
 
 /* ************************************************************************** */
 /*                                 SHADOWS.C                                  */

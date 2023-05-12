@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:29:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/12 10:36:58 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:50:09 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_color	shade_hit(t_world world, t_comps comps, size_t remaining)
 	surface = lighting(comps.object->material,
 			world.lights[0], comps.point, comps.sight);
 	reflected = reflected_color(world, comps, remaining);
-	return(add_color(surface, reflected));
+	return (add_color(surface, reflected));
 }
 
 t_color	color_at(t_world world, t_ray ray, size_t remaining)
@@ -78,7 +78,7 @@ t_color	color_at(t_world world, t_ray ray, size_t remaining)
 	return (color);
 }
 
-t_color reflected_color(t_world world, t_comps comps, size_t remaining)
+t_color	reflected_color(t_world world, t_comps comps, size_t remaining)
 {
 	t_ray	reflect_ray;
 	t_color	color;
