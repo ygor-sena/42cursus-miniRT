@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_spheres.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:22:45 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 12:37:58 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:47:56 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,4 +295,17 @@ Test(spheres, sphere_default_material)
 	cr_assert(eq(flt, s.material.diffuse, m.diffuse));
 	cr_assert(eq(flt, s.material.specular, m.specular));
 	cr_assert(eq(flt, s.material.shininess, m.shininess));
+}
+
+/* A helper for producing a sphere with a glassy material. */
+Test(spheres, sphere_with_glassy_material)
+{
+	t_shape	s;
+
+	s = new_sphere();
+	glassy_shape(&s);
+
+	assert_matrix_equal(s.transform, get_identity_matrix());
+	cr_assert(eq(flt, s.material.transparency, 1.0));
+	cr_assert(eq(flt, s.material.refractive_index, 1.5));
 }

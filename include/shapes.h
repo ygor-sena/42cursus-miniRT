@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 14:13:17 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/12 11:27:42 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,5 +265,11 @@ t_tuple	normal_at_plane(t_shape *shape, t_tuple world_point);
  *         plane.
  */
 t_bool	intersect_plane(t_hit **xs, t_shape *shape, t_ray ray);
+
+/* ************************************************************************** */
+/*                               TEXTURES.C                                   */
+/* ************************************************************************** */
+
+void		glassy_shape(t_shape *shape);
 
 #endif

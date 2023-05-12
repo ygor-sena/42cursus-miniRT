@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:46:43 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/12 10:37:21 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/12 11:15:01 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,4 +210,19 @@ Test(materials, reflectivity_for_default_material)
 
 	m = material();
 	cr_assert(eq(flt, m.reflective, 0.0));
+}
+
+/*
+ * Transparency and Refractive Index for the default material. This test shows
+ * that your material structure contains two new attributes, called transparency
+ * and refractive_index. transparency defaults to 0, and refractive_index
+ * defaults to 1.
+ */
+Test(materials, transp_ref_index_for_default_material)
+{
+	t_material	m;
+
+	m = material();
+	cr_assert(eq(flt, m.transparency, 0.0));
+	cr_assert(eq(flt, m.refractive_index, 1.0));
 }
