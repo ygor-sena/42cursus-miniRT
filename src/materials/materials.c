@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:11:46 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/25 17:30:42 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:52:58 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ t_material	material(void)
 		.ambient = 0.1,
 		.diffuse = 0.9,
 		.specular = 0.9,
-		.shininess = 200.0
+		.shininess = 200.0,
+		.reflective = 0.0,
+		.transparency = 0.0,
+		.refractive_index = 1.0
 	});
 }
 

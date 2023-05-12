@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:29:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 14:13:14 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:50:09 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,24 @@ t_comps	prepare_computations(t_hit *intersection, t_ray ray)
 		return (comps);
 	}
 	comps.over_point = add(comps.point, multiply(comps.sight.normalv, EPSILON));
+	comps.reflectv = reflect(ray.direction, comps.sight.normalv);
 	comps.inside = FALSE;
 	return (comps);
 }
 
-t_color	shade_hit(t_world world, t_comps comps)
+t_color	shade_hit(t_world world, t_comps comps, size_t remaining)
 {
+	t_color	surface;
+	t_color	reflected;
+
 	world.lights->in_shadow = is_shadowed(&world, comps.over_point);
-	return (
-		lighting(
-			comps.object->material,
-			world.lights[0],
-			comps.point,
-			comps.sight
-		));
+	surface = lighting(comps.object->material,
+			world.lights[0], comps.point, comps.sight);
+	reflected = reflected_color(world, comps, remaining);
+	return (add_color(surface, reflected));
 }
 
-t_color	color_at(t_world world, t_ray ray)
+t_color	color_at(t_world world, t_ray ray, size_t remaining)
 {
 	t_hit	*x;
 	t_comps	comps;
@@ -73,6 +74,18 @@ t_color	color_at(t_world world, t_ray ray)
 	if (x == NULL)
 		return (new_color(0, 0, 0));
 	comps = prepare_computations(x, ray);
-	color = shade_hit(world, comps);
+	color = shade_hit(world, comps, remaining);
 	return (color);
+}
+
+t_color	reflected_color(t_world world, t_comps comps, size_t remaining)
+{
+	t_ray	reflect_ray;
+	t_color	color;
+
+	if (!remaining || !comps.object->material.reflective)
+		return (new_color(0, 0, 0));
+	reflect_ray = new_ray(comps.over_point, comps.reflectv);
+	color = color_at(world, reflect_ray, remaining - 1);
+	return (multiply_color(color, comps.object->material.reflective));
 }

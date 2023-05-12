@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_intersections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:28:46 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 14:13:18 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:01:37 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ Test(intersections, aggregating_intersections)
 }
 
 /*
- * This test checks if the function "visible_hit" correctly returns the first
+ * This test checks if the function hit() correctly returns the first
  * visible intersection from a list of intersections when all intersections
  * have positive "t" values. The test creates two spheres and two intersections,
  * inserts them into the list, and checks if the function returns the expected
@@ -83,7 +83,7 @@ Test(intersections, hit_when_all_intersections_have_positive_t)
 }
 
 /*
- * This test checks if the function "visible_hit" correctly returns NULL when
+ * This test checks if the function hit() correctly returns NULL when
  * all intersections in the list have negative "t" values. The test creates a
  * sphere and two intersections with negative "t" values, inserts them into the
  * list, and checks if the function returns NULL as expected.
@@ -105,7 +105,7 @@ Test(intersections, hit_when_all_intersections_have_negative_t)
 }
 
 /*
- * This test checks if the function "visible_hit" correctly returns the lowest
+ * This test checks if the function hit() correctly returns the lowest
  * non-negative intersection from a list of intersections. The test creates a
  * sphere and four intersections with different "t" values, inserts them into
  * the list, and checks if the function returns the expected intersection.
@@ -147,3 +147,92 @@ Test(intersections, hit_should_offset_point)
 	//comps.point.z > comps.over_point.z
 	cr_assert(gt(flt, comps.point.z, comps.over_point.z));
 }
+
+/*
+ * Precomputes the reflection vector. This test creates a plane and position ray
+ * above it, slanting downward at a 45º angle.
+ */
+Test(intersections, precomputing_the_reflection_vector)
+{
+	t_shape	shape;
+	t_ray	r;
+	t_hit	*i;
+	t_comps	comps;
+	float	coord;
+	t_tuple	expected;
+
+	coord = sqrtf(2)/2.0;
+	expected = vector(0, coord, coord);
+	shape = new_plane();
+	r = new_ray(point(0, 1, -1), vector(0, -coord, coord));
+	i = intersection(sqrtf(2), &shape);
+	comps = prepare_computations(i, r);
+
+	cr_assert_float_eq(comps.reflectv.x, expected.x, EPSILON);
+	cr_assert_float_eq(comps.reflectv.y, expected.y, EPSILON);
+	cr_assert_float_eq(comps.reflectv.z, expected.z, EPSILON);
+}
+
+/**
+ * Finding n1 and n2 at various intersections. This test shows that
+ * prepare_computations() determines n1 and n2 correctly at six different
+ * points of intersection. Refer to page 151 on TRTC.
+ */
+/* Test(intesections, finding_n1_n2_at_intersections)
+{
+	t_shape	a;
+	t_shape	b;
+	t_shape	c;
+	t_ray	r;
+	t_hit	*xs;
+	t_hit	*i;
+	t_comps	comps;
+
+	a = new_sphere();
+	glassy_shape(&a);
+	a.transform = scaling(2, 2, 2);
+	a.material.refractive_index = 1.5;
+	
+	b = new_sphere();
+	glassy_shape(&b);
+	b.transform = translation(0, 0, -0.25);
+	b.material.refractive_index = 2.5;
+
+	c = new_sphere();
+	glassy_shape(&c);
+	c.transform = scaling(0, 0, 0.25);
+	c.material.refractive_index = 2.5;
+
+	r = new_ray(point(0, 0, -4), vector(0, 0, 1));
+
+	insert_intersection(&xs, intersection(2.00, &a));
+	insert_intersection(&xs, intersection(2.75, &b));
+	insert_intersection(&xs, intersection(3.25, &c));
+	insert_intersection(&xs, intersection(4.75, &b));
+	insert_intersection(&xs, intersection(5.25, &c));
+	insert_intersection(&xs, intersection(6.00, &a));
+	
+	comps = prepare_computations(xs, r, xs);
+	cr_assert_float_eq(comps.n1, 1.0, EPSILON);
+	cr_assert_float_eq(comps.n2, 1.5, EPSILON);
+
+	comps = prepare_computations(xs, r, xs);
+	cr_assert_float_eq(comps.n1, 1.5, EPSILON);
+	cr_assert_float_eq(comps.n2, 2.0, EPSILON);
+
+	comps = prepare_computations(xs, r, xs);
+	cr_assert_float_eq(comps.n1, 2.0, EPSILON);
+	cr_assert_float_eq(comps.n2, 2.5, EPSILON);
+
+	comps = prepare_computations(xs, r, xs);
+	cr_assert_float_eq(comps.n1, 2.5, EPSILON);
+	cr_assert_float_eq(comps.n2, 2.5, EPSILON);
+
+	comps = prepare_computations(xs, r, xs);
+	cr_assert_float_eq(comps.n1, 2.5, EPSILON);
+	cr_assert_float_eq(comps.n2, 1.5, EPSILON);
+
+	comps = prepare_computations(xs, r, xs);
+	cr_assert_float_eq(comps.n1, 1.5, EPSILON);
+	cr_assert_float_eq(comps.n2, 1.0, EPSILON);
+} */

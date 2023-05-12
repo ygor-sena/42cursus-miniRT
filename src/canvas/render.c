@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 12:16:18 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/23 12:51:00 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:36:31 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_bool	render_scene(t_canvas *canvas, t_world *world, t_camera *camera)
 		while (x < camera->hsize - 1)
 		{
 			ray = ray_for_pixel(camera, x, y);
-			color = color_at(*world, ray);
+			color = color_at(*world, ray, MAX_RECURSION);
 			write_pixel(canvas, x, y, rgb(color));
 			x++;
 		}

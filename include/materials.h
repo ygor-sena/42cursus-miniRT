@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:05:52 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/20 10:58:42 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/12 11:28:00 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@
  * by the parameter shininess.
  * @param shininess Represents the shininess. The higher the shininess, the
  * smaller and tigher the specular highlight.
+ * @param reflective Represents the material's surface reflection value.
+ * @param transparency Represents the material's transparency. If transparency
+ *                     is zero, then the surface is opaque.
+ * @param refractive_index Represents the degree to which light will bend when
+ *                         entering or exiting the material, compared to other
+ *                         materials. If variable value is 1.0, it means that
+ *                         the object is empty, vacuum-filled shells.
  */
 typedef struct s_material
 {
@@ -42,6 +49,9 @@ typedef struct s_material
 	float	diffuse;
 	float	specular;
 	float	shininess;
+	float	reflective;
+	float	transparency;
+	float	refractive_index;
 }	t_material;
 
 /* ************************************************************************** */
@@ -80,7 +90,7 @@ typedef struct s_exposure
  * t_material with the following default values: color = {1, 1, 1},
  * ambient = 0.1, diffuse = 0.9, specular = 0.9 and shininess = 200.
  *
- * @return (t_material) Returns a default instance of the new material.
+ * @return Returns a default instance of the new material.
  */
 t_material	material(void);
 
@@ -99,7 +109,7 @@ t_material	material(void);
  * @param point A struct of type t_tuple of the point being illuminated.
  * @param sight A struct of type t_sight with the values of eye and normal
  * vectors obtained from the Phong Reflection Model algorithm.
- * @return (t_color) The function returns the final shading of that point.
+ * @return The function returns the final shading of that point.
  */
 t_color		lighting(t_material m, t_light light, t_tuple point, t_sight sight);
 
