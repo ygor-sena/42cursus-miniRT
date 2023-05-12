@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/07 19:22:16 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:38:10 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,20 @@ t_world	default_world(void)
 	w.objects[0] = s1;
 	w.objects[1] = s2;
 	return (w);
+}
+
+//TODO: an "add_light_to_world()" maybe will be needed to test multispot lights
+void	add_shape_to_world(t_world *world, t_shape shape)
+{
+    t_shape *new_objects;
+	
+	new_objects = ft_calloc(world->object_count + 1, sizeof(t_shape));
+    ft_memmove(new_objects, world->objects,
+			world->object_count * sizeof(t_shape));
+    new_objects[world->object_count] = shape;
+    free(world->objects);
+    world->objects = new_objects;
+    world->object_count++;
 }
 
 t_bool	compare_spheres(t_sphere *a, t_sphere *b)

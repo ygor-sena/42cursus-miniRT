@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_world.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:55:26 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 12:39:10 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:42:06 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ Test(world, shading_intersection)
 	i = intersection(4, w.objects);
 	r = new_ray(point(0, 0, -5), vector(0, 0, 1));
 	comps = prepare_computations(i, r);
-	c = shade_hit(w, comps);
+	c = shade_hit(w, comps, MAX_RECURSION);
 	expected = new_color(0.38066, 0.47583, 0.2855);
 
 	cr_assert_float_eq(c.red, expected.red, EPSILON);
@@ -174,7 +174,7 @@ Test(world, shading_intersection_from_inside)
 	shape = w.objects[1];
 	i = intersection(0.5, &shape);
 	comps = prepare_computations(i, r);
-	c = shade_hit(w, comps);
+	c = shade_hit(w, comps, MAX_RECURSION);
 	expected = new_color(0.90498, 0.90498, 0.90498);
 
 	cr_assert_float_eq(c.red, expected.red, EPSILON);
@@ -193,7 +193,7 @@ Test(world, color_for_missed_ray)
 
 	w = default_world();
 	r = new_ray(point(0, 0, -5), vector(0, 1, 0));
-	c = color_at(w, r);
+	c = color_at(w, r, MAX_RECURSION);
 	expected = new_color(0, 0, 0);
 
 	cr_assert_float_eq(c.red, expected.red, EPSILON);
@@ -212,7 +212,7 @@ Test(world, color_when_a_ray_hits)
 
 	w = default_world();
 	r = new_ray(point(0, 0, -5), vector(0, 0, 1));
-	c = color_at(w, r);
+	c = color_at(w, r, MAX_RECURSION);
 	expected = new_color(0.38066, 0.47583, 0.2855);
 
 	cr_assert_float_eq(c.red, expected.red, EPSILON);
@@ -237,7 +237,7 @@ Test(world, color_with_an_intersection_behind_the_ray)
 	inner = w.objects + 1;
 	inner->material.ambient = 1;
 	r = new_ray(point(0, 0, 0.75), vector(0, 0, -1));
-	c = color_at(w, r);
+	c = color_at(w, r, MAX_RECURSION);
 
 	cr_assert_float_eq(c.red, inner->material.color.red, EPSILON);
 }
@@ -324,10 +324,170 @@ Test(world, shade_hit_intersection_in_shadow)
 	r = new_ray(point(0, 0, 5), vector(0, 0, 1));
 	i = intersection(4, &s2);
 	comps = prepare_computations(i, r);
-	c = shade_hit(w, comps);
+	c = shade_hit(w, comps, MAX_RECURSION);
 	expected = new_color(0.1, 0.1, 0.1);
 
 	cr_assert_float_eq(c.red, expected.red, EPSILON);
 	cr_assert_float_eq(c.green, expected.green, EPSILON);
 	cr_assert_float_eq(c.blue, expected.blue, EPSILON);
+}
+
+/*
+ * The reflected color for a nonreflective material. Shows that when a ray
+ * strikes a nonreflective surface, the reflected_color() function returns
+ * the color black.
+ */
+Test(world, reflected_color_for_nonreflect_material)
+{
+	t_world	w;
+	t_ray	r;
+	t_shape	shape;
+	t_hit	*i;
+	t_comps	comps;
+	t_color	color;
+	t_color	expected;
+
+	expected = new_color(0, 0, 0);
+	w = default_world();
+	r = new_ray(point(0, 0, 0), vector(0, 0, 1));
+	shape = w.objects[1];
+	shape.material.ambient = 1.0;
+	i = intersection(1, &shape);
+	comps = prepare_computations(i, r);
+	color = reflected_color(w, comps, MAX_RECURSION);
+
+	cr_assert_float_eq(color.red, expected.red, EPSILON);
+	cr_assert_float_eq(color.green, expected.green, EPSILON);
+	cr_assert_float_eq(color.blue, expected.blue, EPSILON);
+}
+
+/*
+ * The reflected color for a reflective material. Shows that reflected_color()
+ * returns the color via reflection when the struck surface is reflective.
+ */
+//WARNING: modified test conditions
+Test(world, reflected_color_for_reflective_material)
+{
+	t_world	w;
+	t_ray	r;
+	t_shape	shape;
+	t_hit	*i;
+	t_comps	comps;
+	t_color	color;
+	float	coord;
+	t_color	expected;
+
+	expected = new_color(0.19033, 0.23791, 0.14274);
+	coord = sqrtf(2)/2.0;
+	w = default_world();
+	shape = new_plane();
+	shape.material.reflective = 0.5;
+	shape.transform = translation(0, -1, 0);
+	add_shape_to_world(&w, shape);
+	r = new_ray(point(0, 0, -3), vector(0, -coord, coord));
+	i = intersection(sqrtf(2), &shape);
+	comps = prepare_computations(i, r);
+	color = reflected_color(w, comps, MAX_RECURSION);
+
+	cr_assert_float_eq(color.red, expected.red, EPSILON);
+	cr_assert_float_eq(color.green, expected.green, EPSILON);
+	cr_assert_float_eq(color.blue, expected.blue, EPSILON);
+}
+
+/*
+ * shade_hit() with reflective material. Shows that shade_hit() incorporates
+ * the reflected color into the final color.
+ */
+//WARNING: modified test conditions
+Test(world, shade_hit_with_reflective_material)
+{
+	t_world	w;
+	t_ray	r;
+	t_shape	shape;
+	t_hit	*i;
+	t_comps	comps;
+	t_color	color;
+	float	coord;
+	t_color	expected;
+
+	expected = new_color(0.87676, 0.92435, 0.82918);
+	coord = sqrtf(2)/2.0;
+	w = default_world();
+	shape = new_plane();
+	shape.material.reflective = 0.5;
+	shape.transform = translation(0, -1, 0);
+	add_shape_to_world(&w, shape);
+	r = new_ray(point(0, 0, -3), vector(0, -coord, coord));
+	i = intersection(sqrtf(2), &shape);
+	comps = prepare_computations(i, r);
+	color = shade_hit(w, comps, MAX_RECURSION);
+
+	cr_assert_float_eq(color.red, expected.red, EPSILON);
+	cr_assert_float_eq(color.green, expected.green, EPSILON);
+	cr_assert_float_eq(color.blue, expected.blue, EPSILON);
+}
+
+/*
+ * color_at() with mutually reflective surfaces. shade_hit() calls
+ * reflected_vector() which calls color_at(). This test shows that the code
+ * safety handles infinite recursion caused by two objects that mutually
+ * reflect rays between themselves.
+ */
+Test(world, color_at_mutual_surface_reflection)
+{
+	t_world	w;
+	t_shape	lower;
+	t_shape	upper;
+	t_ray	r;
+	t_color	color;
+
+	w = default_world();
+	w.lights[0] = point_light(point(0, 0, 0), new_color(1, 1, 1));
+	lower = new_plane();
+	lower.material.reflective = 1.0;
+	lower.transform = translation(0, -1, 0);
+	add_shape_to_world(&w, lower);
+	upper = new_plane();
+	upper.material.reflective = 1.0;
+	upper.transform = translation(0, 1, 0);
+	add_shape_to_world(&w, upper);
+	r = new_ray(point(0, 0, 0), vector(0, 1, 0));
+	color = color_at(w, r, 0);
+
+	cr_assert(color.red);
+	cr_assert(color.green);
+	cr_assert(color.blue);
+}
+
+/*
+ * The reflected color at the maximum recursive depth. This test shows that
+ * reflected_color() returns without effect when invoked at the limit of its
+ * recursive threshold.
+ */
+Test(world, reflected_color_max_recursive_depth)
+{
+	t_world	w;
+	t_shape	shape;
+	t_ray	r;
+	t_hit	*i;
+	t_comps	comps;
+	t_color	color;
+	t_color	expected;
+	float	coord;
+
+	expected = new_color(0, 0, 0);
+	coord = sqrtf(2)/2.0;
+	w = default_world();
+	shape = new_plane();
+	shape.material.reflective = 0.5;
+	shape.transform = translation(0, -1, 0);
+	add_shape_to_world(&w, shape);
+	r = new_ray(point(0, 0, -3), vector(0, -coord, coord));
+	i = intersection(sqrtf(2), &shape);
+	comps = prepare_computations(i, r);
+	color = reflected_color(w, comps, 0);
+
+	cr_assert_float_eq(color.red, expected.red, EPSILON);
+	cr_assert_float_eq(color.green, expected.green, EPSILON);
+	cr_assert_float_eq(color.blue, expected.blue, EPSILON);
 }

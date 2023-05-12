@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:05:52 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/20 10:58:42 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:20:02 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
  * by the parameter shininess.
  * @param shininess Represents the shininess. The higher the shininess, the
  * smaller and tigher the specular highlight.
+ * @param reflective Represents the material's surface reflection value.
  */
 typedef struct s_material
 {
@@ -42,6 +43,7 @@ typedef struct s_material
 	float	diffuse;
 	float	specular;
 	float	shininess;
+	float	reflective;
 }	t_material;
 
 /* ************************************************************************** */

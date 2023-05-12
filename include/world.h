@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/08 16:48:57 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:34:56 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "lights.h"
 # include "shapes.h"
+
+# define MAX_RECURSION 5
 
 typedef struct s_world
 {
@@ -32,6 +34,7 @@ typedef struct s_comps
 	t_sight	sight;
 	t_bool	inside;
 	t_tuple	over_point;
+	t_tuple reflectv;
 }	t_comps;
 
 /* ************************************************************************** */
@@ -78,9 +81,12 @@ t_comps	prepare_computations(t_hit *intersection, t_ray ray);
  *
  * @param world The world in which the intersection occurred.
  * @param comps The precomputed information about the intersection.
+ * @param remaining Specifies the maximum recursive depth for the function if it
+ *                  needs to handle infinite recursion caused by two objects that
+ *                  mutually reflect rays between themselves.
  * @return The color of the intersection point.
  */
-t_color	shade_hit(t_world world, t_comps comps);
+t_color	shade_hit(t_world world, t_comps comps, size_t remaining);
 
 /**
  * @brief Computes the color at the intersection of a given ray with a world.
@@ -96,10 +102,30 @@ t_color	shade_hit(t_world world, t_comps comps);
  *
  * @param world The world in which the intersection occurred.
  * @param ray The ray that intersected with the shapes in the world.
+ * @param remaining Specifies the maximum recursive depth for the function if it
+ *                  needs to handle infinite recursion caused by two objects that
+ *                  mutually reflect rays between themselves.
+ * reflect rays between themselves 
  * @return The color of the intersection point, or black if there is
  *         no such intersection.
  */
-t_color	color_at(t_world world, t_ray ray);
+t_color	color_at(t_world world, t_ray ray, size_t remaining);
+
+/**
+ * @brief This function calcutes the reflected ray and its color from any
+ *        reflective material specified in variable of type t_world.
+ * 
+ * @param world A pointer to a structure of type `t_world` representing the
+ *              world containing objects, rays and light sources.
+ * @param comps The precomputed information about the world.
+ * @param remaining Specifies the maximum recursive depth for the function if it
+ *                  needs to handle infinite recursion caused by two objects that
+ *                  mutually reflect rays between themselves.
+ * @return If remaining is zero or if material reflection is nonexistent, the
+ *         function returns a color equivalent to black. Otherwise, it returns
+ *         the reflected color from a reflective material.
+ */
+t_color reflected_color(t_world world, t_comps comps, size_t remaining);
 
 /* ************************************************************************** */
 /*                                 SHADOWS.C                                  */

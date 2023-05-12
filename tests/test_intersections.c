@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_intersections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:28:46 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 14:13:18 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:37:15 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ Test(intersections, aggregating_intersections)
 }
 
 /*
- * This test checks if the function "visible_hit" correctly returns the first
+ * This test checks if the function hit() correctly returns the first
  * visible intersection from a list of intersections when all intersections
  * have positive "t" values. The test creates two spheres and two intersections,
  * inserts them into the list, and checks if the function returns the expected
@@ -83,7 +83,7 @@ Test(intersections, hit_when_all_intersections_have_positive_t)
 }
 
 /*
- * This test checks if the function "visible_hit" correctly returns NULL when
+ * This test checks if the function hit() correctly returns NULL when
  * all intersections in the list have negative "t" values. The test creates a
  * sphere and two intersections with negative "t" values, inserts them into the
  * list, and checks if the function returns NULL as expected.
@@ -105,7 +105,7 @@ Test(intersections, hit_when_all_intersections_have_negative_t)
 }
 
 /*
- * This test checks if the function "visible_hit" correctly returns the lowest
+ * This test checks if the function hit() correctly returns the lowest
  * non-negative intersection from a list of intersections. The test creates a
  * sphere and four intersections with different "t" values, inserts them into
  * the list, and checks if the function returns the expected intersection.
@@ -146,4 +146,29 @@ Test(intersections, hit_should_offset_point)
 	cr_assert(lt(flt, comps.over_point.z, -EPSILON/2));
 	//comps.point.z > comps.over_point.z
 	cr_assert(gt(flt, comps.point.z, comps.over_point.z));
+}
+
+/* 
+ * Precomputes the reflection vector. This test creates a plane and position ray
+ * above it, slanting downward at a 45º angle.
+ */
+Test(intersections, precomputing_the_reflection_vector)
+{
+	t_shape	shape;
+	t_ray	r;
+	t_hit	*i;
+	t_comps	comps;
+	float	coord;
+	t_tuple	expected;
+
+	coord = sqrtf(2)/2.0;
+	expected = vector(0, coord, coord);
+	shape = new_plane();
+	r = new_ray(point(0, 1, -1), vector(0, -coord, coord));
+	i = intersection(sqrtf(2), &shape);
+	comps = prepare_computations(i, r);
+
+	cr_assert_float_eq(comps.reflectv.x, expected.x, EPSILON);
+	cr_assert_float_eq(comps.reflectv.y, expected.y, EPSILON);
+	cr_assert_float_eq(comps.reflectv.z, expected.z, EPSILON);
 }

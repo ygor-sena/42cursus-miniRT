@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_materials.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:46:43 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/09 12:38:31 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:37:21 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,4 +201,13 @@ Test(materials, lighting_surface_in_shadow)
 	cr_assert_float_eq(result.red, expected.red, EPSILON);
 	cr_assert_float_eq(result.green, expected.green, EPSILON);
 	cr_assert_float_eq(result.blue, expected.blue, EPSILON);
+}
+
+/*	Show that material structure contains a new attribute, called refletive */
+Test(materials, reflectivity_for_default_material)
+{
+	t_material	m;
+
+	m = material();
+	cr_assert(eq(flt, m.reflective, 0.0));
 }
