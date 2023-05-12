@@ -1,5 +1,6 @@
 TESTS := tuples colors matrices transformations rays spheres intersections
 TESTS += lights materials world view_transform camera shapes planes
+TEST  += parse_utils
 
 CYAN  := \33[1;36m
 RESET := \033[0m
@@ -13,7 +14,7 @@ INC_DIRS  := ../include $(LIBFT_DIR) $(MLX_DIR)
 
 # Insert each new directory here
 SRC_DIRS := tuples canvas matrices rays shapes tests lights materials helpers
-SRC_DIRS += camera
+SRC_DIRS += camera parser
 SRC_DIRS += $(addprefix $(SRC_DIR)/, $(SRC_DIRS))
 SRC_DIRS += $(SRC_DIR)
 
@@ -25,6 +26,7 @@ SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c
 SOURCES += mx_utils.c rays.c intersections.c spheres.c
 SOURCES += lights.c materials.c guards.c world.c view_transform.c camera.c
 SOURCES += canvas.c render.c controls.c shadows.c shapes.c planes.c
+SOURCES += parse_utils.c
 
 UTILS := utils.c
 OBJS  := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
@@ -98,6 +100,10 @@ shapes: $(OBJS) test_shapes.c
 
 .PHONY: planes
 planes: $(OBJS) test_planes.c
+	@$(call run, "$^")
+
+.PHONY: parse_utils
+parse_utils: $(OBJS) test_parse_utils.c
 	@$(call run, "$^")
 
 # Makefile rules to clean stdin/stdout/stderr test's files

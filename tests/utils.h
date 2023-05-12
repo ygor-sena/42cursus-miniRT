@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:31:28 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/26 15:49:00 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:53:31 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "helpers.h"
 # include "camera.h"
 # include "canvas.h"
+# include "parser.h"
 
 # define EPSILON 0.00001
 
