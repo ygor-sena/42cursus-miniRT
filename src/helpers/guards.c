@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   guards.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 20:26:40 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/14 10:35:54 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:10:34 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,20 @@ void	*oom(void *ptr)
 		exit(EXIT_FAILURE);
 	}
 	return (ptr);
+}
+
+t_bool	is_equal_float(float a, float b)
+{
+	if (fabsf(a - b) < 0.00001)
+		return (TRUE);
+	return (FALSE);
+}
+
+void	swap(float *t1, float *t2)
+{
+	float	tmp;
+
+	tmp = *t1;
+	*t1 = *t2;
+	*t2 = tmp;
 }
