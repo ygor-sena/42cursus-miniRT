@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/16 10:55:39 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/16 22:28:51 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_cylinder
 typedef struct s_cone
 {
 	t_point	origin;
+	//float	radius;
 	float	minimum;
 	float	maximum;
 	t_bool	closed;
@@ -43,6 +44,7 @@ typedef struct s_cone
 
 typedef struct s_shape		t_shape;
 typedef struct s_cylinder	t_cylinder;
+typedef struct s_cone		t_cone;
 typedef struct s_hit		t_hit;
 typedef t_bool				(*t_hit_record)(t_hit **, t_shape *, t_ray);
 typedef t_tuple				(*t_normal_at)(t_shape *, t_tuple);
@@ -340,10 +342,10 @@ t_bool	intersect_cylinder(t_hit **xs, t_shape *shape, t_ray ray);
  */
 t_tuple	normal_at_cylinder(t_shape *shape, t_tuple world_point);
 
-/* t_shape	new_cone(void);
+t_shape	new_cone(void);
 
 t_bool	intersect_cone(t_hit **xs, t_shape *shape, t_ray ray);
 
-t_tuple	normal_at_cone(t_shape *shape, t_tuple world_point); */
+t_tuple	normal_at_cone(t_shape *shape, t_tuple world_point);
 
 #endif

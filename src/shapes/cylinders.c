@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:38:04 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/16 11:16:40 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:29:10 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_bool	intersect_cylinder(t_hit **xs, t_shape *shape, t_ray ray)
 
 	intersect_caps(xs, shape, ray);
 	d = calculate_distance(ray);
-	if (is_equal_float(fabsf(d.a), 0.0) || d.determinant < 0)
+	if (is_epsilon_zero(fabsf(d.a), 0.0) || d.determinant < 0)
 		return (FALSE);
 	if (d.t1 > d.t2)
 		swap(&d.t1, &d.t2);
@@ -100,7 +100,7 @@ static void	intersect_caps(t_hit **xs, t_shape *shape, t_ray ray)
 	float	x;
 	float	z;
 
-	if (shape->cylinder.closed == FALSE || is_equal_float(ray.direction.y, 0.0))
+	if (shape->cylinder.closed == FALSE || is_epsilon_zero(ray.direction.y, 0.0))
 		return ;
 	t = (shape->cylinder.minimum - ray.origin.y) / ray.direction.y;
 	x = ray.origin.x + t * ray.direction.x;

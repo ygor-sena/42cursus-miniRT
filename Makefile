@@ -36,7 +36,7 @@ SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c
 SOURCES += mx_utils.c rays.c intersections.c spheres.c
 SOURCES += lights.c materials.c guards.c world.c view_transform.c camera.c
 SOURCES += render.c controls.c shapes.c shadows.c planes.c cylinders.c
-#SOURCES += cones.c
+SOURCES += cones.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 

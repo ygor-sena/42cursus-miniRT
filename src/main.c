@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:29:58 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/27 14:27:24 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/16 22:27:38 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,18 @@ t_world	new_world(void)
 	w.lights = ft_calloc(sizeof(t_light), 1);
 	w.objects = ft_calloc(sizeof(t_shape), 2);
 	w.object_count = 1;
-	s1 = new_sphere();
+	/* s1 = new_cylinder();
+	s1.cylinder.maximum = 0.5;
+	s1.cylinder.minimum = -0.5;
+	s1.cylinder.closed = TRUE; */
+	s1 = new_cone();
+	s1.cone.maximum = 0.5;
+	s1.cone.minimum = -0.5;
+	s1.cone.closed = TRUE;
 	s1.material.color = new_color(0.8, 1.0, 0.6);
 	s1.material.diffuse = 0.7;
 	s1.material.specular = 0.2;
-	s1.sphere.radius = 0.5;
+	//s1.sphere.radius = 0.5;
 	w.objects[0] = s1;
 	w.lights[0] = point_light(point(-10, 10, -10), new_color(1, 1, 1));
 	return (w);

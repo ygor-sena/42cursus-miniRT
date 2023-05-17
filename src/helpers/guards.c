@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 20:26:40 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/16 11:10:34 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:29:39 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*oom(void *ptr)
 	return (ptr);
 }
 
-t_bool	is_equal_float(float a, float b)
+t_bool	is_epsilon_zero(float a, float b)
 {
 	if (fabsf(a - b) < 0.00001)
 		return (TRUE);

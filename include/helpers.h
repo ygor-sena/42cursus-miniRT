@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 14:48:10 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/16 11:15:16 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:30:10 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*oom(void *ptr);
  * @return The function returns TRUE if the numbers are approximately equal to
  *         zero within EPSILON range. Otherwise, it returns FALSE.
  */
-t_bool	is_equal_float(float a, float b);
+t_bool	is_epsilon_zero(float a, float b);
 
 /**
  * @brief This function swaps numbers' position if the first parameter is bigger
