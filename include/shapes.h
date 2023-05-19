@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 14:13:17 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:55:09 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ typedef struct s_sphere
 	t_point	origin;
 	float	radius;
 }	t_sphere;
+
+typedef struct s_plane
+{
+	t_point	origin;
+}	t_plane;
 
 typedef struct s_shape	t_shape;
 typedef struct s_hit	t_hit;
@@ -44,6 +49,7 @@ typedef struct s_shape
 {
 	union {
 		t_sphere	sphere;
+		t_plane		plane;
 	};
 	t_matrix		transform;
 	t_material		material;

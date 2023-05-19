@@ -6,64 +6,55 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 12:37:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/11 16:42:44 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:32:05 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int		get_sign(const char **nptr);
-static double	convert_fractional_part(const char *nptr);
+#define RED "\033[31;1m"
+#define BOLD "\033[1m"
+#define RESET "\033[m"
 
-double	ft_atof(const char *nptr)
+void	display_position(t_scanner *scanner, int line, int column);
+
+t_bool	report_error(t_scanner *scanner)
 {
-	int		sign;
-	double	result;
+	int		line;
+	int		column;
+	char	*position;
 
-	result = 0.0;
-	sign = get_sign(&nptr);
-	while (*nptr != '\0' && *nptr != '.')
-	{
-		if (ft_isdigit(*nptr))
-			result = result * 10.0 + (*nptr - '0');
-		else
-			return (result);
-		nptr++;
-	}
-	result += convert_fractional_part(nptr);
-	return (result * sign);
+	line = scanner->line;
+	column = get_error_column(scanner) + 1;
+	position = BOLD"%s at line %d, column %d:\n"RESET;
+	ft_putendl_fd("Error", STDOUT_FILENO);
+	printf(position, scanner->message, line, column);
+	display_position(scanner, line, column);
+	return (FALSE);
 }
 
-static double	convert_fractional_part(const char *nptr)
+void	set_error_state(t_scanner *scanner, const char *error_message)
 {
-	double	result;
-	double	fraction;
-
-	result = 0.0;
-	fraction = 0.1;
-	if (*nptr == '.')
-	{
-		nptr++;
-		while (ft_isdigit(*nptr))
-		{
-			result += (*nptr - '0') * fraction;
-			fraction *= 0.1;
-			nptr++;
-		}
-	}
-	return (result);
+	scanner->message = error_message;
+	scanner->current = scanner->consume;
 }
 
-static int	get_sign(const char **nptr)
+void	display_position(t_scanner *scanner, int line, int column)
 {
-	while (ft_isspace(**nptr))
-		(*nptr)++;
-	if (**nptr == '-')
-	{
-		(*nptr)++;
-		return (-1);
-	}
-	else if (**nptr == '+')
-		(*nptr)++;
-	return (1);
+	printf("%5d | %s%5s | ", line, scanner->start, " ");
+	while (--column > 0)
+		printf(" ");
+	printf(RED"^\n"RESET);
+}
+
+t_bool	validate_range(float value, float start, float end)
+{
+	if (value >= start && value <= end)
+		return (TRUE);
+	return (FALSE);
+}
+
+int	get_error_column(t_scanner *scanner)
+{
+	return (scanner->current - scanner->start);
 }

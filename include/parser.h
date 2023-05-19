@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:11:15 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/18 10:14:22 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:39:25 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define INVALID_NUMBER "Invalid number"
 # define INVALID_VECTOR "Vector components must be between -1 and 1.\n"
 # define INVALID_COLOR "Color values must be between 0 and 255.\n"
-# define INVALID_LIGHT "Light ratio must be between -1 and 1.\n"
+# define INVALID_LIGHT "Light ratio must be between 0 and 1.\n"
 # define INVALID_FOV "Field of view must be between 0 and 180.\n"
 # define INVALID_DIMENSION "Dimensions should be positive.\n"
 
@@ -75,7 +75,6 @@ void		skip_whitespace(t_scanner *scanner);
 int			is_sign(int c);
 
 // Parse
-// t_bool		parse_element(t_scanner *scanner);
 t_bool		parse_element(t_scanner *scanner, t_scene *scene);
 void		add_to_world(t_shape *shape, t_world *world);
 
