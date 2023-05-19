@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/07 19:22:16 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:53:59 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_world	world_stub(void)
 	return ((t_world){
 		.object_count = 0,
 		.objects = NULL,
+		.light_count = 0,
 		.lights = NULL,
 		.xs = NULL
 	});
@@ -53,6 +54,7 @@ t_world	default_world(void)
 	s2.sphere.radius = 1.0;
 
 	w.lights[0] = point_light(point(-10, 10, -10), new_color(1, 1, 1));
+	w.light_count++;
 	w.objects[0] = s1;
 	w.objects[1] = s2;
 	return (w);

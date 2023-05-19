@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:17:27 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/19 16:35:38 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:45:48 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,6 @@ void	add_light_to_world(t_light *light, t_world *world)
 	world->lights = ft_realloc(
 			world->lights, sizeof(t_shape) * (world->light_count + 1));
 	world->lights[world->light_count++] = *light;
-}
-
-void	set_ambient_light(float intensity, t_color lighting, t_shape *shape)
-{
-	t_color	ambient;
-	t_color	material;
-
-	ambient = multiply_color(lighting, intensity);
-	material = shape->material.color;
-	shape->material.ambient = intensity;
-	shape->material.lightness = hadamard_product(material, ambient);
 }
 
 // TODO: precisa ser analisado depois das formas
