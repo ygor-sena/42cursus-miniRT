@@ -6,11 +6,13 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 12:16:18 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/23 12:51:00 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:31:10 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "canvas.h"
+
+static int	convert(float color);
 
 t_bool	render_scene(t_canvas *canvas, t_world *world, t_camera *camera)
 {
@@ -40,10 +42,18 @@ t_bool	render_scene(t_canvas *canvas, t_world *world, t_camera *camera)
 int	rgb(t_color color)
 {
 	return (
-		(int)(color.red * 255 + 0.5) << 16 |
-		(int)(color.green * 255 + 0.5) << 8 |
-		(int)(color.blue * 255 + 0.5)
+		convert(color.red) << 16
+		| convert(color.green) << 8
+		| convert(color.blue)
 	);
+}
+
+static int	convert(float color)
+{
+	if (color > 1)
+		color = 1;
+	color *= 255 + 0.5;
+	return (color);
 }
 
 int	pixel_at(t_canvas *canvas, int x, int y)
