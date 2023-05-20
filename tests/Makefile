@@ -1,5 +1,7 @@
 TESTS := tuples colors matrices transformations rays spheres intersections
 TESTS += lights materials world view_transform camera shapes planes patterns
+TESTS += cylinders
+#TESTS += cones
 
 CYAN  := \33[1;36m
 RESET := \033[0m
@@ -25,6 +27,8 @@ SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c
 SOURCES += mx_utils.c rays.c intersections.c spheres.c
 SOURCES += lights.c materials.c guards.c world.c view_transform.c camera.c
 SOURCES += canvas.c render.c controls.c shadows.c shapes.c planes.c patterns.c
+SOURCES += cylinders.c
+#SOURCES += cones.c
 
 UTILS := utils.c
 OBJS  := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
@@ -103,6 +107,14 @@ planes: $(OBJS) test_planes.c
 .PHONY: patterns
 patterns: $(OBJS) test_patterns.c
 	@$(call run, "$^")
+
+.PHONY: cylinders
+cylinders: $(OBJS) test_cylinders.c
+	@$(call run, "$^")
+
+#.PHONY: cones
+#cones: $(OBJS) test_cones.c
+#	@$(call run, "$^")
 
 # Makefile rules to clean stdin/stdout/stderr test's files
 clean:

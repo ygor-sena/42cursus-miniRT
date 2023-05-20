@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/19 20:55:54 by yde-goes         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/05/19 21:07:28 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef SHAPES_H
 # define SHAPES_H
@@ -16,7 +17,7 @@
 # include "rays.h"
 # include "materials.h"
 
-# define EPSILON 0.00001
+# define EPSILON		0.00001
 
 typedef struct s_sphere
 {
@@ -24,10 +25,28 @@ typedef struct s_sphere
 	float	radius;
 }	t_sphere;
 
-typedef struct s_shape	t_shape;
-typedef struct s_hit	t_hit;
-typedef t_bool			(*t_hit_record)(t_hit **, t_shape *, t_ray);
-typedef t_tuple			(*t_normal_at)(t_shape *, t_tuple);
+typedef struct s_cylinder
+{
+	t_point	origin;
+	float	radius;
+	float	minimum;
+	float	maximum;
+	t_bool	closed;
+}	t_cylinder;
+
+typedef struct s_cone
+{
+	t_point	origin;
+	float	minimum;
+	float	maximum;
+	t_bool	closed;
+}	t_cone;
+
+typedef struct s_shape		t_shape;
+typedef struct s_cylinder	t_cylinder;
+typedef struct s_hit		t_hit;
+typedef t_bool				(*t_hit_record)(t_hit **, t_shape *, t_ray);
+typedef t_tuple				(*t_normal_at)(t_shape *, t_tuple);
 
 /**
  * @struct t_shape
@@ -44,6 +63,8 @@ typedef struct s_shape
 {
 	union {
 		t_sphere	sphere;
+		t_cylinder	cylinder;
+		t_cone		cone;
 	};
 	t_matrix		transform;
 	t_material		material;
@@ -60,6 +81,9 @@ typedef struct s_hit
 
 typedef struct s_distance
 {
+	float	a;
+	float	b;
+	float	c;
 	float	t1;
 	float	t2;
 	float	determinant;
@@ -307,5 +331,62 @@ t_color	pattern_at_shape(t_pattern pattern,
  */
 //t_color lighting(t_shape *shape, t_light light, t_tuple point, t_sight sight);
 t_color	lighting(t_material m, t_light light, t_tuple point, t_sight sight);
+
+/* ************************************************************************** */
+/*                               CYLINDER.C                                   */
+/* ************************************************************************** */
+
+/**
+ * @brief Creates a new cylinder with default properties.
+ *
+ * This function creates a new cylinder with default properties transform and
+ * material by calling `new_shape()` and then assigning specific properties
+ * origin, radius, maximum height, minimum height and closed (or capped) to it.
+ * The function returns a structure of type `t_shape` representing the new
+ * cylinder.
+ *
+ * @return A structure of type `t_shape` representing a new cylinder with
+ *         default properties.
+ */
+t_shape	new_cylinder(void);
+
+/**
+ * @brief This function calculates the intersection of a ray with a cylinder.
+ *
+ * It first checks if there are any intersections on the sides of the cylinder.
+ * Then, it proceeds to check for intersections within the end caps. If any
+ * intersection is found, the function computes the intersection of the sides and
+ * end caps, respectively.
+ *
+ * @param xs A pointer to a pointer to a structure of type `t_hit` representing
+ *           the list of intersections.
+ * @param shape A pointer to a structure of type `t_shape` representing the
+ *              cylinder.
+ * @param ray A structure of type `t_ray` representing the ray.
+ * @return Returns a boolean value indicating whether the ray intersects the
+ *         cylinder.
+ */
+t_bool	intersect_cylinder(t_hit **xs, t_shape *shape, t_ray ray);
+
+/**
+ * @brief Calculates the normal vector at a point on a cylinder.
+ *
+ * This function calculates the normal vector at a given point on a cylinder.
+ * The normal vector is a vector that is perpendicular to the cylinder at the
+ * given point.
+ *
+ * @param shape A pointer to a structure of type `t_shape` representing the
+ *              cylinder.
+ * @param world_point A tuple representing the point on the cylinder in world
+ *                    coordinates.
+ * @return Returns a tuple representing the normal vector at the given point.
+ */
+t_tuple	normal_at_cylinder(t_shape *shape, t_tuple world_point);
+
+/* t_shape	new_cone(void);
+
+t_bool	intersect_cone(t_hit **xs, t_shape *shape, t_ray ray);
+
+t_tuple	normal_at_cone(t_shape *shape, t_tuple world_point); */
 
 #endif
