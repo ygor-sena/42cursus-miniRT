@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 14:36:22 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/15 16:42:39 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/20 15:14:22 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,6 @@ double	ft_atof(const char *nptr)
 	}
 	result += convert_fractional_part(nptr);
 	return (result * sign);
-}
-
-void	*ft_realloc(void *ptr, size_t size)
-{
-	void	*new_ptr;
-
-	if (size == 0)
-	{
-		free(ptr);
-		return (NULL);
-	}
-	if (ptr == NULL)
-		return (ft_calloc(1, size));
-	new_ptr = ft_calloc(1, size);
-	if (new_ptr != NULL)
-	{
-		ft_memcpy(new_ptr, ptr, size);
-		free(ptr);
-	}
-	return (new_ptr);
 }
 
 static double	convert_fractional_part(const char *nptr)
