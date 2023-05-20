@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 14:13:17 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/19 20:55:54 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,5 +265,47 @@ t_tuple	normal_at_plane(t_shape *shape, t_tuple world_point);
  *         plane.
  */
 t_bool	intersect_plane(t_hit **xs, t_shape *shape, t_ray ray);
+
+/* ************************************************************************** */
+/*                               PATTERNS.C                                   */
+/* ************************************************************************** */
+
+/**
+ * @brief This function applies a pattern texture on a given object at a given
+ *        world location.
+ * 
+ * @param pattern Receives the pattern to be applied.
+ * @param shape Represents the shape that will receive the pattern.
+ * @param world_point Contains the world point at which the pattern's color
+ *                    will be applied.
+ * @return Returns the color for the given pattern, on the given shape, at the
+ *         given world.
+ */
+t_color	pattern_at_shape(t_pattern pattern,
+			t_shape *shape, t_tuple world_point);
+
+/* ************************************************************************** */
+/*                              MATERIALS.C                                   */
+/* ************************************************************************** */
+
+/**
+ * @brief In a nutshell, the function adds together the material's ambient
+ * diffuse, and specular componentes, weighted by the angles between the
+ * different vectors. The material can receive dark or light exposure.
+ * Dark exposure means that the material is exposed to light indirectly.
+ * Thus, only ambient reflection is computed. Light exposure means that
+ * the material is exposed to light directly and, in addition to ambient
+ * reflection, the diffuse and specular reflection are also calculated.
+ *
+ * @param m A struct of type t_material that stores the material's color,
+ * ambient, diffuse, specular and shininess attributes.
+ * @param light A struct of type t_light containing the light's source.
+ * @param point A struct of type t_tuple of the point being illuminated.
+ * @param sight A struct of type t_sight with the values of eye and normal
+ * vectors obtained from the Phong Reflection Model algorithm.
+ * @return (t_color) The function returns the final shading of that point.
+ */
+//t_color lighting(t_shape *shape, t_light light, t_tuple point, t_sight sight);
+t_color	lighting(t_material m, t_light light, t_tuple point, t_sight sight);
 
 #endif
