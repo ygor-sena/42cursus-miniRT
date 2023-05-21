@@ -36,7 +36,7 @@ SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c
 SOURCES += mx_utils.c rays.c intersections.c spheres.c
 SOURCES += lights.c materials.c guards.c world.c view_transform.c camera.c
 SOURCES += render.c controls.c shapes.c shadows.c planes.c
-SOURCES += scanner.c scanner_utils.c parse_types.c helpers.c
+SOURCES += scanner.c scanner_utils.c parse_types.c ft_atof.c
 SOURCES += parse.c parse_basic.c parse_grouped.c parse_utils.c parse_shapes.c
 SOURCES += parse_ambient.c
 
