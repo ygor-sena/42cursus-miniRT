@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/18 16:53:59 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/21 15:41:55 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_world	world_stub(void)
 		.objects = NULL,
 		.light_count = 0,
 		.lights = NULL,
+		.ambient = new_color(0.1, 0.1, 0.1),
 		.xs = NULL
 	});
 }

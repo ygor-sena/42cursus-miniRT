@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   materials.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:11:46 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/25 17:30:42 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/21 15:52:20 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_material	material(void)
 {
 	return ((t_material){
 		.color = new_color(1, 1, 1),
-		.ambient = 0.1,
+		.ambient = new_color(0.1, 0.1, 0.1),
 		.diffuse = 0.9,
 		.specular = 0.9,
 		.shininess = 200.0
@@ -45,7 +45,7 @@ static t_color	dark_exposure(t_material m, t_exposure e)
 	t_color	diffuse;
 	t_color	specular;
 
-	ambient = multiply_color(e.effective_color, m.ambient);
+	ambient = hadamard_product(e.effective_color, m.ambient);
 	diffuse = new_color(0, 0, 0);
 	specular = new_color(0, 0, 0);
 	return (add_color(add_color(ambient, diffuse), specular));
@@ -58,7 +58,7 @@ static t_color	light_exposure(t_material m, t_light light,
 	t_color	diffuse;
 	t_color	specular;
 
-	ambient = multiply_color(e.effective_color, m.ambient);
+	ambient = hadamard_product(e.effective_color, m.ambient);
 	diffuse = multiply_color(e.effective_color, m.diffuse * e.light_dot_normal);
 	e.reflectv = reflect(negate(e.lightv), sight.normalv);
 	e.reflect_dot_eye = dot(e.reflectv, sight.eyev);

@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:22:45 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 12:37:58 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/21 16:16:09 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,10 +288,12 @@ Test(spheres, sphere_default_material)
 
 	s = new_sphere();
 	m = material();
-	m.ambient = 1;
+	m.ambient = new_color(1, 1, 1);
 	s.material = m;
 
-	cr_assert(eq(flt, s.material.ambient, m.ambient));
+	cr_assert(eq(flt, s.material.ambient.red, m.ambient.red));
+	cr_assert(eq(flt, s.material.ambient.green, m.ambient.green));
+	cr_assert(eq(flt, s.material.ambient.blue, m.ambient.blue));
 	cr_assert(eq(flt, s.material.diffuse, m.diffuse));
 	cr_assert(eq(flt, s.material.specular, m.specular));
 	cr_assert(eq(flt, s.material.shininess, m.shininess));
