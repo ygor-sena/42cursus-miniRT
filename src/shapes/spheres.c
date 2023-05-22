@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 10:34:13 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:08:36 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,9 @@ t_tuple	normal_at_sphere(t_shape *shape, t_tuple world_point)
 	t_tuple	object_normal;
 	t_tuple	world_normal;
 
-	object_point = multiply_tp_mx(inverse(shape->transform), world_point);
+	object_point = multiply_tp_mx(shape->inverse, world_point);
 	object_normal = subtract(object_point, point(0, 0, 0));
-	world_normal = multiply_tp_mx(transpose(
-				inverse(shape->transform)), object_normal);
+	world_normal = multiply_tp_mx(shape->transpose, object_normal);
 	world_normal.w = 0.0;
 	return (normalize(world_normal));
 }

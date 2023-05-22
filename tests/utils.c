@@ -6,11 +6,12 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/21 15:41:55 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:13:37 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+#include "shapes.h"
 
 t_world	world_stub(void)
 {
@@ -51,7 +52,7 @@ t_world	default_world(void)
 	s1.sphere.radius = 0.5;
 
 	s2 = new_sphere();
-	s2.transform = scaling(0.5, 0.5, 0.5);
+	set_transform(&s2, scaling(0.5, 0.5, 0.5));
 	s2.sphere.radius = 1.0;
 
 	w.lights[0] = point_light(point(-10, 10, -10), new_color(1, 1, 1));

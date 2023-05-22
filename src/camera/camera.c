@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:16:40 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/22 19:54:53 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:42:45 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ t_camera	new_camera(float hsize, float vsize, float field_of_view)
 	camera.vsize = vsize;
 	camera.field_of_view = field_of_view;
 	camera.transform = get_identity_matrix();
+	camera.inverse = inverse(camera.transform);
 	set_pixel_size(&camera);
 	return (camera);
 }
 
-// PERF: Cache the inverse transformations of the matrix
 t_ray	ray_for_pixel(t_camera *camera, float px, float py)
 {
 	float	world_x;
@@ -39,10 +39,8 @@ t_ray	ray_for_pixel(t_camera *camera, float px, float py)
 
 	world_x = camera->half_width - (px + 0.5) * camera->pixel_size;
 	world_y = camera->half_height - (py + 0.5) * camera->pixel_size;
-	pixel = multiply_tp_mx(
-			inverse(camera->transform),
-			point(world_x, world_y, -1));
-	origin = multiply_tp_mx(inverse(camera->transform), point(0, 0, 0));
+	pixel = multiply_tp_mx(camera->inverse, point(world_x, world_y, -1));
+	origin = multiply_tp_mx(camera->inverse, point(0, 0, 0));
 	direction = normalize(subtract(pixel, origin));
 	return (new_ray(origin, direction));
 }

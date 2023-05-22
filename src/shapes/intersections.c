@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:36:20 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 14:13:15 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:20:54 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_bool	intersect(t_hit **xs, t_shape *shape, t_ray ray)
 {
 	t_ray	local_ray;
 
-	local_ray = transform(ray, inverse(shape->transform));
+	local_ray = transform(ray, shape->inverse);
 	shape->intersect(xs, shape, local_ray);
 	return (TRUE);
 }

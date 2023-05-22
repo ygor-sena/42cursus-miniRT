@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:11:42 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/20 18:19:43 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:07:51 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_bool	parse_sphere(t_scanner *scanner, t_scene *scene)
 	radius /= 2;
 	scale = scaling(radius, radius, radius);
 	transform = translation(origin.x, origin.y, origin.z);
-	shape.transform = multiply_mx_mx(transform, scale);
+	set_transform(&shape, multiply_mx_mx(transform, scale));
 	add_object_to_world(&shape, &scene->world);
 	return (TRUE);
 }

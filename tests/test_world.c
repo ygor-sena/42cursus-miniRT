@@ -6,10 +6,11 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:55:26 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/21 16:19:30 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:24:03 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shapes.h"
 #include "utils.h"
 
 /* Should return a empty world, containing no objects and no light source. */

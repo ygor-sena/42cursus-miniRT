@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:13:05 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 15:32:48 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:21:20 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ Test(camera, ray_with_transformed_camera)
 
 	c = new_camera(201, 101, M_PI_2);
 	c.transform = multiply_mx_mx(rotation_y(M_PI_4), translation(0, -2, 5));
+	c.inverse = inverse(c.transform);
 	r = ray_for_pixel(&c, 100, 50);
 	cr_assert_float_eq(r.origin.x, 0, EPSILON);
 	cr_assert_float_eq(r.origin.y, 2, EPSILON);

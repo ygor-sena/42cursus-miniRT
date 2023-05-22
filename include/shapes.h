@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/16 14:55:09 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 13:58:11 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_shape
 		t_plane		plane;
 	};
 	t_matrix		transform;
+	t_matrix		inverse;
+	t_matrix		transpose;
 	t_material		material;
 	t_hit_record	intersect;
 	t_normal_at		normal_at;

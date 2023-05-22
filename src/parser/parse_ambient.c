@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:17:27 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/21 14:24:56 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:32:39 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_bool	parse_camera(t_scanner *scanner, t_scene *scene)
 		return (FALSE);
 	camera = new_camera(100, 100, fov * (M_PI / 180.0));
 	camera.transform = view_transform(origin, direction, vector(0, 1, 0));
+	camera.inverse = inverse(camera.transform);
 	scene->camera = camera;
 	return (TRUE);
 }
