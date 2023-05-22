@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:08:40 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/18 08:37:01 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/20 14:06:25 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_bool	parse_color(t_scanner *scanner, t_color *color)
 // <position> ::= <float> "," <float> "," <float>
 t_bool	parse_position(t_scanner *scanner, t_point *position)
 {
+	*position = point(0, 0, 0);
 	if (!parse_float(scanner, &position->x))
 		return (FALSE);
 	if (!scan_comma(scanner))
@@ -50,6 +51,7 @@ t_bool	parse_position(t_scanner *scanner, t_point *position)
 // <direction> ::= <float> "," <float> "," <float>
 t_bool	parse_direction(t_scanner *scanner, t_vector *direction)
 {
+	*direction = vector(0, 0, 0);
 	if (!parse_direction_component(scanner, &direction->x))
 		return (FALSE);
 	if (!scan_comma(scanner))

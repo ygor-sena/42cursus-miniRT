@@ -5,74 +5,108 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/12 12:13:58 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/20 15:24:00 by mdias-ma         ###   ########.fr       */
+/*   Created: 2023/05/22 13:15:21 by mdias-ma          #+#    #+#             */
+/*   Updated: 2023/05/22 13:37:35 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	*expand(void *ptr, size_t old_size, size_t element_size);
+#ifndef EINVAL
+# define EINVAL 22  /* Invalid argument */
+#endif
 
-t_bool	parse_element(t_scanner *scanner, t_scene *scene)
+#ifndef ENOENT
+# define ENOENT 2   /* No such file or directory */
+#endif
+
+#define BUFFER 1024
+
+static int		open_rt_file(const char *filename);
+static t_bool	flush_buffer(int file);
+static t_bool	validate_restrictions(int totals[]);
+
+t_bool	parse(char *filename, t_scene *scene)
 {
-	t_token		type;
+	int			file;
+	char		*content;
+	t_scanner	scanner;
+	static int	totals[TOKEN_COUNT];
 
-	type = parse_type(scanner);
-	if (type == TOKEN_AMBIENT_LIGHT)
-		return (parse_ambient_light(scanner, scene));
-	if (type == TOKEN_CAMERA)
-		return (parse_camera(scanner, scene));
-	if (type == TOKEN_LIGHT)
-		return (parse_light(scanner, scene));
-	if (type == TOKEN_SPHERE)
-		return (parse_sphere(scanner, scene));
-	if (type == TOKEN_PLANE)
-		return (parse_plane(scanner, scene));
-	if (type == TOKEN_CYLINDER)
-		return (parse_cylinder(scanner, scene));
-	if (type == TOKEN_COMMENT)
-		return (parse_comment(scanner));
-	if (type == TOKEN_NEWLINE)
-		return (TRUE);
+	file = open_rt_file(filename);
+	content = get_next_line(file);
+	while (content)
+	{
+		init_scanner(&scanner, content);
+		if (!parse_element(&scanner, scene, totals))
+		{
+			report_error(&scanner);
+			free(content);
+			return (flush_buffer(file));
+		}
+		free(content);
+		content = get_next_line(file);
+	}
+	close(file);
+	return (validate_restrictions(totals));
+}
+
+static int	open_rt_file(const char *filename)
+{
+	int		file;
+	char	*extension;
+	char	error_msg[BUFFER];
+
+	ft_strlcpy(error_msg, "minirt: ", BUFFER);
+	extension = ft_strrchr(filename, '.');
+	if (!extension || ft_strncmp(extension, ".rt", 4) != 0)
+	{
+		ft_strlcat(error_msg, strerror(EINVAL), BUFFER);
+		ft_putendl_fd(error_msg, STDERR_FILENO);
+		exit (EXIT_FAILURE);
+	}
+	file = open(filename, O_RDONLY);
+	if (file < 0)
+	{
+		ft_strlcat(error_msg, strerror(ENOENT), BUFFER);
+		ft_putendl_fd(error_msg, STDERR_FILENO);
+		exit (EXIT_FAILURE);
+	}
+	return (file);
+}
+
+static t_bool	flush_buffer(int file)
+{
+	char	*content;
+
+	content = "";
+	close(file);
+	while (content)
+	{
+		content = get_next_line(file);
+		free(content);
+	}
 	return (FALSE);
 }
 
-t_bool	parse_comment(t_scanner *scanner)
+static t_bool	validate_restrictions(int totals[])
 {
-	while (*scanner->current != '\n')
-		advance(scanner);
-	if (!scan_newline(scanner))
-		return (FALSE);
-	return (TRUE);
-}
+	t_bool	has_error;
+	char	error_msg[BUFFER];
 
-void	add_object_to_world(t_shape *shape, t_world *world)
-{
-	world->objects = expand(
-			world->objects, world->object_count, sizeof(t_shape));
-	world->objects[world->object_count++] = *shape;
-}
-
-void	add_light_to_world(t_light *light, t_world *world)
-{
-	world->lights = expand(world->lights, world->light_count, sizeof(t_shape));
-	world->lights[world->light_count++] = *light;
-}
-
-static void	*expand(void *ptr, size_t old_size, size_t element_size)
-{
-	size_t	new_size;
-	void	*new_ptr;
-
-	new_size = old_size + 1;
-	new_ptr = malloc(new_size * element_size);
-	if (new_ptr == NULL)
-		return (NULL);
-	if (ptr != NULL)
+	has_error = FALSE;
+	ft_strlcpy(error_msg, "Error\n", BUFFER);
+	if (totals[TOKEN_CAMERA] > 1)
 	{
-		ft_memcpy(new_ptr, ptr, old_size * element_size);
-		free(ptr);
+		has_error = TRUE;
+		ft_strlcat(error_msg, ERROR_CAMERA, BUFFER);
 	}
-	return (new_ptr);
+	if (totals[TOKEN_AMBIENT_LIGHT] > 1)
+	{
+		has_error = TRUE;
+		ft_strlcat(error_msg, ERROR_AMBIENT, BUFFER);
+	}
+	if (has_error)
+		ft_putstr_fd(error_msg, STDERR_FILENO);
+	return (!has_error);
 }

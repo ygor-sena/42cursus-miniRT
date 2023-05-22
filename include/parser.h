@@ -6,13 +6,15 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:11:15 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/19 16:39:25 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 13:47:47 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 
 # include <fcntl.h>
+# include <stdlib.h>
+# include <string.h>
 
 # include "world.h"
 # include "canvas.h"
@@ -29,12 +31,8 @@
 # define INVALID_FOV "Field of view must be between 0 and 180.\n"
 # define INVALID_DIMENSION "Dimensions should be positive.\n"
 
-typedef struct s_scene
-{
-	t_canvas	canvas;
-	t_world		world;
-	t_camera	camera;
-}	t_scene;
+# define ERROR_CAMERA "Only one camera allowed.\n"
+# define ERROR_AMBIENT "Only one ambient light allowed.\n"
 
 typedef enum e_token
 {
@@ -46,7 +44,8 @@ typedef enum e_token
 	TOKEN_CYLINDER,
 	TOKEN_NEWLINE,
 	TOKEN_COMMENT,
-	TOKEN_ERROR
+	TOKEN_ERROR,
+	TOKEN_COUNT
 }	t_token;
 
 typedef struct s_scanner
@@ -59,14 +58,13 @@ typedef struct s_scanner
 }	t_scanner;
 
 // Scanner
-t_scanner	new_scanner(const char *source);
 void		init_scanner(t_scanner *scanner, const char *source);
 t_bool		scan_integer(t_scanner *scanner);
 t_bool		scan_float(t_scanner *scanner);
 t_bool		scan_comma(t_scanner *scanner);
 t_bool		scan_newline(t_scanner *scanner);
 
-// Scanner types
+// Parse types
 t_token		parse_type(t_scanner *scanner);
 
 // Scanner utils
@@ -75,25 +73,34 @@ void		skip_whitespace(t_scanner *scanner);
 int			is_sign(int c);
 
 // Parse
-t_bool		parse_element(t_scanner *scanner, t_scene *scene);
-void		add_to_world(t_shape *shape, t_world *world);
+t_bool		parse(char *filename, t_scene *scene);
 
-// Parse compounds
+// Parse element
+t_bool		parse_element(t_scanner *scanner, t_scene *scene, int totals[]);
+t_bool		parse_comment(t_scanner *scanner);
+void		add_object_to_world(t_shape *shape, t_world *world);
+void		add_light_to_world(t_light *light, t_world *world);
+
+// Parse basic
 t_bool		parse_float(t_scanner *scanner, float *result);
+t_bool		parse_light_ratio(t_scanner *scanner, float *light);
+t_bool		parse_field_of_view(t_scanner *scanner, int *fov);
+t_bool		parse_dimension(t_scanner *scanner, float *dimension);
+
+// Parse grouped
 t_bool		parse_color(t_scanner *scanner, t_color *result);
 t_bool		parse_position(t_scanner *scanner, t_point *position);
 t_bool		parse_direction(t_scanner *scanner, t_vector *direction);
-t_bool		parse_dimension(t_scanner *scanner, float *dimension);
-t_bool		parse_field_of_view(t_scanner *scanner, int *fov);
-t_bool		parse_light_ratio(t_scanner *scanner, float *light);
 
+// Parse ambient
 t_bool		parse_ambient_light(t_scanner *scanner, t_scene *scene);
 t_bool		parse_camera(t_scanner *scanner, t_scene *scene);
 t_bool		parse_light(t_scanner *scanner, t_scene *scene);
+
+// Parse shapes
 t_bool		parse_sphere(t_scanner *scanner, t_scene *scene);
 t_bool		parse_plane(t_scanner *scanner, t_scene *scene);
 t_bool		parse_cylinder(t_scanner *scanner, t_scene *scene);
-t_bool		parse_comment(t_scanner *scanner);
 
 // Parse utils
 t_bool		report_error(t_scanner *scanner);
@@ -103,6 +110,5 @@ void		set_error_state(t_scanner *scanner, const char *error_message);
 
 // Helpers
 double		ft_atof(const char *nptr);
-void		*ft_realloc(void *ptr, size_t size);
 
 #endif // !PARSER_H

@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:28:08 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 09:22:11 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/22 13:41:22 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ typedef struct s_canvas
 	int		width;
 	int		height;
 }	t_canvas;
+
+typedef struct s_scene
+{
+	t_world		world;
+	t_camera	camera;
+}	t_scene;
 
 /* ************************************************************************** */
 /*                                  CANVAS.C                                  */
@@ -116,8 +122,7 @@ t_bool	new_canvas(t_canvas *canvas, int width, int height);
 t_bool	put_on_window(t_canvas *canvas, char *title);
 int		show_window(t_canvas *canvas);
 
-t_bool	render_scene(t_canvas *canvas, t_world *world, t_camera *camera);
-int		rgb(t_color color);
+t_bool	render(t_scene *scene, t_canvas *canvas);
 void	write_pixel(const t_canvas *canvas, int x, int y, int color);
 int		pixel_at(t_canvas *image, int x, int y);
 

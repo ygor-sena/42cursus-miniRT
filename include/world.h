@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/17 19:57:03 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 13:39:24 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 
 typedef struct s_world
 {
+	t_hit	*xs;
 	int		object_count;
 	t_shape	*objects;
 	int		light_count;
 	t_light	*lights;
-	t_hit	*xs;
+	t_color	ambient;
 }	t_world;
 
 typedef struct s_comps
