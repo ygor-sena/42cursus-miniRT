@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:28:08 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 13:41:22 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:51:21 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "mlx.h"
 # include "camera.h"
 # include "world.h"
+
+# define SCREEN_WIDTH    800
+# define SCREEN_HEIGHT   400
 
 # define K_ESCAPE        0xff1b
 # define K_Q             0x0071
