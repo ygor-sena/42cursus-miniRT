@@ -106,6 +106,7 @@ parser: $(OBJS) test_parser.c
 
 clean:
 	@$(RM) -r $(TESTS)
+	@$(RM) -r $(UTILS:.c=.o)
 	@$(LOG) "Removing objects"
 
 fclean: clean
