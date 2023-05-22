@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 14:08:36 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:57:40 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_shape	new_sphere(void)
 	object.sphere.radius = 1.0;
 	object.normal_at = normal_at_sphere;
 	object.intersect = intersect_sphere;
+	object.material.diffuse = 0.7;
+	object.material.specular = 0.3;
 	return (object);
 }
 
