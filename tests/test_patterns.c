@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   test_patterns.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:37:57 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/19 20:58:18 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:47:57 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "materials.h"
 #include "utils.h"
 
 /* Creating a stripe pattern */
@@ -250,8 +251,9 @@ Test(patterns, lighting_with_stripe_pattern_applied)
 	//t_shape		shape;
 
 	//shape = new_sphere();
+	m = material();
 	m.pattern = new_pattern(new_color(1, 1, 1), new_color(0, 0, 0));
-	m.ambient = 1;
+	m.ambient = new_color(1, 1, 1);
 	m.diffuse = 0;
 	m.specular = 0;
 	//shape.material = m;
@@ -263,7 +265,7 @@ Test(patterns, lighting_with_stripe_pattern_applied)
 	c1 = lighting(m, light, point(0.9, 0, 0), sight);
 	//c2 = lighting(shape, light, point(1.1, 0, 0), sight);
 	c2 = lighting(m, light, point(1.1, 0, 0), sight);
-	
+
 	cr_assert(eq(flt, c1.red, 1));
 	cr_assert(eq(flt, c1.green, 1));
 	cr_assert(eq(flt, c1.blue, 1));

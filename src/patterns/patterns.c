@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   patterns.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:22:30 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/19 20:03:38 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:45:04 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_pattern	new_pattern(t_color a, t_color b)
 		.has_pattern = TRUE,
 		.pattern_at = stripe_at,
 		.a = new_color(a.red, a.green, a.blue),
-		.b = new_color(b.red, b.green, b.blue)
+		.b = new_color(b.red, b.green, b.blue),
+		.transform = get_identity_matrix()
 	});
 }
 
