@@ -1,6 +1,6 @@
 TESTS := tuples colors matrices transformations rays spheres intersections
 TESTS += lights materials world view_transform camera shapes planes
-TESTS += atof scanner parser
+TESTS += atof scanner parser patterns cylinders
 
 CYAN  := \33[1;36m
 RESET := \033[0m
@@ -104,6 +104,19 @@ scanner: $(OBJS) test_scanner.c
 parser: $(OBJS) test_parser.c
 	@$(call run, "$^")
 
+.PHONY: patterns
+patterns: $(OBJS) test_patterns.c
+	@$(call run, "$^")
+
+.PHONY: cylinders
+cylinders: $(OBJS) test_cylinders.c
+	@$(call run, "$^")
+
+#.PHONY: cones
+#cones: $(OBJS) test_cones.c
+#	@$(call run, "$^")
+
+# Makefile rules to clean stdin/stdout/stderr test's files
 clean:
 	@$(RM) -r $(TESTS)
 	@$(RM) -r $(UTILS:.c=.o)

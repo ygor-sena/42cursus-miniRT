@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "materials.h"
+#include "shapes.h"
 
 static t_color	dark_exposure(t_material m, t_exposure e);
 static t_color	light_exposure(t_material m, t_light light, \
@@ -23,15 +24,37 @@ t_material	material(void)
 		.ambient = new_color(0.1, 0.1, 0.1),
 		.diffuse = 0.9,
 		.specular = 0.9,
-		.shininess = 200.0
+		.shininess = 200.0,
+		.pattern.has_pattern = FALSE
 	});
 }
 
+/* t_color	lighting(t_shape *shape, t_light light, t_tuple point, t_sight sight)
+{
+	t_exposure	e;
+	t_color		color;
+
+	if (shape->material.pattern.has_pattern)
+		color = pattern_at_shape(shape->material.pattern, shape, point);
+	else
+		color = shape->material.color;
+	e.effective_color = hadamard_product(color, light.intensity);
+	e.lightv = normalize(subtract(light.position, point));
+	e.light_dot_normal = dot(e.lightv, sight.normalv);
+	if (e.light_dot_normal < 0 || light.in_shadow == TRUE)
+		return (dark_exposure(shape->material, e));
+	return (light_exposure(shape->material, light, e, sight));
+} */
 t_color	lighting(t_material m, t_light light, t_tuple point, t_sight sight)
 {
 	t_exposure	e;
+	t_color		color;
 
-	e.effective_color = hadamard_product(m.color, light.intensity);
+	if (m.pattern.has_pattern)
+		color = m.pattern.pattern_at(m.pattern, point);
+	else
+		color = m.color;
+	e.effective_color = hadamard_product(color, light.intensity);
 	e.lightv = normalize(subtract(light.position, point));
 	e.light_dot_normal = dot(e.lightv, sight.normalv);
 	if (e.light_dot_normal < 0 || light.in_shadow == TRUE)

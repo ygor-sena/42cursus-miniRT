@@ -6,12 +6,11 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:30:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 14:13:37 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:30:16 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-#include "shapes.h"
 
 t_world	world_stub(void)
 {
@@ -46,12 +45,15 @@ t_world	default_world(void)
 	w.object_count = 2;
 
 	s1 = new_sphere();
+	s1.material = material();
+	s1.material = material();
 	s1.material.color = new_color(0.8, 1.0, 0.6);
 	s1.material.diffuse = 0.7;
 	s1.material.specular = 0.2;
 	s1.sphere.radius = 0.5;
 
 	s2 = new_sphere();
+	s2.material = material();
 	set_transform(&s2, scaling(0.5, 0.5, 0.5));
 	s2.sphere.radius = 1.0;
 

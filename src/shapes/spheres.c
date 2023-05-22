@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   spheres.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
 /*   Updated: 2023/05/22 14:57:40 by mdias-ma         ###   ########.fr       */
@@ -54,9 +54,12 @@ static t_distance	calculate_distance(t_sphere *sphere, t_ray ray)
 	c = dot(sphere_to_ray, sphere_to_ray) - 1;
 	delta = (b * b) - 4 * a * c;
 	return ((t_distance){
+		.a = a,
+		.b = b,
+		.c = c,
 		.t1 = (-b - sqrtf(delta)) / (2 * a),
 		.t2 = (-b + sqrtf(delta)) / (2 * a),
-		.determinant = (b * b) - 4 * a * c,
+		.determinant = delta,
 	});
 }
 

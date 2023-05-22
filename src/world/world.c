@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:29:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 14:13:14 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/19 20:57:32 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_comps	prepare_computations(t_hit *intersection, t_ray ray)
 	return (comps);
 }
 
+//comps.object->material becomes comps.object
 t_color	shade_hit(t_world world, t_comps comps)
 {
 	world.lights->in_shadow = is_shadowed(&world, comps.over_point);

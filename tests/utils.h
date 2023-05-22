@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:31:28 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/11 12:53:31 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/19 20:57:54 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include "parser.h"
 
 # define EPSILON 0.00001
+# define BLACK new_color(0, 0, 0)
+# define WHITE new_color(1, 1, 1)
 
 t_bool		compare_spheres(t_sphere *a, t_sphere *b);
 t_world		world_stub(void);
