@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/05/19 21:07:28 by yde-goes         ###   ########.fr       */
+/*   Created: 2023/05/19 21:20:38 by yde-goes          #+#    #+#             */
+/*   Updated: 2023/05/19 21:21:16 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef SHAPES_H
 # define SHAPES_H
