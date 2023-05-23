@@ -1,7 +1,6 @@
 TESTS := tuples colors matrices transformations rays spheres intersections
-TESTS += lights materials world view_transform camera shapes planes patterns
-TESTS += cylinders
-#TESTS += cones
+TESTS += lights materials world view_transform camera shapes planes
+TESTS += atof scanner parser patterns cylinders
 
 CYAN  := \33[1;36m
 RESET := \033[0m
@@ -12,27 +11,16 @@ OBJ_DIR   := ../obj
 LIBFT_DIR := ../lib/libft
 MLX_DIR   := ../lib/mlx_linux
 INC_DIRS  := ../include $(LIBFT_DIR) $(MLX_DIR)
-
-# Insert each new directory here
-SRC_DIRS := tuples canvas matrices rays shapes tests lights materials helpers
-SRC_DIRS += camera patterns
-SRC_DIRS += $(addprefix $(SRC_DIR)/, $(SRC_DIRS))
-SRC_DIRS += $(SRC_DIR)
+SRC_DIRS  := $(shell find $(SRC) -type d)
 
 vpath %.h $(INC_DIRS)
 vpath %.c $(SRC_DIRS)
 
-SOURCES := models.c basic_math.c vector_math.c colors.c
-SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c
-SOURCES += mx_utils.c rays.c intersections.c spheres.c
-SOURCES += lights.c materials.c guards.c world.c view_transform.c camera.c
-SOURCES += canvas.c render.c controls.c shadows.c shapes.c planes.c patterns.c
-SOURCES += cylinders.c
-#SOURCES += cones.c
-
-UTILS := utils.c
-OBJS  := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
-OBJS  += $(UTILS:.c=.o)
+SOURCES := $(shell find $(SRC_DIR) -name '*.c' -exec basename {} \;)
+SOURCES := $(filter-out main.c, $(SOURCES))
+UTILS   := utils.c
+OBJS    := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
+OBJS    += $(UTILS:.c=.o)
 
 CFLAGS  := -Wall -Werror -Wextra -g $(addprefix -I,$(INC_DIRS))
 LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
@@ -104,6 +92,18 @@ shapes: $(OBJS) test_shapes.c
 planes: $(OBJS) test_planes.c
 	@$(call run, "$^")
 
+.PHONY: atof
+atof: $(OBJS) test_atof.c
+	@$(call run, "$^")
+
+.PHONY: scanner
+scanner: $(OBJS) test_scanner.c
+	@$(call run, "$^")
+
+.PHONY: parser
+parser: $(OBJS) test_parser.c
+	@$(call run, "$^")
+
 .PHONY: patterns
 patterns: $(OBJS) test_patterns.c
 	@$(call run, "$^")
@@ -119,6 +119,7 @@ cylinders: $(OBJS) test_cylinders.c
 # Makefile rules to clean stdin/stdout/stderr test's files
 clean:
 	@$(RM) -r $(TESTS)
+	@$(RM) -r $(UTILS:.c=.o)
 	@$(LOG) "Removing objects"
 
 fclean: clean

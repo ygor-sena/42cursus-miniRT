@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:43:18 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/07 19:14:47 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/20 17:38:34 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_shape	new_plane(void)
 	object = new_shape();
 	object.normal_at = normal_at_plane;
 	object.intersect = intersect_plane;
+	object.plane.origin = point(0, 0, 0);
 	return (object);
 }
 

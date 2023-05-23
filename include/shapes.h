@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 21:20:38 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/19 21:21:16 by yde-goes         ###   ########.fr       */
+/*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
+/*   Updated: 2023/05/23 13:52:18 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ typedef struct s_sphere
 	t_point	origin;
 	float	radius;
 }	t_sphere;
+
+typedef struct s_plane
+{
+	t_point	origin;
+}	t_plane;
 
 typedef struct s_cylinder
 {
@@ -62,10 +67,13 @@ typedef struct s_shape
 {
 	union {
 		t_sphere	sphere;
+		t_plane		plane;
 		t_cylinder	cylinder;
 		t_cone		cone;
 	};
 	t_matrix		transform;
+	t_matrix		inverse;
+	t_matrix		transpose;
 	t_material		material;
 	t_hit_record	intersect;
 	t_normal_at		normal_at;

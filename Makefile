@@ -18,7 +18,7 @@ LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR   := $(LIB_DIR)/mlx_linux
 INC_DIRS  := include $(LIBFT_DIR) $(MLX_DIR)
 SRC_DIRS  := tuples canvas matrices rays shapes lights materials helpers world
-SRC_DIRS  += camera patterns
+SRC_DIRS  += camera parser patterns
 SRC_DIRS  := $(addprefix src/, $(SRC_DIRS))
 SRC_DIRS  += src
 
@@ -29,13 +29,16 @@ LIBFT   := $(LIBFT_DIR)/libft.a
 MLX     := $(MLX_DIR)/libmlx_Linux.a
 
 HEADERS := tuples.h canvas.h matrices.h rays.h shapes.h lights.h materials.h
-HEADERS += world.h helpers.h camera.h mlx.h patterns.h
+HEADERS += world.h helpers.h camera.h mlx.h parser.h patterns.h
 
 SOURCES := main.c models.c basic_math.c vector_math.c colors.c canvas.c
 SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c
 SOURCES += mx_utils.c rays.c intersections.c spheres.c
 SOURCES += lights.c materials.c guards.c world.c view_transform.c camera.c
-SOURCES += render.c controls.c shapes.c shadows.c planes.c cylinders.c patterns.c
+SOURCES += render.c controls.c shapes.c shadows.c planes.c
+SOURCES += scanner.c scanner_utils.c parse_types.c ft_atof.c
+SOURCES += parse.c parse_basic.c parse_grouped.c parse_utils.c parse_shapes.c
+SOURCES += parse_ambient.c parse_element.c cylinders.c patterns.c
 #SOURCES += cones.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
