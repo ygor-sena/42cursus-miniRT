@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 15:24:54 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:52:18 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_cone
 	float	maximum;
 	t_bool	closed;
 }	t_cone;
-
 
 typedef struct s_shape		t_shape;
 typedef struct s_cylinder	t_cylinder;
