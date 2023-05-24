@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_cylinders.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:30:32 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/13 14:15:44 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:09:35 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ Test(cylinders, ray_strikes_cylinder_3)
 	intersect_cylinder(&xs, &cyl, r);
 	
 	cr_assert(eq(i32, intersection_count(xs), 2));
-	cr_assert_float_eq(xs->t, 6.80800, EPSILON);
-	cr_assert_float_eq(xs->next->t, 7.08870, EPSILON);
+	cr_assert_float_eq(xs->t, 6.80798, EPSILON);
+	cr_assert_float_eq(xs->next->t, 7.08872, EPSILON);
 }
 
 /* Normal vector on a cylinder */

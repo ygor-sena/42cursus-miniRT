@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 12:28:50 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 15:49:24 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:24:12 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ Test(view_transformation, arbitrary_transformation)
 	t_tuple		up;
 	t_matrix	t;
 
-	const float	expected[MAX][MAX] = {
+	const double	expected[MAX][MAX] = {
 		{-0.50709, 0.50709,  0.67612, -2.36643},
 		{ 0.76772, 0.60609,  0.12122, -2.82843},
 		{-0.35857, 0.59761, -0.71714,  0.00000},

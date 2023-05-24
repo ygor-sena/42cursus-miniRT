@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mx_operations.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 10:44:17 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/11 14:23:00 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:13:37 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 */
 t_matrix	multiply_mx_mx(t_matrix a, t_matrix b)
 {
-	float		m[MAX][MAX];
+	double		m[MAX][MAX];
 	size_t		row;
 	size_t		col;
 
-	ft_bzero(m, sizeof(float) * SIZE);
+	ft_bzero(m, sizeof(double) * SIZE);
 	row = -1;
 	while (++row < MAX)
 	{
@@ -44,7 +44,7 @@ t_matrix	multiply_mx_mx(t_matrix a, t_matrix b)
 */
 t_tuple	multiply_tp_mx(t_matrix a, t_tuple b)
 {
-	float		t[MAX];
+	double		t[MAX];
 	size_t		row;
 
 	row = -1;
@@ -61,13 +61,13 @@ t_tuple	multiply_tp_mx(t_matrix a, t_tuple b)
 /* 
 *	OBS: assuming that t will always be a 4x4 matrix.
 *	If it's a 3x3 or 2x2, maybe it'll generate a bug...
-*	ft_bzero(m, sizeof(float) * SIZE); line 70
+*	ft_bzero(m, sizeof(double) * SIZE); line 70
 */
 t_matrix	transpose(t_matrix	t)
 {
 	size_t		row;
 	size_t		col;
-	float		m[MAX][MAX];
+	double		m[MAX][MAX];
 
 	row = -1;
 	while (++row < t.size)
@@ -79,19 +79,19 @@ t_matrix	transpose(t_matrix	t)
 	return (create_matrix(m, t.size));
 }
 
-/* float newPrecision(float n, float i)
+/* double newPrecision(double n, double i)
 {
     return floor(pow(10,i)*n)/pow(10,i);
 } 
 */
 /*	This function can be refactored because of decimal precision
 *	Is five precision points suficient? Ow do we need 9?
-	ft_bzero(inverted, sizeof(float) * SIZE); line 99
+	ft_bzero(inverted, sizeof(double) * SIZE); line 99
  */
 t_matrix	inverse(t_matrix t)
 {	
-	float	inverted[MAX][MAX];
-	float	determinant;	
+	double	inverted[MAX][MAX];
+	double	determinant;	
 	size_t	row;
 	size_t	col;
 

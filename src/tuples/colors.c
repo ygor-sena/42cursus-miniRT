@@ -6,13 +6,13 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:24:30 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/03/22 12:35:22 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:15:16 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tuples.h"
 
-t_color	new_color(float red, float green, float blue)
+t_color	new_color(double red, double green, double blue)
 {
 	return ((t_color){
 		red, green, blue,
@@ -37,7 +37,7 @@ t_color	subtract_color(t_color a, t_color b)
 	});
 }
 
-t_color	multiply_color(t_color color, float scalar)
+t_color	multiply_color(t_color color, double scalar)
 {
 	return ((t_color){
 		color.red * scalar,

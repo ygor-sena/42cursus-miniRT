@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:43:18 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/20 17:38:34 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:15:26 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_bool	intersect_plane(t_hit **xs, t_shape *shape, t_ray ray)
 {
 	float	t;
 
-	if (fabsf(ray.direction.y) < EPSILON)
+	if (fabs(ray.direction.y) < EPSILON)
 		return (FALSE);
 	t = -ray.origin.y / ray.direction.y;
 	insert_intersection(xs, intersection(t, shape));

@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:11:03 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/14 15:35:35 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:01:37 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_bool	scan_integer(t_scanner *scanner)
 	return (TRUE);
 }
 
-t_bool	scan_float(t_scanner *scanner)
+t_bool	scan_double(t_scanner *scanner)
 {
 	if (!scan_integer(scanner))
 		return (FALSE);

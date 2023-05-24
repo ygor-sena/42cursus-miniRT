@@ -6,16 +6,15 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:08:40 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/20 14:06:25 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:16:07 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static t_bool	parse_color_component(t_scanner *scanner, float *color);
-static t_bool	parse_direction_component(t_scanner *scanner, float *coord);
+static t_bool	parse_color_component(t_scanner *scanner, double *color);
+static t_bool	parse_direction_component(t_scanner *scanner, double *coord);
 
-// <color> ::= <int> "," <int> "," <int>
 t_bool	parse_color(t_scanner *scanner, t_color *color)
 {
 	if (!parse_color_component(scanner, &color->red))
@@ -31,24 +30,22 @@ t_bool	parse_color(t_scanner *scanner, t_color *color)
 	return (TRUE);
 }
 
-// <position> ::= <float> "," <float> "," <float>
 t_bool	parse_position(t_scanner *scanner, t_point *position)
 {
 	*position = point(0, 0, 0);
-	if (!parse_float(scanner, &position->x))
+	if (!parse_double(scanner, &position->x))
 		return (FALSE);
 	if (!scan_comma(scanner))
 		return (FALSE);
-	if (!parse_float(scanner, &position->y))
+	if (!parse_double(scanner, &position->y))
 		return (FALSE);
 	if (!scan_comma(scanner))
 		return (FALSE);
-	if (!parse_float(scanner, &position->z))
+	if (!parse_double(scanner, &position->z))
 		return (FALSE);
 	return (TRUE);
 }
 
-// <direction> ::= <float> "," <float> "," <float>
 t_bool	parse_direction(t_scanner *scanner, t_vector *direction)
 {
 	*direction = vector(0, 0, 0);
@@ -65,7 +62,7 @@ t_bool	parse_direction(t_scanner *scanner, t_vector *direction)
 	return (TRUE);
 }
 
-static t_bool	parse_color_component(t_scanner *scanner, float *color)
+static t_bool	parse_color_component(t_scanner *scanner, double *color)
 {
 	if (!scan_integer(scanner))
 		return (FALSE);
@@ -79,9 +76,9 @@ static t_bool	parse_color_component(t_scanner *scanner, float *color)
 	return (FALSE);
 }
 
-static t_bool	parse_direction_component(t_scanner *scanner, float *coord)
+static t_bool	parse_direction_component(t_scanner *scanner, double *coord)
 {
-	if (!scan_float(scanner))
+	if (!scan_double(scanner))
 		return (FALSE);
 	*coord = ft_atof(scanner->consume);
 	if (validate_range(*coord, -1.0, 1.0))

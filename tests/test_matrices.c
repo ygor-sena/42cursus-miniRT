@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:33:50 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/09 12:38:36 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:23:33 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Test(matrices, create_matrix_4x4)
 {
 	t_matrix	m;
 
-	const float	table[MAX][MAX] = {
+	const double	table[MAX][MAX] = {
 		{1, 2, 3, 4},
 		{5.5, 6.5, 7.5, 8.5},
 		{9, 10, 11, 12},
@@ -51,7 +51,7 @@ Test(matrices, create_matrix_2x2)
 {
 	t_matrix	m;
 
-	const float	table[MAX][MAX] = {
+	const double	table[MAX][MAX] = {
 		{-3, 5},
 		{1, -2},
 	};
@@ -68,7 +68,7 @@ Test(matrices, create_matrix_3x3)
 {
 	t_matrix	m;
 
-	const float	table[MAX][MAX] = {
+	const double	table[MAX][MAX] = {
 		{-3, 5, 0},
 		{1, -2, -7},
 		{0, 1, 1},
@@ -95,14 +95,14 @@ Test(matrices, is_equal_matrix)
 	t_matrix	b;
 	int			result;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{1, 2, 3, 4},
 		{5, 6, 7, 8},
 		{9, 8, 7, 6},
 		{5, 4, 3, 2},
 	};
 
-	const float	table_b[MAX][MAX] = {
+	const double	table_b[MAX][MAX] = {
 		{2, 3, 4, 5},
 		{6, 7, 8, 9},
 		{8, 7, 6, 5},
@@ -123,14 +123,14 @@ Test(matrices, is_not_equal_matrix)
 	t_matrix	b;
 	int			result;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{1, 2, 3, 4},
 		{5, 6, 7, 8},
 		{9, 8, 7, 6},
 		{5, 4, 3, 2},
 	};
 
-	const float	table_b[MAX][MAX] = {
+	const double	table_b[MAX][MAX] = {
 		{1, 2, 3, 4},
 		{5, 6, 7, 8},
 		{9, 8, 7, 6},
@@ -151,14 +151,14 @@ Test(matrices, multiply_mx_mx)
 	t_matrix	b;
 	t_matrix	c;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{1, 2, 3, 4},
 		{5, 6, 7, 8},
 		{9, 8, 7, 6},
 		{5, 4, 3, 2},
 	};
 
-	const float	table_b[MAX][MAX] = {
+	const double	table_b[MAX][MAX] = {
 		{-2, 1, 2, 3},
 		{3, 2, 1, -1},
 		{4, 3, 6, 5},
@@ -197,7 +197,7 @@ Test(matrices, multiply_tp_mx)
 	t_tuple		b;
 	t_tuple		c;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{1, 2, 3, 4},
 		{2, 4, 4, 2},
 		{8, 6, 4, 1},
@@ -221,14 +221,14 @@ Test(matrices, multiply_by_identity_matrix)
 	t_matrix	id;
 	t_matrix	c;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{0, 1, 2, 4},
 		{1, 2, 4, 8},
 		{2, 4, 8, 16},
 		{4, 8, 16, 32},
 	};
 
-	const float	table_id[MAX][MAX] = {
+	const double	table_id[MAX][MAX] = {
 		{1, 0, 0, 0},
 		{0, 1, 0, 0},
 		{0, 0, 1, 0},
@@ -266,7 +266,7 @@ Test(matrices, transpose)
 	t_matrix	a;
 	t_matrix	c;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{0, 9, 3, 0},
 		{9, 8, 0, 8},
 		{1, 8, 5, 3},
@@ -308,7 +308,7 @@ Test(matrices, transpose_of_identity_matrix)
 	t_matrix	a;
 	t_matrix	id;
 
-	const float	table_id[MAX][MAX] = {
+	const double	table_id[MAX][MAX] = {
 		{1, 0, 0, 0},
 		{0, 1, 0, 0},
 		{0, 0, 1, 0},
@@ -345,7 +345,7 @@ Test(matrices, determinant_2x2)
 	t_matrix	a;
 	int			result;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{1, 5},
 		{-3, 2},
 	};
@@ -362,7 +362,7 @@ Test(matrices, submatrix_of_3x3)
 	t_matrix	a;
 	t_matrix	result;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{1, 5, 0},
 		{-3, 2, 7},
 		{0, 6, -3},
@@ -384,7 +384,7 @@ Test(matrices, submatrix_of_4x4)
 	t_matrix	a;
 	t_matrix	result;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{-6, 1, 1, 6},
 		{-8, 5, 8, 6},
 		{-1, 0, 8, 2},
@@ -411,9 +411,9 @@ Test(matrices, submatrix_of_4x4)
 Test(matrices, minor_of_3x3)
 {
 	t_matrix	a;
-	float		result;
+	double		result;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{3, 5, 0},
 		{2, -1, 7},
 		{6, -1, 5},
@@ -432,9 +432,9 @@ Test(matrices, minor_of_3x3)
 Test(matrices, cofactor_of_3x3)
 {
 	t_matrix	a;
-	float		result;
+	double		result;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{3, 5, 0},
 		{2, -1, 7},
 		{6, -1, 5},
@@ -453,9 +453,9 @@ Test(matrices, cofactor_of_3x3)
 Test(matrices, determinant_of_3x3)
 {
 	t_matrix	a;
-	float		result;
+	double		result;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{1, 2, 6},
 		{-5, 8, -4},
 		{2, 6, 4},
@@ -480,9 +480,9 @@ Test(matrices, determinant_of_3x3)
 Test(matrices, determinant_of_4x4)
 {
 	t_matrix	a;
-	float		result;
+	double		result;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{-2, -8, 3, 5},
 		{-3, 1, 7, 3},
 		{1, 2, -9, 6},
@@ -511,9 +511,9 @@ Test(matrices, determinant_of_4x4)
 Test(matrices, is_invertible_4x4)
 {
 	t_matrix	a;
-	float		result;
+	double		result;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{6, 4, 4, 4},
 		{5, 5, 7, 6},
 		{4, -9, 3, -7},
@@ -531,9 +531,9 @@ Test(matrices, is_invertible_4x4)
 Test(matrices, is_not_invertible_4x4)
 {
 	t_matrix	a;
-	float		result;
+	double		result;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{-4, 2, -2, -3},
 		{9, 6, 2, 6},
 		{0, -5, 1, -5},
@@ -552,9 +552,9 @@ Test(matrices, get_inverse_1)
 {
 	t_matrix	a;
 	t_matrix	b;
-	float		result;
+	double		result;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{-5, 2, 6, -8},
 		{1, -5, 1, 8},
 		{7, 7, -6, -7},
@@ -569,11 +569,11 @@ Test(matrices, get_inverse_1)
 
 	result = get_cofactor(a, 2, 3);
 	cr_assert(eq(flt, result, -160));
-	cr_assert(eq(flt, b.matrix[3][2], (float) -160/532));
+	cr_assert(eq(flt, b.matrix[3][2], (double) -160/532));
 
 	result = get_cofactor(a, 3, 2);
 	cr_assert(eq(flt, result, 105));
-	cr_assert(eq(flt, b.matrix[2][3], (float) 105/532));
+	cr_assert(eq(flt, b.matrix[2][3], (double) 105/532));
 
 	cr_assert_float_eq(b.matrix[0][0], 0.21805, EPSILON);
 	cr_assert_float_eq(b.matrix[0][1], 0.45113, EPSILON);
@@ -602,7 +602,7 @@ Test(matrices, get_inverse_2)
 	t_matrix	a;
 	t_matrix	b;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{8, -5, 9, 2},
 		{7, 5, 6, 1},
 		{-6, 0, 9, 6},
@@ -639,7 +639,7 @@ Test(matrices, get_inverse_3)
 	t_matrix	a;
 	t_matrix	b;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{9, 3, 0, 9},
 		{-5, -2, -6, -3},
 		{-4, 9, 6, 4},
@@ -678,14 +678,14 @@ Test(matrices, mult_product_by_its_inverse)
 	t_matrix	c;
 	t_matrix	result;
 
-	const float	table_a[MAX][MAX] = {
+	const double	table_a[MAX][MAX] = {
 		{3, -9, 7, 3},
 		{3, -8, 2, -9},
 		{-4, 4, 4, 1},
 		{-6, 5, -1, 1},
 	};
 
-	const float	table_b[MAX][MAX] = {
+	const double	table_b[MAX][MAX] = {
 		{8, 2, 2, 2},
 		{3, -1, 7, 0},
 		{7, 0, 5, 4},
