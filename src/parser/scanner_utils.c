@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shapes.c                                           :+:      :+:    :+:   */
+/*   scanner_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 16:47:49 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 14:03:02 by mdias-ma         ###   ########.fr       */
+/*   Created: 2023/05/12 12:12:46 by mdias-ma          #+#    #+#             */
+/*   Updated: 2023/05/13 14:02:39 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shapes.h"
+#include "parser.h"
 
-t_shape	new_shape(void)
+void	advance(t_scanner *scanner)
 {
-	return ((t_shape){
-		.material = material(),
-		.transform = get_identity_matrix(),
-		.inverse = get_identity_matrix(),
-		.transpose = get_identity_matrix(),
-	});
+	scanner->current++;
 }
 
-void	set_transform(t_shape *shape, t_matrix transform)
+void	skip_whitespace(t_scanner *scanner)
 {
-	shape->transform = transform;
-	shape->inverse = inverse(transform);
-	shape->transpose = transpose(shape->inverse);
+	while (*scanner->current == ' ')
+		advance(scanner);
+	scanner->consume = scanner->current;
+}
+
+int	is_sign(int c)
+{
+	return (c == '-' || c == '+');
 }

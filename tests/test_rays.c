@@ -6,12 +6,16 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:19:07 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 12:38:43 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:41:45 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+/*
+ * This test checks if the function "new_ray" correctly creates a new ray with
+ * the given origin and direction.
+ */
 Test(rays, creating_a_new_ray)
 {
 	t_ray		ray;
@@ -27,6 +31,10 @@ Test(rays, creating_a_new_ray)
 	cr_assert(eq(flt, ray.origin.w, origin.w));
 }
 
+/*
+ * This test checks if the function "position" correctly computes a point along
+ * a ray at a given distance from the origin.
+ */
 Test(rays, computing_a_point_from_distance)
 {
 	t_ray	ray;
@@ -63,6 +71,10 @@ Test(rays, computing_a_point_from_distance)
 	cr_assert(eq(flt, result.w, expected.w));
 }
 
+/*
+ * This test checks if the function "transform" correctly translates a ray by a
+ * given matrix.
+ */
 Test(rays, translating_a_ray)
 {
 	t_ray		ray;
@@ -77,6 +89,10 @@ Test(rays, translating_a_ray)
 	cr_assert(eq(flt, ray2.origin.z, 8));
 }
 
+/*
+ * This test checks if the function "transform" correctly scales a ray by a
+ * given matrix.
+ */
 Test(rays, scaling_a_ray)
 {
 	t_ray		ray;

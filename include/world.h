@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/08 16:48:57 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 08:37:40 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@
 
 typedef struct s_world
 {
+	t_hit	*xs;
 	int		object_count;
 	t_shape	*objects;
+	int		light_count;
 	t_light	*lights;
-	t_hit	*xs;
+	t_color	ambient;
 }	t_world;
 
 typedef struct s_comps
@@ -122,6 +124,6 @@ t_color	color_at(t_world world, t_ray ray);
  * @return Returns `TRUE` if the point is in shadow. Otherwise, returns `FALSE`
  *         if the point is not in shadow.
  */
-t_bool	is_shadowed(t_world *world, t_tuple point);
+t_bool	is_shadowed(t_world *world, t_tuple point, int index);
 
 #endif

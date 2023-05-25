@@ -6,12 +6,16 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:41:36 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 12:38:04 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:15:37 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+/*
+ * This test checks if the function "new_color" correctly creates a new color
+ * with the given RGB values.
+ */
 Test(colors, create_colors)
 {
 	t_color	c;
@@ -22,6 +26,9 @@ Test(colors, create_colors)
 	cr_assert(eq(flt, c.blue, 0.7));
 }
 
+/* This test checks if the function "add_color" correctly adds two colors
+ * together.
+ */
 Test(colors, add_colors)
 {
 	t_color	c1;
@@ -36,6 +43,10 @@ Test(colors, add_colors)
 	cr_assert_float_eq(result.blue, 1.0, EPSILON);
 }
 
+/*
+ * This test checks if the function "subtract_color" correctly subtracts one
+ * color from another.
+ */
 Test(colors, subtract_colors)
 {
 	t_color	c1;
@@ -50,6 +61,10 @@ Test(colors, subtract_colors)
 	cr_assert_float_eq(result.blue, 0.50, EPSILON);
 }
 
+/*
+ * This test checks if the function "hadamard_product" correctly multiplies
+ * two colors together component-wise.
+ */
 Test(colors, multiply_colors_by_scalar)
 {
 	t_color	c1;

@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:28:46 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 14:13:18 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:10:41 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ Test(intersections, hit_should_offset_point)
 
 	r = new_ray(point(0, 0, -5), vector(0, 0, 1));
 	shape = new_sphere();
-	shape.transform = translation(0, 0, 1);
+	set_transform(&shape, translation(0, 0, 1));
 	i = intersection(5, &shape);
 	comps = prepare_computations(i, r);
 

@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 12:29:11 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 13:14:51 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:19:31 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_camera
 	float		half_height;
 	float		pixel_size;
 	t_matrix	transform;
+	t_matrix	inverse;
+	t_matrix	transpose;
 }	t_camera;
 
 /**

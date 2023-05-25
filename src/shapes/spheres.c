@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/15 10:46:11 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/22 14:57:40 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_shape	new_sphere(void)
 	object.sphere.radius = 1.0;
 	object.normal_at = normal_at_sphere;
 	object.intersect = intersect_sphere;
+	object.material.diffuse = 0.7;
+	object.material.specular = 0.3;
 	return (object);
 }
 
@@ -72,10 +74,9 @@ t_tuple	normal_at_sphere(t_shape *shape, t_tuple world_point)
 	t_tuple	object_normal;
 	t_tuple	world_normal;
 
-	object_point = multiply_tp_mx(inverse(shape->transform), world_point);
+	object_point = multiply_tp_mx(shape->inverse, world_point);
 	object_normal = subtract(object_point, point(0, 0, 0));
-	world_normal = multiply_tp_mx(transpose(
-				inverse(shape->transform)), object_normal);
+	world_normal = multiply_tp_mx(shape->transpose, object_normal);
 	world_normal.w = 0.0;
 	return (normalize(world_normal));
 }

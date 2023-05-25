@@ -6,12 +6,16 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 12:28:50 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 12:39:01 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:24:12 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+/*
+ * This test checks if the function "view_transform" correctly transforms the
+ * default orientation of the camera.
+ */
 Test(view_transformation, transform_default_orientation)
 {
 	t_tuple		from;
@@ -29,6 +33,10 @@ Test(view_transformation, transform_default_orientation)
 	cr_assert(eq(i32, result, 0));
 }
 
+/*
+ * This checks if the function "view_transform" correctly transforms the camera
+ * when looking in the positive z direction.
+ */
 Test(view_transformation, looking_in_positive_z)
 {
 	t_tuple		from;
@@ -46,6 +54,10 @@ Test(view_transformation, looking_in_positive_z)
 	cr_assert(eq(i32, result, 0));
 }
 
+/*
+ * This checks if the function "view_transform" correctly moves the world when
+ * the camera is moved.
+ */
 Test(view_transformation, moves_the_world)
 {
 	t_tuple		from;
@@ -63,6 +75,10 @@ Test(view_transformation, moves_the_world)
 	cr_assert(eq(i32, result, 0));
 }
 
+/*
+ * This checks if the function "view_transform" correctly transforms the camera
+ * with an arbitrary transformation.
+ */
 Test(view_transformation, arbitrary_transformation)
 {
 	t_tuple		from;
@@ -70,7 +86,7 @@ Test(view_transformation, arbitrary_transformation)
 	t_tuple		up;
 	t_matrix	t;
 
-	const float	expected[MAX][MAX] = {
+	const double	expected[MAX][MAX] = {
 		{-0.50709, 0.50709,  0.67612, -2.36643},
 		{ 0.76772, 0.60609,  0.12122, -2.82843},
 		{-0.35857, 0.59761, -0.71714,  0.00000},

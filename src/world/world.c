@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:29:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 14:13:14 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 08:48:26 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,28 @@ t_comps	prepare_computations(t_hit *intersection, t_ray ray)
 	return (comps);
 }
 
+//comps.object->material becomes comps.object
 t_color	shade_hit(t_world world, t_comps comps)
 {
-	world.lights->in_shadow = is_shadowed(&world, comps.over_point);
-	return (
-		lighting(
-			comps.object->material,
-			world.lights[0],
-			comps.point,
-			comps.sight
-		));
+	int		index;
+	t_color	color;
+
+	index = 0;
+	color = new_color(0, 0, 0);
+	while (index < world.light_count)
+	{
+		world.lights[index].in_shadow = is_shadowed(
+				&world, comps.over_point, index);
+		color = add_color(color,
+				lighting(
+					comps.object->material,
+					world.lights[index],
+					comps.point,
+					comps.sight
+					));
+		index++;
+	}
+	return (color);
 }
 
 t_color	color_at(t_world world, t_ray ray)

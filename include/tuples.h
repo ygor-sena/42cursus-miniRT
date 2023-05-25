@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tuples.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:09:16 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 09:23:00 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:30:29 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@
  */
 typedef struct s_tuple
 {
-	float	x;
-	float	y;
-	float	z;
-	float	w;
+	double	x;
+	double	y;
+	double	z;
+	double	w;
 }	t_tuple;
 
 /**
@@ -60,9 +60,9 @@ typedef t_tuple	t_vector;
  */
 typedef struct s_color
 {
-	float	red;
-	float	green;
-	float	blue;
+	double	red;
+	double	green;
+	double	blue;
 }	t_color;
 
 /* ************************************************************************** */
@@ -77,10 +77,10 @@ typedef struct s_color
  * @param y Receives a value for y-axis coordinate.
  * @param z Receives a value for z-axis coordinate.
  * @param w Receives 1 if the tuple is point or 0 if the tuple is a vector.
- * @return (t_tuple) Returns an instance of a tuple with the values passed
+ * @return Returns an instance of a tuple with the values passed
  * as parameter.
  */
-t_tuple	tuple(float x, float y, float z, float w);
+t_tuple	tuple(double x, double y, double z, double w);
 
 /**
  * @brief This function is a simplification of the function tuple(). It will
@@ -90,10 +90,10 @@ t_tuple	tuple(float x, float y, float z, float w);
  * @param x Receives a value for x-axis coordinate.
  * @param y Receives a value for y-axis coordinate.
  * @param z Receives a value for z-axis coordinate.
- * @return (t_tuple) Returns an instance of a point with the given coordinates
+ * @return Returns an instance of a point with the given coordinates
  * passed as parameter and w set to 1.
  */
-t_tuple	point(float x, float y, float z);
+t_tuple	point(double x, double y, double z);
 
 /**
  * @brief This function is a simplification of the function tuple(). It will
@@ -103,10 +103,10 @@ t_tuple	point(float x, float y, float z);
  * @param x Receives a value for x-axis coordinate.
  * @param y Receives a value for y-axis coordinate.
  * @param z Receives a value for z-axis coordinate.
- * @return (t_tuple) Returns an instance of a point with the given coordinates
+ * @return Returns an instance of a point with the given coordinates
  * passed as parameter and w set to 0.
  */
-t_tuple	vector(float x, float y, float z);
+t_tuple	vector(double x, double y, double z);
 
 /* ************************************************************************** */
 /*                               BASIC_MATH.C                                 */
@@ -120,7 +120,7 @@ t_tuple	vector(float x, float y, float z);
  *
  * @param a Receives the first tuple to sum.
  * @param b Receives the second tuple to sum.
- * @return (t_tuple) Returns a new tuple by adding the corresponding components
+ * @return Returns a new tuple by adding the corresponding components
  * of each of the operands.
  */
 t_tuple	add(t_tuple a, t_tuple b);
@@ -136,7 +136,7 @@ t_tuple	add(t_tuple a, t_tuple b);
  *
  * @param a Receives the first tuple to subtract.
  * @param b Receives the second tuple to subtract.
- * @return (t_tuple) Returns a new tuple by subtracting the corresponding
+ * @return Returns a new tuple by subtracting the corresponding
  * components of each of the operands.
  */
 t_tuple	subtract(t_tuple a, t_tuple b);
@@ -147,7 +147,7 @@ t_tuple	subtract(t_tuple a, t_tuple b);
  * the opposite vector points from the light source back to the surface.
  *
  * @param a Receives the vector to be negated.
- * @return (t_tuple) Returns the negated vector of the vector passed as
+ * @return Returns the negated vector of the vector passed as
  * parameter by doing vector a minus a vector with zero values.
  */
 t_tuple	negate(t_tuple a);
@@ -157,22 +157,22 @@ t_tuple	negate(t_tuple a);
  * it changes the vector length uniformly.
  *
  * @param a Receives the t_tuple vector to be scaled by multiplication.
- * @param scalar Receives a float value to stretch out the vector.
- * @return (t_tuple) Returns a new vector with each component of the given tuple
+ * @param scalar Receives a double value to stretch out the vector.
+ * @return Returns a new vector with each component of the given tuple
  * multiplied by the given scalar passed as parameter.
  */
-t_tuple	multiply(t_tuple a, float scalar);
+t_tuple	multiply(t_tuple a, double scalar);
 
 /**
  * @brief The function divide() divides a vector by a scalar value, i.e., it
  * changes the vector length uniformly.
  *
  * @param a Receives the t_tuple vector to be scaled by division.
- * @param scalar Receives a float value to shrink the vector.
- * @return (t_tuple) Returns a new vector with each component of the given tuple
+ * @param scalar Receives a double value to shrink the vector.
+ * @return Returns a new vector with each component of the given tuple
  * divided by the given scalar passed as parameter.
  */
-t_tuple	divide(t_tuple a, float scalar);
+t_tuple	divide(t_tuple a, double scalar);
 
 /* ************************************************************************** */
 /*                              VECTOR_MATH.C                                 */
@@ -184,9 +184,9 @@ t_tuple	divide(t_tuple a, float scalar);
  * vectors or direction vectors.
  *
  * @param vector Receives the vector to its magnitude value.
- * @return (float) Returns the magnitude value of the length.
+ * @return Returns the magnitude value of the length.
  */
-float	magnitude(t_tuple vector);
+double	magnitude(t_tuple vector);
 
 /**
  * @brief The function normalize() takes an arbitrary vector and converts it
@@ -194,7 +194,7 @@ float	magnitude(t_tuple vector);
  * scale, i.e., keeps all vectors speaking the same language.
  *
  * @param vector Receives the vector to be normalized to a unit vector.
- * @return (t_tuple) Returns a new vector that was normalized.
+ * @return Returns a new vector that was normalized.
  */
 t_tuple	normalize(t_tuple vector);
 
@@ -211,10 +211,10 @@ t_tuple	normalize(t_tuple vector);
  *
  * @param a Receives the first vector for the dot product.
  * @param b Receives the second vector for the dot product.
- * @return (float) Returns a value which is the dot product that states the
+ * @return Returns a value which is the dot product that states the
  * relationship between two vectors in terms of direction.
  */
-float	dot(t_tuple a, t_tuple b);
+double	dot(t_tuple a, t_tuple b);
 
 /**
  * @brief The function cross() multiplies vectors, instead of tuples. After all,
@@ -225,7 +225,7 @@ float	dot(t_tuple a, t_tuple b);
  *
  * @param a Receives the first vector to be multiplied.
  * @param b Receives the second vector to be multiplied.
- * @return (t_tuple) Returns a new vector which is perpendicular to both vectors
+ * @return Returns a new vector which is perpendicular to both vectors
  * passed as parameter to the function.
  */
 t_tuple	cross(t_tuple a, t_tuple b);
@@ -237,7 +237,7 @@ t_tuple	cross(t_tuple a, t_tuple b);
  * @param in A struct of type t_tuple containing the vector to be reflected.
  * @param normal A struct of type t_tuple storing the normal vector to be
  * used as reference for the reflection of the in vector.
- * @return (t_tuple) Returns the reflected vector from in and out as
+ * @return Returns the reflected vector from in and out as
  * reference orientation.
  */
 t_tuple	reflect(t_tuple in, t_tuple normal);
@@ -253,10 +253,10 @@ t_tuple	reflect(t_tuple in, t_tuple normal);
  * @param red Receives a red color value for the RGB scale.
  * @param green Receives a green color value for the RGB scale.
  * @param blue Receives a blue color value for the RGB scale.
- * @return (t_color) Returns an instance of a color with the values passed
+ * @return Returns an instance of a color with the values passed
  * as parameter.
  */
-t_color	new_color(float red, float green, float blue);
+t_color	new_color(double red, double green, double blue);
 
 /**
  * @brief The function add_color() combines the intensity of each RGB color
@@ -265,7 +265,7 @@ t_color	new_color(float red, float green, float blue);
  *
  * @param a Receives the first color to sum.
  * @param b Receives the second color to sum.
- * @return (t_color) Returns a new color with combined intensity resultant of
+ * @return Returns a new color with combined intensity resultant of
  * the sum of each RGB color component of a and b.
  */
 t_color	add_color(t_color a, t_color b);
@@ -277,34 +277,34 @@ t_color	add_color(t_color a, t_color b);
  *
  * @param a Receives the first color to decrease.
  * @param b Receives the second color to decrease.
- * @return (t_color) Returns a new color with decreased intensity resultant of
+ * @return Returns a new color with decreased intensity resultant of
  * the subtraction of each RGB color component of a and b.
  */
 t_color	subtract_color(t_color a, t_color b);
 
 /**
  * @brief The function multiply_color() scales the intensities of each RGB color
- *	component of the parameter color by a constant parameter scalar. For
- *	example, multiplying (1, 0, 0) by 0.5 or 1.5 result in (0.5, 0, 0) or
- *	(1.5, 0, 0). In other words, the red components were halved or doubled.
+ * component of the parameter color by a constant parameter scalar. For
+ * example, multiplying (1, 0, 0) by 0.5 or 1.5 result in (0.5, 0, 0) or
+ * (1.5, 0, 0). In other words, the red components were halved or doubled.
  *
  * @param color Receives the color to be scaled.
  * @param scalar Receives the scale factor to be applied for each color value.
- * @return (t_color) Returns a new color with halved or intensified RGB color
+ * @return Returns a new color with halved or intensified RGB color
  * values resulting from the scalar multiplication.
  */
-t_color	multiply_color(t_color color, float scalar);
+t_color	multiply_color(t_color color, double scalar);
 
 /**
  * @brief The function hadamard_product() blends two color together by
- *	multiplying corresponding components of each color. This process is known as
- *	Hadamard product or Schur product. For example, to view a yellow-green
- *	surface under reddish-purple light would result in a red-like color because
- *	the red component would be highest among the RGB values.
+ * multiplying corresponding components of each color. This process is known as
+ * Hadamard product or Schur product. For example, to view a yellow-green
+ * surface under reddish-purple light would result in a red-like color because
+ * the red component would be highest among the RGB values.
  *
  * @param a Receives the first color to be blended.
  * @param b Receives the second color to be blended.
- * @return (t_color) Returns a new blended color from Schur product of a and b.
+ * @return Returns a new blended color from Schur product of a and b.
  */
 t_color	hadamard_product(t_color a, t_color b);
 

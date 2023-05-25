@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:09:12 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/07 19:25:01 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/21 16:11:12 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ Test(shapes, the_default_material)
 	cr_assert_float_eq(result.color.red, expected.color.red, EPSILON);
 	cr_assert_float_eq(result.color.green, expected.color.green, EPSILON);
 	cr_assert_float_eq(result.color.blue, expected.color.blue, EPSILON);
-	cr_assert_float_eq(result.ambient, expected.ambient, EPSILON);
+	cr_assert_float_eq(result.ambient.red, expected.ambient.red, EPSILON);
+	cr_assert_float_eq(result.ambient.green, expected.ambient.green, EPSILON);
+	cr_assert_float_eq(result.ambient.blue, expected.ambient.blue, EPSILON);
 	cr_assert_float_eq(result.diffuse, expected.diffuse, EPSILON);
 	cr_assert_float_eq(result.specular, expected.specular, EPSILON);
 	cr_assert_float_eq(result.shininess, expected.shininess, EPSILON);
@@ -62,13 +64,15 @@ Test(shapes, assigning_a_material)
 
 	s = new_shape();
 	expected = material();
-	expected.ambient = 1;
+	expected.ambient = new_color(1, 1, 1);
 	s.material = expected;
 
 	cr_assert_float_eq(s.material.color.red, expected.color.red, EPSILON);
 	cr_assert_float_eq(s.material.color.green, expected.color.green, EPSILON);
 	cr_assert_float_eq(s.material.color.blue, expected.color.blue, EPSILON);
-	cr_assert_float_eq(s.material.ambient, expected.ambient, EPSILON);
+	cr_assert_float_eq(s.material.ambient.red, expected.ambient.red, EPSILON);
+	cr_assert_float_eq(s.material.ambient.green, expected.ambient.green, EPSILON);
+	cr_assert_float_eq(s.material.ambient.blue, expected.ambient.blue, EPSILON);
 	cr_assert_float_eq(s.material.diffuse, expected.diffuse, EPSILON);
 	cr_assert_float_eq(s.material.specular, expected.specular, EPSILON);
 	cr_assert_float_eq(s.material.shininess, expected.shininess, EPSILON);

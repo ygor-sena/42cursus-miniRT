@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   materials.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:05:52 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/20 10:58:42 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:22:40 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MATERIALS_H
 
 # include "lights.h"
+# include "patterns.h"
 
 /**
  * @brief A material has a surface color and four attributes
@@ -34,14 +35,17 @@
  * by the parameter shininess.
  * @param shininess Represents the shininess. The higher the shininess, the
  * smaller and tigher the specular highlight.
+ * @param pattern Represents the pattern texture of a given material. It can be
+ *                a striped or a checkered pattern.
  */
 typedef struct s_material
 {
-	t_color	color;
-	float	ambient;
-	float	diffuse;
-	float	specular;
-	float	shininess;
+	t_color		color;
+	t_color		ambient;
+	float		diffuse;
+	float		specular;
+	float		shininess;
+	t_pattern	pattern;
 }	t_material;
 
 /* ************************************************************************** */
@@ -83,24 +87,5 @@ typedef struct s_exposure
  * @return (t_material) Returns a default instance of the new material.
  */
 t_material	material(void);
-
-/**
- * @brief In a nutshell, the function adds together the material's ambient
- * diffuse, and specular componentes, weighted by the angles between the
- * different vectors. The material can receive dark or light exposure.
- * Dark exposure means that the material is exposed to light indirectly.
- * Thus, only ambient reflection is computed. Light exposure means that
- * the material is exposed to light directly and, in addition to ambient
- * reflection, the diffuse and specular reflection are also calculated.
- *
- * @param m A struct of type t_material that stores the material's color,
- * ambient, diffuse, specular and shininess attributes.
- * @param light A struct of type t_light containing the light's source.
- * @param point A struct of type t_tuple of the point being illuminated.
- * @param sight A struct of type t_sight with the values of eye and normal
- * vectors obtained from the Phong Reflection Model algorithm.
- * @return (t_color) The function returns the final shading of that point.
- */
-t_color		lighting(t_material m, t_light light, t_tuple point, t_sight sight);
 
 #endif

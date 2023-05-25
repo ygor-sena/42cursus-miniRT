@@ -6,10 +6,11 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:55:26 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 12:39:10 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 08:45:03 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shapes.h"
 #include "utils.h"
 
 /* Should return a empty world, containing no objects and no light source. */
@@ -233,16 +234,16 @@ Test(world, color_with_an_intersection_behind_the_ray)
 
 	w = default_world();
 	outter = w.objects;
-	outter->material.ambient = 1;
+	outter->material.ambient = new_color(1, 1, 1);
 	inner = w.objects + 1;
-	inner->material.ambient = 1;
+	inner->material.ambient = new_color(1, 1, 1);
 	r = new_ray(point(0, 0, 0.75), vector(0, 0, -1));
 	c = color_at(w, r);
 
 	cr_assert_float_eq(c.red, inner->material.color.red, EPSILON);
 }
 
-/*	There is no shadow when nothing is collinear with point and light */
+/* There is no shadow when nothing is collinear with point and light */
 Test(world, no_shadow_collinear)
 {
 	t_world	w;
@@ -251,12 +252,12 @@ Test(world, no_shadow_collinear)
 
 	w = default_world();
 	p = point(0, 10, 0);
-	result = is_shadowed(&w, p);
+	result = is_shadowed(&w, p, 0);
 
 	cr_assert(eq(int, result, FALSE));
 }
 
-/*	The shadow when an object is between the point and the light */
+/* The shadow when an object is between the point and the light */
 Test(world, is_shadow_obj_between_point_and_light)
 {
 	t_world	w;
@@ -265,12 +266,12 @@ Test(world, is_shadow_obj_between_point_and_light)
 
 	w = default_world();
 	p = point(10, -10, 10);
-	result = is_shadowed(&w, p);
+	result = is_shadowed(&w, p, 0);
 
 	cr_assert(eq(int, result, TRUE));
 }
 
-/*	There is no shadow when an object is behind the light */
+/* There is no shadow when an object is behind the light */
 Test(world, no_shadow_obj_behind_light)
 {
 	t_world	w;
@@ -279,12 +280,12 @@ Test(world, no_shadow_obj_behind_light)
 
 	w = default_world();
 	p = point(-20, 20, -20);
-	result = is_shadowed(&w, p);
+	result = is_shadowed(&w, p, 0);
 
 	cr_assert(eq(int, result, FALSE));
 }
 
-/*	There is no shadow when an object is behind the point */
+/* There is no shadow when an object is behind the point */
 Test(world, no_shadow_obj_behind_pointcd)
 {
 	t_world	w;
@@ -293,12 +294,12 @@ Test(world, no_shadow_obj_behind_pointcd)
 
 	w = default_world();
 	p = point(-2, 2, -2);
-	result = is_shadowed(&w, p);
+	result = is_shadowed(&w, p, 0);
 
 	cr_assert(eq(int, result, FALSE));
 }
 
-/*	shade_hit() is given an intersection in shadow */
+/* shade_hit() is given an intersection in shadow */
 Test(world, shade_hit_intersection_in_shadow)
 {
 	t_world	w;
