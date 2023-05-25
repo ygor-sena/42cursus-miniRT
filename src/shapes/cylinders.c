@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:38:04 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/17 17:29:10 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/21 21:28:42 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_shape	new_cylinder(void)
 
 	object = new_shape();
 	object.cylinder.origin = point(0, 0, 0);
-	object.cylinder.radius = 1.0;
+	//object.cylinder.radius = 1.0;
 	object.cylinder.minimum = -INFINITY;
 	object.cylinder.maximum = INFINITY;
 	object.cylinder.closed = FALSE;
@@ -41,7 +41,7 @@ t_bool	intersect_cylinder(t_hit **xs, t_shape *shape, t_ray ray)
 
 	intersect_caps(xs, shape, ray);
 	d = calculate_distance(ray);
-	if (is_epsilon_zero(fabsf(d.a), 0.0) || d.determinant < 0)
+	if (fabsf(d.a) < EPSILON || d.determinant < 0)
 		return (FALSE);
 	if (d.t1 > d.t2)
 		swap(&d.t1, &d.t2);
@@ -100,7 +100,8 @@ static void	intersect_caps(t_hit **xs, t_shape *shape, t_ray ray)
 	float	x;
 	float	z;
 
-	if (shape->cylinder.closed == FALSE || is_epsilon_zero(ray.direction.y, 0.0))
+	if (shape->cylinder.closed == FALSE
+		|| fabsf(ray.direction.y) < EPSILON)
 		return ;
 	t = (shape->cylinder.minimum - ray.origin.y) / ray.direction.y;
 	x = ray.origin.x + t * ray.direction.x;

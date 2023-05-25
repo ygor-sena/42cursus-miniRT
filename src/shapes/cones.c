@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 10:56:52 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/17 17:28:58 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:16:52 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_distance	calculate_distance(t_ray ray);
 static void			intersect_caps(t_hit **xs, t_shape *shape, t_ray ray);
-static t_bool		check_cap(t_ray ray, float t, float cone_range);
+//static t_bool		check_cap(t_ray ray, float t, float cone_range);
 
 t_shape	new_cone(void)
 {
@@ -22,7 +22,6 @@ t_shape	new_cone(void)
 
 	object = new_shape();
 	object.cone.origin = point(0, 0, 0);
-	//object.cone.radius = 1.0;
 	object.cone.minimum = -INFINITY;
 	object.cone.maximum = INFINITY;
 	object.cone.closed = FALSE;
@@ -54,7 +53,7 @@ t_tuple	normal_at_cone(t_shape *shape, t_tuple world_point)
 /* t_bool	intersect_cone(t_hit **xs, t_shape *shape, t_ray ray)
 {
 	t_distance	d;
-	float		t;
+	//float		t;
 	float		y0;
 	float		y1;
 
@@ -63,8 +62,8 @@ t_tuple	normal_at_cone(t_shape *shape, t_tuple world_point)
 		return (FALSE);
 	if (fabsf(d.a) < EPSILON)
 	{
-		t = (-d.c) / (d.b * 2);
-		insert_intersection(xs, intersection(t, shape));
+		//t = (-d.c) / (d.b * 2);
+		//insert_intersection(xs, intersection(t, shape));
 	}
 	else
 	{
@@ -83,25 +82,33 @@ t_tuple	normal_at_cone(t_shape *shape, t_tuple world_point)
 	return (TRUE);
 } */
 
+
+
+
+/* if (is_epsilon_zero(d.a, 0.0))
+{
+	if (is_epsilon_zero(d.b, 0.0))
+		return (FALSE);
+	insert_intersection(xs, intersection((-d.c) / (2 * d.b), shape));
+	return (TRUE);
+} */
 t_bool	intersect_cone(t_hit **xs, t_shape *shape, t_ray ray)
 {
 	t_distance	d;
 	float		y0;
 	float		y1;
-	float		t;
 
 	intersect_caps(xs, shape, ray);
 	d = calculate_distance(ray);
 	// ray is parallel to the y axis
 	// ray does not intersect the cylinder
-	if (is_epsilon_zero(fabsf(d.a), 0.0))
+	if (fabsf(d.a) < EPSILON)
 	{
 		// ray misses both halves of cone
-		if (is_epsilon_zero(fabsf(d.b), 0.0))
+		if (fabsf(d.b) < EPSILON)
 			return (FALSE);
 		// there's one intersection point
-		t = (-d.c) / (d.b * 2.0);
-		insert_intersection(xs, intersection(t, shape));
+		insert_intersection(xs, intersection((-d.c) / (2 * d.b), shape));
 		return (TRUE);
 	}
 	// ray does not intersect cone
@@ -111,9 +118,9 @@ t_bool	intersect_cone(t_hit **xs, t_shape *shape, t_ray ray)
 		swap(&d.t1, &d.t2);
 	y0 = ray.origin.y + d.t1 * ray.direction.y;
 	y1 = ray.origin.y + d.t2 * ray.direction.y;
-	if (shape->cylinder.minimum < y0 && y0 < shape->cylinder.maximum)
+	if (shape->cone.minimum < y0 && y0 < shape->cone.maximum)
 		insert_intersection(xs, intersection(d.t1, shape));
-	if (shape->cylinder.minimum < y1 && y1 < shape->cylinder.maximum)
+	if (shape->cone.minimum < y1 && y1 < shape->cone.maximum)
 		insert_intersection(xs, intersection(d.t2, shape));
 	return (TRUE);
 }
@@ -126,14 +133,12 @@ static t_distance	calculate_distance(t_ray ray)
 	float	discriminant;
 
 	a = (powf(ray.direction.x, 2) - powf(ray.direction.y, 2)
-		+ powf(ray.direction.z, 2));
+			+ powf(ray.direction.z, 2));
 	b = (2 * ray.origin.x * ray.direction.x)
 		- (2 * ray.origin.y * ray.direction.y)
 		+ (2 * ray.origin.z * ray.direction.z);
 	c = powf(ray.origin.x, 2) - powf(ray.origin.y, 2)
 		+ powf(ray.origin.z, 2);
-	//if (is_epsilon_zero(a, 0.0))
-	//	return ((t_distance){0, 0, -1});
 	discriminant = powf(b, 2) - 4 * a * c;
 	return ((t_distance){
 		.a = a,
@@ -145,7 +150,7 @@ static t_distance	calculate_distance(t_ray ray)
 	});
 }
 
-static t_bool	check_cap(t_ray ray, float t, float cone_range)
+/* static t_bool	check_cap(t_ray ray, float t, float cone_range)
 {
 	float	x;
 	float	z;
@@ -153,20 +158,25 @@ static t_bool	check_cap(t_ray ray, float t, float cone_range)
 	x = ray.origin.x + t * ray.direction.x;
 	z = ray.origin.z + t * ray.direction.z;
 	return ((powf(x, 2) + powf(z, 2)) <= powf(cone_range, 2));
-	//return ((powf(x, 2) + powf(z, 2)) <= cone_range);
 }
-
+ */
+//if (check_cap(ray, t, shape->cone.minimum))
 static void	intersect_caps(t_hit **xs, t_shape *shape, t_ray ray)
 {
 	float	t;
+	float	x;
+	float	z;
 
-	//if (!shape->cone.closed && fabsf(ray.direction.y) >= EPSILON)
-	if (!shape->cone.closed || is_epsilon_zero(ray.direction.y, 0.0))
+	if (!shape->cone.closed || fabsf(ray.direction.y) < EPSILON)
 		return ;
 	t = (shape->cone.minimum - ray.origin.y) / ray.direction.y;
-	if (check_cap(ray, t, shape->cone.minimum))
+	x = ray.origin.x + t * ray.direction.x;
+	z = ray.origin.z + t * ray.direction.z;
+	if ((powf(x, 2) + powf(z, 2)) <= fabsf(shape->cone.minimum) + EPSILON)
 		insert_intersection(xs, intersection(t, shape));
 	t = (shape->cone.maximum - ray.origin.y) / ray.direction.y;
-	if (check_cap(ray, t, shape->cone.maximum))
+	x = ray.origin.x + t * ray.direction.x;
+	z = ray.origin.z + t * ray.direction.z;
+	if ((powf(x, 2) + powf(z, 2)) <= fabsf(shape->cone.maximum) + EPSILON)
 		insert_intersection(xs, intersection(t, shape));
 }

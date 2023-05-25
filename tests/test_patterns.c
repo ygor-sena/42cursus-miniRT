@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   test_patterns.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:37:57 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/22 15:47:57 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:33:07 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "materials.h"
 #include "utils.h"
 
 /* Creating a stripe pattern */
@@ -265,7 +264,7 @@ Test(patterns, lighting_with_stripe_pattern_applied)
 	c1 = lighting(m, light, point(0.9, 0, 0), sight);
 	//c2 = lighting(shape, light, point(1.1, 0, 0), sight);
 	c2 = lighting(m, light, point(1.1, 0, 0), sight);
-
+	
 	cr_assert(eq(flt, c1.red, 1));
 	cr_assert(eq(flt, c1.green, 1));
 	cr_assert(eq(flt, c1.blue, 1));

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/05/16 22:28:51 by yde-goes         ###   ########.fr       */
+<<<<<<< Updated upstream
+/*   Updated: 2023/05/25 14:30:04 by yde-goes         ###   ########.fr       */
 =======
-/*   Updated: 2023/05/23 13:52:18 by mdias-ma         ###   ########.fr       */
->>>>>>> 26a45430e070633796629cde4757ababd1a65d75
+/*   Updated: 2023/05/22 17:12:41 by yde-goes         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,12 @@ typedef struct s_cylinder
 typedef struct s_cone
 {
 	t_point	origin;
-	//float	radius;
 	float	minimum;
 	float	maximum;
 	t_bool	closed;
 }	t_cone;
 
 typedef struct s_shape		t_shape;
-typedef struct s_cylinder	t_cylinder;
-typedef struct s_cone		t_cone;
 typedef struct s_hit		t_hit;
 typedef t_bool				(*t_hit_record)(t_hit **, t_shape *, t_ray);
 typedef t_tuple				(*t_normal_at)(t_shape *, t_tuple);
