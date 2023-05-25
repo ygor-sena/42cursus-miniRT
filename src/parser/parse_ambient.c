@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:17:27 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 14:45:48 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:04:40 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_bool	parse_ambient_light(t_scanner *scanner, t_scene *scene)
 {
-	float	intensity;
+	double	intensity;
 	t_color	lighting;
 
 	if (!parse_light_ratio(scanner, &intensity))
@@ -52,7 +52,7 @@ t_bool	parse_camera(t_scanner *scanner, t_scene *scene)
 t_bool	parse_light(t_scanner *scanner, t_scene *scene)
 {
 	t_point	origin;
-	float	bright;
+	double	bright;
 	t_color	color;
 	t_light	light;
 

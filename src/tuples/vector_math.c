@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   vector_math.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:01:27 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/11 14:09:08 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:15:04 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tuples.h"
 
-float	magnitude(t_tuple v)
+double	magnitude(t_tuple v)
 {
 	return (
 		sqrtf(
@@ -26,7 +26,7 @@ float	magnitude(t_tuple v)
 
 t_tuple	normalize(t_tuple v)
 {
-	float	length;
+	double	length;
 
 	length = magnitude(v);
 	return ((t_tuple){
@@ -37,7 +37,7 @@ t_tuple	normalize(t_tuple v)
 	});
 }
 
-float	dot(t_tuple a, t_tuple b)
+double	dot(t_tuple a, t_tuple b)
 {
 	return (
 		a.x * b.x

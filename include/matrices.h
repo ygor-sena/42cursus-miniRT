@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrices.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:06 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/04/24 09:22:38 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:14:12 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
  */
 typedef struct s_matrix
 {
-	float	matrix[MAX][MAX];
+	double	matrix[MAX][MAX];
 	size_t	size;
 }	t_matrix;
 
@@ -45,8 +45,8 @@ typedef struct s_matrix
  */
 typedef struct s_shearing
 {
-	float	p1;
-	float	p2;
+	double	p1;
+	double	p2;
 }	t_shearing;
 
 /* ************************************************************************** */
@@ -126,7 +126,7 @@ t_matrix	inverse(t_matrix t);
  * @return (t_matrix) Returns a new translated matrix from the coordinates
  *         passed to the function as parameter.
  */
-t_matrix	translation(float x, float y, float z);
+t_matrix	translation(double x, double y, double z);
 
 /**
  * @brief This function scales a given matrix by multiplication. When applied
@@ -141,7 +141,7 @@ t_matrix	translation(float x, float y, float z);
  * @return (t_matrix) Returns a new scaled matrix from the coordinates passed to
  *         the function as parameter.
  */
-t_matrix	scaling(float x, float y, float z);
+t_matrix	scaling(double x, double y, double z);
 
 /**
  * @brief This function applies shearing (or skew) transformation to a given
@@ -173,7 +173,7 @@ t_matrix	shearing(t_shearing x, t_shearing y, t_shearing z);
  * @return (t_matrix) Returns a new rotated matrix after the rotation passed to
  *         the function as parameter.
  */
-t_matrix	rotation_x(float rad);
+t_matrix	rotation_x(double rad);
 
 /**
  * @brief This function rotates a given matrix around the y-axis.
@@ -182,7 +182,7 @@ t_matrix	rotation_x(float rad);
  * @return (t_matrix) Returns a new rotated matrix after the rotation passed to
  *         the function as parameter.
  */
-t_matrix	rotation_y(float rad);
+t_matrix	rotation_y(double rad);
 
 /**
  * @brief This function rotates a given matrix around the z-axis.
@@ -191,7 +191,7 @@ t_matrix	rotation_y(float rad);
  * @return (t_matrix) Returns a new rotated matrix after the rotation passed to
  *         the function as parameter.
  */
-t_matrix	rotation_z(float rad);
+t_matrix	rotation_z(double rad);
 
 /* ************************************************************************** */
 /*                             MX_ATTRIBUTES.C                                */
@@ -206,10 +206,10 @@ t_matrix	rotation_z(float rad);
  *        has no solution.
  *
  * @param t Receives the matrix to calculate its determinant.
- * @return (float) Returns a float value which is the determinant of the matrix
+ * @return (double) Returns a double value which is the determinant of the matrix
  *         passed to the function as parameter.
  */
-float		get_determinant(t_matrix t);
+double		get_determinant(t_matrix t);
 
 /**
  * @brief This functions gets the submatrix of a given matrix. That is, what is
@@ -235,10 +235,10 @@ t_matrix	get_submatrix(t_matrix t, size_t del_row, size_t del_col);
  * @param t Receives the matrix from which the minor will be calculated.
  * @param row Receives the row value from which the minor will be calculated.
  * @param col Receives the column value from which the minor will be calculated.
- * @return (float) Returns the minor of the matrix passed to the function
+ * @return (double) Returns the minor of the matrix passed to the function
  *         as parameter.
  */
-float		get_minor(t_matrix t, size_t row, size_t col);
+double		get_minor(t_matrix t, size_t row, size_t col);
 
 /**
  * @brief This function gets the cofactor of a given matrix. Cofactors are
@@ -252,10 +252,10 @@ float		get_minor(t_matrix t, size_t row, size_t col);
  * @param row Receives the row value from which the cofactor will be calculated.
  * @param col Receives the column value from which the cofactor will be
  *            calculated.
- * @return (float) Returns the cofactor of the matrix passed to the function
+ * @return (double) Returns the cofactor of the matrix passed to the function
  *         as parameter.
  */
-float		get_cofactor(t_matrix t, size_t row, size_t col);
+double		get_cofactor(t_matrix t, size_t row, size_t col);
 
 /**
  * @brief This fucntion gets a new matrix with the special attribute of being an
@@ -271,19 +271,19 @@ t_matrix	get_identity_matrix(void);
 /*                                MX_UTILS.C                                  */
 /* ************************************************************************** */
 
-t_shearing	to_shear(float a, float b);
+t_shearing	to_shear(double a, double b);
 
 /**
  * @brief This function creates a matrix up to 4x4 and, therefore, size of 16
  *        (4x4). For instance, a matrix of 3x3 will have a size of 9(3x3).
  *
- * @param table A bidimensional array of const float containing the matrix.
+ * @param table A bidimensional array of const double containing the matrix.
  * @param size A size_t value containing how much elements the array has.
  * @return (t_matrix) Returns successfully a new matrix created with
  *         ft_memmove() from the array and array's size passed as parameter to
  *         the function.
  */
-t_matrix	create_matrix(const float table[MAX][MAX], size_t size);
+t_matrix	create_matrix(const double table[MAX][MAX], size_t size);
 
 /**
  * @brief The function compare_matrix() checks if two matrices are identical or

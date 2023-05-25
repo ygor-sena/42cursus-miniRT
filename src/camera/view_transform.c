@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:30:15 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/18 16:05:43 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:14:33 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
 
 static t_matrix	orient_xform(t_tuple forward, t_tuple left, t_tuple true_up)
 {
-	const float	table[MAX][MAX] = {
+	const double	table[MAX][MAX] = {
 	{left.x, left.y, left.z, 0},
 	{true_up.x, true_up.y, true_up.z, 0},
 	{-forward.x, -forward.y, -forward.z, 0},

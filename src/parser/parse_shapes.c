@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:11:42 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 14:07:51 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:04:22 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_bool	parse_sphere(t_scanner *scanner, t_scene *scene)
 	t_matrix	scale;
 	t_matrix	transform;
 	t_point		origin;
-	float		radius;
+	double		radius;
 
 	shape = new_sphere();
 	if (!parse_position(scanner, &origin))
@@ -60,8 +60,8 @@ t_bool	parse_cylinder(t_scanner *scanner, t_scene *scene)
 {
 	t_point		origin;
 	t_vector	direction;
-	float		diameter;
-	float		height;
+	double		diameter;
+	double		height;
 	t_color		color;
 
 	(void) scene;

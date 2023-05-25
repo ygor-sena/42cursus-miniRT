@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:55:26 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 14:24:03 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 08:45:03 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,7 +252,7 @@ Test(world, no_shadow_collinear)
 
 	w = default_world();
 	p = point(0, 10, 0);
-	result = is_shadowed(&w, p);
+	result = is_shadowed(&w, p, 0);
 
 	cr_assert(eq(int, result, FALSE));
 }
@@ -266,7 +266,7 @@ Test(world, is_shadow_obj_between_point_and_light)
 
 	w = default_world();
 	p = point(10, -10, 10);
-	result = is_shadowed(&w, p);
+	result = is_shadowed(&w, p, 0);
 
 	cr_assert(eq(int, result, TRUE));
 }
@@ -280,7 +280,7 @@ Test(world, no_shadow_obj_behind_light)
 
 	w = default_world();
 	p = point(-20, 20, -20);
-	result = is_shadowed(&w, p);
+	result = is_shadowed(&w, p, 0);
 
 	cr_assert(eq(int, result, FALSE));
 }
@@ -294,7 +294,7 @@ Test(world, no_shadow_obj_behind_pointcd)
 
 	w = default_world();
 	p = point(-2, 2, -2);
-	result = is_shadowed(&w, p);
+	result = is_shadowed(&w, p, 0);
 
 	cr_assert(eq(int, result, FALSE));
 }

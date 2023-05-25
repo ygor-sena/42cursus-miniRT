@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 12:37:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/18 16:32:05 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:12:29 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	display_position(t_scanner *scanner, int line, int column)
 	printf(RED"^\n"RESET);
 }
 
-t_bool	validate_range(float value, float start, float end)
+t_bool	validate_range(double value, double start, double end)
 {
 	if (value >= start && value <= end)
 		return (TRUE);

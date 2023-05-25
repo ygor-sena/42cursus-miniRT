@@ -6,15 +6,15 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 09:49:29 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/15 17:49:05 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:03:43 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_bool	parse_float(t_scanner *scanner, float *result)
+t_bool	parse_double(t_scanner *scanner, double *result)
 {
-	if (scan_float(scanner))
+	if (scan_double(scanner))
 	{
 		*result = ft_atof(scanner->consume);
 		return (TRUE);
@@ -22,9 +22,9 @@ t_bool	parse_float(t_scanner *scanner, float *result)
 	return (FALSE);
 }
 
-t_bool	parse_light_ratio(t_scanner *scanner, float *light)
+t_bool	parse_light_ratio(t_scanner *scanner, double *light)
 {
-	if (!scan_float(scanner))
+	if (!scan_double(scanner))
 		return (FALSE);
 	*light = ft_atof(scanner->consume);
 	if (validate_range(*light, 0, 1))
@@ -44,9 +44,9 @@ t_bool	parse_field_of_view(t_scanner *scanner, int *fov)
 	return (FALSE);
 }
 
-t_bool	parse_dimension(t_scanner *scanner, float *dimension)
+t_bool	parse_dimension(t_scanner *scanner, double *dimension)
 {
-	if (!scan_float(scanner))
+	if (!scan_double(scanner))
 		return (FALSE);
 	*dimension = ft_atof(scanner->consume);
 	if (*dimension >= 0)

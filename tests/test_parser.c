@@ -6,33 +6,33 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:18:30 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/16 16:33:10 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:01:03 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-Test(parser, float_with_valid_input)
+Test(parser, double_with_valid_input)
 {
 	t_scanner	scanner;
-	float		result;
-	float		expected;
+	double		result;
+	double		expected;
 
 	expected = 3.14159;
 	init_scanner(&scanner, "3.14159");
-	parse_float(&scanner, &result);
+	parse_double(&scanner, &result);
 	cr_assert(eq(flt, result, expected));
 }
 
-Test(parser, float_with_invalid_character)
+Test(parser, double_with_invalid_character)
 {
 	t_scanner	scanner;
-	float		result;
+	double		result;
 	t_bool		success;
 	int			error_column;
 
 	init_scanner(&scanner, "I000.1");
-	success = parse_float(&scanner, &result);
+	success = parse_double(&scanner, &result);
 	error_column = get_error_column(&scanner);
 	cr_assert(eq(i32, success, FALSE));
 	cr_assert(eq(i32, error_column, 0));
@@ -44,7 +44,7 @@ Test(parser, color_without_spaces)
 	t_color		result;
 	t_color		expected;
 	t_bool		success;
-	float		value;
+	double		value;
 
 	value = 10.0 / 255;
 	init_scanner(&scanner, "10,10,10");
@@ -63,7 +63,7 @@ Test(parser, color_with_multiple_spaces)
 	t_color		result;
 	t_color		expected;
 	t_bool		success;
-	float		value;
+	double		value;
 
 	value = 10.0 / 255;
 	init_scanner(&scanner, "10,     10,10");
@@ -195,12 +195,12 @@ Test(parser, direction_out_of_range)
 Test(parser, field_of_view_with_valid_input)
 {
 	t_scanner	scanner;
-	float		result;
-	float		expected;
+	double		result;
+	double		expected;
 
 	expected = 180;
 	init_scanner(&scanner, "180");
-	parse_float(&scanner, &result);
+	parse_double(&scanner, &result);
 	cr_assert(eq(flt, result, expected));
 }
 
@@ -221,8 +221,8 @@ Test(parser, field_of_view_out_of_range)
 Test(parser, light_ratio_with_valid_input)
 {
 	t_scanner	scanner;
-	float		result;
-	float		expected;
+	double		result;
+	double		expected;
 
 	expected = -1;
 	init_scanner(&scanner, "-1");
@@ -233,7 +233,7 @@ Test(parser, light_ratio_with_valid_input)
 Test(parser, light_ratio_out_of_range)
 {
 	t_scanner	scanner;
-	float		result;
+	double		result;
 	t_bool		success;
 	int			error_column;
 
@@ -247,8 +247,8 @@ Test(parser, light_ratio_out_of_range)
 Test(parser, dimension_with_valid_input)
 {
 	t_scanner	scanner;
-	float		result;
-	float		expected;
+	double		result;
+	double		expected;
 
 	expected = 42;
 	init_scanner(&scanner, "42");
@@ -259,7 +259,7 @@ Test(parser, dimension_with_valid_input)
 Test(parser, dimension_out_of_range)
 {
 	t_scanner	scanner;
-	float		result;
+	double		result;
 	t_bool		success;
 	int			error_column;
 

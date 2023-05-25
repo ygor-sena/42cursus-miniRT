@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:11:15 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/23 13:58:59 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:12:32 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void		init_scanner(t_scanner *scanner, const char *source);
 /* Identify whether the character sequence in the input forms an integer. */
 t_bool		scan_integer(t_scanner *scanner);
 
-/* Identify whether the character sequence in the input forms an float. */
-t_bool		scan_float(t_scanner *scanner);
+/* Identify whether the character sequence in the input forms a double. */
+t_bool		scan_double(t_scanner *scanner);
 
 /* Verify if there is a comma in the input. */
 t_bool		scan_comma(t_scanner *scanner);
@@ -150,17 +150,17 @@ void		add_light_to_world(t_light *light, t_world *world);
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse basic
 
-/* Convert a float from the input and store it in `result`. */
-t_bool		parse_float(t_scanner *scanner, float *result);
+/* Convert a double from the input and store it in `result`. */
+t_bool		parse_double(t_scanner *scanner, double *result);
 
 /* Convert the light ratio from the input and store it in `light`. */
-t_bool		parse_light_ratio(t_scanner *scanner, float *light);
+t_bool		parse_light_ratio(t_scanner *scanner, double *light);
 
 /* Convert the field of view from the input and store it in `fov`. */
 t_bool		parse_field_of_view(t_scanner *scanner, int *fov);
 
 /* Convert the dimension from the input and store it in `dimension`. */
-t_bool		parse_dimension(t_scanner *scanner, float *dimension);
+t_bool		parse_dimension(t_scanner *scanner, double *dimension);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse grouped
@@ -205,7 +205,7 @@ t_bool		parse_cylinder(t_scanner *scanner, t_scene *scene);
 t_bool		report_error(t_scanner *scanner);
 
 /* Validate if a number is within a certain range. */
-t_bool		validate_range(float value, float start, float end);
+t_bool		validate_range(double value, double start, double end);
 
 /* Get the column where an error occurred. */
 int			get_error_column(t_scanner *scanner);
@@ -216,7 +216,7 @@ void		set_error_state(t_scanner *scanner, const char *error_message);
 ////////////////////////////////////////////////////////////////////////////////
 /// Helpers
 
-/* Convert a string to a float. */
+/* Convert a string to a double. */
 double		ft_atof(const char *nptr);
 
 #endif // !PARSER_H

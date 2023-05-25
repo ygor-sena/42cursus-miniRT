@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   mx_attributes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 10:44:09 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/03/27 11:23:05 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:13:33 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrices.h"
 
 /* Get the determinant of the given matrix */
-/* float	get_determinant(t_matrix t)
+/* double	get_determinant(t_matrix t)
 {
 	return ((t.matrix[0][0] * t.matrix[1][1]) \
 		- (t.matrix[0][1] * t.matrix[1][0]));
 } */
-float	get_determinant(t_matrix t)
+double	get_determinant(t_matrix t)
 {
 	size_t	col;
-	float	det;
+	double	det;
 
 	det = 0;
 	if (t.size == 2)
@@ -39,7 +39,7 @@ float	get_determinant(t_matrix t)
 /* Get the submatrix of the given matrix */
 t_matrix	get_submatrix(t_matrix t, size_t del_row, size_t del_col)
 {
-	float	sub_m[MAX][MAX];
+	double	sub_m[MAX][MAX];
 	size_t	row;
 	size_t	col;
 
@@ -54,24 +54,24 @@ t_matrix	get_submatrix(t_matrix t, size_t del_row, size_t del_col)
 	return (create_matrix(sub_m, t.size - 1));
 }
 
-/* float	get_minor(t_matrix t, size_t row, size_t col)
+/* double	get_minor(t_matrix t, size_t row, size_t col)
 {
 	return (get_determinant(get_submatrix(t, row, col)));
 } */
 /* Get the determinant of the submatrix of the given matrix */
-float	get_minor(t_matrix t, size_t row, size_t col)
+double	get_minor(t_matrix t, size_t row, size_t col)
 {
 	t_matrix	m;
-	float		minor;
+	double		minor;
 
 	m = get_submatrix(t, row, col);
 	minor = get_determinant(m);
 	return (minor);
 }
 
-float	get_cofactor(t_matrix t, size_t row, size_t col)
+double	get_cofactor(t_matrix t, size_t row, size_t col)
 {
-	float		cofactor;
+	double		cofactor;
 
 	cofactor = get_minor(t, row, col);
 	if ((row + col) % 2 == 1)
@@ -81,7 +81,7 @@ float	get_cofactor(t_matrix t, size_t row, size_t col)
 
 t_matrix	get_identity_matrix(void)
 {
-	const float	table_id[MAX][MAX] = {
+	const double	table_id[MAX][MAX] = {
 	{1, 0, 0, 0},
 	{0, 1, 0, 0},
 	{0, 0, 1, 0},
