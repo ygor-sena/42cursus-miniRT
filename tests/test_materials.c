@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:46:43 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/21 16:19:22 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/26 09:09:23 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,17 @@ Test(materials, eye_between_lt_surface)
 
 	t_material	m;
 	t_tuple		position;
-	//t_shape		shape;
+	t_shape		shape;
 
 	m = material();
-	//shape.material = m;
+	shape.material = m;
 	position = point(0, 0, 0);
 
 	sight.eyev = vector(0, 0, -1);
 	sight.normalv = vector(0, 0, -1);
 	light = point_light(point(0, 0, -10), new_color(1, 1, 1));
-	//result = lighting(&shape, light, position, sight);
-	result = lighting(m, light, position, sight);
+	result = lighting(&shape, light, position, sight);
+	//result = lighting(m, light, position, sight);
 	expected = new_color(1.9, 1.9, 1.9);
 
 	cr_assert_float_eq(result.red, expected.red, EPSILON);
@@ -88,18 +88,18 @@ Test(materials, eye_between_lt_surface_offset_45)
 
 	t_material	m;
 	t_tuple		position;
-	//t_shape		shape;
+	t_shape		shape;
 
 	m = material();
 	position = point(0, 0, 0);
-	//shape.material = m;
+	shape.material = m;
 	
 	coord = sqrtf(2)/2.0;
 	sight.eyev = vector(0, coord, -coord);
 	sight.normalv = vector(0, 0, -1);
 	light = point_light(point(0, 0, -10), new_color(1, 1, 1));
-	//result = lighting(&shape, light, position, sight);
-	result = lighting(m, light, position, sight);
+	result = lighting(&shape, light, position, sight);
+	//result = lighting(m, light, position, sight);
 	expected = new_color(1.0, 1.0, 1.0);
 
 	cr_assert_float_eq(result.red, expected.red, EPSILON);
@@ -117,17 +117,17 @@ Test(materials, eye_opposite_surface_lt_offset_45)
 
 	t_material	m;
 	t_tuple		position;
-	//t_shape		shape;
+	t_shape		shape;
 
 	m = material();
 	position = point(0, 0, 0);
-	//shape.material = m;
+	shape.material = m;
 
 	sight.eyev = vector(0, 0, -1);
 	sight.normalv = vector(0, 0, -1);
 	light = point_light(point(0, 10, -10), new_color(1, 1, 1));
-	//result = lighting(&shape, light, position, sight);
-	result = lighting(m, light, position, sight);
+	result = lighting(&shape, light, position, sight);
+	//result = lighting(m, light, position, sight);
 	expected = new_color(0.7364, 0.7364, 0.7364);
 
 	cr_assert_float_eq(result.red, expected.red, EPSILON);
@@ -146,18 +146,18 @@ Test(materials, eye_reflection_light_path)
 
 	t_material	m;
 	t_tuple		position;
-	//t_shape		shape;
+	t_shape		shape;
 
 	m = material();
 	position = point(0, 0, 0);
-	//shape.material = m;
+	shape.material = m;
 
 	coord = sqrtf(2)/2.0;
 	sight.eyev = vector(0, -coord, -coord);
 	sight.normalv = vector(0, 0, -1);
 	light = point_light(point(0, 10, -10), new_color(1, 1, 1));
-	//result = lighting(&shape, light, position, sight);
-	result = lighting(m, light, position, sight);
+	result = lighting(&shape, light, position, sight);
+	//result = lighting(m, light, position, sight);
 	expected = new_color(1.63639, 1.63639, 1.63639);
 
 	cr_assert_float_eq(result.red, expected.red, EPSILON);
@@ -175,17 +175,17 @@ Test(materials, eye_light_behind_surface)
 
 	t_material	m;
 	t_tuple		position;
-	//t_shape		shape;
+	t_shape		shape;
 
 	m = material();
 	position = point(0, 0, 0);
-	//shape.material = m;
+	shape.material = m;
 
 	sight.eyev = vector(0, 0, -1);
 	sight.normalv = vector(0, 0, -1);
 	light = point_light(point(0, 0, 10), new_color(1, 1, 1));
-	//result = lighting(&shape, light, position, sight);
-	result = lighting(m, light, position, sight);
+	result = lighting(&shape, light, position, sight);
+	//result = lighting(m, light, position, sight);
 	expected = new_color(0.1, 0.1, 0.1);
 
 	cr_assert_float_eq(result.red, expected.red, EPSILON);
@@ -203,11 +203,11 @@ Test(materials, lighting_surface_in_shadow)
 
 	t_material	m;
 	t_tuple		position;
-	//t_shape		shape;
+	t_shape		shape;
 
 	m = material();
 	position = point(0, 0, 0);
-	//shape.material = m;
+	shape.material = m;
 
 	expected = new_color(0.1, 0.1, 0.1);
 	eye.eyev = vector(0, 0, 1);
@@ -215,8 +215,8 @@ Test(materials, lighting_surface_in_shadow)
 	position = point(0, 0, 0);
 	light = point_light(point(0, 0, -10), new_color(1, 1, 1));
 	light.in_shadow = TRUE;
-	//result = lighting(&shape, light, position, eye);
-	result = lighting(m, light, position, eye);
+	result = lighting(&shape, light, position, eye);
+	//result = lighting(m, light, position, eye);
 
 	cr_assert_float_eq(result.red, expected.red, EPSILON);
 	cr_assert_float_eq(result.green, expected.green, EPSILON);
