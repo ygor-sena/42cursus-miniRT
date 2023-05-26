@@ -12,7 +12,7 @@
 
 #include "lights.h"
 
-t_light	point_light(t_tuple position, t_color intensity)
+t_light	point_light(t_point position, t_color intensity)
 {
 	return ((t_light){
 		.position = position,

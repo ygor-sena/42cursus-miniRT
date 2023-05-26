@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   materials.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:05:52 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/22 15:22:40 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:34:20 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ typedef struct s_material
  */
 typedef struct s_exposure
 {
-	t_color	effective_color;
-	t_tuple	lightv;
-	t_tuple	reflectv;
-	float	light_dot_normal;
-	float	reflect_dot_eye;
-	float	factor;
+	t_color		effective_color;
+	t_vector	lightv;
+	t_vector	reflectv;
+	float		light_dot_normal;
+	float		reflect_dot_eye;
+	float		factor;
 }	t_exposure;
 
 /**

@@ -26,7 +26,7 @@ typedef struct s_pattern	t_pattern;
  *        stripe_at instead.
  */
 typedef t_color				(*t_pttr_at)(t_pattern pattern,
-												t_tuple world_point);
+												t_point world_point);
 
 /**
  * @brief The type t_pattern contatins all the necessary information to apply a
@@ -68,7 +68,7 @@ t_pattern	new_pattern(t_color a, t_color b);
  * @return The function returns the first pattern color a if condition is met.
  *         Otherwise, it returns the second pattern b.
  */
-t_color		stripe_at(t_pattern pattern, t_tuple world_point);
+t_color		stripe_at(t_pattern pattern, t_point world_point);
 
 /**
  * @brief This function applies a checkered pattern on shape's surface located
@@ -80,7 +80,7 @@ t_color		stripe_at(t_pattern pattern, t_tuple world_point);
  * @return The function returns the first pattern color a if condition is met.
  *         Otherwise, it returns the second pattern b.
  */
-t_color		checkered_at(t_pattern pattern, t_tuple world_point);
+t_color		checkered_at(t_pattern pattern, t_point world_point);
 
 /**
  * @brief This function assigns a transformation matrix to a pattern, which is

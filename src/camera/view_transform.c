@@ -12,13 +12,13 @@
 
 #include "camera.h"
 
-static t_matrix	orient_xform(t_tuple forward, t_tuple left, t_tuple true_up);
+static t_matrix	orient_xform(t_vector forward, t_vector left, t_vector true_up);
 
-t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
+t_matrix	view_transform(t_point from, t_point to, t_vector up)
 {
-	t_tuple		forward;
-	t_tuple		left;
-	t_tuple		true_up;
+	t_point		forward;
+	t_point		left;
+	t_vector	true_up;
 	t_matrix	orientation;
 
 	forward = normalize(subtract(to, from));
@@ -31,7 +31,7 @@ t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
 	);
 }
 
-static t_matrix	orient_xform(t_tuple forward, t_tuple left, t_tuple true_up)
+static t_matrix	orient_xform(t_vector forward, t_vector left, t_vector true_up)
 {
 	const double	table[MAX][MAX] = {
 	{left.x, left.y, left.z, 0},

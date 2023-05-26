@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   guards.c                                           :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 20:26:40 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/26 09:08:17 by yde-goes         ###   ########.fr       */
+/*   Created: 2023/05/25 15:18:54 by yde-goes          #+#    #+#             */
+/*   Updated: 2023/05/26 09:11:54 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "helpers.h"
 
-void	*oom(void *ptr)
+void	swap(double *nbr1, double *nbr2)
 {
-	if (ptr == NULL)
-	{
-		perror("minirt");
-		exit(EXIT_FAILURE);
-	}
-	return (ptr);
+	double	tmp;
+
+	tmp = *nbr1;
+	*nbr1 = *nbr2;
+	*nbr2 = tmp;
 }

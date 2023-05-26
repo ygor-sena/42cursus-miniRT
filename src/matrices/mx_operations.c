@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mx_operations.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 10:44:17 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/24 11:13:37 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/26 09:08:38 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrices.h"
 #include "tuples.h"
 
-/*	WARNING: Maybe refactor 4x4 multiplication, 
-*	same case of the function below
-*/
 t_matrix	multiply_mx_mx(t_matrix a, t_matrix b)
 {
 	double		m[MAX][MAX];
@@ -38,10 +35,6 @@ t_matrix	multiply_mx_mx(t_matrix a, t_matrix b)
 	return (create_matrix(m, MAX));
 }
 
-/*	WARNING: Maybe this one will need refactor.
-*	MAX --> t.size
-*	aux variable to multiply row/columns
-*/
 t_tuple	multiply_tp_mx(t_matrix a, t_tuple b)
 {
 	double		t[MAX];
@@ -58,11 +51,6 @@ t_tuple	multiply_tp_mx(t_matrix a, t_tuple b)
 	return (tuple(t[0], t[1], t[2], t[3]));
 }
 
-/* 
-*	OBS: assuming that t will always be a 4x4 matrix.
-*	If it's a 3x3 or 2x2, maybe it'll generate a bug...
-*	ft_bzero(m, sizeof(double) * SIZE); line 70
-*/
 t_matrix	transpose(t_matrix	t)
 {
 	size_t		row;
@@ -79,15 +67,6 @@ t_matrix	transpose(t_matrix	t)
 	return (create_matrix(m, t.size));
 }
 
-/* double newPrecision(double n, double i)
-{
-    return floor(pow(10,i)*n)/pow(10,i);
-} 
-*/
-/*	This function can be refactored because of decimal precision
-*	Is five precision points suficient? Ow do we need 9?
-	ft_bzero(inverted, sizeof(double) * SIZE); line 99
- */
 t_matrix	inverse(t_matrix t)
 {	
 	double	inverted[MAX][MAX];
