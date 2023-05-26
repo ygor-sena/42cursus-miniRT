@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:37:57 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/25 14:33:07 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/26 09:09:27 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,23 +247,23 @@ Test(patterns, lighting_with_stripe_pattern_applied)
 	t_light		light;
 	t_color		c1;
 	t_color		c2;
-	//t_shape		shape;
+	t_shape		shape;
 
-	//shape = new_sphere();
+	shape = new_sphere();
 	m = material();
 	m.pattern = new_pattern(new_color(1, 1, 1), new_color(0, 0, 0));
 	m.ambient = new_color(1, 1, 1);
 	m.diffuse = 0;
 	m.specular = 0;
-	//shape.material = m;
+	shape.material = m;
 	sight.eyev = vector(0, 0, -1);
 	sight.normalv = vector(0, 0, -1);
 	light = point_light(point(0, 0, -10), new_color(1, 1, 1));
 	light.in_shadow = FALSE;
-	//c1 = lighting(shape, light, point(0.9, 0, 0), sight);
-	c1 = lighting(m, light, point(0.9, 0, 0), sight);
-	//c2 = lighting(shape, light, point(1.1, 0, 0), sight);
-	c2 = lighting(m, light, point(1.1, 0, 0), sight);
+	c1 = lighting(&shape, light, point(0.9, 0, 0), sight);
+	//c1 = lighting(m, light, point(0.9, 0, 0), sight);
+	c2 = lighting(&shape, light, point(1.1, 0, 0), sight);
+	//c2 = lighting(m, light, point(1.1, 0, 0), sight);
 	
 	cr_assert(eq(flt, c1.red, 1));
 	cr_assert(eq(flt, c1.green, 1));

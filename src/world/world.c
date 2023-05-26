@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:29:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/25 14:33:50 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/26 09:09:05 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_color	shade_hit(t_world world, t_comps comps)
 				&world, comps.over_point, index);
 		color = add_color(color,
 				lighting(
-					comps.object->material,
+					comps.object,
 					world.lights[index],
 					comps.point,
 					comps.sight

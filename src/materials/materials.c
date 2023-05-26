@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   materials.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:11:46 by yde-goes          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2023/05/21 15:52:20 by mdias-ma         ###   ########.fr       */
-=======
-/*   Updated: 2023/05/19 21:36:26 by yde-goes         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2023/05/26 09:08:26 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +29,7 @@ t_material	material(void)
 	});
 }
 
-/* t_color	lighting(t_shape *shape, t_light light, t_tuple point, t_sight sight)
+t_color	lighting(t_shape *shape, t_light light, t_tuple point, t_sight sight)
 {
 	t_exposure	e;
 	t_color		color;
@@ -48,22 +44,6 @@ t_material	material(void)
 	if (e.light_dot_normal < 0 || light.in_shadow == TRUE)
 		return (dark_exposure(shape->material, e));
 	return (light_exposure(shape->material, light, e, sight));
-} */
-t_color	lighting(t_material m, t_light light, t_tuple point, t_sight sight)
-{
-	t_exposure	e;
-	t_color		color;
-
-	if (m.pattern.has_pattern)
-		color = m.pattern.pattern_at(m.pattern, point);
-	else
-		color = m.color;
-	e.effective_color = hadamard_product(color, light.intensity);
-	e.lightv = normalize(subtract(light.position, point));
-	e.light_dot_normal = dot(e.lightv, sight.normalv);
-	if (e.light_dot_normal < 0 || light.in_shadow == TRUE)
-		return (dark_exposure(m, e));
-	return (light_exposure(m, light, e, sight));
 }
 
 static t_color	dark_exposure(t_material m, t_exposure e)
