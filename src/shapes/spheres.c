@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spheres.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 14:57:40 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/26 09:50:51 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,17 @@ static t_distance	calculate_distance(t_sphere *sphere, t_ray ray)
 	});
 }
 
+t_vector	normal_at_sphere(t_shape *shape, t_point object_point)
+{
+	t_vector	object_normal;
+
+	(void) shape;
+	object_normal = subtract(object_point, point(0, 0, 0));
+	object_normal.w = 0.0;
+	return (normalize(object_normal));
+}
 /**
- * Hack, to ensure we have a clean vector, as due the inverse transpose
+ * HACK: to ensure we have a clean vector, as due the inverse transpose
  * the w component could be affected if the transformation matrix included
  * a translation.
  */
-t_tuple	normal_at_sphere(t_shape *shape, t_tuple world_point)
-{
-	t_tuple	object_point;
-	t_tuple	object_normal;
-	t_tuple	world_normal;
-
-	object_point = multiply_tp_mx(shape->inverse, world_point);
-	object_normal = subtract(object_point, point(0, 0, 0));
-	world_normal = multiply_tp_mx(shape->transpose, object_normal);
-	world_normal.w = 0.0;
-	return (normalize(world_normal));
-}

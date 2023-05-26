@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/23 13:52:18 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/26 01:38:09 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,8 @@ t_shape	new_sphere(void);
  */
 t_tuple	normal_at_sphere(t_shape *shape, t_tuple world_point);
 
+t_vector	normal_at(t_shape *shape, t_point world_point);
+
 /**
  * @brief Calculates the intersection points between a ray and a sphere.
  *
@@ -276,7 +278,7 @@ t_shape	new_plane(void);
  *                    coordinates.
  * @return Returns a tuple representing the normal vector at the given point.
  */
-t_tuple	normal_at_plane(t_shape *shape, t_tuple world_point);
+// t_tuple	normal_at_plane(t_shape *shape, t_tuple world_point);
 
 /**
  * @brief Calculates the intersection of a ray with a plane.
@@ -295,7 +297,7 @@ t_tuple	normal_at_plane(t_shape *shape, t_tuple world_point);
  * @return Returns a boolean value indicating whether the ray intersects the
  *         plane.
  */
-t_bool	intersect_plane(t_hit **xs, t_shape *shape, t_ray ray);
+// t_bool	intersect_plane(t_hit **xs, t_shape *shape, t_ray ray);
 
 /* ************************************************************************** */
 /*                               PATTERNS.C                                   */

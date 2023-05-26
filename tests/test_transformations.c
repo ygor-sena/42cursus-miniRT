@@ -6,13 +6,13 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 10:59:12 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/09 12:38:51 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:26:24 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-/*	Multiplying by a translation matrix */
+/* Multiplying by a translation matrix */
 Test(transformations, mult_by_translation_matrix)
 {
 	t_matrix	transform;
@@ -28,7 +28,7 @@ Test(transformations, mult_by_translation_matrix)
 	cr_assert(eq(flt, result.z, 7));
 }
 
-/*	Multiplying by the inverse of a translation matrix */
+/* Multiplying by the inverse of a translation matrix */
 Test(transformations, mult_by_inv_of_transl_matrix)
 {
 	t_matrix	transform;
@@ -46,7 +46,7 @@ Test(transformations, mult_by_inv_of_transl_matrix)
 	cr_assert(eq(flt, result.z, 3));
 }
 
-/*	Translation does not affect vectors */
+/* Translation does not affect vectors */
 Test(transformations, transl_doesnt_affect_vectors)
 {
 	t_matrix	transform;
@@ -62,7 +62,7 @@ Test(transformations, transl_doesnt_affect_vectors)
 	cr_assert(eq(flt, result.z, v.z));
 }
 
-/*	A scaling matrix applied to a point */
+/* A scaling matrix applied to a point */
 Test(transformations, scaling_matrix_to_point)
 {
 	t_matrix	transform;
@@ -78,7 +78,7 @@ Test(transformations, scaling_matrix_to_point)
 	cr_assert(eq(flt, result.z, 32));
 }
 
-/*	A scaling matrix applied to a vector */
+/* A scaling matrix applied to a vector */
 Test(transformations, scaling_matrix_to_vector)
 {
 	t_matrix	transform;
@@ -94,7 +94,7 @@ Test(transformations, scaling_matrix_to_vector)
 	cr_assert(eq(flt, result.z, 32));
 }
 
-/*	Multiplying by the inverse of a scaling matrix */
+/* Multiplying by the inverse of a scaling matrix */
 Test(transformations, mult_by_inv_of_scaling_mat)
 {
 	t_matrix	transform;
@@ -112,7 +112,7 @@ Test(transformations, mult_by_inv_of_scaling_mat)
 	cr_assert(eq(flt, result.z, 2));
 }
 
-/*	Reflection is scaling by a negative value */
+/* Reflection is scaling by a negative value */
 Test(transformations, scaling_by_neg_value)
 {
 	t_matrix	transform;
@@ -128,7 +128,7 @@ Test(transformations, scaling_by_neg_value)
 	cr_assert(eq(flt, result.z, 4));
 }
 
-/*	Rotating a point around the x axis */
+/* Rotating a point around the x axis */
 Test(transformations, rotation_around_x_axis)
 {
 	t_matrix	half_quarter;
@@ -169,7 +169,7 @@ Test(transformations, inv_x_rotation)
 	cr_assert_float_eq(result.z, -sqrt(2)/2, EPSILON);
 }
 
-/*	Rotating a point around the z axis */
+/* Rotating a point around the y axis */
 Test(transformations, rotation_around_y_axis)
 {
 	t_matrix	half_quarter;
@@ -192,7 +192,7 @@ Test(transformations, rotation_around_y_axis)
 	cr_assert_float_eq(result.z, 0, EPSILON);
 }
 
-/*	A shearing transformation moves x in proportion to y */
+/* Rotating a point around the z axis */
 Test(transformations, rotation_around_z_axis)
 {
 	t_matrix	half_quarter;
@@ -215,7 +215,7 @@ Test(transformations, rotation_around_z_axis)
 	cr_assert_float_eq(result.z, 0, EPSILON);
 }
 
-/*	A shearing transformation moves x in proportion to z */
+/* A shearing transformation moves x in proportion to z */
 Test(transformations, shearing_x_in_y)
 {
 	t_matrix	transform;
@@ -231,7 +231,7 @@ Test(transformations, shearing_x_in_y)
 	cr_assert_float_eq(result.z, 4, EPSILON);
 }
 
-/*	A shearing transformation moves y in proportion to x */
+/* A shearing transformation moves y in proportion to x */
 Test(transformations, shearing_x_in_z)
 {
 	t_matrix	transform;
@@ -247,7 +247,7 @@ Test(transformations, shearing_x_in_z)
 	cr_assert_float_eq(result.z, 4, EPSILON);
 }
 
-/*	A shearing transformation moves y in proportion to z */
+/* A shearing transformation moves y in proportion to z */
 Test(transformations, shearing_y_in_x)
 {
 	t_matrix	transform;
@@ -263,7 +263,7 @@ Test(transformations, shearing_y_in_x)
 	cr_assert_float_eq(result.z, 4, EPSILON);
 }
 
-/*	A shearing transformation moves z in proportion to x */
+/* A shearing transformation moves z in proportion to x */
 Test(transformations, shearing_y_in_z)
 {
 	t_matrix	transform;
@@ -279,7 +279,7 @@ Test(transformations, shearing_y_in_z)
 	cr_assert_float_eq(result.z, 4, EPSILON);
 }
 
-/*	A shearing transformation moves z in proportion to y */
+/* A shearing transformation moves z in proportion to y */
 Test(transformations, shearing_z_in_x)
 {
 	t_matrix	transform;
@@ -295,7 +295,7 @@ Test(transformations, shearing_z_in_x)
 	cr_assert_float_eq(result.z, 6, EPSILON);
 }
 
-/*	Individual transformations are applied in sequence */
+/* Individual transformations are applied in sequence */
 Test(transformations, shearing_z_in_y)
 {
 	t_matrix	transform;
@@ -311,7 +311,7 @@ Test(transformations, shearing_z_in_y)
 	cr_assert_float_eq(result.z, 7, EPSILON);
 }
 
-/*	Individual transformations are applied in sequence */
+/* Individual transformations are applied in sequence */
 Test(transformations, transf_in_sequence)
 {
 	t_tuple		p;
@@ -346,7 +346,7 @@ Test(transformations, transf_in_sequence)
 	cr_assert_float_eq(p4.z, 7, EPSILON);
 }
 
-/*	Chained transformations must be applied in reverse order */
+/* Chained transformations must be applied in reverse order */
 Test(transformations, chained_transf_in_reverse)
 {
 	t_tuple		p;

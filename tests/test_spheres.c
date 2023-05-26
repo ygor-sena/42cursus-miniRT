@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:22:45 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/21 16:16:09 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/26 01:14:01 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,14 +142,14 @@ Test(spheres, intersect_a_translated_sphere_with_a_ray)
 }
 
 /* Checks the normal on a sphere at a point on the x axis */
-Test(spheres, normal_at_sphere_x_axis)
+Test(spheres, normal_at_x_axis)
 {
 	t_shape		s;
 	t_vector	n;
 	t_tuple		res;
 
 	s = new_sphere();
-	n = normal_at_sphere(&s, point(1, 0, 0));
+	n = normal_at(&s, point(1, 0, 0));
 	res = vector(1, 0, 0);
 
 	cr_assert(eq(flt, n.x, res.x));
@@ -159,14 +159,14 @@ Test(spheres, normal_at_sphere_x_axis)
 }
 
 /* Checks the normal on a sphere at a point on the y axis */
-Test(spheres, normal_at_sphere_y_axis)
+Test(spheres, normal_at_y_axis)
 {
 	t_shape		s;
 	t_vector	n;
 	t_tuple		res;
 
 	s = new_sphere();
-	n = normal_at_sphere(&s, point(0, 1, 0));
+	n = normal_at(&s, point(0, 1, 0));
 	res = vector(0, 1, 0);
 
 	cr_assert(eq(flt, n.x, res.x));
@@ -176,14 +176,14 @@ Test(spheres, normal_at_sphere_y_axis)
 }
 
 /* Checks the normal on a sphere at a point on the z axis */
-Test(spheres, normal_at_sphere_z_axis)
+Test(spheres, normal_at_z_axis)
 {
 	t_shape		s;
 	t_vector	n;
 	t_tuple		res;
 
 	s = new_sphere();
-	n = normal_at_sphere(&s, point(0, 0, 1));
+	n = normal_at(&s, point(0, 0, 1));
 	res = vector(0, 0, 1);
 
 	cr_assert(eq(flt, n.x, res.x));
@@ -193,7 +193,7 @@ Test(spheres, normal_at_sphere_z_axis)
 }
 
 /* Checks the normal on a sphere at a nonaxial point */
-Test(spheres, normal_at_sphere_nonaxial_pt)
+Test(spheres, normal_at_nonaxial_pt)
 {
 	t_shape		s;
 	t_vector	n;
@@ -202,7 +202,7 @@ Test(spheres, normal_at_sphere_nonaxial_pt)
 
 	s = new_sphere();
 	coord = sqrtf(3.0)/3.0;
-	n = normal_at_sphere(&s, point(coord, coord, coord));
+	n = normal_at(&s, point(coord, coord, coord));
 	res = vector(coord, coord, coord);
 
 	cr_assert_float_eq(n.x, res.x, EPSILON);
@@ -225,7 +225,7 @@ Test(spheres, normal_is_normalized_vector)
 
 	s = new_sphere();
 	coord = sqrtf(3.0)/3.0;
-	n = normal_at_sphere(&s, point(coord, coord, coord));
+	n = normal_at(&s, point(coord, coord, coord));
 	res = normalize(n);
 
 	cr_assert_float_eq(n.x, res.x, EPSILON);
@@ -246,7 +246,7 @@ Test(spheres, normal_on_a_translated_sphere)
 
 	s = new_sphere();
 	set_transform(&s, translation(0.0, 1.0, 0.0));
-	n = normal_at_sphere(&s, point(0, 1.70711, -0.70711));
+	n = normal_at(&s, point(0, 1.70711, -0.70711));
 	res = vector(0, 0.70711, -0.70711);
 
 	cr_assert_float_eq(n.x, res.x, EPSILON);
@@ -272,7 +272,7 @@ Test(spheres, normal_on_a_transformed_sphere)
 			rotation_z((float) M_PI/5.0));
 	set_transform(&s, m);
 	coord = sqrtf(2)/2.0;
-	n = normal_at_sphere(&s, point(0, coord, -coord));
+	n = normal_at(&s, point(0, coord, -coord));
 	res = vector(0, 0.97014, -0.24254);
 	cr_assert_float_eq(n.x, res.x, EPSILON);
 	cr_assert_float_eq(n.y, res.y, EPSILON);
