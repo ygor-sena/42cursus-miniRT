@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/26 09:08:02 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:19:37 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,21 @@ typedef t_tuple				(*t_normal_at)(t_shape *, t_tuple);
  * @struct t_shape
  * @brief Represents a shape in a scene.
  *
- * @param transform The transformation matrix for the shape.
- * @param material The material of the shape.
- * @param intersect The function used to calculate the intersection of a ray
- *                  with the shape.
- * @param normal_at The function used to calculate the normal at a point on
- *                  the shape.
+ * @union This union of shapes represent the possible geometric forms that
+ *        structure t_shape can assume, i.e., to be a sphere, a plane, a
+ *        cylinder or a cone. Each shape has its own particular values. The
+ *        fields below are common properties shared by all types of shape. Each
+ *        one of them is going to be manipulated (transform, inverse and
+ *        transpose), be made of some matter (material) and be intersected by
+ *        rays (intersect and normal_at).
+ * @param transform Stores the transformation matrix for the shape.
+ * @param inverse Stores the inverse matrix for the shape.
+ * @param transpose Stores the transpose matrix for the shape.
+ * @param material Stores the material information of the shape.
+ * @param intersect Stores the function's name used to calculate the
+ *                  intersection of a ray with the shape.
+ * @param normal_at Stores the function's name used to calculate the normal at a
+ *                  point on the shape.
  */
 typedef struct s_shape
 {
@@ -99,7 +108,20 @@ typedef struct s_pythagoras
 /*                             INTERSECTIONS.C                                */
 /* ************************************************************************** */
 
-// TODO: document this
+/**
+ * @brief This function gets shape's intersection from ray's origin. If the ray
+ *        is inside the shape, then there is one intersection in front of the
+ *        ray and another one behind it. When the ray intersects the shape at
+ *        one point only, the function returns two intersections with the same
+ *        point each. This will be helpful when dealing with object overlaps in
+ *        ch. 16 (Constructive Solid Geometry - CSG).
+ *
+ * @param xs A struct of type t_hit that stores intersections' values, if any.
+ * @param sphere A struct of type t_shape containing a shape.
+ * @param ray A struct of type t_ray containing a ray.
+ * @return Returns `TRUE` if an intersection was found and added to the list.
+ *         Otherwise, returns `FALSE`.
+ */
 t_bool			intersect(t_hit **xs, t_shape *shape, t_ray ray);
 
 /**
@@ -155,9 +177,6 @@ void			insert_intersection(t_hit **xs, t_hit *i);
  *         visible intersection from the list of intersection records.
  */
 t_hit			*hit(t_hit *xs);
-
-// TODO: move to utils.c
-int				intersection_count(t_hit *xs);
 
 /* ************************************************************************** */
 /*                                 SHAPES.C                                   */
@@ -242,7 +261,7 @@ t_tuple			normal_at_sphere(t_shape *shape, t_tuple world_point);
  *              sphere to be intersected.
  * @param ray A structure of type `t_ray` representing the ray to be intersected
  *            with the sphere.
- * @return Returns `true` if an intersection was found, `false` otherwise.
+ * @return Returns `TRUE` if an intersection was found, `FALSE` otherwise.
  */
 t_bool			intersect_sphere(t_hit **xs, t_shape *shape, t_ray ray);
 
@@ -257,8 +276,8 @@ t_bool			intersect_sphere(t_hit **xs, t_shape *shape, t_ray ray);
  * `new_shape()` and then assigning specific properties to it. The function
  * returns a structure of type `t_shape` representing the new plane.
  *
- * @return A structure of type `t_shape` representing a new plane with default
- *         properties.
+ * @return Returns a structure of type `t_shape` representing a new plane with
+ *         default properties.
  */
 t_shape			new_plane(void);
 
@@ -327,8 +346,8 @@ t_color			pattern_at_shape(t_pattern pattern,
  * the material is exposed to light directly and, in addition to ambient
  * reflection, the diffuse and specular reflection are also calculated.
  *
- * @param m A struct of type t_material that stores the material's color,
- * ambient, diffuse, specular and shininess attributes.
+ * @param shape A struct of type t_shape that stores the shape's material
+ *              color, ambient, diffuse, specular and shininess attributes.
  * @param light A struct of type t_light containing the light's source.
  * @param point A struct of type t_tuple of the point being illuminated.
  * @param sight A struct of type t_sight with the values of eye and normal
@@ -351,8 +370,8 @@ t_color			lighting(t_shape *shape, t_light light,
  * The function returns a structure of type `t_shape` representing the new
  * cylinder.
  *
- * @return A structure of type `t_shape` representing a new cylinder with
- *         default properties.
+ * @return Returns a structure of type `t_shape` representing a new cylinder
+ *         with default properties.
  */
 t_shape			new_cylinder(void);
 
@@ -439,6 +458,10 @@ t_bool			intersect_cone(t_hit **xs, t_shape *shape, t_ray ray);
  * @return Returns a tuple representing the normal vector at the given point.
  */
 t_tuple			normal_at_cone(t_shape *shape, t_tuple world_point);
+
+/* ************************************************************************** */
+/*                             DISCRIMINANTS.C                                */
+/* ************************************************************************** */
 
 /**
  * @brief This function returns the necessary data to evaluate a ray-sphere

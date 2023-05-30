@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrices.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:06 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/24 11:14:12 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:19:29 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
  *        is a grid of numbers that can be manipulated as a single unit.
  *        Matrices and their operations are the foundational basis which will
  *        helps us to manipulate points, vectors and, ultimately, shapes.
+ *
+ * @param matrix Stores a matrix.
+ * @param size Stores the size of the matrix. For example, a matrix of 3x3 has a
+ *             size of 9. For instance, a 2x2 matrix has a size of 4.
  */
 typedef struct s_matrix
 {
@@ -42,6 +46,9 @@ typedef struct s_matrix
  *        t_shearing containing the y and z values. For instance, when done to
  *        the y axis, we pass p1 and p2 which stands for x and z. Lastly, when
  *        applying it to the z axis, we pass x and y as p1 and p2, respectively.
+ *
+ * @param p1 The first value to be used as proportion for shearing.
+ * @param p2 The second value to be used as proportion for shearing.
  */
 typedef struct s_shearing
 {
@@ -60,8 +67,8 @@ typedef struct s_shearing
  *
  * @param a Receives the first matrix to be multiplied.
  * @param b Receives the second matrix to be multiplied.
- * @return (t_matrix) Returns a new matrix which is the product of the two
- *         matrices passed to the function as parameter.
+ * @return Returns a new matrix which is the product of the two matrices passed
+ *         to the function as parameter.
  */
 t_matrix	multiply_mx_mx(t_matrix a, t_matrix b);
 
@@ -73,8 +80,8 @@ t_matrix	multiply_mx_mx(t_matrix a, t_matrix b);
  *
  * @param a Receives the matrix to be multiplied.
  * @param b Receives the tuple to be multiplied.
- * @return (t_tuple) Returns a new tuple which is the product of the two
- *         variables passed to the function as parameter.
+ * @return Returns a new tuple which is the product of the two variables passed
+ *         to the function as parameter.
  */
 t_tuple		multiply_tp_mx(t_matrix a, t_tuple b);
 
@@ -86,8 +93,8 @@ t_tuple		multiply_tp_mx(t_matrix a, t_tuple b);
  *        always gives the own identity matrix as result.
  *
  * @param t Receives the matrix to be transposed.
- * @return (t_matrix) Returns a new matrix which is the transposition of the
- *         matrix passed to the function as parameter.
+ * @return Returns a new matrix which is the transposition of the matrix passed
+ *         to the function as parameter.
  */
 t_matrix	transpose(t_matrix t);
 
@@ -105,8 +112,8 @@ t_matrix	transpose(t_matrix t);
  *        will always be different.
  *
  * @param t Receives the matrix to be inverted.
- * @return (t_matrix) Returns a new matrix which is the inversion of the matrix
- *         passed to the function as parameter.
+ * @return Returns a new matrix which is the inversion of the matrix passed to
+ *         the function as parameter.
  */
 t_matrix	inverse(t_matrix t);
 
@@ -123,8 +130,8 @@ t_matrix	inverse(t_matrix t);
  * @param x Receives the x-axis value of the translation.
  * @param y Receives the y-axis value of the translation.
  * @param z Receives the z-axis value of the translation.
- * @return (t_matrix) Returns a new translated matrix from the coordinates
- *         passed to the function as parameter.
+ * @return Returns a new translated matrix from the coordinates passed to the
+ *         function as parameter.
  */
 t_matrix	translation(double x, double y, double z);
 
@@ -138,8 +145,8 @@ t_matrix	translation(double x, double y, double z);
  * @param x Receives the x-axis value to scale.
  * @param y Receives the y-axis value to scale.
  * @param z Receives the z-axis value to scale.
- * @return (t_matrix) Returns a new scaled matrix from the coordinates passed to
- *         the function as parameter.
+ * @return Returns a new scaled matrix from the coordinates passed to the
+ *         function as parameter.
  */
 t_matrix	scaling(double x, double y, double z);
 
@@ -157,8 +164,8 @@ t_matrix	scaling(double x, double y, double z);
  *          in proportion to them. 
  * @param z Receives a struct t_shearing storing the x and y values to change z
  *          in proportion to them. 
- * @return (t_matrix) Returns a new matrix after the shearing operation from
- *         values passed to the function as parameter.
+ * @return Returns a new matrix after the shearing operation from values passed
+ *         to the function as parameter.
  */
 t_matrix	shearing(t_shearing x, t_shearing y, t_shearing z);
 
@@ -170,8 +177,8 @@ t_matrix	shearing(t_shearing x, t_shearing y, t_shearing z);
  * @brief This function rotates a given matrix around the x-axis.
  *
  * @param rad Receives the rotation around x axis to be performed in radians.
- * @return (t_matrix) Returns a new rotated matrix after the rotation passed to
- *         the function as parameter.
+ * @return Returns a new rotated matrix after the rotation passed to the
+ *         function as parameter.
  */
 t_matrix	rotation_x(double rad);
 
@@ -179,8 +186,8 @@ t_matrix	rotation_x(double rad);
  * @brief This function rotates a given matrix around the y-axis.
  *
  * @param rad Receives the rotation around y axis to be performed in radians.
- * @return (t_matrix) Returns a new rotated matrix after the rotation passed to
- *         the function as parameter.
+ * @return Returns a new rotated matrix after the rotation passed to the
+ *         function as parameter.
  */
 t_matrix	rotation_y(double rad);
 
@@ -188,8 +195,8 @@ t_matrix	rotation_y(double rad);
  * @brief This function rotates a given matrix around the z-axis.
  *
  * @param rad Receives the rotation around z axis to be performed in radians.
- * @return (t_matrix) Returns a new rotated matrix after the rotation passed to
- *         the function as parameter.
+ * @return Returns a new rotated matrix after the rotation passed to the
+ *         function as parameter.
  */
 t_matrix	rotation_z(double rad);
 
@@ -206,8 +213,8 @@ t_matrix	rotation_z(double rad);
  *        has no solution.
  *
  * @param t Receives the matrix to calculate its determinant.
- * @return (double) Returns a double value which is the determinant of the matrix
- *         passed to the function as parameter.
+ * @return Returns a double value which is the determinant of the matrix passed
+ *         to the function as parameter.
  */
 double		get_determinant(t_matrix t);
 
@@ -222,8 +229,8 @@ double		get_determinant(t_matrix t);
  *                deleted when calculating the submatrix.
  * @param del_col Receives a size_t value which stands for the column to be
  *                deleted when calculating the submatrix.
- * @return (t_matrix) Returns the submatrix of the matrix passed to the function
- *         as parameter.
+ * @return Returns the submatrix of the matrix passed to the function as
+ *         parameter.
  */
 t_matrix	get_submatrix(t_matrix t, size_t del_row, size_t del_col);
 
@@ -235,8 +242,7 @@ t_matrix	get_submatrix(t_matrix t, size_t del_row, size_t del_col);
  * @param t Receives the matrix from which the minor will be calculated.
  * @param row Receives the row value from which the minor will be calculated.
  * @param col Receives the column value from which the minor will be calculated.
- * @return (double) Returns the minor of the matrix passed to the function
- *         as parameter.
+ * @return Returns the minor of the matrix passed to the function as parameter.
  */
 double		get_minor(t_matrix t, size_t row, size_t col);
 
@@ -252,8 +258,8 @@ double		get_minor(t_matrix t, size_t row, size_t col);
  * @param row Receives the row value from which the cofactor will be calculated.
  * @param col Receives the column value from which the cofactor will be
  *            calculated.
- * @return (double) Returns the cofactor of the matrix passed to the function
- *         as parameter.
+ * @return Returns the cofactor of the matrix passed to the function as
+ *         parameter.
  */
 double		get_cofactor(t_matrix t, size_t row, size_t col);
 
@@ -263,7 +269,7 @@ double		get_cofactor(t_matrix t, size_t row, size_t col);
  *        any matrix or tuple by the identity matrix, you get back the matrix or
  *        tuple you started with.
  *
- * @return (t_matrix) Returns a new instance of an identity matrix.
+ * @return Returns a new instance of an identity matrix.
  */
 t_matrix	get_identity_matrix(void);
 
@@ -279,9 +285,8 @@ t_shearing	to_shear(double a, double b);
  *
  * @param table A bidimensional array of const double containing the matrix.
  * @param size A size_t value containing how much elements the array has.
- * @return (t_matrix) Returns successfully a new matrix created with
- *         ft_memmove() from the array and array's size passed as parameter to
- *         the function.
+ * @return Returns successfully a new matrix created with ft_memmove() from the
+ *         array and array's size passed as parameter to the function.
  */
 t_matrix	create_matrix(const double table[MAX][MAX], size_t size);
 
@@ -292,8 +297,8 @@ t_matrix	create_matrix(const double table[MAX][MAX], size_t size);
  *
  * @param a Receives the first matrix to be compared.
  * @param b Receives the second matrix to be compared.
- * @return (int) The function returns 0 if the matrices are identical.
- *         Otherwise, it returns a non-zero integer.
+ * @return The function returns 0 if the matrices are identical. Otherwise, it
+ *         returns a non-zero integer.
  */
 int			compare_matrix(t_matrix	a, t_matrix b);
 
@@ -304,8 +309,8 @@ int			compare_matrix(t_matrix	a, t_matrix b);
  *        invertible.
  *
  * @param t Receives a matrix to be checked.
- * @return (t_bool) Returns TRUE if the given matrix is invertible. On the
- *         contrary, it returns FALSE if it's not invertible.
+ * @return Returns TRUE if the given matrix is invertible. On the contrary, it
+ *         returns FALSE if it's not invertible.
  */
 t_bool		is_invertible(t_matrix t);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 12:29:11 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 14:19:31 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:19:13 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,29 @@
 # include "matrices.h"
 # include "rays.h"
 
+/**
+ * ABOUT THE HEADER CAMERA.H
+ *
+ * This header contains all functions regarding camera implementation.
+ */
+
+/**
+ * @brief The structure of type t_camera contains the necessary information for
+ *        camera configuration, rendering and transformation.
+ * @param hsize Stores the horizontal size (in pixels).
+ * @param vsize Stores the vertical size (in pixels).
+ * @param field_of_view This field stores angle that describes how much the
+ *                      camera can see. When the field of view is small, the
+ *                      view will be "zoomed in", magnifying a smaller area of
+ *                      the scene.
+ * @param half_width Stores the camera's half hsize value.
+ * @param half_height Stores the camera's half vsize value.
+ * @param pixel_size Stores the camera's pixel size calculated from half_width
+ *                   and hsize values.
+ * @param transform Stores the transformation matrix for the camera.
+ * @param inverse Stores the inverse matrix for the camera.
+ * @param transpose Stores the transpose matrix for the camera.
+ */
 typedef struct s_camera
 {
 	float		hsize;
@@ -30,6 +53,10 @@ typedef struct s_camera
 	t_matrix	transpose;
 }	t_camera;
 
+/* ************************************************************************** */
+/*                             VIEW_TRANSFORM.C                               */
+/* ************************************************************************** */
+
 /**
  * @brief Computes the view transformation matrix given the position of the
  *        camera and the point to look at.
@@ -42,9 +69,13 @@ typedef struct s_camera
  * @param from The position of the camera in the world.
  * @param to The point in the world to look at.
  * @param up A vector indicating which direction is up.
- * @return The view transformation matrix.
+ * @return Returns the view transformation matrix.
  */
 t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up);
+
+/* ************************************************************************** */
+/*                                 CAMERA.C                                   */
+/* ************************************************************************** */
 
 /**
  * @brief Creates a new camera with the given attributes.
@@ -61,7 +92,7 @@ t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up);
  * @param field_of_view The angle that describes how much the camera can see.
  *                      When the field of view is small, the view will be
  *                      "zoomed in", magnifying a smaller area of the scene.
- * @return The new camera.
+ * @return Returns the instance of a new camera.
  */
 t_camera	new_camera(float hsize, float vsize, float field_of_view);
 
@@ -83,7 +114,8 @@ t_camera	new_camera(float hsize, float vsize, float field_of_view);
  * @param camera Pointer to the camera object.
  * @param px The horizontal coordinate of the pixel on the camera plane.
  * @param py The vertical coordinate of the pixel on the camera plane.
- * @return A ray that passes through the specified pixel on the camera plane.
+ * @return Returns a ray that passes through the specified pixel on the camera
+ *         plane.
  */
 t_ray		ray_for_pixel(t_camera *camera, float px, float py);
 

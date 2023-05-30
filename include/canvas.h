@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   canvas.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:28:08 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 14:51:21 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:19:18 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 /**
  * ABOUT THE HEADER CANVAS.H
  *
- * This header contains all funtions that works directly or indirectly with
+ * This header contains all functions that works directly or indirectly with
  * graphic information and MLX's library manipulation.
  */
 
