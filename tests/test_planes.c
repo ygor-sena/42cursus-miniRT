@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:52:01 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 12:38:40 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:22:16 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ Test(planes, constant_normal)
 	t_vector	n3;
 
 	plane = new_plane();
-	n1 = normal_at_plane(&plane, point(0, 0, 0));
-	n2 = normal_at_plane(&plane, point(10, 0, -10));
-	n3 = normal_at_plane(&plane, point(-5, 0, 150));
+	n1 = normal_at(&plane, point(0, 0, 0));
+	n2 = normal_at(&plane, point(10, 0, -10));
+	n3 = normal_at(&plane, point(-5, 0, 150));
 
 	cr_assert(eq(flt, compare_tuples(n1, vector(0, 1, 0)), TRUE));
 	cr_assert(eq(flt, compare_tuples(n2, vector(0, 1, 0)), TRUE));
@@ -40,7 +40,7 @@ Test(planes, intersect_a_ray_parallel)
 	xs = NULL;
 	p = new_plane();
 	r = new_ray(point(0, 10, 0), vector(0, 0, 1));
-	intersect_plane(&xs, &p, r);
+	intersect(&xs, &p, r);
 
 	cr_assert(eq(ptr, xs, NULL));
 }
@@ -55,7 +55,7 @@ Test(planes, intersect_a_coplanar)
 	xs = NULL;
 	p = new_plane();
 	r = new_ray(point(0, 0, 0), vector(0, 0, 1));
-	intersect_plane(&xs, &p, r);
+	intersect(&xs, &p, r);
 
 	cr_assert(eq(ptr, xs, NULL));
 }
@@ -70,7 +70,7 @@ Test(planes, intersect_from_above)
 	xs = NULL;
 	p = new_plane();
 	r = new_ray(point(0, 1, 0), vector(0, -1, 0));
-	intersect_plane(&xs, &p, r);
+	intersect(&xs, &p, r);
 
 	cr_assert(eq(flt, xs[0].t, 1));
 	cr_assert(eq(ptr, xs[0].object, &p));
@@ -86,7 +86,7 @@ Test(planes, intersect_from_below)
 	xs = NULL;
 	p = new_plane();
 	r = new_ray(point(0, -1, 0), vector(0, 1, 0));
-	intersect_plane(&xs, &p, r);
+	intersect(&xs, &p, r);
 
 	cr_assert(eq(flt, xs[0].t, 1));
 	cr_assert(eq(ptr, xs[0].object, &p));

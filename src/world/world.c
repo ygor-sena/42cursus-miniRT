@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:29:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/26 09:09:05 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:20:27 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,17 @@ t_comps	prepare_computations(t_hit *intersection, t_ray ray)
 	comps.object = intersection->object;
 	comps.point = position(ray, comps.t);
 	comps.sight.eyev = negate(ray.direction);
-	comps.sight.normalv = comps.object->normal_at(comps.object, comps.point);
+	comps.sight.normalv = normal_at(comps.object, comps.point);
+	comps.inside = FALSE;
 	if (dot(comps.sight.normalv, comps.sight.eyev) < 0)
 	{
 		comps.inside = TRUE;
 		comps.sight.normalv = negate(comps.sight.normalv);
-		comps.over_point = add(
-				comps.point, multiply(comps.sight.normalv, EPSILON));
-		return (comps);
 	}
 	comps.over_point = add(comps.point, multiply(comps.sight.normalv, EPSILON));
-	comps.inside = FALSE;
 	return (comps);
 }
 
-//comps.object->material becomes comps.object
 t_color	shade_hit(t_world world, t_comps comps)
 {
 	int		index;

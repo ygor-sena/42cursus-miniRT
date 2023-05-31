@@ -37,7 +37,7 @@
  */
 typedef struct s_light
 {
-	t_tuple	position;
+	t_point	position;
 	t_color	intensity;
 	t_bool	in_shadow;
 }	t_light;
@@ -52,8 +52,8 @@ typedef struct s_light
  */
 typedef struct s_sight
 {
-	t_tuple	eyev;
-	t_tuple	normalv;
+	t_vector	eyev;
+	t_vector	normalv;
 }	t_sight;
 
 /* ************************************************************************** */
@@ -72,6 +72,6 @@ typedef struct s_sight
  * and a color intensity in RGB values.
  */
 
-t_light	point_light(t_tuple position, t_color intensity);
+t_light	point_light(t_point position, t_color intensity);
 
 #endif

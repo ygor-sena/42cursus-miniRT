@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   patterns.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:21:56 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/19 20:47:07 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:41:53 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PATTERNS_H
 
 # include "matrices.h"
-# include "libft.h"
 
 typedef struct s_pattern	t_pattern;
 
@@ -26,7 +25,7 @@ typedef struct s_pattern	t_pattern;
  *        stripe_at instead.
  */
 typedef t_color				(*t_pttr_at)(t_pattern pattern,
-												t_tuple world_point);
+												t_point world_point);
 
 /**
  * @brief The type t_pattern contatins all the necessary information to apply a
@@ -45,6 +44,8 @@ typedef struct s_pattern
 	t_color		a;
 	t_color		b;
 	t_matrix	transform;
+	t_matrix	inverse;
+	t_matrix	transpose;
 }	t_pattern;
 
 /**
@@ -68,7 +69,7 @@ t_pattern	new_pattern(t_color a, t_color b);
  * @return The function returns the first pattern color a if condition is met.
  *         Otherwise, it returns the second pattern b.
  */
-t_color		stripe_at(t_pattern pattern, t_tuple world_point);
+t_color		stripe_at(t_pattern pattern, t_point world_point);
 
 /**
  * @brief This function applies a checkered pattern on shape's surface located
@@ -80,7 +81,7 @@ t_color		stripe_at(t_pattern pattern, t_tuple world_point);
  * @return The function returns the first pattern color a if condition is met.
  *         Otherwise, it returns the second pattern b.
  */
-t_color		checkered_at(t_pattern pattern, t_tuple world_point);
+t_color		checkered_at(t_pattern pattern, t_point world_point);
 
 /**
  * @brief This function assigns a transformation matrix to a pattern, which is

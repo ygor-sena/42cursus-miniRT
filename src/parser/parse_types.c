@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 14:02:39 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/21 21:43:49 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:03:40 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_token	parse_type(t_scanner *scanner)
 		return (TOKEN_PLANE);
 	if (match_shape(scanner, "cy"))
 		return (TOKEN_CYLINDER);
+	if (match_shape(scanner, "cn"))
+		return (TOKEN_CONE);
 	if (match(scanner, '#'))
 		return (TOKEN_COMMENT);
 	if (match(scanner, '\n'))
@@ -50,6 +52,7 @@ static t_bool	match_shape(t_scanner *scanner, char *expected)
 	{
 		if (match(scanner, expected[1]))
 			return (TRUE);
+		scanner->current--;
 		return (FALSE);
 	}
 	return (FALSE);

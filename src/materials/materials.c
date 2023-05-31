@@ -29,7 +29,7 @@ t_material	material(void)
 	});
 }
 
-t_color	lighting(t_shape *shape, t_light light, t_tuple point, t_sight sight)
+t_color	lighting(t_shape *shape, t_light light, t_point point, t_sight sight)
 {
 	t_exposure	e;
 	t_color		color;

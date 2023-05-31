@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   discriminants.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 15:23:47 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/26 09:10:35 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:34:25 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ t_pythagoras	sphere_discriminant(t_sphere *sphere, t_ray ray)
 		.a = a,
 		.b = b,
 		.c = c,
-		.t1 = (-b - sqrtf(delta)) / (2.0 * a),
-		.t2 = (-b + sqrtf(delta)) / (2.0 * a),
+		.t1 = (-b - sqrt(delta)) / (2.0 * a),
+		.t2 = (-b + sqrt(delta)) / (2.0 * a),
 		.discriminant = delta,
 	});
 }
