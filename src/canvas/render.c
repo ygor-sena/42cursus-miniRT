@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 12:16:18 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 13:41:56 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:56:11 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_bool	render(t_scene *scene, t_canvas *canvas)
 	return (TRUE);
 }
 
-int	rgb(t_color color)
+static int	rgb(t_color color)
 {
 	return (
 		convert(color.red) << 16

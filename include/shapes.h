@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/30 18:19:37 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:27:49 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,38 @@
 
 # define EPSILON		0.00001
 
+/**
+ * @brief The structure t_sphere represents a sphere.
+ *
+ * @param origin Stores the sphere's origin point.
+ * @param radius Stores the radius of the sphere.
+ */
 typedef struct s_sphere
 {
 	t_point	origin;
 	float	radius;
 }	t_sphere;
 
+/**
+ * @brief The structure t_plane represents a plane.
+ *
+ * @param origin Stores the plane's origin point.
+ */
 typedef struct s_plane
 {
 	t_point	origin;
 }	t_plane;
 
+/**
+ * @brief The structure t_cylinder represents a cylinder.
+ *
+ * @param origin Stores the cylinder's origin point.
+ * @param radius Stores the radius of the cylinder.
+ * @param minimum Stores the cylinder's minimum height, i.e, lowest height.
+ * @param maximum Stores the cylinder's maxinum height, i.e, highest height.
+ * @param closed Stores TRUE, if the cylinder is capped or FALSE, if it isn't
+ *               capped.
+ */
 typedef struct s_cylinder
 {
 	t_point	origin;
@@ -38,6 +59,15 @@ typedef struct s_cylinder
 	t_bool	closed;
 }	t_cylinder;
 
+/**
+ * @brief The structure t_cone represents a cone.
+ *
+ * @param origin Stores the cone's origin point.
+ * @param minimum Stores the cone's minimum height, i.e, lowest height.
+ * @param maximum Stores the cone's maxinum height, i.e, highest height.
+ * @param closed Stores TRUE, if the cone is capped or FALSE, if it isn't
+ *               capped.
+ */
 typedef struct s_cone
 {
 	t_point	origin;
@@ -55,7 +85,7 @@ typedef t_tuple				(*t_normal_at)(t_shape *, t_tuple);
  * @struct t_shape
  * @brief Represents a shape in a scene.
  *
- * @union This union of shapes represent the possible geometric forms that
+ * @param shape This union of shapes represents the possible geometric forms the
  *        structure t_shape can assume, i.e., to be a sphere, a plane, a
  *        cylinder or a cone. Each shape has its own particular values. The
  *        fields below are common properties shared by all types of shape. Each
@@ -87,6 +117,15 @@ typedef struct s_shape
 	t_normal_at		normal_at;
 }	t_shape;
 
+/**
+ * @brief The structure t_hit stores a linked list of ray-shape intersections'
+ *        values. 
+ *
+ * @param t Stores the distance between the origin of the ray and the point of
+ *          intersection.
+ * @param object Stores information about the shape that is being intersected.
+ * @param next Stores the next intersection value of one ray casting, if any.
+ */
 typedef struct s_hit
 {
 	double	t;
@@ -94,7 +133,34 @@ typedef struct s_hit
 	t_hit	*next;
 }	t_hit;
 
-typedef struct s_pythagoras
+/**
+ * @brief This struct stores the necessary data to evaluate a ray-sphere
+ *        intersection. To do that, it relies in geometry, trigonometry and the
+ *        Pythagorean theorem. It's important to mention that discriminant means
+ *        the number that says whether the ray intersects the sphere at all.
+ *        For a detailed description, refer to: https://www.scratchapixel.com/
+ *        lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/
+ *        ray-sphere-intersection.html.
+ *
+ * @param a Stores a value from quadratic equation. This value is useful to
+ *          identify if a ray is parallel or not to y axis of a given cylinder.
+ * @param b Stores b value from quadratic equation derived from geometry rules.
+ * @param c Stores c value from quadratic equation derived from geometry rules.
+ * @param t1 Stores the distance from ray's origin up to the intersection of a
+ *           given ray with shape's surface. If there is only one, it means the
+ *           ray intersects the shape in only one point.
+ * @param t2 Stores the distance from ray's origin up to the intersection of a
+ *           given ray with shape's surface. The combination of positive and
+ *           negative numbers of t1 and t2 will determine where the ray is
+ *           intersecting the shape.
+ * @param discriminant Stores the information about how the ray intersects a
+ *                     given shape. If discriminant isless than 0, then the ray
+ *                     doesn't intersect the shape. If discriminant is 0, the
+ *                     ray intersects the shape in one place only. If the
+ *                     discriminant is higher than 0, the ray intersects the
+ *                     shape in two places.
+ */
+typedef struct s_discriminant
 {
 	double	a;
 	double	b;
@@ -102,7 +168,7 @@ typedef struct s_pythagoras
 	double	t1;
 	double	t2;
 	double	discriminant;
-}	t_pythagoras;
+}	t_discriminant;
 
 /* ************************************************************************** */
 /*                             INTERSECTIONS.C                                */
@@ -473,12 +539,12 @@ t_tuple			normal_at_cone(t_shape *shape, t_tuple world_point);
  *               sphere to be (or not) intersected with a ray.
  * @param ray A structure of type `t_ray` representing the ray that is going to
  *            intersect (or not) the sphere.
- * @return Returns a structure of type `t_pythogoras` with a, b, c values from
+ * @return Returns a structure of type `t_discriminant` with a, b, c values from
  *         quadratic equation derived from initial formulas as well as t1, t2
  *         and discriminant values. t1 and t2 are the distance from ray's origin
  *         up to the intersection of given ray with sphere's surface.
  */
-t_pythagoras	sphere_discriminant(t_sphere *sphere, t_ray ray);
+t_discriminant	sphere_discriminant(t_sphere *sphere, t_ray ray);
 
 /**
  * @brief This function returns the necessary data to evaluate a ray-cylinder
@@ -488,12 +554,12 @@ t_pythagoras	sphere_discriminant(t_sphere *sphere, t_ray ray);
  *
  * @param ray A structure of type `t_ray` representing the ray that is going to
  *            intersect (or not) the cylinder.
- * @return Returns a structure of type `t_pythogoras` with a, b, c values from
+ * @return Returns a structure of type `t_discriminant` with a, b, c values from
  *         quadratic equation derived from initial formulas as well as t1, t2
  *         and discriminant values. t1 and t2 are the distance from ray's origin
  *         up to the intersection of given ray with cylinder's surface.
  */
-t_pythagoras	cylinder_discriminant(t_ray ray);
+t_discriminant	cylinder_discriminant(t_ray ray);
 
 /**
  * @brief This function returns the necessary data to evaluate a ray-cone
@@ -503,11 +569,11 @@ t_pythagoras	cylinder_discriminant(t_ray ray);
  *
  * @param ray A structure of type `t_ray` representing the ray that is going to
  *            intersect (or not) the cone.
- * @return Returns a structure of type `t_pythogoras` with a, b, c values from
+ * @return Returns a structure of type `t_discriminant` with a, b, c values from
  *         quadratic equation derived from initial formulas as well as t1, t2
  *         and discriminant values. t1 and t2 are the distance from ray's origin
  *         up to the intersection of given ray with cone's surface.
  */
-t_pythagoras	cone_discriminant(t_ray ray);
+t_discriminant	cone_discriminant(t_ray ray);
 
 #endif

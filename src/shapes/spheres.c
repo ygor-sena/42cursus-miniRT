@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/26 09:08:56 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:22:38 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_shape	new_sphere(void)
 
 t_bool	intersect_sphere(t_hit **xs, t_shape *shape, t_ray ray)
 {
-	t_pythagoras	d;
+	t_discriminant	d;
 
 	d = sphere_discriminant(&shape->sphere, ray);
 	if (d.discriminant < 0)

@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:28:08 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/30 18:19:18 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:10:23 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,15 @@ typedef struct s_canvas
 	int		height;
 }	t_canvas;
 
+/**
+ * @brief The structure t_scene is how the user sees the ray tracing rendering.
+ *        There is a camera from which the world of shapes and point lights are
+ *        seen.
+ *
+ * @param world Stores the world objects to be displayed.
+ * @param camera Stores the information about the point of view from which the
+ *               world is observed.
+ */
 typedef struct s_scene
 {
 	t_world		world;
@@ -73,24 +82,62 @@ typedef struct s_scene
 
 /**
  * @brief This function attempts to start a connection with Xserver using MLX
- *        library. After that, it tries to create a new window on screen with
- *        the established Xserver connection, width, height and window's title
- *        passed as parameter. Hereafter, an attempt to create a new image on
- *        screen with the new window, width and height is done. Lastly, the
- *        function tries to write information on the new image with a given bits
- *        per pixel, line length and endianess.
+ *        library.
+ *
+ * @param canvas A struct of type t_canvas containing the necessary fields for
+ *               graphic initialization and window rendering.
+ * @return If connection with Xserver is established succesfully, the function
+ *         returns nothing. Otherwise, it prints a message to stderr and exits
+ *         the program.
+ */
+void	init_mlx_connection(t_canvas *canvas);
+
+/**
+ * @brief This function attempts to start a connection with Xserver using MLX
+ *        library. After that, an attempt to create a new image on screen with
+ *        the new mlx_ptr, width and height is done. Lastly, the function tries
+ *        to write information on the new image with a given bits per pixel,
+ *        line length and endianess.
  *
  * @param canvas A struct of type t_canvas containing the necessary fields for
  *               graphic initialization and window rendering.
  * @param width The desired width of the window to be created.
  * @param height The desired height of the window to be created.
- * @param title The desired title to describe the window to be created.
- * @return (t_bool) If the function successfully establishes a Xserver
- *         connection, init a window, create a new image on screen and write
- *         information on it, the function returns TRUE. Otherwise, if one of
- *         the four aforementioned steps fail, the function returns FALSE.
+ * @return If the function successfully establishes a Xserver connection, create
+ *         a new image on screen and write information on it, the function
+ *         returns TRUE. Otherwise, if one of the aforementioned steps fail, the
+ *         function returns FALSE.
  */
-// t_bool	new_canvas(t_canvas *canvas, int width, int height, char *title);
+t_bool	new_canvas(t_canvas *canvas, int width, int height);
+
+/**
+ * @brief The function tries to create a new window on screen with the
+ *        established Xserver connection, width, height and window's title
+ *        passed as parameter
+ *
+ * @param canvas A struct of type t_canvas containing the necessary fields for
+ *               graphic initialization and window rendering.
+ * @param title The desired title to describe the window to be created. 
+ * @return Returns TRUE if new window is created succesfully. Otherwise, it
+ *         returns FALSE.
+ */
+t_bool	put_on_window(t_canvas *canvas, char *title);
+
+/**
+ * @brief This function inserts an image to window. To do that, it needs from
+ *        the parameter canvas a pointer to an existing Xserver connection, a
+ *        pointer an existing window, a pointer to an existing image and the
+ *        x and y screen position. The default for x and y is 0.
+ *
+ * @param canvas A struct of type t_canvas containing the necessary fields for
+ *               graphic initialization and window rendering.
+ * @return The function successfully exits after image is inserted to window.
+ */
+int		show_window(t_canvas *canvas);
+
+/* ************************************************************************** */
+/*                                 CONTROLS.C                                 */
+/* ************************************************************************** */
 
 /**
  * @brief This function is to be used as the second parameter of the MLX library
@@ -101,9 +148,9 @@ typedef struct s_scene
  *               possible values of keysym, refer to the header X11/keysymdef.h.
  * @param canvas A struct of type t_canvas containing the necessary fields for
  *               graphic initialization and window rendering.
- * @return (int) If the keysym passed as parameter is equal to ESC or Q's key,
- *               the program successfully exits. Otherwise, the function cleanly
- *               exits with status 0, i.e., EXIT_SUCCESS identifier.
+ * @return If the keysym passed as parameter is equal to ESC or Q's key, the
+ *         program successfully exits. Otherwise, the function cleanly exits
+ *         with status 0, i.e., EXIT_SUCCESS identifier.
  */
 int		handle_keypress(int keysym, t_canvas *canvas);
 
@@ -115,18 +162,55 @@ int		handle_keypress(int keysym, t_canvas *canvas);
  *
  * @param canvas A struct of type t_canvas containing the necessary fields for
  *               graphic initialization and window rendering.
- * @return (int) After free routine, the function successfully exits with status
- *               0, i.e., EXIT_SUCCESS identifier.
+ * @return After free routine, the function successfully exits with status 0,
+ *         i.e., EXIT_SUCCESS identifier.
  */
 int		quit(t_canvas *canvas);
 
-void	init_mlx_connection(t_canvas *canvas);
-t_bool	new_canvas(t_canvas *canvas, int width, int height);
-t_bool	put_on_window(t_canvas *canvas, char *title);
-int		show_window(t_canvas *canvas);
+/* ************************************************************************** */
+/*                                  RENDER.C                                  */
+/* ************************************************************************** */
 
+/**
+ * @brief This functions renders a scene of ray casting objects. It attempts to
+ *        initialize a connection to the graphic library MLX, if successfilly,
+*         it proceeds to write pixel by pixel to a image that will be rendered
+          and seen by the user though a MLX's windows.
+ * 
+ * @param scene A struct of type t_scene that stores information about the how
+ *              the world will be seen and which objects of a given world will
+ *              be observed.
+ * @param canvas A struct of type t_canvas containing the necessary fields for
+ *               graphic initialization and window rendering.
+ * @return Returns TRUE if a scene is rendered successfully. Otherwise, if the
+ *         canvas cannot be created, it returns FALSE.
+ */
 t_bool	render(t_scene *scene, t_canvas *canvas);
+
+/**
+ * @brief The function pixel_at() writes a pixel at (x, y) coordinates of the
+ *        image, if a given coordinate is within canvas width and height.
+ * 
+ * @param canvas A struct of type t_canvas containing the necessary fields for
+ *               graphic initialization and window rendering.
+ * @param x The x value of the pixel to be inserted.
+ * @param y The y value of the pixel to be inserted.
+ * @param color Stores the color of the pixel.
+ */
 void	write_pixel(const t_canvas *canvas, int x, int y, int color);
+
+/**
+ * @brief The function pixel_at() will put a pixel at (x, y) coordinates of the
+ *        image. It will act as a replacement for the mlx_pixel_put() function.
+ *        For more information, refer to https://aurelienbrabant.fr/blog/
+ *        pixel-drawing-with-the-minilibx.
+ * 
+ * @param image A struct of type t_canvas containing the necessary fields for
+ *              graphic initialization and window rendering.
+ * @param x The x value of the pixel to be inserted.
+ * @param y The y value of the pixel to be inserted.
+ * @return Returns a pixel at (x, y) coordinates.
+ */
 int		pixel_at(t_canvas *image, int x, int y);
 
 #endif

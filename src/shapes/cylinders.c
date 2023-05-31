@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:38:04 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/26 09:08:51 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:23:02 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_shape	new_cylinder(void)
 // ray does not intersect the cylinder
 t_bool	intersect_cylinder(t_hit **xs, t_shape *shape, t_ray ray)
 {
-	t_pythagoras	d;
+	t_discriminant	d;
 	double			y0;
 	double			y1;
 

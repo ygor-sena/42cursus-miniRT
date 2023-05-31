@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/30 18:19:41 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/31 10:06:35 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 /**
  * @brief This struct contains everything related to the building of a ray
  *        tracing's world. The world has objects (or shapes), point lights and
- *        an ambient color.
+ *        an ambient color. Together, these elements makes the scene rendering
+ *        possible.
  *
  * @param xs A struct of type t_hit that stores intersections' values, if any.
  * @param object_count Stores the information about how many shapes there are in

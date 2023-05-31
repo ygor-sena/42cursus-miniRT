@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:29:04 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/26 09:09:05 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/31 10:49:36 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ t_comps	prepare_computations(t_hit *intersection, t_ray ray)
 	return (comps);
 }
 
-//comps.object->material becomes comps.object
 t_color	shade_hit(t_world world, t_comps comps)
 {
 	int		index;
