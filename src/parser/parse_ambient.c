@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:17:27 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/24 21:16:41 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/27 11:50:17 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_bool	parse_camera(t_scanner *scanner, t_scene *scene)
 	if (!scan_newline(scanner))
 		return (FALSE);
 	camera = new_camera(SCREEN_WIDTH, SCREEN_HEIGHT, fov * DEGREES_TO_RADIANS);
-	camera.transform = view_transform(origin, direction, vector(0, 1, 0));
+	camera.transform = view_transform(origin, point(0, 1, 0), direction);
 	camera.inverse = inverse(camera.transform);
 	scene->camera = camera;
 	return (TRUE);
