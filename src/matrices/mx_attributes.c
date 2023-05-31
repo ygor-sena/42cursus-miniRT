@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mx_attributes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 10:44:09 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/26 09:08:35 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:26:53 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ t_matrix	get_submatrix(t_matrix t, size_t del_row, size_t del_col)
 	size_t	col;
 
 	row = -1;
+	if (t.size == 0)
+		return (get_identity_matrix());
 	while (++row < t.size - 1)
 	{
 		col = -1;
