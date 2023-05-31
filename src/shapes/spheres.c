@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spheres.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/26 12:31:55 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:25:12 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_shape	new_sphere(void)
 
 t_bool	intersect_sphere(t_hit **xs, t_shape *shape, t_ray ray)
 {
-	t_pythagoras	d;
+	t_discriminant	d;
 
 	d = sphere_discriminant(&shape->sphere, ray);
 	if (d.discriminant < 0)

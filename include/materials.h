@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:05:52 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/25 14:34:20 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:19:25 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,15 @@ typedef struct s_material
  * exposition to light.
  *
  * @param effective_color Combines the surface colo with light's color/
- * intensity.
+ *                        intensity.
  * @param lightv Finds the direction to the light source.
  * @param reflectv Finds the direction to the light reflection.
  * @param light_dot_normal Represents the cosine of the angle between the light
- * 	vector and the normal vector. A negative number means the light is on the
- * other side of the surface.
+ *                         vector and the normal vector. A negative number means
+ *                         the light is on the other side of the surface.
  * @param reflect_dot_eye Represents the cosine of the angle between the
- * reflection vector and the eye vector. A negative number means the light
- * reflects away from the eye.
+ *                        reflection vector and the eye vector. A negative
+ *                        number means the light reflects away from the eye.
  * @param factor Computes the specular contribution.
  */
 typedef struct s_exposure
@@ -81,10 +81,11 @@ typedef struct s_exposure
 
 /**
  * @brief The function material() instances a new material of struct type
- * t_material with the following default values: color = {1, 1, 1},
- * ambient = 0.1, diffuse = 0.9, specular = 0.9 and shininess = 200.
+ *        t_material with the following default values: color = {1, 1, 1},
+ *        ambient = {0.1, 0.1, 0.1}, diffuse = 0.9, specular = 0.9 and
+ *        shininess = 200. Thus, as default no pattern is applied.
  *
- * @return (t_material) Returns a default instance of the new material.
+ * @return Returns a default instance of the new material.
  */
 t_material	material(void);
 

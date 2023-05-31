@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 10:56:52 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/26 09:00:18 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:23:15 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_tuple	normal_at_cone(t_shape *shape, t_tuple world_point)
 
 t_bool	intersect_cone(t_hit **xs, t_shape *shape, t_ray ray)
 {
-	t_pythagoras	d;
+	t_discriminant	d;
 	double			y0;
 	double			y1;
 

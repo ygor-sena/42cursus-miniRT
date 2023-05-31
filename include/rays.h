@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 10:17:15 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 09:22:44 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:19:33 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef struct s_ray
  * @param origin Receives a point tuple, which is starting point of the ray.
  * @param direction Receives a vector tuple, which is the direction where the
  *                  ray points to.
- * @return (t_ray) Sucessfully returns a new ray with the given origin and
- *         direction passed as parameter to the function.
+ * @return Sucessfully returns a new ray with the given origin and direction
+ *         passed as parameter to the function.
  */
 t_ray	new_ray(t_point origin, t_vector direction);
 
@@ -54,8 +54,8 @@ t_ray	new_ray(t_point origin, t_vector direction);
  * @param ray Receives a ray as reference.
  * @param distance Receives a float value which is the time or distance that the
  *                 ray must travel.
- * @return (t_point) Returns the ray's coordinates after it traveled for a given
- *         time or after it gone through a given distance.
+ * @return Returns the ray's coordinates after it traveled for a given time or
+ *         after it gone through a given distance.
  */
 t_point	position(t_ray ray, float distance);
 
@@ -68,7 +68,7 @@ t_point	position(t_ray ray, float distance);
  *
  * @param ray Receives a ray to the transformed.
  * @param matrix Reveives the matrix transformation to be applied in the ray.
- * @return (t_ray) Successfully returns a new unnormalized and transformed ray.
+ * @return Successfully returns a new unnormalized and transformed ray.
  */
 t_ray	transform(t_ray ray, t_matrix matrix);
 

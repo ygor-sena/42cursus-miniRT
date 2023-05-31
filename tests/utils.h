@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 09:31:28 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/19 20:57:54 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:20:02 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ t_sphere	*sphere_stub(void);
 t_bool		compare_spheres(t_sphere *a, t_sphere *b);
 t_bool		compare_tuples(t_tuple a, t_tuple b);
 void		assert_matrix_equal(t_matrix a, t_matrix b);
+int			intersection_count(t_hit *xs);
 
 #endif
