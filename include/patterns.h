@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   patterns.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:21:56 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/19 20:47:07 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:41:53 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PATTERNS_H
 
 # include "matrices.h"
-# include "libft.h"
 
 typedef struct s_pattern	t_pattern;
 
@@ -45,6 +44,8 @@ typedef struct s_pattern
 	t_color		a;
 	t_color		b;
 	t_matrix	transform;
+	t_matrix	inverse;
+	t_matrix	transpose;
 }	t_pattern;
 
 /**
