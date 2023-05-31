@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:11:15 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/31 11:21:43 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:15:28 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,38 +89,107 @@ typedef struct s_scanner
  */
 void		init_scanner(t_scanner *scanner, const char *source);
 
-/* Identify whether the character sequence in the input forms an integer. */
+/**
+ * @brief Identify if input character sequence forms an integer.
+ *
+ * This function determines whether the character sequence in the input
+ * forms a valid integer.
+ *
+ * @param scanner Pointer to the scanner.
+ * @return        True if the sequence is a valid integer, false otherwise.
+ */
 t_bool		scan_integer(t_scanner *scanner);
 
-/* Identify whether the character sequence in the input forms a double. */
+/**
+ * @brief Identify if input character sequence forms a double number.
+ *
+ * This function checks if the character sequence in the input scanner
+ * represents a valid double number.
+ *
+ * @param scanner Pointer to the scanner.
+ * @return        True if the sequence is a valid double, false otherwise.
+ */
 t_bool		scan_double(t_scanner *scanner);
 
-/* Verify if there is a comma in the input. */
+/**
+ * @brief Verify presence of a comma in the input.
+ *
+ * This function verifies if there is a comma character in the input scanner.
+ *
+ * @param scanner Pointer to the scanner.
+ * @return        True if a comma is present, false otherwise.
+ */
 t_bool		scan_comma(t_scanner *scanner);
 
-/* Verify if there is a newline in the input. */
+/**
+ * @brief Verify presence of a newline in the input.
+ *
+ * This function verifies if there is a newline character in the given scanner.
+ *
+ * @param scanner Pointer to the scanner.
+ * @return        True if a newline is present, false otherwise.
+ */
 t_bool		scan_newline(t_scanner *scanner);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse types
+
+/**
+ * @brief Identify token characterizing analysis type in a line.
+ *
+ * Determines the token representing the analysis type in a line of the input.
+ *
+ * @param scanner Pointer to scanner object.
+ * @return        Token representing the analysis type.
+ */
 t_token		parse_type(t_scanner *scanner);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Scanner utils
 
-/* Advance the `current` pointer to the next character. */
+/**
+ * @brief Advance the `current` pointer to the next character.
+ *
+ * This function advances the current pointer of the scanner
+ * to the next character in the input.
+ *
+ * @param scanner Pointer to the scanner.
+ */
 void		advance(t_scanner *scanner);
 
-/* Skip all whitespace characters encountered. */
+/**
+ * @brief Skip all encountered whitespace characters.
+ *
+ * This function skips all whitespace characters encountered by advancing
+ * the current pointer of the scanner past them in the input.
+ *
+ * @param scanner Pointer to the scanner.
+ */
 void		skip_whitespace(t_scanner *scanner);
 
-/* Check if it is a sign. */
+/**
+ * @brief Check if character is a sign.
+ *
+ * Checks if given character represents a sign (positive or negative).
+ *
+ * @param c Character to be checked.
+ * @return  1 if sign, 0 otherwise.
+ */
 int			is_sign(int c);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse
 
-/* Open and read a file, assigning each found element to the scene. */
+/**
+ * @brief Open and read a file, assigning found elements to the scene.
+ *
+ * This function opens and reads a file specified by the filename. It parses
+ * the content of the file, assigning each found element to the given scene.
+ *
+ * @param  filename Name of the file to open and read.
+ * @param  scene Pointer to the scene object.
+ * @return True if successful, false otherwise.
+ */
 t_bool		parse(char *filename, t_scene *scene);
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -129,100 +198,321 @@ t_bool		parse(char *filename, t_scene *scene);
 /**
  * @brief Parses and processes an element from the input.
  *
- * This function parses an element from the input and performs the necessary
- * processing based on the element's type. It updates the scene with the parsed
- * element and returns the result indicating the success or failure of the parse.
+ * This function parses and processes an element from the input by analyzing
+ * the scanned sequence in the given scanner. It also updates the totals array
+ * to keep track of the number of elements read from the input.
  *
  * @param scanner A pointer to the scanner structure.
  * @param scene   A pointer to the scene structure.
+ * @param totals  An array to store the count of elements read from the input.
  * @return        A boolean value indicating whether the parse was successful.
  */
 t_bool		parse_element(t_scanner *scanner, t_scene *scene, int totals[]);
 
-/* Parse comments. */
+/**
+ * @brief Parse comments.
+ *
+ * @param scanner Pointer to the scanner.
+ * @return        True if comment parsing is successful, false otherwise.
+ */
 t_bool		parse_comment(t_scanner *scanner);
 
-/* Add objects to the world. */
+/**
+ * @brief Add a shape to the world.
+ *
+ * @param shape Pointer to the shape to be added.
+ * @param world Pointer to the world.
+ */
 void		add_object_to_world(t_shape *shape, t_world *world);
 
-/* Add lights to the world. */
+/**
+ * @brief Add a light source to the world.
+ *
+ * @param light Pointer to the light source to be added.
+ * @param world Pointer to the world.
+ */
 void		add_light_to_world(t_light *light, t_world *world);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse basic
 
-/* Convert a double from the input and store it in `result`. */
+/**
+ * @brief Convert double from input and store in result.
+ *
+ * @param scanner Pointer to the scanner.
+ * @param result  Pointer to store the parsed double.
+ * @return        True if successful, false otherwise.
+ */
 t_bool		parse_double(t_scanner *scanner, double *result);
 
-/* Convert the light ratio from the input and store it in `light`. */
+/**
+ * @brief Parse the light ratio from the input.
+ *
+ * This function parses the light ratio from the input by analyzing the scanned
+ * sequence in the given scanner. It verifies if the number is within the range
+ * [0, 1]. If there is an error during parsing or if the number is outside the
+ * valid range, the scanner is configured with the appropriate error message.
+ *
+ * @param scanner Pointer to the scanner of type t_scanner.
+ * @param light   Pointer to the memory location where the parsed light ratio
+ *                will be stored.
+ * @return        True if successful, false otherwise. If false, check
+ *                scanner->message for error message.
+ */
 t_bool		parse_light_ratio(t_scanner *scanner, double *light);
 
-/* Convert the field of view from the input and store it in `fov`. */
+/**
+ * @brief Convert field of view from input and store it in `fov`.
+ *
+ * This function converts the field of view from the input by analyzing the
+ * scanned sequence in the given scanner and stores it in the memory location
+ * pointed to by `fov`. It verifies if the field of view is within the range
+ * of 0 to 180 degrees. If there is an error during conversion or if the value
+ * is outside the valid range, the scanner is configured with the appropriate
+ * error message.
+ *
+ * @param scanner Pointer to the scanner.
+ * @param fov     Pointer to the memory location where the parsed field of view
+ *                will be stored.
+ * @return        True if successful, false otherwise. If false, check
+ *                scanner->message for error message.
+ */
 t_bool		parse_field_of_view(t_scanner *scanner, int *fov);
 
-/* Convert the dimension from the input and store it in `dimension`. */
+/**
+ * @brief Convert dimension from input and store it in `dimension`.
+ *
+ * This function converts the dimension from the input by analyzing the scanned
+ * sequence in the given scanner and stores it in the memory location pointed to
+ * by `dimension`. It verifies if the dimension is a positive number. If there is
+ * an error during conversion or if the value is not positive, the scanner is
+ * configured with the appropriate error message.
+ *
+ * @param scanner   Pointer to the scanner.
+ * @param dimension Pointer to the memory location where the parsed dimension
+ *                  will be stored.
+ * @return          True if successful, false otherwise. If false, check
+ *                  scanner->message for error message.
+ */
 t_bool		parse_dimension(t_scanner *scanner, double *dimension);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse grouped
 
-/* Convert a color from the input and store it in `result`. */
+/**
+ * @brief Convert a color from the input and store it in `result`.
+ *
+ * This function converts a color from the input by analyzing the scanned
+ * sequence in the given scanner and stores it in the memory location pointed
+ * to by `result`. It verifies if each color channel (red, green, and blue)
+ * is between 0 and 255. If there is an error during conversion or if any
+ * channel value is out of range, the scanner is configured with the
+ * appropriate error message.
+ *
+ * @param scanner Pointer to the scanner.
+ * @param result  Pointer to the memory location where the parsed color
+ *                will be stored.
+ * @return        True if successful, false otherwise. If false, check
+ *                scanner->message for error message.
+ */
 t_bool		parse_color(t_scanner *scanner, t_color *result);
 
-/* Convert a position from the input and store it in `position`. */
+/**
+ * @brief Convert a position from the input and store it in `position`.
+ *
+ * @param scanner  Pointer to the scanner object.
+ * @param position Pointer to the memory location where the parsed position
+ *                 will be stored.
+ * @return         True if successful, false otherwise.
+ */
 t_bool		parse_position(t_scanner *scanner, t_point *position);
 
-/* Convert a direction from the input and store it in `direction`. */
+/**
+ * @brief Convert a direction from the input and store it in `direction`.
+ *
+ * This function converts a direction vector from the input by analyzing the
+ * scanned sequence in the given scanner and stores it in the memory location
+ * pointed to by `direction`. It verifies if each component of the vector is
+ * between -1 and 1.
+ * If there is an error during conversion or if any component value is out of
+ * range, the scanner is configured with the appropriate error message.
+ *
+ * @param scanner   Pointer to the scanner object.
+ * @param direction Pointer to the memory location where the parsed direction
+ *                  will be stored.
+ * @return          True if successful, false otherwise. If false, check
+ *                  scanner->message for error message.
+ */
 t_bool		parse_direction(t_scanner *scanner, t_vector *direction);
 
+/**
+ * @brief Parse a pattern from the input and assign it to a shape.
+ *
+ * @param scanner Pointer to the scanner object.
+ * @param shape   Pointer to the shape to which the parsed pattern
+ *                will be assigned.
+ * @return        True if successful, false otherwise.
+ */
 t_bool		parse_pattern(t_scanner *scanner, t_shape *shape);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse ambient
 
-/* Convert the ambient light from the input and add it to the scene. */
+/**
+ * @brief Convert ambient light from input and add to scene.
+ *
+ * @param scanner Pointer to the scanner object.
+ * @param scene   Pointer to the scene to add ambient light.
+ * @return        True if successful, false otherwise.
+ */
 t_bool		parse_ambient_light(t_scanner *scanner, t_scene *scene);
 
-/* Convert the camera from the input and add it to the scene. */
+/**
+ * @brief Convert camera from input and add to scene.
+ *
+ * @param scanner Pointer to the scanner object.
+ * @param scene   Pointer to the scene to add camera.
+ * @return        True if successful, false otherwise.
+ */
 t_bool		parse_camera(t_scanner *scanner, t_scene *scene);
 
-/* Convert the light point from the input and add it to the scene. */
+/**
+ * @brief Convert light point from input and add to scene.
+ *
+ * @param scanner Pointer to the scanner object.
+ * @param scene   Pointer to the scene to add light point.
+ * @return        True if successful, false otherwise.
+ */
 t_bool		parse_light(t_scanner *scanner, t_scene *scene);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse shapes
 
-/* Convert a sphere from the input and add it to the scene. */
+/**
+ * @brief Convert a sphere from the input and add it to the scene.
+ *
+ * This function converts a sphere from the input by analyzing the scanned
+ * sequence in the given scanner and adds it to the scene. It uses the provided
+ * scanner to parse the necessary properties of the sphere such as its position,
+ * radius, color, pattern, and any additional attributes.
+ *
+ * @param scanner Pointer to the scanner.
+ * @param scene   Pointer to the scene where the sphere will be added.
+ * @return        True if the sphere is successfully parsed and added to the
+ *                scene, false otherwise.
+ */
 t_bool		parse_sphere(t_scanner *scanner, t_scene *scene);
 
-/* Convert a plane from the input and add it to the scene. */
+/**
+ * @brief Convert a plane from the input and add it to the scene.
+ *
+ * This function converts a plane from the input by analyzing the scanned
+ * sequence in the given scanner and adds it to the scene. It uses the provided
+ * scanner to parse the necessary properties of the plane such as its position,
+ * direction, color, pattern, and any additional attributes.
+ *
+ * @param scanner Pointer to the scanner.
+ * @param scene   Pointer to the scene where the plane will be added.
+ * @return        True if the plane is successfully parsed and added to the
+ *                scene, false otherwise.
+ */
 t_bool		parse_plane(t_scanner *scanner, t_scene *scene);
 
-/* Convert a cylinder from the input and add it to the scene. */
+/**
+ * @brief Convert a cylinder from the input and add it to the scene.
+ *
+ * This function converts a cylinder from the input by analyzing the scanned
+ * sequence in the given scanner and adds it to the scene. It uses the provided
+ * scanner to parse the necessary properties of the cylinder such as its
+ * position, direction, diameter, height, color, pattern, and any additional
+ * attributes.
+ *
+ * @param scanner Pointer to the scanner.
+ * @param scene   Pointer to the scene where the cylinder will be added.
+ * @return        True if the cylinder is successfully parsed and added to the
+ *                scene, false otherwise.
+ */
 t_bool		parse_cylinder(t_scanner *scanner, t_scene *scene);
 
-/* Convert a cone from the input and add it to the scene. */
+/**
+ * @brief Convert a cone from the input and add it to the scene.
+ *
+ * This function converts a cone from the input by analyzing the scanned
+ * sequence in the given scanner and adds it to the scene. It uses the
+ * provided scanner to parse the necessary properties of the cone such as
+ * its position, direction, diameter, height, color, pattern, and any
+ * additional attributes.
+ *
+ * @param scanner Pointer to the scanner.
+ * @param scene   Pointer to the scene where the cone will be added.
+ * @return        True if the cone is successfully parsed and added to the
+ *                scene, false otherwise.
+ */
 t_bool		parse_cone(t_scanner *scanner, t_scene *scene);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse utils
 
-/* Display an error message based on the state of the scanner. */
+/**
+ * @brief Display an error message based on the state of the scanner.
+ *
+ * @param scanner Pointer to the scanner.
+ * @return        True if the error message is successfully displayed,
+ *                false otherwise.
+ */
 t_bool		report_error(t_scanner *scanner);
 
-/* Validate if a number is within a certain range. */
+/**
+ * @brief Validate if a number is within a certain range.
+ *
+ * This function checks if the given value is within the specified range,
+ * inclusive.
+ *
+ * @param value The value to be validated.
+ * @param start The start of the range.
+ * @param end   The end of the range.
+ * @return      True if the value is within the range, false otherwise.
+ */
 t_bool		validate_range(double value, double start, double end);
 
-/* Get the column where an error occurred. */
+/**
+ * @brief Get the column where an error occurred.
+ *
+ * This function returns the column number where an error occurred during
+ * scanning. It calculates the column number by subtracting the starting pointer
+ * of the scanner (scanner->start) from the current pointer (scanner->current).
+ * The result represents the offset in characters between the start of the input
+ * and the current position where the error occurred.
+ *
+ * @param scanner Pointer to the scanner.
+ * @return        The column number where an error occurred.
+ */
 int			get_error_column(t_scanner *scanner);
 
-/* Determine the error message based on the state of the scanner. */
+/**
+ * @brief Determine the error message based on the state of the scanner.
+ *
+ * This function sets the error state of the scanner by assigning the provided
+ * error message to the scanner's message field. It also resets the current
+ * position in the scanner's input to the consume position, effectively
+ * rewinding the scanner to a specific location.
+ *
+ * @param scanner       Pointer to the scanner object.
+ * @param error_message The error message to be assigned to the scanner.
+ */
 void		set_error_state(t_scanner *scanner, const char *error_message);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Helpers
 
-/* Convert a string to a double. */
+/**
+ * @brief Convert a string to a double.
+ *
+ * This function converts a string representation of a number to a double value.
+ *
+ * @param nptr The string to be converted.
+ * @return The converted double value.
+ */
 double		ft_atof(const char *nptr);
 
 #endif // !PARSER_H
