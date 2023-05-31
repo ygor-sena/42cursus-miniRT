@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:11:15 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/24 13:12:32 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:21:43 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef enum e_token
 	TOKEN_SPHERE,
 	TOKEN_PLANE,
 	TOKEN_CYLINDER,
+	TOKEN_CONE,
 	TOKEN_NEWLINE,
 	TOKEN_COMMENT,
 	TOKEN_ERROR,
@@ -101,7 +102,7 @@ t_bool		scan_comma(t_scanner *scanner);
 t_bool		scan_newline(t_scanner *scanner);
 
 ////////////////////////////////////////////////////////////////////////////////
-// Parse types
+/// Parse types
 t_token		parse_type(t_scanner *scanner);
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -174,6 +175,8 @@ t_bool		parse_position(t_scanner *scanner, t_point *position);
 /* Convert a direction from the input and store it in `direction`. */
 t_bool		parse_direction(t_scanner *scanner, t_vector *direction);
 
+t_bool		parse_pattern(t_scanner *scanner, t_shape *shape);
+
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse ambient
 
@@ -197,6 +200,9 @@ t_bool		parse_plane(t_scanner *scanner, t_scene *scene);
 
 /* Convert a cylinder from the input and add it to the scene. */
 t_bool		parse_cylinder(t_scanner *scanner, t_scene *scene);
+
+/* Convert a cone from the input and add it to the scene. */
+t_bool		parse_cone(t_scanner *scanner, t_scene *scene);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse utils
