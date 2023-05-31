@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/26 09:08:02 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:37:08 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,26 @@ t_shape			new_sphere(void);
  */
 t_tuple			normal_at_sphere(t_shape *shape, t_tuple world_point);
 
-t_vector	normal_at(t_shape *shape, t_point world_point);
+/**
+ * @brief Calculates the normal vector at a given point on a shape's surface.
+ *
+ * A surface normal, or normal vector, is a vector that points perpendicular
+ * to a surface at a given point. This function calculates the normal vector
+ * at a specified point on the surface of a shape. The normal vector is
+ * essential in various applications, such as shading and collision detection.
+ *
+ * The function computes the normal vector by evaluating the specific shape's
+ * surface properties and geometry at the given world point. The world point
+ * refers to the point on the shape's surface for which the normal vector
+ * is to be calculated.
+ *
+ * @param shape A pointer to a structure of type t_shape representing the shape.
+ * @param world_point A structure of type t_point referring to the world point on
+ *                    the surface of the given shape.
+ * @return A normal vector perpendicular to the given world point on
+ *         the shape's surface.
+ */
+t_vector		normal_at(t_shape *shape, t_point world_point);
 
 /**
  * @brief Calculates the intersection points between a ray and a sphere.
