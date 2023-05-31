@@ -6,7 +6,7 @@ NAME  := miniRT
 
 CYAN  := \33[1;36m
 RESET := \033[0m
-LOG   := printf "[$(CYAN)INFO$(RESET)] %s\n"
+LOG   := printf "[$(CYAN)$(RESET)] %s\n"
 
 ################################################################################
 ##                                DIRECTORIES                                 ##
@@ -37,9 +37,10 @@ SOURCES += mx_utils.c rays.c intersections.c spheres.c
 SOURCES += lights.c materials.c guards.c world.c view_transform.c camera.c
 SOURCES += render.c controls.c shapes.c shadows.c planes.c
 SOURCES += scanner.c scanner_utils.c parse_types.c ft_atof.c swap.c
-SOURCES += parse.c parse_basic.c parse_grouped.c parse_utils.c parse_shapes.c
+SOURCES += parse.c parse_basic.c parse_grouped.c parse_utils.c
+SOURCES += parse_shapes_1.c parse_shapes_2.c
 SOURCES += parse_ambient.c parse_element.c cylinders.c patterns.c
-SOURCES += discriminants.c cones.c
+SOURCES += discriminants.c cones.c parse_pattern.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
@@ -47,9 +48,15 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 ##                                 COMPILATION                                ##
 ################################################################################
 
-CFLAGS  := -Wall -Werror -Wextra -g $(addprefix -I,$(INC_DIRS))
+CFLAGS  := -Wall -Werror -Wextra $(addprefix -I,$(INC_DIRS))
 LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
 LDLIBS  := -lft -lmlx -lXext -lX11 -lm
+
+ifdef DEBUG
+	CFLAGS += -g
+else
+	CFLAGS += -Ofast
+endif
 
 all: $(NAME)
 
@@ -60,12 +67,12 @@ test: $(NAME)
 	@make -C tests --no-print-directory
 
 $(NAME): $(OBJS) | $(LIBFT) $(MLX)
-	@$(LOG) "Linking objects to $@"
-	$(CC) $^ $(LDFLAGS) $(LDLIBS) -o $@
+	@$(LOG) "Building $@"
+	@$(CC) $^ $(LDFLAGS) $(LDLIBS) -o $@
 
 $(OBJ_DIR)/%.o: %.c $(HEADERS) | $(OBJ_DIR)
-	@$(LOG) "Compiling $@"
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(LOG) "Compiling $(notdir $<)"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	@$(LOG) "Creating objects directory"
