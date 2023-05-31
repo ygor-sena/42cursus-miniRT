@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:09:12 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/21 16:11:12 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:20:57 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ Test(shapes, normal_on_a_translated_shape)
 
 	s = new_sphere();
 	set_transform(&s, translation(0, 1, 0));
-	n = s.normal_at(&s, point(0, 1.70711, -0.70711));
+	n = normal_at(&s, point(0, 1.70711, -0.70711));
 
 	cr_assert_float_eq(n.x, 0, EPSILON);
 	cr_assert_float_eq(n.y, 0.70711, EPSILON);
@@ -105,7 +105,7 @@ Test(shapes, normal_on_a_transformed_shape)
 	s = new_sphere();
 	m = multiply_mx_mx(scaling(1, 0.5, 1), rotation_z(M_PI/5));
 	set_transform(&s, m);
-	n = s.normal_at(&s, point(0, sqrtf(2)/2, -sqrtf(2)/2));
+	n = normal_at(&s, point(0, sqrtf(2)/2, -sqrtf(2)/2));
 
 	cr_assert_float_eq(n.x, 0, EPSILON);
 	cr_assert_float_eq(n.y, 0.97014, EPSILON);

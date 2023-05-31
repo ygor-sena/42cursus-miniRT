@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:06 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/30 18:19:29 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:22:55 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,5 +313,13 @@ int			compare_matrix(t_matrix	a, t_matrix b);
  *         returns FALSE if it's not invertible.
  */
 t_bool		is_invertible(t_matrix t);
+
+/**
+ * @brief Calculates the rotation matrix for a given vector.
+ *
+ * @param vector The vector for which the rotation matrix will be calculated.
+ * @return The rotation matrix for the given vector.
+ */
+t_matrix	rotation_matrix(t_vector vector);
 
 #endif

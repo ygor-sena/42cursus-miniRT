@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/31 10:06:35 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:24:21 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,6 @@ t_color	color_at(t_world world, t_ray ray);
  * @return Returns `TRUE` if the point is in shadow. Otherwise, returns `FALSE`
  *         if the point is not in shadow.
  */
-t_bool	is_shadowed(t_world *world, t_tuple point, int index);
+t_bool	is_shadowed(t_world *world, t_point point, int index);
 
 #endif

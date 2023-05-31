@@ -71,12 +71,12 @@ typedef struct s_material
  */
 typedef struct s_exposure
 {
-	t_color	effective_color;
-	t_tuple	lightv;
-	t_tuple	reflectv;
-	float	light_dot_normal;
-	float	reflect_dot_eye;
-	float	factor;
+	t_color		effective_color;
+	t_vector	lightv;
+	t_vector	reflectv;
+	float		light_dot_normal;
+	float		reflect_dot_eye;
+	float		factor;
 }	t_exposure;
 
 /**

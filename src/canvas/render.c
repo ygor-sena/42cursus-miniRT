@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 12:16:18 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/31 15:56:11 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:24:32 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_bool	render(t_scene *scene, t_canvas *canvas)
 	y = 0;
 	while (y < camera.vsize - 1)
 	{
+		ft_printf("\rRendering: %d%%", (int)(y * 100.0 / camera.vsize));
 		x = 0;
 		while (x < camera.hsize - 1)
 		{
@@ -39,6 +40,7 @@ t_bool	render(t_scene *scene, t_canvas *canvas)
 		}
 		y++;
 	}
+	ft_printf("\rRendering: 100%%\n");
 	return (TRUE);
 }
 

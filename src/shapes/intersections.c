@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:36:20 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 14:20:54 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/26 07:43:37 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes.h"
 
-#define NODE_MAX 32
+#define BIAS 0.0001
+#define NODE_MAX 256
 
 t_hit	*intersection(float t, t_shape *shape)
 {
@@ -60,7 +61,7 @@ void	insert_intersection(t_hit **xs, t_hit *isect)
 
 t_hit	*hit(t_hit *xs)
 {
-	while (xs != NULL && xs->t < 0)
+	while (xs != NULL && xs->t <= BIAS)
 		xs = xs->next;
 	return (xs);
 }

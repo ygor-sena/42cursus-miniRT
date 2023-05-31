@@ -31,11 +31,11 @@ t_camera	new_camera(float hsize, float vsize, float field_of_view)
 
 t_ray	ray_for_pixel(t_camera *camera, float px, float py)
 {
-	float	world_x;
-	float	world_y;
-	t_tuple	pixel;
-	t_tuple	origin;
-	t_tuple	direction;
+	float		world_x;
+	float		world_y;
+	t_point		pixel;
+	t_point		origin;
+	t_vector	direction;
 
 	world_x = camera->half_width - (px + 0.5) * camera->pixel_size;
 	world_y = camera->half_height - (py + 0.5) * camera->pixel_size;

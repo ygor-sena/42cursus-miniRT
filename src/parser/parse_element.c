@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 12:13:58 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 13:17:15 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:27:43 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_bool	parse_element(t_scanner *scanner, t_scene *scene, int totals[])
 		return (parse_plane(scanner, scene));
 	if (type == TOKEN_CYLINDER)
 		return (parse_cylinder(scanner, scene));
+	if (type == TOKEN_CONE)
+		return (parse_cone(scanner, scene));
 	if (type == TOKEN_COMMENT)
 		return (parse_comment(scanner));
 	if (type == TOKEN_NEWLINE)
@@ -57,7 +59,7 @@ void	add_object_to_world(t_shape *shape, t_world *world)
 
 void	add_light_to_world(t_light *light, t_world *world)
 {
-	world->lights = expand(world->lights, world->light_count, sizeof(t_shape));
+	world->lights = expand(world->lights, world->light_count, sizeof(t_light));
 	world->lights[world->light_count++] = *light;
 }
 

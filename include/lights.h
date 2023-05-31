@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:06:23 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/30 18:19:22 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:20:55 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
  */
 typedef struct s_light
 {
-	t_tuple	position;
+	t_point	position;
 	t_color	intensity;
 	t_bool	in_shadow;
 }	t_light;
@@ -59,8 +59,8 @@ typedef struct s_light
  */
 typedef struct s_sight
 {
-	t_tuple	eyev;
-	t_tuple	normalv;
+	t_vector	eyev;
+	t_vector	normalv;
 }	t_sight;
 
 /* ************************************************************************** */
@@ -78,6 +78,7 @@ typedef struct s_sight
  * @return Returns a light's source with a given location in space and a color
  *         intensity in RGB values.
  */
-t_light	point_light(t_tuple position, t_color intensity);
+
+t_light	point_light(t_point position, t_color intensity);
 
 #endif

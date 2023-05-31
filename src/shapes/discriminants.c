@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 15:23:47 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/31 11:23:35 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:25:04 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ t_discriminant	sphere_discriminant(t_sphere *sphere, t_ray ray)
 		.a = a,
 		.b = b,
 		.c = c,
-		.t1 = (-b - sqrtf(delta)) / (2.0 * a),
-		.t2 = (-b + sqrtf(delta)) / (2.0 * a),
+		.t1 = (-b - sqrt(delta)) / (2.0 * a),
+		.t2 = (-b + sqrt(delta)) / (2.0 * a),
 		.discriminant = delta,
 	});
 }

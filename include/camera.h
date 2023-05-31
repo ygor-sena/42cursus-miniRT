@@ -71,7 +71,7 @@ typedef struct s_camera
  * @param up A vector indicating which direction is up.
  * @return Returns the view transformation matrix.
  */
-t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up);
+t_matrix	view_transform(t_point from, t_point to, t_vector up);
 
 /* ************************************************************************** */
 /*                                 CAMERA.C                                   */
