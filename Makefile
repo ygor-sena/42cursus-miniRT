@@ -40,7 +40,7 @@ SOURCES += scanner.c scanner_utils.c parse_types.c ft_atof.c swap.c
 SOURCES += parse.c parse_basic.c parse_grouped.c parse_utils.c
 SOURCES += parse_shapes_1.c parse_shapes_2.c
 SOURCES += parse_ambient.c parse_element.c cylinders.c patterns.c
-SOURCES += discriminants.c cones.c parse_pattern.c
+SOURCES += discriminants.c cones.c parse_pattern.c checkers.c mappings.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
