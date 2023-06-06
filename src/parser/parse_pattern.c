@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:11:46 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/30 16:38:42 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/06 13:17:55 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #define CHECKERED 1
 
 t_bool	scan_pattern(t_scanner *scanner, int *type);
+void	make_checkerboard(t_shape *shape);
 
 t_bool	parse_pattern(t_scanner *scanner, t_shape *shape)
 {
@@ -34,12 +35,18 @@ t_bool	parse_pattern(t_scanner *scanner, t_shape *shape)
 		shape->material.pattern = pattern;
 		shape->material.pattern.pattern_at = stripe_at;
 		if (type == CHECKERED)
-			shape->material.pattern.pattern_at = checkered_at;
+			make_checkerboard(shape);
 		set_pattern_transform(
 			&shape->material.pattern,
 			translation(0.1, 0.1, 0.1));
 	}
 	return (TRUE);
+}
+
+void	make_checkerboard(t_shape *shape)
+{
+	shape->material.pattern.pattern_at = checkered_at;
+	texture_map(&shape->material.pattern, shape->checker, shape->map);
 }
 
 t_bool	scan_pattern(t_scanner *scanner, int *type)

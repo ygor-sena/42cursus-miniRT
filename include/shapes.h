@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/31 16:23:35 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:32:27 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "rays.h"
 # include "materials.h"
+# include "patterns.h"
 
 # define EPSILON		0.00001
 
@@ -115,6 +116,8 @@ typedef struct s_shape
 	t_material		material;
 	t_hit_record	intersect;
 	t_normal_at		normal_at;
+	t_checker		checker;
+	t_uv_map		map;
 }	t_shape;
 
 /**

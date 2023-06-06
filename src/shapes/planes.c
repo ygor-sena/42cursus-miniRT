@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:43:18 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/26 01:27:03 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:38:42 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_shape	new_plane(void)
 	object.intersect = intersect_plane;
 	object.plane.origin = point(0, 0, 0);
 	object.material.specular = 0.5;
+	object.checker = uv_checkers(2, 2, new_color(0, 0, 0), new_color(1, 1, 1));
+	object.map = planar_map;
 	return (object);
 }
 

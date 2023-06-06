@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cones.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 10:56:52 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/31 11:23:15 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:51:48 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_shape	new_cone(void)
 	object.cone.closed = FALSE;
 	object.normal_at = normal_at_cone;
 	object.intersect = intersect_cone;
+	object.checker = uv_checkers(2, 2, new_color(0, 0, 0), new_color(1, 1, 1));
+	object.map = cylindrical_map;
 	return (object);
 }
 

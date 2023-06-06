@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinders.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:38:04 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/31 11:23:02 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:42:47 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_shape	new_cylinder(void)
 	object.cylinder.closed = FALSE;
 	object.normal_at = normal_at_cylinder;
 	object.intersect = intersect_cylinder;
+	object.checker = uv_checkers(2, 2, new_color(0, 0, 0), new_color(1, 1, 1));
+	object.map = cylindrical_map;
 	return (object);
 }
 

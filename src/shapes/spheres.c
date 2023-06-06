@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   spheres.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:30:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/31 16:25:12 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:32:29 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "patterns.h"
 #include "shapes.h"
 
 t_shape	new_sphere(void)
@@ -23,6 +24,8 @@ t_shape	new_sphere(void)
 	object.intersect = intersect_sphere;
 	object.material.diffuse = 0.7;
 	object.material.specular = 0.3;
+	object.checker = uv_checkers(16, 8, new_color(0, 0, 0), new_color(1, 1, 1));
+	object.map = spherical_map;
 	return (object);
 }
 
