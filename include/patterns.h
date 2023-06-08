@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   patterns.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:21:56 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/06/02 16:54:00 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/08 18:51:06 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,39 @@ typedef struct s_text_map
 }	t_text_map;
 
 /**
+ * @brief The struct of type t_uv_image represents an image used for texturing
+ *        another image.
+ *
+ * The t_uv_image structure contains the necessary fields for storing image data
+ * and relevant information used for texturing operations. It is used to define
+ * an image that can be applied as a texture on another image or rendered onto
+ * a canvas.
+ *
+ * @param mlx_ptr A pointer to a connection with the Xserver.
+ * @param win_ptr A pointer to a window created with MLX (MinilibX).
+ * @param img_ptr A pointer to an image created with MLX (MinilibX).
+ * @param addr    A pointer to the image data, indicating how to write data on
+ *                pixels of the image.
+ * @param bpp     The bits per pixel value of the image.
+ * @param line_len The line length value of the image.
+ * @param endian   The endianness order of the image.
+ * @param width    The width of the image in pixels.
+ * @param height   The height of the image in pixels.
+ */
+typedef struct s_uv_image
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img_ptr;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		width;
+	int		height;
+}	t_uv_image;
+
+/**
  * @brief The type t_pattern contatins all the necessary information to apply a
  *        texture on a given shape's surface.
  * @param has_pattern Stores TRUE if shape has a pattern or FALSE, if not.
@@ -94,6 +127,7 @@ typedef struct s_pattern
 	t_matrix	transform;
 	t_matrix	inverse;
 	t_matrix	transpose;
+	t_uv_image	canvas;
 }	t_pattern;
 
 /* ************************************************************************** */
@@ -134,6 +168,24 @@ t_color		stripe_at(t_pattern pattern, t_point world_point);
  *         Otherwise, it returns the second pattern b.
  */
 t_color		checkered_at(t_pattern pattern, t_point world_point);
+
+/**
+ * @brief Calculates the color of a bumped pattern applied to a shape's surface
+ *        at a given point.
+ *
+ * A bumped pattern is a pattern that adds a sense of depth or texture to a
+ * surface.
+ * This function applies a bumped pattern on the surface of a shape at the
+ * specified point. It determines the color of the pattern at that point based
+ * on the pattern and the position of the point.
+ *
+ * @param pattern A structure of type t_pattern that stores the bumped pattern
+ *                to be applied.
+ * @param point A structure of type t_point representing the point on the
+ *              shape's surface.
+ * @return The color of the pattern at the given point.
+ */
+t_color		bumped_at(t_pattern pattern, t_point point);
 
 /**
  * @brief This function assigns a transformation matrix to a pattern, which is

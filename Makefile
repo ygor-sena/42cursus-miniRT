@@ -38,7 +38,7 @@ SOURCES += lights.c materials.c guards.c world.c view_transform.c camera.c
 SOURCES += render.c controls.c shapes.c shadows.c planes.c
 SOURCES += scanner.c scanner_utils.c parse_types.c ft_atof.c swap.c
 SOURCES += parse.c parse_basic.c parse_grouped.c parse_utils.c
-SOURCES += parse_shapes_1.c parse_shapes_2.c
+SOURCES += parse_shapes_1.c parse_shapes_2.c bumpmap.c parse_textures.c
 SOURCES += parse_ambient.c parse_element.c cylinders.c patterns.c
 SOURCES += discriminants.c cones.c parse_pattern.c checkers.c mappings.c
 
@@ -51,6 +51,7 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 CFLAGS  := -Wall -Werror -Wextra $(addprefix -I,$(INC_DIRS))
 LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
 LDLIBS  := -lft -lmlx -lXext -lX11 -lm
+DEBUG   := 1
 
 ifdef DEBUG
 	CFLAGS += -g
