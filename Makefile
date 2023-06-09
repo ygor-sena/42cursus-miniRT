@@ -4,9 +4,10 @@
 
 NAME  := miniRT
 
-CYAN  := \33[1;36m
 RESET := \033[0m
-LOG   := printf "[$(CYAN)$(RESET)] %s\n"
+CYAN  := \033[1;36m
+CHECK := \342\234\224
+LOG   := printf "[$(CYAN)$(CHECK)$(RESET)] %s\n"
 
 ################################################################################
 ##                                DIRECTORIES                                 ##
@@ -51,7 +52,6 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 CFLAGS  := -Wall -Werror -Wextra $(addprefix -I,$(INC_DIRS))
 LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
 LDLIBS  := -lft -lmlx -lXext -lX11 -lm
-DEBUG   := 1
 
 ifdef DEBUG
 	CFLAGS += -g
