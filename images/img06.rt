@@ -1,0 +1,29 @@
+# Multiple spheres 02
+
+# Ambient Light
+# <intensity: 0-1> <color: red, green, blue>
+A                            0.1         255,255,255
+
+# Camera
+# <coordinates of camera position: x,y,z> <camera view: x,y,z> <pov:x,y,z>
+C   0,1.5,-6         0,1,0   70
+
+# Light
+# <coordinates: x,y,z> <brightness: 0-1> <color:red,green,blue>
+L  -10,10,-10                0.5         255,255,255
+L   10,10,-10                0.5         255,255,255
+L   0,10,-10                 0.5         255,255,255
+
+# Sphere
+# <coordinates: x,y,z> <diameter> <color:red,green,blue>
+sp  1.5,0.5,-0.5             1           128,255,26
+sp  -0.5,1,0.5               2           26,255,128
+
+# Cylinder
+# <coordinates: x,y,z>  <orientation: x,y,z> <diameter: >= 0> <height: >= 0> <color:red,green,blue>
+cy  0.8,0.7,0        0,1,0   0.5   4     200,200,200
+cy  -3,0.6,1.6       0,0,1   1.2   2     122,23,230
+
+# Plane 
+# <coordinates: x,y,z> <origin:x,y,z> <color:red,green,blue>
+pl  0,0,0            0,1,0               255,0,0

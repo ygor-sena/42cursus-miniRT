@@ -1,0 +1,15 @@
+# The Basic Shapes 02
+
+# Ambient Light
+A   0.1                                 255,255,255
+
+# Camera
+# <coordinates of camera position: x,y,z> <camera view: x,y,z> <pov:x,y,z>
+C   0,0.5,-50  0,1,0   100
+
+# Light
+L  10,12,-5                  1         255,0,0
+
+# Plane 
+# <coordinates: x,y,z> <origin:x,y,z> <color:red,green,blue>
+pl  0,0,0            0,1,0                  255,229,229
