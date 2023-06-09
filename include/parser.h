@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:11:15 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/06/08 21:18:19 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:47:03 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -521,19 +521,6 @@ int			get_error_column(t_scanner *scanner);
  * @param error_message The error message to be assigned to the scanner.
  */
 void		set_error_state(t_scanner *scanner, const char *error_message);
-
-////////////////////////////////////////////////////////////////////////////////
-/// Helpers
-
-/**
- * @brief Convert a string to a double.
- *
- * This function converts a string representation of a number to a double value.
- *
- * @param nptr The string to be converted.
- * @return The converted double value.
- */
-double		ft_atof(const char *nptr);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse textures
