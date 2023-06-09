@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:11:15 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/31 15:15:28 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:47:03 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "world.h"
 # include "canvas.h"
 
+# define BUFFER 1024
+
 # define ERROR_UNEXPECTED_ELEMENT "Unexpected element"
 # define ERROR_EXPECTED_NUMBER "Expected a number"
 # define ERROR_EXPECTED_NEWLINE "Expected newline"
@@ -30,6 +32,7 @@
 # define INVALID_LIGHT "Light ratio must be between 0 and 1.\n"
 # define INVALID_FOV "Field of view must be between 0 and 180.\n"
 # define INVALID_DIMENSION "Dimensions should be positive.\n"
+# define INVALID_FILE "Invalid texture file"
 
 # define ERROR_CAMERA "Only one camera allowed.\n"
 # define ERROR_AMBIENT "Only one ambient light allowed.\n"
@@ -191,6 +194,23 @@ int			is_sign(int c);
  * @return True if successful, false otherwise.
  */
 t_bool		parse(char *filename, t_scene *scene);
+
+/**
+ * @brief Check if a filename has a specified extension.
+ *
+ * This function checks whether a given filename has a specified extension. It
+ * compares the extension of the filename with the provided extension parameter.
+ * The extension should be passed without the leading dot (e.g., "png" instead
+ * of ".png"). If the filename has the same extension, the function returns true;
+ * otherwise, it returns false.
+ *
+ * @param filename   The filename to check.
+ * @param extension  The desired extension to compare with (without the leading
+ *                   dot).
+ * @return           True if the filename has the specified extension, false
+ *                   otherwise.
+ */
+t_bool		check_extension(const char *filename, const char *extension);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse element
@@ -503,16 +523,24 @@ int			get_error_column(t_scanner *scanner);
 void		set_error_state(t_scanner *scanner, const char *error_message);
 
 ////////////////////////////////////////////////////////////////////////////////
-/// Helpers
+/// Parse textures
 
 /**
- * @brief Convert a string to a double.
+ * @brief Validate and load a texture file into a UV map and assign it to the
+ * shape.
  *
- * This function converts a string representation of a number to a double value.
+ * This function validates the integrity of the texture file to be scanned, loads
+ * the file into a UV map, and assigns it to the specified shape.
+ * The texture file is loaded into a UV map, which represents the mapping of the
+ * texture coordinates onto the surface of the shape. The UV map allows for
+ * accurate and realistic texture mapping, enhancing the visual appearance of
+ * the shape.
  *
- * @param nptr The string to be converted.
- * @return The converted double value.
+ * @param scanner Pointer to the scanner.
+ * @param shape   Pointer to the shape to which the texture will be assigned.
+ * @return        True if the texture file is successfully validated, loaded
+ *                into the UV map, and assigned to the shape, false otherwise.
  */
-double		ft_atof(const char *nptr);
+t_bool		parse_texture(t_scanner *scanner, t_shape *shape);
 
 #endif // !PARSER_H

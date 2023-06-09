@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:30:32 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/24 13:09:35 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:15:17 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ Test(cylinders, ray_misses_cylinder_1)
 	t_tuple	direction;
 	t_ray	r;
 	t_hit	*xs;
-	
+
 	xs = NULL;
 	cyl = new_cylinder();
 	origin = point(1, 0, 0);
 	direction = normalize(vector(0, 1, 0));
 	r = new_ray(origin, direction);
-	intersect_cylinder(&xs, &cyl, r);
-	
+	intersect(&xs, &cyl, r);
+
 	cr_assert(eq(ptr, xs, NULL));
 }
 
@@ -39,14 +39,14 @@ Test(cylinders, ray_misses_cylinder_2)
 	t_tuple	direction;
 	t_ray	r;
 	t_hit	*xs;
-	
+
 	xs = NULL;
 	cyl = new_cylinder();
 	origin = point(0, 0, 0);
 	direction = normalize(vector(0, 1, 0));
 	r = new_ray(origin, direction);
-	intersect_cylinder(&xs, &cyl, r);
-	
+	intersect(&xs, &cyl, r);
+
 	cr_assert(eq(ptr, xs, NULL));
 }
 
@@ -58,14 +58,14 @@ Test(cylinders, ray_misses_cylinder_3)
 	t_tuple	direction;
 	t_ray	r;
 	t_hit	*xs;
-	
+
 	xs = NULL;
 	cyl = new_cylinder();
 	origin = point(0, 0, -5);
 	direction = normalize(vector(1, 1, 1));
 	r = new_ray(origin, direction);
-	intersect_cylinder(&xs, &cyl, r);
-	
+	intersect(&xs, &cyl, r);
+
 	cr_assert(eq(ptr, xs, NULL));
 }
 
@@ -77,14 +77,14 @@ Test(cylinders, ray_strikes_cylinder_1)
 	t_tuple	direction;
 	t_ray	r;
 	t_hit	*xs;
-	
+
 	xs = NULL;
 	cyl = new_cylinder();
 	origin = point(1, 0, -5);
 	direction = normalize(vector(0, 0, 1));
 	r = new_ray(origin, direction);
-	intersect_cylinder(&xs, &cyl, r);
-	
+	intersect(&xs, &cyl, r);
+
 	cr_assert(eq(i32, intersection_count(xs), 2));
 	cr_assert(eq(flt, xs->t, 5));
 	cr_assert(eq(flt, xs->next->t, 5));
@@ -98,14 +98,14 @@ Test(cylinders, ray_strikes_cylinder_2)
 	t_tuple	direction;
 	t_ray	r;
 	t_hit	*xs;
-	
+
 	xs = NULL;
 	cyl = new_cylinder();
 	origin = point(0, 0, -5);
 	direction = normalize(vector(0, 0, 1));
 	r = new_ray(origin, direction);
-	intersect_cylinder(&xs, &cyl, r);
-	
+	intersect(&xs, &cyl, r);
+
 	cr_assert(eq(i32, intersection_count(xs), 2));
 	cr_assert(eq(flt, xs->t, 4));
 	cr_assert(eq(flt, xs->next->t, 6));
@@ -120,14 +120,14 @@ Test(cylinders, ray_strikes_cylinder_3)
 	t_tuple	direction;
 	t_ray	r;
 	t_hit	*xs;
-	
+
 	xs = NULL;
 	cyl = new_cylinder();
 	origin = point(0.5, 0, -5);
 	direction = normalize(vector(0.1, 1, 1));
 	r = new_ray(origin, direction);
-	intersect_cylinder(&xs, &cyl, r);
-	
+	intersect(&xs, &cyl, r);
+
 	cr_assert(eq(i32, intersection_count(xs), 2));
 	cr_assert_float_eq(xs->t, 6.80798, EPSILON);
 	cr_assert_float_eq(xs->next->t, 7.08872, EPSILON);
@@ -141,9 +141,9 @@ Test(cylinders, normal_vector_on_cylinder_1)
 	t_tuple	res;
 
 	cyl = new_cylinder();
-	n = normal_at_cylinder(&cyl, point(1, 0, 0));
+	n = normal_at(&cyl, point(1, 0, 0));
 	res = vector(1, 0, 0);
-	
+
 	cr_assert_float_eq(n.x, res.x, EPSILON);
 	cr_assert_float_eq(n.y, res.y, EPSILON);
 	cr_assert_float_eq(n.z, res.z, EPSILON);
@@ -158,9 +158,9 @@ Test(cylinders, normal_vector_on_cylinder_2)
 	t_tuple	res;
 
 	cyl = new_cylinder();
-	n = normal_at_cylinder(&cyl, point(0, 5, -1));
+	n = normal_at(&cyl, point(0, 5, -1));
 	res = vector(0, 0, -1);
-	
+
 	cr_assert_float_eq(n.x, res.x, EPSILON);
 	cr_assert_float_eq(n.y, res.y, EPSILON);
 	cr_assert_float_eq(n.z, res.z, EPSILON);
@@ -175,9 +175,9 @@ Test(cylinders, normal_vector_on_cylinder_3)
 	t_tuple	res;
 
 	cyl = new_cylinder();
-	n = normal_at_cylinder(&cyl, point(0, -2, 1));
+	n = normal_at(&cyl, point(0, -2, 1));
 	res = vector(0, 0, 1);
-	
+
 	cr_assert_float_eq(n.x, res.x, EPSILON);
 	cr_assert_float_eq(n.y, res.y, EPSILON);
 	cr_assert_float_eq(n.z, res.z, EPSILON);
@@ -192,9 +192,9 @@ Test(cylinders, normal_vector_on_cylinder_4)
 	t_tuple	res;
 
 	cyl = new_cylinder();
-	n = normal_at_cylinder(&cyl, point(-1, 1, 0));
+	n = normal_at(&cyl, point(-1, 1, 0));
 	res = vector(-1, 0, 0);
-	
+
 	cr_assert_float_eq(n.x, res.x, EPSILON);
 	cr_assert_float_eq(n.y, res.y, EPSILON);
 	cr_assert_float_eq(n.z, res.z, EPSILON);
@@ -222,14 +222,14 @@ Test(cylinders, intersecting_constrained_cylinder_1)
 	t_tuple	direction;
 	t_ray	r;
 	t_hit	*xs;
-	
+
 	xs = NULL;
 	cyl = new_cylinder();
 	cyl.cylinder.minimum = 1;
 	cyl.cylinder.maximum = 2;
 	direction = normalize(vector(0.1, 1, 0));
 	r = new_ray(point(0, 1.5, 0), direction);
-	intersect_cylinder(&xs, &cyl, r);
+	intersect(&xs, &cyl, r);
 
 	cr_assert(eq(i32, intersection_count(xs), 0));	
 }
@@ -244,14 +244,14 @@ Test(cylinders, intersecting_constrained_cylinder_2)
 	t_tuple	direction;
 	t_ray	r;
 	t_hit	*xs;
-	
+
 	xs = NULL;
 	cyl = new_cylinder();
 	cyl.cylinder.minimum = 1;
 	cyl.cylinder.maximum = 2;
 	direction = normalize(vector(0, 0, 1));
 	r = new_ray(point(0, 3, -5), direction);
-	intersect_cylinder(&xs, &cyl, r);
+	intersect(&xs, &cyl, r);
 
 	cr_assert(eq(i32, intersection_count(xs), 0));	
 }
@@ -266,14 +266,14 @@ Test(cylinders, intersecting_constrained_cylinder_3)
 	t_tuple	direction;
 	t_ray	r;
 	t_hit	*xs;
-	
+
 	xs = NULL;
 	cyl = new_cylinder();
 	cyl.cylinder.minimum = 1;
 	cyl.cylinder.maximum = 2;
 	direction = normalize(vector(0, 0, -5));
 	r = new_ray(point(0, 0, 1), direction);
-	intersect_cylinder(&xs, &cyl, r);
+	intersect(&xs, &cyl, r);
 
 	cr_assert(eq(i32, intersection_count(xs), 0));	
 }
@@ -288,14 +288,14 @@ Test(cylinders, intersecting_constrained_cylinder_4)
 	t_tuple	direction;
 	t_ray	r;
 	t_hit	*xs;
-	
+
 	xs = NULL;
 	cyl = new_cylinder();
 	cyl.cylinder.minimum = 1;
 	cyl.cylinder.maximum = 2;
 	direction = normalize(vector(0, 2, -5));
 	r = new_ray(point(0, 0, 1), direction);
-	intersect_cylinder(&xs, &cyl, r);
+	intersect(&xs, &cyl, r);
 
 	cr_assert(eq(i32, intersection_count(xs), 0));	
 }
@@ -310,14 +310,14 @@ Test(cylinders, intersecting_constrained_cylinder_5)
 	t_tuple	direction;
 	t_ray	r;
 	t_hit	*xs;
-	
+
 	xs = NULL;
 	cyl = new_cylinder();
 	cyl.cylinder.minimum = 1;
 	cyl.cylinder.maximum = 2;
 	direction = normalize(vector(0, 1, -5));
 	r = new_ray(point(0, 0, 1), direction);
-	intersect_cylinder(&xs, &cyl, r);
+	intersect(&xs, &cyl, r);
 
 	cr_assert(eq(i32, intersection_count(xs), 0));	
 }
@@ -332,14 +332,14 @@ Test(cylinders, intersecting_constrained_cylinder_6)
 	t_tuple	direction;
 	t_ray	r;
 	t_hit	*xs;
-	
+
 	xs = NULL;
 	cyl = new_cylinder();
 	cyl.cylinder.minimum = 1;
 	cyl.cylinder.maximum = 2;
 	direction = normalize(vector(0, 0, 1));
 	r = new_ray(point(0, 1.5, -2), direction);
-	intersect_cylinder(&xs, &cyl, r);
+	intersect(&xs, &cyl, r);
 
 	cr_assert(eq(i32, intersection_count(xs), 2));	
 }
@@ -376,7 +376,7 @@ Test(cylinders, intersect_caps_closed_cylinder_1)
 	cyl.cylinder.closed = TRUE;
 	direction = normalize(vector(0, -1, 0));
 	r = new_ray(point(0, 3, 0), direction);
-	intersect_cylinder(&xs, &cyl, r);
+	intersect(&xs, &cyl, r);
 
 	cr_assert(eq(i32, intersection_count(xs), 2));
 }
@@ -400,7 +400,7 @@ Test(cylinders, intersect_caps_closed_cylinder_2)
 	cyl.cylinder.closed = TRUE;
 	direction = normalize(vector(0, -1, 2));
 	r = new_ray(point(0, 3, -2), direction);
-	intersect_cylinder(&xs, &cyl, r);
+	intersect(&xs, &cyl, r);
 
 	cr_assert(eq(i32, intersection_count(xs), 2));
 }
@@ -427,7 +427,7 @@ Test(cylinders, intersect_caps_closed_cylinder_3)
 	cyl.cylinder.closed = TRUE;
 	direction = normalize(vector(0, -1, 1));
 	r = new_ray(point(0, 4, -2), direction);
-	intersect_cylinder(&xs, &cyl, r);
+	intersect(&xs, &cyl, r);
 
 	cr_assert(eq(i32, intersection_count(xs), 2));
 }
@@ -451,7 +451,7 @@ Test(cylinders, intersect_caps_closed_cylinder_4)
 	cyl.cylinder.closed = TRUE;
 	direction = normalize(vector(0, 1, 2));
 	r = new_ray(point(0, 0, -2), direction);
-	intersect_cylinder(&xs, &cyl, r);
+	intersect(&xs, &cyl, r);
 
 	cr_assert(eq(i32, intersection_count(xs), 2));
 }
@@ -477,7 +477,7 @@ Test(cylinders, intersect_caps_closed_cylinder_5)
 	cyl.cylinder.closed = TRUE;
 	direction = normalize(vector(0, 1, 1));
 	r = new_ray(point(0, -1, -2), direction);
-	intersect_cylinder(&xs, &cyl, r);
+	intersect(&xs, &cyl, r);
 
 	cr_assert(eq(i32, intersection_count(xs), 2));
 }
@@ -493,7 +493,7 @@ Test(cylinders, normal_vector_on_cyl_end_caps_1)
 	cyl.cylinder.minimum = 1;
 	cyl.cylinder.maximum = 2;
 	cyl.cylinder.closed = TRUE;
-	n = normal_at_cylinder(&cyl, point(0, 1, 0));
+	n = normal_at(&cyl, point(0, 1, 0));
 	res = vector(0, -1, 0);
 
 	cr_assert_float_eq(n.x, res.x, EPSILON);
@@ -512,7 +512,7 @@ Test(cylinders, normal_vector_on_cyl_end_caps_2)
 	cyl.cylinder.minimum = 1;
 	cyl.cylinder.maximum = 2;
 	cyl.cylinder.closed = TRUE;
-	n = normal_at_cylinder(&cyl, point(0.5, 1, 0));
+	n = normal_at(&cyl, point(0.5, 1, 0));
 	res = vector(0, -1, 0);
 
 	cr_assert_float_eq(n.x, res.x, EPSILON);
@@ -531,7 +531,7 @@ Test(cylinders, normal_vector_on_cyl_end_caps_3)
 	cyl.cylinder.minimum = 1;
 	cyl.cylinder.maximum = 2;
 	cyl.cylinder.closed = TRUE;
-	n = normal_at_cylinder(&cyl, point(0, 1, 0.5));
+	n = normal_at(&cyl, point(0, 1, 0.5));
 	res = vector(0, -1, 0);
 
 	cr_assert_float_eq(n.x, res.x, EPSILON);
@@ -550,7 +550,7 @@ Test(cylinders, normal_vector_on_cyl_end_caps_4)
 	cyl.cylinder.minimum = 1;
 	cyl.cylinder.maximum = 2;
 	cyl.cylinder.closed = TRUE;
-	n = normal_at_cylinder(&cyl, point(0, 2, 0));
+	n = normal_at(&cyl, point(0, 2, 0));
 	res = vector(0, 1, 0);
 
 	cr_assert_float_eq(n.x, res.x, EPSILON);
@@ -569,7 +569,7 @@ Test(cylinders, normal_vector_on_cyl_end_caps_5)
 	cyl.cylinder.minimum = 1;
 	cyl.cylinder.maximum = 2;
 	cyl.cylinder.closed = TRUE;
-	n = normal_at_cylinder(&cyl, point(0.5, 2, 0));
+	n = normal_at(&cyl, point(0.5, 2, 0));
 	res = vector(0, 1, 0);
 
 	cr_assert_float_eq(n.x, res.x, EPSILON);
@@ -588,7 +588,7 @@ Test(cylinders, normal_vector_on_cyl_end_caps_6)
 	cyl.cylinder.minimum = 1;
 	cyl.cylinder.maximum = 2;
 	cyl.cylinder.closed = TRUE;
-	n = normal_at_cylinder(&cyl, point(0, 2, 0.5));
+	n = normal_at(&cyl, point(0, 2, 0.5));
 	res = vector(0, 1, 0);
 
 	cr_assert_float_eq(n.x, res.x, EPSILON);

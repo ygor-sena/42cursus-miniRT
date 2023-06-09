@@ -4,9 +4,10 @@
 
 NAME  := miniRT
 
-CYAN  := \33[1;36m
 RESET := \033[0m
-LOG   := printf "[$(CYAN)$(RESET)] %s\n"
+CYAN  := \033[1;36m
+CHECK := \342\234\224
+LOG   := printf "[$(CYAN)$(CHECK)$(RESET)] %s\n"
 
 ################################################################################
 ##                                DIRECTORIES                                 ##
@@ -34,11 +35,11 @@ HEADERS += world.h helpers.h camera.h mlx.h parser.h patterns.h
 SOURCES := main.c models.c basic_math.c vector_math.c colors.c canvas.c
 SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c
 SOURCES += mx_utils.c rays.c intersections.c spheres.c
-SOURCES += lights.c materials.c guards.c world.c view_transform.c camera.c
+SOURCES += lights.c materials.c world.c view_transform.c camera.c
 SOURCES += render.c controls.c shapes.c shadows.c planes.c
 SOURCES += scanner.c scanner_utils.c parse_types.c ft_atof.c swap.c
 SOURCES += parse.c parse_basic.c parse_grouped.c parse_utils.c
-SOURCES += parse_shapes_1.c parse_shapes_2.c
+SOURCES += parse_shapes_1.c parse_shapes_2.c bumpmap.c parse_textures.c
 SOURCES += parse_ambient.c parse_element.c cylinders.c patterns.c
 SOURCES += discriminants.c cones.c parse_pattern.c checkers.c mappings.c
 

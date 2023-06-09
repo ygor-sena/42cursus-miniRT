@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 14:48:10 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/26 09:07:52 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:48:28 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,6 @@
  */
 
 /* ************************************************************************** */
-/*                                  GUARDS.C                                  */
-/* ************************************************************************** */
-
-/**
- * @brief oom() means outside memory guard. This function checks if the pointer
- *        passed as parameter is NULL. If true, a message with the corresponding
- *        errno number is printed and the program is terminated.
- *
- * @param ptr The pointer to be checked after calling malloc().
- * @return Returns the pointer if malloc() succeeded. Otherwise, the program is
- *         ceased.
- */
-void	*oom(void *ptr);
-
-/* ************************************************************************** */
 /*                                   SWAP.C                                   */
 /* ************************************************************************** */
 
@@ -51,5 +36,19 @@ void	*oom(void *ptr);
  * @param nbr2 Receives the second the number to be compared.
  */
 void	swap(double *nbr1, double *nbr2);
+
+/* ************************************************************************** */
+/*                                  FT_ATOF.C                                 */
+/* ************************************************************************** */
+
+/**
+ * @brief Convert a string to a double.
+ *
+ * This function converts a string representation of a number to a double value.
+ *
+ * @param nptr The string to be converted.
+ * @return The converted double value.
+ */
+double	ft_atof(const char *nptr);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/31 16:23:35 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:30:13 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "rays.h"
 # include "materials.h"
+# include "patterns.h"
 
 # define EPSILON		0.00001
 
@@ -115,6 +116,8 @@ typedef struct s_shape
 	t_material		material;
 	t_hit_record	intersect;
 	t_normal_at		normal_at;
+	t_checker		checker;
+	t_uv_map		map;
 }	t_shape;
 
 /**
@@ -261,6 +264,27 @@ t_hit			*hit(t_hit *xs);
 t_shape			new_shape(void);
 
 /**
+ * @brief Calculates the normal vector at a given point on a shape's surface.
+ *
+ * A surface normal, or normal vector, is a vector that points perpendicular
+ * to a surface at a given point. This function calculates the normal vector
+ * at a specified point on the surface of a shape. The normal vector is
+ * essential in various applications, such as shading and collision detection.
+ *
+ * The function computes the normal vector by evaluating the specific shape's
+ * surface properties and geometry at the given world point. The world point
+ * refers to the point on the shape's surface for which the normal vector
+ * is to be calculated.
+ *
+ * @param shape A pointer to a structure of type t_shape representing the shape.
+ * @param world_point A structure of type t_point referring to the world point on
+ *                    the surface of the given shape.
+ * @return A normal vector perpendicular to the given world point on
+ *         the shape's surface.
+ */
+t_vector		normal_at(t_shape *shape, t_point world_point);
+
+/**
  * @brief Assigns a transformation matrix to a shape.
  *
  * The transformation matrix is applied to the shape by modifying its internal
@@ -290,68 +314,6 @@ void			set_transform(t_shape *shape, t_matrix transform);
  */
 t_shape			new_sphere(void);
 
-/**
- * @brief Calculates the normal vector at a given point on a sphere's surface.
- *
- * A surface normal, or normal vector, is a vector that points perpendicular
- * to a surface at a given point. This function calculates the normal vector
- * at a specified point on the surface of a sphere. The normal vector is
- * essential in various applications, such as shading and collision detection.
- *
- * The function computes the normal vector by drawing a vector from the
- * sphere's origin to the world point passed as the second parameter. This
- * world point refers to the point on the sphere's surface for which the
- * normal vector is to be calculated.
- *
- * @param sphere A struct of type t_sphere containing an initialized sphere.
- * @param world_point A struct of type t_tuple referring to the world point on
- *                    the given sphere's surface.
- * @return A normal vector perpendicular to the given world point on
- *         a given sphere's surface.
- */
-t_tuple			normal_at_sphere(t_shape *shape, t_tuple world_point);
-
-/**
- * @brief Calculates the normal vector at a given point on a shape's surface.
- *
- * A surface normal, or normal vector, is a vector that points perpendicular
- * to a surface at a given point. This function calculates the normal vector
- * at a specified point on the surface of a shape. The normal vector is
- * essential in various applications, such as shading and collision detection.
- *
- * The function computes the normal vector by evaluating the specific shape's
- * surface properties and geometry at the given world point. The world point
- * refers to the point on the shape's surface for which the normal vector
- * is to be calculated.
- *
- * @param shape A pointer to a structure of type t_shape representing the shape.
- * @param world_point A structure of type t_point referring to the world point on
- *                    the surface of the given shape.
- * @return A normal vector perpendicular to the given world point on
- *         the shape's surface.
- */
-t_vector		normal_at(t_shape *shape, t_point world_point);
-
-/**
- * @brief Calculates the intersection points between a ray and a sphere.
- *
- * This function calculates the intersection points between a ray and a sphere.
- * If the ray starts inside the sphere, there are two intersection points: one
- * in front of the ray and one behind it. When the ray intersects the sphere at
- * one point only, the function returns two identical intersection points. This
- * is useful when dealing with object overlaps in Constructive Solid Geometry
- * (CSG).
- *
- * @param xs A pointer to a pointer of type `t_hit` representing the collection
- *           of intersection points.
- * @param shape A pointer to a structure of type `t_shape` representing the
- *              sphere to be intersected.
- * @param ray A structure of type `t_ray` representing the ray to be intersected
- *            with the sphere.
- * @return Returns `TRUE` if an intersection was found, `FALSE` otherwise.
- */
-t_bool			intersect_sphere(t_hit **xs, t_shape *shape, t_ray ray);
-
 /* ************************************************************************** */
 /*                                PLANES.C                                    */
 /* ************************************************************************** */
@@ -367,40 +329,6 @@ t_bool			intersect_sphere(t_hit **xs, t_shape *shape, t_ray ray);
  *         default properties.
  */
 t_shape			new_plane(void);
-
-/**
- * @brief Calculates the normal vector at a point on a plane.
- *
- * This function calculates the normal vector at a given point on a plane. The
- * normal vector is a vector that is perpendicular to the plane at the given
- * point.
- *
- * @param shape A pointer to a structure of type `t_shape` representing the
- *              plane.
- * @param world_point A tuple representing the point on the plane in world
- *                    coordinates.
- * @return Returns a tuple representing the normal vector at the given point.
- */
-// t_tuple	normal_at_plane(t_shape *shape, t_tuple world_point);
-
-/**
- * @brief Calculates the intersection of a ray with a plane.
- *
- * This function calculates the intersection of a ray with a plane that extends
- * infinitely in the xz plane and passes through the origin. The function
- * returns a boolean value indicating whether the ray intersects the plane.
- * If the ray intersects the plane, the function adds a hit record to the list
- * of intersections.
- *
- * @param xs A pointer to a pointer to a structure of type `t_hit` representing
- *           the list of intersections.
- * @param shape A pointer to a structure of type `t_shape` representing the
- *              plane.
- * @param ray A structure of type `t_ray` representing the ray.
- * @return Returns a boolean value indicating whether the ray intersects the
- *         plane.
- */
-// t_bool	intersect_plane(t_hit **xs, t_shape *shape, t_ray ray);
 
 /* ************************************************************************** */
 /*                               PATTERNS.C                                   */
@@ -462,39 +390,6 @@ t_color			lighting(t_shape *shape, t_light light,
  */
 t_shape			new_cylinder(void);
 
-/**
- * @brief This function calculates the intersection of a ray with a cylinder.
- *
- * It first checks if there are any intersections on the sides of the cylinder.
- * Then, it proceeds to check for intersections within the end caps. If any
- * intersection is found, the function computes the intersection of the sides and
- * end caps, respectively.
- *
- * @param xs A pointer to a pointer to a structure of type `t_hit` representing
- *           the list of intersections.
- * @param shape A pointer to a structure of type `t_shape` representing the
- *              cylinder.
- * @param ray A structure of type `t_ray` representing the ray.
- * @return Returns a boolean value indicating whether the ray intersects the
- *         cylinder.
- */
-t_bool			intersect_cylinder(t_hit **xs, t_shape *shape, t_ray ray);
-
-/**
- * @brief Calculates the normal vector at a point on a cylinder.
- *
- * This function calculates the normal vector at a given point on a cylinder.
- * The normal vector is a vector that is perpendicular to the cylinder at the
- * given point.
- *
- * @param shape A pointer to a structure of type `t_shape` representing the
- *              cylinder.
- * @param world_point A tuple representing the point on the cylinder in world
- *                    coordinates.
- * @return Returns a tuple representing the normal vector at the given point.
- */
-t_tuple			normal_at_cylinder(t_shape *shape, t_tuple world_point);
-
 /* ************************************************************************** */
 /*                                 CONES.C                                    */
 /* ************************************************************************** */
@@ -512,39 +407,6 @@ t_tuple			normal_at_cylinder(t_shape *shape, t_tuple world_point);
  *         default properties.
  */
 t_shape			new_cone(void);
-
-/**
- * @brief This function calculates the intersection of a ray with a cone.
- *
- * It first checks if there are any intersections on the sides of the cone.
- * Then, it proceeds to check for intersections within the end caps. If any
- * intersection is found, the function computes the intersection of the sides and
- * end caps, respectively.
- *
- * @param xs A pointer to a pointer to a structure of type `t_hit` representing
- *           the list of intersections.
- * @param shape A pointer to a structure of type `t_shape` representing the
- *              cone.
- * @param ray A structure of type `t_ray` representing the ray.
- * @return Returns a boolean value indicating whether the ray intersects the
- *         cone.
- */
-t_bool			intersect_cone(t_hit **xs, t_shape *shape, t_ray ray);
-
-/**
- * @brief Calculates the normal vector at a point on a cone.
- *
- * This function calculates the normal vector at a given point on a cone.
- * The normal vector is a vector that is perpendicular to the cone at the
- * given point.
- *
- * @param shape A pointer to a structure of type `t_shape` representing the
- *              cone.
- * @param world_point A tuple representing the point on the cone in world
- *                    coordinates.
- * @return Returns a tuple representing the normal vector at the given point.
- */
-t_tuple			normal_at_cone(t_shape *shape, t_tuple world_point);
 
 /* ************************************************************************** */
 /*                             DISCRIMINANTS.C                                */

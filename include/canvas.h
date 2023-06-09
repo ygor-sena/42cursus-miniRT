@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   canvas.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:28:08 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/31 16:10:23 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:07:42 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,9 +174,9 @@ int		quit(t_canvas *canvas);
 /**
  * @brief This functions renders a scene of ray casting objects. It attempts to
  *        initialize a connection to the graphic library MLX, if successfilly,
-*         it proceeds to write pixel by pixel to a image that will be rendered
-          and seen by the user though a MLX's windows.
- * 
+ *        it proceeds to write pixel by pixel to a image that will be rendered
+ *        and seen by the user though a MLX's windows.
+ *
  * @param scene A struct of type t_scene that stores information about the how
  *              the world will be seen and which objects of a given world will
  *              be observed.
@@ -188,9 +188,9 @@ int		quit(t_canvas *canvas);
 t_bool	render(t_scene *scene, t_canvas *canvas);
 
 /**
- * @brief The function pixel_at() writes a pixel at (x, y) coordinates of the
+ * @brief The function write_pixel() writes a pixel at (x, y) coordinates of the
  *        image, if a given coordinate is within canvas width and height.
- * 
+ *
  * @param canvas A struct of type t_canvas containing the necessary fields for
  *               graphic initialization and window rendering.
  * @param x The x value of the pixel to be inserted.
@@ -198,19 +198,5 @@ t_bool	render(t_scene *scene, t_canvas *canvas);
  * @param color Stores the color of the pixel.
  */
 void	write_pixel(const t_canvas *canvas, int x, int y, int color);
-
-/**
- * @brief The function pixel_at() will put a pixel at (x, y) coordinates of the
- *        image. It will act as a replacement for the mlx_pixel_put() function.
- *        For more information, refer to https://aurelienbrabant.fr/blog/
- *        pixel-drawing-with-the-minilibx.
- * 
- * @param image A struct of type t_canvas containing the necessary fields for
- *              graphic initialization and window rendering.
- * @param x The x value of the pixel to be inserted.
- * @param y The y value of the pixel to be inserted.
- * @return Returns a pixel at (x, y) coordinates.
- */
-int		pixel_at(t_canvas *image, int x, int y);
 
 #endif

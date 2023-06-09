@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   patterns.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:22:30 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/06/02 16:06:26 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:34:53 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_pattern	new_pattern(t_color a, t_color b)
 		.b = new_color(b.red, b.green, b.blue),
 		.texture_map.uv_pattern = uv_checkers(0, 0, a, b),
 		.texture_map.uv_map = planar_map,
+		.texture_map.canvas = NULL,
 		.transform = get_identity_matrix(),
 		.inverse = get_identity_matrix(),
 		.transpose = get_identity_matrix()
@@ -35,10 +36,6 @@ t_color	stripe_at(t_pattern pattern, t_point world_point)
 	return (pattern.b);
 }
 
-//if ((int)(floor(world_point.x) + floor(world_point.y)
-//	+ floor(world_point.z)) % 2 == 0)
-//	return (pattern.a);
-//return (pattern.b);
 t_color	checkered_at(t_pattern pattern, t_point world_point)
 {
 	t_checker	uv;

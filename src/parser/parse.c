@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:15:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 13:37:35 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:18:20 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 #ifndef ENOENT
 # define ENOENT 2   /* No such file or directory */
 #endif
-
-#define BUFFER 1024
 
 static int		open_rt_file(const char *filename);
 static t_bool	flush_buffer(int file);
@@ -54,12 +52,10 @@ t_bool	parse(char *filename, t_scene *scene)
 static int	open_rt_file(const char *filename)
 {
 	int		file;
-	char	*extension;
 	char	error_msg[BUFFER];
 
 	ft_strlcpy(error_msg, "minirt: ", BUFFER);
-	extension = ft_strrchr(filename, '.');
-	if (!extension || ft_strncmp(extension, ".rt", 4) != 0)
+	if (!check_extension(filename, "rt"))
 	{
 		ft_strlcat(error_msg, strerror(EINVAL), BUFFER);
 		ft_putendl_fd(error_msg, STDERR_FILENO);
@@ -73,6 +69,20 @@ static int	open_rt_file(const char *filename)
 		exit (EXIT_FAILURE);
 	}
 	return (file);
+}
+
+t_bool	check_extension(const char *filename, const char *extension)
+{
+	const char	*file_ext;
+
+	file_ext = ft_strrchr(filename, '.');
+	if (file_ext)
+	{
+		file_ext++;
+		if (ft_strncmp(file_ext, extension, ft_strlen(extension) + 1) == 0)
+			return (TRUE);
+	}
+	return (FALSE);
 }
 
 static t_bool	flush_buffer(int file)
