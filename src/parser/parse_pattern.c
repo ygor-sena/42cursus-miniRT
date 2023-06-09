@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:11:46 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/06/08 19:09:30 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:48:17 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,15 @@ t_bool	parse_pattern(t_scanner *scanner, t_shape *shape)
 
 static void	load_checkerboard(t_shape *shape)
 {
+	int			width;
+	int			height;
 	t_checker	checker;
 	t_pattern	pattern;
 
+	width = shape->checker.width;
+	height = shape->checker.height;
 	pattern = shape->material.pattern;
-	checker = uv_checkers(16, 8, pattern.a, pattern.b);
+	checker = uv_checkers(width, height, pattern.a, pattern.b);
 	shape->checker = checker;
 	shape->material.pattern.pattern_at = checkered_at;
 	texture_map(&shape->material.pattern, shape->checker, shape->map);
