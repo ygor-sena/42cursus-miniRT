@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 10:56:52 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/06/06 12:51:48 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:28:54 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void		intersect_caps(t_hit **xs, t_shape *shape, t_ray ray);
 static t_bool	check_cap(t_ray ray, double t, double cone_range);
+static t_tuple	normal_at_cone(t_shape *shape, t_tuple world_point);
+static t_bool	intersect_cone(t_hit **xs, t_shape *shape, t_ray ray);
 
 t_shape	new_cone(void)
 {
@@ -31,7 +33,20 @@ t_shape	new_cone(void)
 	return (object);
 }
 
-t_tuple	normal_at_cone(t_shape *shape, t_tuple world_point)
+/**
+ * @brief Calculates the normal vector at a point on a cone.
+ *
+ * This function calculates the normal vector at a given point on a cone.
+ * The normal vector is a vector that is perpendicular to the cone at the
+ * given point.
+ *
+ * @param shape A pointer to a structure of type `t_shape` representing the
+ *              cone.
+ * @param world_point A tuple representing the point on the cone in world
+ *                    coordinates.
+ * @return Returns a tuple representing the normal vector at the given point.
+ */
+static t_tuple	normal_at_cone(t_shape *shape, t_tuple world_point)
 {
 	double	dist;
 	double	min_radius;
@@ -59,7 +74,23 @@ t_tuple	normal_at_cone(t_shape *shape, t_tuple world_point)
  * intersect the cone.
  */
 
-t_bool	intersect_cone(t_hit **xs, t_shape *shape, t_ray ray)
+/**
+ * @brief This function calculates the intersection of a ray with a cone.
+ *
+ * It first checks if there are any intersections on the sides of the cone.
+ * Then, it proceeds to check for intersections within the end caps. If any
+ * intersection is found, the function computes the intersection of the sides and
+ * end caps, respectively.
+ *
+ * @param xs A pointer to a pointer to a structure of type `t_hit` representing
+ *           the list of intersections.
+ * @param shape A pointer to a structure of type `t_shape` representing the
+ *              cone.
+ * @param ray A structure of type `t_ray` representing the ray.
+ * @return Returns a boolean value indicating whether the ray intersects the
+ *         cone.
+ */
+static t_bool	intersect_cone(t_hit **xs, t_shape *shape, t_ray ray)
 {
 	t_discriminant	d;
 	double			y0;
