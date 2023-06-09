@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:29:58 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/26 09:50:09 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:22:58 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	main(int argc, char **argv)
 	t_scene		scene;
 	t_canvas	canvas;
 
-	scene = new_scene();
 	if (argc != 2)
 		return (EXIT_FAILURE);
+	scene = new_scene();
 	if (!parse(argv[argc - 1], &scene))
 	{
 		deallocate_world(&scene);
@@ -66,6 +66,22 @@ void	setup_world(t_scene *scene)
 
 void	deallocate_world(t_scene *scene)
 {
+	int			idx;
+	t_uv_image	*canvas;
+
+	idx = 0;
+	while (idx < scene->world.object_count)
+	{
+		canvas = scene->world.objects[idx].material.pattern.texture_map.canvas;
+		if (canvas)
+		{
+			mlx_destroy_image(canvas->mlx_ptr, canvas->img_ptr);
+			mlx_destroy_display(canvas->mlx_ptr);
+			free(canvas->mlx_ptr);
+			free(canvas);
+		}
+		idx++;
+	}
 	free(scene->world.objects);
 	free(scene->world.lights);
 }

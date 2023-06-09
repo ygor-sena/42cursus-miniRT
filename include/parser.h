@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:11:15 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/06/08 19:26:13 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:18:19 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 # include "world.h"
 # include "canvas.h"
+
+# define BUFFER 1024
 
 # define ERROR_UNEXPECTED_ELEMENT "Unexpected element"
 # define ERROR_EXPECTED_NUMBER "Expected a number"

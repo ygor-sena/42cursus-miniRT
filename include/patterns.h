@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:21:56 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/06/08 18:51:06 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:13:10 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,6 @@ typedef struct s_checker
 }	t_checker;
 
 /**
- * @brief This structure creates a t_pattern subclass (the same as t_pttr_at,
- *        which calls stripe_at() or checkered_at()). t_text_map is a subclass
- *        that uses spherical_map(), planar_map() or cylindrical_map() to define
- *        how to apply a pattern on a given 2D or 3D shape's surface.
- *
- * @param uv_pattern Contains information about the pattern to applied on a
- *                   given shape's surface.
- * @param uv_map Contains the corresponding shape's function that will correctly
- *               apply the texture on its surface. For example, if the shape is
- *               a plane, this field must be planar_map. If it's a cylinder, it
- *               must be cylindrical_map and if it's a sphere, it must be
- *               spherical_map.
- */
-typedef struct s_text_map
-{
-	t_checker	uv_pattern;
-	t_uv_map	uv_map;
-}	t_text_map;
-
-/**
  * @brief The struct of type t_uv_image represents an image used for texturing
  *        another image.
  *
@@ -101,6 +81,27 @@ typedef struct s_uv_image
 }	t_uv_image;
 
 /**
+ * @brief This structure creates a t_pattern subclass (the same as t_pttr_at,
+ *        which calls stripe_at() or checkered_at()). t_text_map is a subclass
+ *        that uses spherical_map(), planar_map() or cylindrical_map() to define
+ *        how to apply a pattern on a given 2D or 3D shape's surface.
+ *
+ * @param uv_pattern Contains information about the pattern to applied on a
+ *                   given shape's surface.
+ * @param uv_map Contains the corresponding shape's function that will correctly
+ *               apply the texture on its surface. For example, if the shape is
+ *               a plane, this field must be planar_map. If it's a cylinder, it
+ *               must be cylindrical_map and if it's a sphere, it must be
+ *               spherical_map.
+ */
+typedef struct s_text_map
+{
+	t_checker	uv_pattern;
+	t_uv_map	uv_map;
+	t_uv_image	*canvas;
+}	t_text_map;
+
+/**
  * @brief The type t_pattern contatins all the necessary information to apply a
  *        texture on a given shape's surface.
  * @param has_pattern Stores TRUE if shape has a pattern or FALSE, if not.
@@ -127,7 +128,6 @@ typedef struct s_pattern
 	t_matrix	transform;
 	t_matrix	inverse;
 	t_matrix	transpose;
-	t_uv_image	canvas;
 }	t_pattern;
 
 /* ************************************************************************** */

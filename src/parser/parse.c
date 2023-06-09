@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:15:21 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/06/08 14:55:00 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:18:20 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 #ifndef ENOENT
 # define ENOENT 2   /* No such file or directory */
 #endif
-
-#define BUFFER 1024
 
 static int		open_rt_file(const char *filename);
 static t_bool	flush_buffer(int file);

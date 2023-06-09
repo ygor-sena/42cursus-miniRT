@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 12:16:18 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/31 16:24:32 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/07 16:53:47 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,6 @@ static int	convert(float color)
 		color = 1;
 	color *= 255 + 0.5;
 	return (color);
-}
-
-int	pixel_at(t_canvas *canvas, int x, int y)
-{
-	char	*pixel;
-
-	pixel = canvas->addr + (y * canvas->line_len + x * (canvas->bpp / 8));
-	return (*(int *)pixel);
 }
 
 void	write_pixel(const t_canvas *canvas, int x, int y, int color)

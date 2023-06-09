@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:22:30 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/06/08 18:43:57 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:34:53 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_pattern	new_pattern(t_color a, t_color b)
 		.b = new_color(b.red, b.green, b.blue),
 		.texture_map.uv_pattern = uv_checkers(0, 0, a, b),
 		.texture_map.uv_map = planar_map,
+		.texture_map.canvas = NULL,
 		.transform = get_identity_matrix(),
 		.inverse = get_identity_matrix(),
 		.transpose = get_identity_matrix()

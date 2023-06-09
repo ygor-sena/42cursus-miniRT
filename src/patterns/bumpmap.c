@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:48:24 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/06/07 17:03:05 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/08 20:40:53 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,23 @@ t_color	bumped_at(t_pattern pattern, t_point point)
 
 	uv = pattern.texture_map.uv_map(point);
 	uv.height = 1 - uv.height;
-	x = floor(uv.width * (pattern.canvas.width - 1));
-	y = floor(uv.height * (pattern.canvas.height - 1));
-	return (pixel_at(&pattern.canvas, x, y));
+	x = floor(uv.width * (pattern.texture_map.canvas->width - 1));
+	y = floor(uv.height * (pattern.texture_map.canvas->height - 1));
+	return (pixel_at(pattern.texture_map.canvas, x, y));
 }
+
+// t_color	bumped_at(t_pattern pattern, t_point point)
+// {
+// 	size_t		x;
+// 	size_t		y;
+// 	t_checker	uv;
+//
+// 	uv = pattern.texture_map.uv_map(point);
+// 	uv.height = 1 - uv.height;
+// 	x = floor(uv.width * (pattern.canvas.width - 1));
+// 	y = floor(uv.height * (pattern.canvas.height - 1));
+// 	return (pixel_at(&pattern.canvas, x, y));
+// }
 
 static t_color	pixel_at(t_uv_image *bumpmap, int x, int y)
 {
