@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:11:03 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/24 13:01:37 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/11 10:09:50 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_scanner(t_scanner *scanner, const char *source)
 	scanner->start = source;
 	scanner->consume = source;
 	scanner->current = source;
+	scanner->sync = source;
 	scanner->message = ERROR_UNEXPECTED_ELEMENT;
 }
 

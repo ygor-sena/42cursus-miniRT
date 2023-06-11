@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:08:40 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/24 13:16:07 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/11 10:11:55 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,22 @@ t_bool	parse_position(t_scanner *scanner, t_point *position)
 t_bool	parse_direction(t_scanner *scanner, t_vector *direction)
 {
 	*direction = vector(0, 0, 0);
-	if (!parse_direction_component(scanner, &direction->x))
+	save_position(scanner);
+	if (!parse_direction_component(scanner, &direction->x)
+		|| !scan_comma(scanner)
+		|| !parse_direction_component(scanner, &direction->y)
+		|| !scan_comma(scanner)
+		|| !parse_direction_component(scanner, &direction->z))
+	{
+		sync_position(scanner);
 		return (FALSE);
-	if (!scan_comma(scanner))
+	}
+	if (fabs(1.0 - magnitude(*direction)) >= EPSILON)
+	{
+		sync_position(scanner);
+		set_error_state(scanner, NON_NORMALIZED);
 		return (FALSE);
-	if (!parse_direction_component(scanner, &direction->y))
-		return (FALSE);
-	if (!scan_comma(scanner))
-		return (FALSE);
-	if (!parse_direction_component(scanner, &direction->z))
-		return (FALSE);
+	}
 	return (TRUE);
 }
 

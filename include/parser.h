@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:11:15 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/06/08 22:47:03 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/11 10:18:00 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define INVALID_FOV "Field of view must be between 0 and 180.\n"
 # define INVALID_DIMENSION "Dimensions should be positive.\n"
 # define INVALID_FILE "Invalid texture file"
+# define NON_NORMALIZED "Vector should be normalized"
 
 # define ERROR_CAMERA "Only one camera allowed.\n"
 # define ERROR_AMBIENT "Only one ambient light allowed.\n"
@@ -77,6 +78,7 @@ typedef struct s_scanner
 	const char	*consume;
 	const char	*current;
 	const char	*message;
+	const char	*sync;
 }	t_scanner;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -179,6 +181,31 @@ void		skip_whitespace(t_scanner *scanner);
  * @return  1 if sign, 0 otherwise.
  */
 int			is_sign(int c);
+
+/**
+ * @brief Saves the current position of the scanner for later restoration and
+ * synchronization with the parser.
+ *
+ * This function takes a pointer to a scanner object and saves the current
+ * position of the scanner in the sync pointer of the scanner object.
+ * The saved position can be used later to restore the scanner to its current
+ * position and synchronize it with the parser.
+ *
+ * @param scanner A pointer to a scanner object.
+ */
+void		save_position(t_scanner *scanner);
+
+/**
+ * @brief Synchronizes the scanner with the parser by restoring its position
+ * to a previously saved position.
+ *
+ * This function takes a pointer to a scanner object and restores the scanner
+ * to the saved position in the sync pointer of the scanner object,
+ * synchronizing it with the parser.
+ *
+ * @param scanner A pointer to a scanner object.
+ */
+void		sync_position(t_scanner *scanner);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Parse
