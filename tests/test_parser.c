@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:18:30 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/24 13:01:03 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/11 09:55:30 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,8 +155,8 @@ Test(parser, direction_with_valid_input)
 	t_vector	expected;
 	t_bool		success;
 
-	init_scanner(&scanner, "-1.0, 0.5, 1.0");
-	expected = vector(-1.0, 0.5, 1.0);
+	init_scanner(&scanner, "-1.0, 0.0, 0.0");
+	expected = vector(-1.0, 0.0, 0.0);
 	success = parse_direction(&scanner, &result);
 	cr_assert(eq(i32, success, TRUE));
 	cr_assert(eq(flt, result.x, expected.x));
