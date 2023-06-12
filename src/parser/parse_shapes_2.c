@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:27:09 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/30 20:44:43 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/11 10:27:33 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,13 @@ t_bool	parse_cylinder(t_scanner *scanner, t_scene *scene)
 	t_shape		shape;
 
 	shape = new_cylinder();
-	if (!parse_position(scanner, &param.origin))
-		return (FALSE);
-	if (!parse_direction(scanner, &param.direction))
-		return (FALSE);
-	if (!parse_dimension(scanner, &param.diameter))
-		return (FALSE);
-	if (!parse_dimension(scanner, &param.height))
-		return (FALSE);
-	if (!parse_color(scanner, &shape.material.color))
-		return (FALSE);
-	if (!parse_pattern(scanner, &shape))
-		return (FALSE);
-	if (!scan_newline(scanner))
+	if (!parse_position(scanner, &param.origin)
+		|| !parse_direction(scanner, &param.direction)
+		|| !parse_dimension(scanner, &param.diameter)
+		|| !parse_dimension(scanner, &param.height)
+		|| !parse_color(scanner, &shape.material.color)
+		|| !parse_pattern(scanner, &shape)
+		|| !scan_newline(scanner))
 		return (FALSE);
 	set_cylinder_attributes(&shape, param);
 	add_object_to_world(&shape, &scene->world);
@@ -78,19 +72,13 @@ t_bool	parse_cone(t_scanner *scanner, t_scene *scene)
 	t_param		param;
 
 	shape = new_cone();
-	if (!parse_position(scanner, &param.origin))
-		return (FALSE);
-	if (!parse_direction(scanner, &param.direction))
-		return (FALSE);
-	if (!parse_dimension(scanner, &param.diameter))
-		return (FALSE);
-	if (!parse_dimension(scanner, &param.height))
-		return (FALSE);
-	if (!parse_color(scanner, &shape.material.color))
-		return (FALSE);
-	if (!parse_pattern(scanner, &shape))
-		return (FALSE);
-	if (!scan_newline(scanner))
+	if (!parse_position(scanner, &param.origin)
+		|| !parse_direction(scanner, &param.direction)
+		|| !parse_dimension(scanner, &param.diameter)
+		|| !parse_dimension(scanner, &param.height)
+		|| !parse_color(scanner, &shape.material.color)
+		|| !parse_pattern(scanner, &shape)
+		|| !scan_newline(scanner))
 		return (FALSE);
 	set_cone_attributes(&shape, param);
 	add_object_to_world(&shape, &scene->world);

@@ -6,7 +6,7 @@
 /*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:08:40 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/06/11 10:11:55 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/11 10:20:12 by mdias-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,11 @@ static t_bool	parse_direction_component(t_scanner *scanner, double *coord);
 
 t_bool	parse_color(t_scanner *scanner, t_color *color)
 {
-	if (!parse_color_component(scanner, &color->red))
-		return (FALSE);
-	if (!scan_comma(scanner))
-		return (FALSE);
-	if (!parse_color_component(scanner, &color->green))
-		return (FALSE);
-	if (!scan_comma(scanner))
-		return (FALSE);
-	if (!parse_color_component(scanner, &color->blue))
+	if (!parse_color_component(scanner, &color->red)
+		|| !scan_comma(scanner)
+		|| !parse_color_component(scanner, &color->green)
+		|| !scan_comma(scanner)
+		|| !parse_color_component(scanner, &color->blue))
 		return (FALSE);
 	return (TRUE);
 }
@@ -33,15 +29,11 @@ t_bool	parse_color(t_scanner *scanner, t_color *color)
 t_bool	parse_position(t_scanner *scanner, t_point *position)
 {
 	*position = point(0, 0, 0);
-	if (!parse_double(scanner, &position->x))
-		return (FALSE);
-	if (!scan_comma(scanner))
-		return (FALSE);
-	if (!parse_double(scanner, &position->y))
-		return (FALSE);
-	if (!scan_comma(scanner))
-		return (FALSE);
-	if (!parse_double(scanner, &position->z))
+	if (!parse_double(scanner, &position->x)
+		|| !scan_comma(scanner)
+		|| !parse_double(scanner, &position->y)
+		|| !scan_comma(scanner)
+		|| !parse_double(scanner, &position->z))
 		return (FALSE);
 	return (TRUE);
 }
