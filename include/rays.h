@@ -6,10 +6,11 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 10:17:15 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/30 18:19:33 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:40:17 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/// @file rays.h
 #ifndef RAYS_H
 # define RAYS_H
 

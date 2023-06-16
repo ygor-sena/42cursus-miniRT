@@ -1,0 +1,27 @@
+var tuples_8h =
+[
+    [ "s_tuple", "structs__tuple.html", "structs__tuple" ],
+    [ "s_color", "structs__color.html", "structs__color" ],
+    [ "t_color", "tuples_8h.html#a43da74144dd0bc8864f91dfed33bd6bf", null ],
+    [ "t_point", "tuples_8h.html#a499dd2c8e66cb9e3d0f581a58df46b40", null ],
+    [ "t_tuple", "tuples_8h.html#a2169f9a7bb6d3ded00c7d8a718af65af", null ],
+    [ "t_vector", "tuples_8h.html#aea609bcc1e9134165bc86014c7974ec7", null ],
+    [ "add", "tuples_8h.html#aaf01ab17525ee6d57129c5ba5c94c448", null ],
+    [ "add_color", "tuples_8h.html#a91b7ed8096607dc1b097a08aa80c8b97", null ],
+    [ "cross", "tuples_8h.html#a8eaa25e6f960107d31c18e55d423bef9", null ],
+    [ "divide", "tuples_8h.html#a9b129eae1933bf3bed7af0d939296d56", null ],
+    [ "dot", "tuples_8h.html#afbdf6db5149d7efd4ba550624feeda00", null ],
+    [ "hadamard_product", "tuples_8h.html#a5872e0d11701b91a3b75d5664278a2b2", null ],
+    [ "magnitude", "tuples_8h.html#acd9350f4296b7f51461048564f7fa07f", null ],
+    [ "multiply", "tuples_8h.html#adb90ae888436ed8b2c127b75e98292a6", null ],
+    [ "multiply_color", "tuples_8h.html#ab688dce91569b246792e32fb2108077c", null ],
+    [ "negate", "tuples_8h.html#a9da14e746e44eb96c9a43b9ad7972c4f", null ],
+    [ "new_color", "tuples_8h.html#a699bdcc97a6ea92a458d81c5ef198950", null ],
+    [ "normalize", "tuples_8h.html#a4b6e6a5e1ac158f7d3504130d2bccd44", null ],
+    [ "point", "tuples_8h.html#abd0ad1d76c573e7816318b2d5a9efe64", null ],
+    [ "reflect", "tuples_8h.html#ab6b63350165cbd8cb181657b296f6583", null ],
+    [ "subtract", "tuples_8h.html#aa7e4408a46cea1573bfa077bc0b3f3c3", null ],
+    [ "subtract_color", "tuples_8h.html#a0454ae7e68d2dfc2d477696a93b43c71", null ],
+    [ "tuple", "tuples_8h.html#a781311ed1a4373afee4f1cfd38f71ff4", null ],
+    [ "vector", "tuples_8h.html#a3d1d2f7d5266743d5a19a0a246d39064", null ]
+];

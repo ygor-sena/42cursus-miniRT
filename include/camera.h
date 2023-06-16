@@ -6,10 +6,11 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 12:29:11 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/30 18:19:13 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:39:48 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/// @file camera.h
 #ifndef CAMERA_H
 # define CAMERA_H
 

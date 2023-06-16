@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 14:48:10 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/06/08 22:48:28 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:39:56 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/// @file helpers.h
 #ifndef HELPERS_H
 # define HELPERS_H
 
