@@ -1,0 +1,17 @@
+<map id="s_shape" name="s_shape">
+<area shape="rect" id="node1" title=" " alt="" coords="421,560,496,587"/>
+<area shape="rect" id="node2" href="$structs__cone.html" title="The structure t_cone represents a cone." alt="" coords="5,471,72,497"/>
+<area shape="rect" id="node3" href="$structs__tuple.html" title="Tuple means a list of ordered things. The struct t_tuple stores coordinates for a left&#45;handed coordin..." alt="" coords="216,351,285,377"/>
+<area shape="rect" id="node4" href="$structs__plane.html" title="The structure t_plane represents a plane." alt="" coords="215,471,287,497"/>
+<area shape="rect" id="node5" href="$structs__sphere.html" title="The structure t_sphere represents a sphere." alt="" coords="311,471,391,497"/>
+<area shape="rect" id="node6" href="$structs__cylinder.html" title="The structure t_cylinder represents a cylinder." alt="" coords="415,471,503,497"/>
+<area shape="rect" id="node7" href="$structs__material.html" title="A material has a surface color and four attributes from the Phong Reflection Model: ambient,..." alt="" coords="727,471,817,497"/>
+<area shape="rect" id="node8" href="$structs__pattern.html" title="The type t_pattern contatins all the necessary information to apply a texture on a given shape&#39;s surf..." alt="" coords="731,351,813,377"/>
+<area shape="rect" id="node9" href="$structs__text__map.html" title="This structure creates a t_pattern subclass (the same as t_pttr_at, which calls stripe_at() or checke..." alt="" coords="723,229,821,256"/>
+<area shape="rect" id="node10" href="$structs__checker.html" title="This structure encapsulates the function uv_checkers()." alt="" coords="621,109,707,136"/>
+<area shape="rect" id="node11" href="$structs__color.html" title="The struct s_color stores the color values of ray tracing. It contains a field for red,..." alt="" coords="846,5,914,32"/>
+<area shape="rect" id="node12" href="$structs__uv__image.html" title="The struct of type t_uv_image represents an image used for texturing another image." alt="" coords="731,109,831,136"/>
+<area shape="rect" id="node13" href="$structs__matrix.html" title="The struct t_matrix stores a matrix up to 4x4 and size of 16. A matrix is a grid of numbers that can ..." alt="" coords="606,229,685,256"/>
+<area shape="rect" id="node14" href="$structs__hit.html" title="The structure t_hit stores a linked list of ray&#45;shape intersections&#39; values." alt="" coords="959,471,1012,497"/>
+<area shape="rect" id="node15" href="$structt__shape.html" title="Represents a shape in a scene." alt="" coords="1006,351,1079,377"/>
+</map>

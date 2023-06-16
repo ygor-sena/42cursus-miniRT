@@ -1,0 +1,5 @@
+<map id="s_exposure" name="s_exposure">
+<area shape="rect" id="node1" title="The struct s_exposure contains the necessary fields to calculate the a scene&#39;s lighting...." alt="" coords="39,109,135,136"/>
+<area shape="rect" id="node2" href="$structs__tuple.html" title="Tuple means a list of ordered things. The struct t_tuple stores coordinates for a left&#45;handed coordin..." alt="" coords="5,5,75,32"/>
+<area shape="rect" id="node3" href="$structs__color.html" title="The struct s_color stores the color values of ray tracing. It contains a field for red,..." alt="" coords="99,5,167,32"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="s_checker" name="s_checker">
+<area shape="rect" id="node1" title="This structure encapsulates the function uv_checkers()." alt="" coords="5,109,92,136"/>
+<area shape="rect" id="node2" href="$structs__color.html" title="The struct s_color stores the color values of ray tracing. It contains a field for red,..." alt="" coords="15,5,83,32"/>
+</map>

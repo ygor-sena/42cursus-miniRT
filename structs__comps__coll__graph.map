@@ -1,0 +1,6 @@
+<map id="s_comps" name="s_comps">
+<area shape="rect" id="node1" title="This structure of type t_comps stores some precomputed values that are useful when working intersecti..." alt="" coords="111,201,190,228"/>
+<area shape="rect" id="node2" href="$structs__sight.html" title="The struct s_sight represents the human eye looking forwards." alt="" coords="117,111,185,137"/>
+<area shape="rect" id="node3" href="$structs__tuple.html" title="Tuple means a list of ordered things. The struct t_tuple stores coordinates for a left&#45;handed coordin..." alt="" coords="5,5,75,32"/>
+<area shape="rect" id="node4" href="$structt__shape.html" title="Represents a shape in a scene." alt="" coords="209,111,282,137"/>
+</map>

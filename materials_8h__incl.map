@@ -1,0 +1,12 @@
+<map id="materials.h" name="materials.h">
+<area shape="rect" id="node1" title=" " alt="" coords="131,5,227,32"/>
+<area shape="rect" id="node2" href="$lights_8h.html" title=" " alt="" coords="91,155,162,181"/>
+<area shape="rect" id="node9" href="$patterns_8h.html" title=" " alt="" coords="181,80,269,107"/>
+<area shape="rect" id="node3" href="$tuples_8h.html" title=" " alt="" coords="195,229,269,256"/>
+<area shape="rect" id="node6" href="$helpers_8h.html" title=" " alt="" coords="5,229,88,256"/>
+<area shape="rect" id="node8" title=" " alt="" coords="112,229,171,256"/>
+<area shape="rect" id="node4" title=" " alt="" coords="198,304,266,331"/>
+<area shape="rect" id="node5" title=" " alt="" coords="103,304,174,331"/>
+<area shape="rect" id="node7" title=" " alt="" coords="12,304,79,331"/>
+<area shape="rect" id="node10" href="$matrices_8h.html" title=" " alt="" coords="187,155,277,181"/>
+</map>

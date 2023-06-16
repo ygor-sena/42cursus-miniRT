@@ -1,0 +1,4 @@
+<map id="s_camera" name="s_camera">
+<area shape="rect" id="node1" title="The structure of type t_camera contains the necessary information for camera configuration,..." alt="" coords="5,124,91,151"/>
+<area shape="rect" id="node2" href="$structs__matrix.html" title="The struct t_matrix stores a matrix up to 4x4 and size of 16. A matrix is a grid of numbers that can ..." alt="" coords="9,5,87,32"/>
+</map>

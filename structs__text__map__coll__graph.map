@@ -1,0 +1,6 @@
+<map id="s_text_map" name="s_text_map">
+<area shape="rect" id="node1" title="This structure creates a t_pattern subclass (the same as t_pttr_at, which calls stripe_at() or checke..." alt="" coords="66,213,165,240"/>
+<area shape="rect" id="node2" href="$structs__checker.html" title="This structure encapsulates the function uv_checkers()." alt="" coords="5,109,92,136"/>
+<area shape="rect" id="node3" href="$structs__color.html" title="The struct s_color stores the color values of ray tracing. It contains a field for red,..." alt="" coords="15,5,83,32"/>
+<area shape="rect" id="node4" href="$structs__uv__image.html" title="The struct of type t_uv_image represents an image used for texturing another image." alt="" coords="116,109,216,136"/>
+</map>

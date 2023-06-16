@@ -1,0 +1,4 @@
+<map id="s_ray" name="s_ray">
+<area shape="rect" id="node1" title="The struct of type t_ray represents a ray, which is the foundation for ray casting...." alt="" coords="11,109,69,136"/>
+<area shape="rect" id="node2" href="$structs__tuple.html" title="Tuple means a list of ordered things. The struct t_tuple stores coordinates for a left&#45;handed coordin..." alt="" coords="5,5,75,32"/>
+</map>

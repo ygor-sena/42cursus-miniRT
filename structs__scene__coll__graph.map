@@ -1,0 +1,11 @@
+<map id="s_scene" name="s_scene">
+<area shape="rect" id="node1" title="The structure t_scene is how the user sees the ray tracing rendering. There is a camera from which th..." alt="" coords="253,303,327,329"/>
+<area shape="rect" id="node2" href="$structs__world.html" title="This struct contains everything related to the building of a ray tracing&#39;s world. The world has objec..." alt="" coords="203,213,275,240"/>
+<area shape="rect" id="node3" href="$structt__shape.html" title="Represents a shape in a scene." alt="" coords="5,5,79,32"/>
+<area shape="rect" id="node7" href="$structs__hit.html" title="The structure t_hit stores a linked list of ray&#45;shape intersections&#39; values." alt="" coords="81,95,134,121"/>
+<area shape="rect" id="node4" href="$structs__color.html" title="The struct s_color stores the color values of ray tracing. It contains a field for red,..." alt="" coords="227,5,295,32"/>
+<area shape="rect" id="node5" href="$structs__light.html" title="The struct s_light represents a light&#39;s source. This source has a position in space and an intensity ..." alt="" coords="323,95,388,121"/>
+<area shape="rect" id="node6" href="$structs__tuple.html" title="Tuple means a list of ordered things. The struct t_tuple stores coordinates for a left&#45;handed coordin..." alt="" coords="341,5,410,32"/>
+<area shape="rect" id="node8" href="$structs__camera.html" title="The structure of type t_camera contains the necessary information for camera configuration,..." alt="" coords="354,213,439,240"/>
+<area shape="rect" id="node9" href="$structs__matrix.html" title="The struct t_matrix stores a matrix up to 4x4 and size of 16. A matrix is a grid of numbers that can ..." alt="" coords="412,95,491,121"/>
+</map>

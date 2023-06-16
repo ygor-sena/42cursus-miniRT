@@ -1,0 +1,8 @@
+<map id="s_pattern" name="s_pattern">
+<area shape="rect" id="node1" title="The type t_pattern contatins all the necessary information to apply a texture on a given shape&#39;s surf..." alt="" coords="73,347,155,373"/>
+<area shape="rect" id="node2" href="$structs__text__map.html" title="This structure creates a t_pattern subclass (the same as t_pttr_at, which calls stripe_at() or checke..." alt="" coords="67,228,166,255"/>
+<area shape="rect" id="node3" href="$structs__checker.html" title="This structure encapsulates the function uv_checkers()." alt="" coords="57,109,144,136"/>
+<area shape="rect" id="node4" href="$structs__color.html" title="The struct s_color stores the color values of ray tracing. It contains a field for red,..." alt="" coords="5,5,73,32"/>
+<area shape="rect" id="node5" href="$structs__uv__image.html" title="The struct of type t_uv_image represents an image used for texturing another image." alt="" coords="168,109,268,136"/>
+<area shape="rect" id="node6" href="$structs__matrix.html" title="The struct t_matrix stores a matrix up to 4x4 and size of 16. A matrix is a grid of numbers that can ..." alt="" coords="193,228,272,255"/>
+</map>

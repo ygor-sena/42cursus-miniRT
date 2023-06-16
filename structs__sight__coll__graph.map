@@ -1,0 +1,4 @@
+<map id="s_sight" name="s_sight">
+<area shape="rect" id="node1" title="The struct s_sight represents the human eye looking forwards." alt="" coords="6,109,74,136"/>
+<area shape="rect" id="node2" href="$structs__tuple.html" title="Tuple means a list of ordered things. The struct t_tuple stores coordinates for a left&#45;handed coordin..." alt="" coords="5,5,75,32"/>
+</map>

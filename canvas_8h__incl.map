@@ -1,0 +1,18 @@
+<map id="canvas.h" name="canvas.h">
+<area shape="rect" id="node1" title=" " alt="" coords="116,5,196,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="96,453,155,480"/>
+<area shape="rect" id="node3" title=" " alt="" coords="256,80,315,107"/>
+<area shape="rect" id="node4" href="$camera_8h.html" title=" " alt="" coords="65,229,148,256"/>
+<area shape="rect" id="node10" href="$world_8h.html" title=" " alt="" coords="161,80,231,107"/>
+<area shape="rect" id="node5" href="$tuples_8h.html" title=" " alt="" coords="179,453,253,480"/>
+<area shape="rect" id="node8" href="$matrices_8h.html" title=" " alt="" coords="131,379,221,405"/>
+<area shape="rect" id="node9" href="$rays_8h.html" title=" " alt="" coords="145,304,207,331"/>
+<area shape="rect" id="node6" title=" " alt="" coords="275,528,343,555"/>
+<area shape="rect" id="node7" title=" " alt="" coords="181,528,251,555"/>
+<area shape="rect" id="node11" href="$lights_8h.html" title=" " alt="" coords="283,379,354,405"/>
+<area shape="rect" id="node14" href="$shapes_8h.html" title=" " alt="" coords="171,155,251,181"/>
+<area shape="rect" id="node12" href="$helpers_8h.html" title=" " alt="" coords="277,453,360,480"/>
+<area shape="rect" id="node13" title=" " alt="" coords="368,528,435,555"/>
+<area shape="rect" id="node15" href="$materials_8h.html" title=" " alt="" coords="273,229,369,256"/>
+<area shape="rect" id="node16" href="$patterns_8h.html" title=" " alt="" coords="232,304,320,331"/>
+</map>
