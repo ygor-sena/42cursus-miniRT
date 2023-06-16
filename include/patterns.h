@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   patterns.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:21:56 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/06/08 21:13:10 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:40:14 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/// @file patterns.h
 #ifndef PATTERNS_H
 # define PATTERNS_H
 

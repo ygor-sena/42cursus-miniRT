@@ -6,10 +6,11 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:17:44 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/05/31 16:24:21 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:40:27 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/// @file world.h
 #ifndef WORLD_H
 # define WORLD_H
 

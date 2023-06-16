@@ -6,10 +6,11 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:06:23 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/31 16:20:55 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:39:59 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/// @file lights.h
 #ifndef LIGHTS_H
 # define LIGHTS_H
 

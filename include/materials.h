@@ -6,10 +6,11 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 11:05:52 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/30 18:19:25 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:40:04 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/// @file materials.h
 #ifndef MATERIALS_H
 # define MATERIALS_H
 

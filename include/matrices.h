@@ -6,10 +6,11 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:06 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/31 16:22:55 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:40:07 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/// @file matrices.h
 #ifndef MATRICES_H
 # define MATRICES_H
 
