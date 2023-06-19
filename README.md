@@ -24,7 +24,7 @@ The 11th project of 42's curriculum is an introduction to the beautiful world of
 #### 1) Copy this repository to your local workstation
 
 ```
-git@github.com:ygor-sena/42cursus-miniRT.git
+git clone https://github.com/ygor-sena/42cursus-miniRT.git
 ```
 
 #### 2) Install the required libraries to run the project and the unit tests
