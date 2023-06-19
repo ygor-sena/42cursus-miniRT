@@ -24,7 +24,7 @@ The 11th project of 42's curriculum is an introduction to the beautiful world of
 #### 1) Copy this repository to your local workstation
 
 ```
-git@github.com:ygor-sena/42cursus-miniRT.git
+git clone https://github.com/ygor-sena/42cursus-miniRT.git
 ```
 
 #### 2) Install the required libraries to run the project and the unit tests
@@ -204,7 +204,7 @@ With the implementation of the matrix cache, the time spent on matrix calculatio
     *   [miniRT](https://github.com/rodrigo-br/miniRT_42) by [rodrigo-br](https://github.com/rodrigo-br) and [araggonhnxd](https://github.com/araggohnxd).
     *   [miniRT](https://github.com/appinha/42cursus-02-miniRT) by [appinha](https://github.com/appinha).
 
-🫂 Awknowledgements
+🫂 Acknowledgements
 -------------------
 
 Thanks to [Larissa Silva](https://github.com/leaozim), [Rodrigo Alves](https://github.com/rodrigo-br) and [Matheus Oliveira](https://github.com/araggohnxd) for being so helpful when we needed it. Last but not least, a huge thanks to [Jamis Buck](https://github.com/jamis), who wrote the amazing book [The Ray Tracer Challenge](http://raytracerchallenge.com/) and made the development of this project joyful.
