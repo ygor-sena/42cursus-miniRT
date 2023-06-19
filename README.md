@@ -14,7 +14,7 @@
 
 The 11th project of 42's curriculum is an introduction to the beautiful world of Raytracing and it asks students to render simple Computer-Generated-Images so that they will never be afraid of implementing mathematical formulas again. This project makes possible to create scenes such as the one below, an image of our beautiful pale blue bot called Earth.
 
-The detailed Doxygen documentation of this project can be read [here](https://ygor-sena.github.io/42cursus-miniRT/).
+🚨🚨 [The detailed Doxygen documentation of this project can be read here](https://ygor-sena.github.io/42cursus-miniRT/). 🚨🚨
 
 ![](https://github.com/ygor-sena/42cursus-miniRT/assets/102881479/402e660f-3ca7-4b66-a49a-fee296dc60cb)
 
@@ -58,28 +58,29 @@ Every line will have an `<id>`, an `<object_type>` and one or more corresponding
 
 |ID|Object type|Parameter (arguments)|Usage example|
 |:--|:--|:--|:--|
-|`A`|Ambient light|Intensity value (0-1)| `1`|
+|`A`|Ambient lighting|Lighting ratio (0-1)| `1`|
 |||RGB color (red, green, blue)(0-255)| `255,255,255`|
-|`C`|Camera|Coordinates (x, y, z)|`0,15,-5`|
-|||Camera view (x, y, z)| `1,0,0`|
-|||Point of view (x, y, z)(0-180)| `10`
-|`L`|Light source|Coordinates (x, y, z)|`0,0,5`|
-|||Brightness (0-1)| `0.5`|
+|`C`|Camera|Coordinates of the view point (x, y, z)|`0,15,-5`|
+|||3D normalized orientation vector (x, y, z)(-1-1)| `1,0,0`|
+|||Horizontal point of view in degrees (x, y, z)(0-180)| `10`
+|`L`|Light source|Coordinates of the light point (x, y, z)|`0,0,5`|
+|||Brightness ratio (0-1)| `0.5`|
 |||RGB color (red, green, blue)(0-255)| `0,255,0`|
-|`sp`|Sphere|Coordinates (x, y, z)|`0,0,0`|
-|||Diameter (greater than 0)|`2`|
+|`sp`|Sphere|Coordinates of the sphere center (x, y, z)|`0,0,0`|
+|||The sphere diameter (greater than 0)|`2`|
 |||RGB color (red, green, blue)(0-255)| `255,55,255`|
-|`pl`|Plane|Coordinates (x, y, z)|`0,0,0`|
-|||Origin (x, y, z)|`0,1,0`|
+|`pl`|Plane|Coordinates of a point in the plane (x, y, z)|`0,0,0`|
+|||3D normalized origin vector (x, y, z)(-1-1)|`0,1,0`|
 |||RGB color (red, green, blue)(0-255)| `98,130,229`|
-|`cy`|Cylinder|Coordinates (x, y, z)|`1,3,1`|
-|||Orientation (x, y, z)| `0,1,0`|
-|||Diameter (greater than 0)|`4`|
+|`cy`|Cylinder|Coordinates of the center of the cylinder (x, y, z)|`1,3,1`|
+|||3D normalized vector of axis of cylinder (x, y, z)(-1-1)| `0,1,0`|
+|||The cylinder diameter (greater than 0)|`4`|
+|||The cylinder height|`2`|
 |||RGB color (red, green, blue)(0-255)| `40,220,55`|
-|`cn`|Cone|Coordinates (x, y, z)|`1,3,1`|
-|||Orientation (x, y, z)| `0,1,0`|
-|||Diameter (greater than 0)|`4`|
-|||Height|`2`|
+|`cn`|Cone|Coordinates of the center of the cone (x, y, z)|`1,3,1`|
+|||3D normalized vector of axis of cone (x, y, z)| `0,1,0`|
+|||The cone diameter (greater than 0)|`4`|
+|||The cone height|`2`|
 |||RGB color (red, green, blue)(0-255)| `122,23,230`|
 
 If the user wants to create a blue (`0,0,255`) light source (`L`) located at `-10,10-10` with maximum brightness (`1`), the configuration as follows:
