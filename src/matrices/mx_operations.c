@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 10:44:17 by yde-goes          #+#    #+#             */
-/*   Updated: 2023/05/26 09:08:38 by yde-goes         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:15:26 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_matrix	transpose(t_matrix	t)
 }
 
 t_matrix	inverse(t_matrix t)
-{	
+{
 	double	inverted[MAX][MAX];
 	double	determinant;	
 	size_t	row;
