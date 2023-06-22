@@ -6,7 +6,7 @@ var annotated_dup =
     [ "📜 Requirements", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md7", null ],
     [ "📈 About how we implemented the project", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md8", null ],
     [ "🚀 Optimizations", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md9", [
-      [ "Memory Pool for Intersection Storage", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md10", [
+      [ "1) Memory Pool for Intersection Storage", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md10", [
         [ "1) Copy this repository to your local workstation", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md2", null ],
         [ "2) Install the required libraries to run the project and the unit tests", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md3", null ],
         [ "3) Compile the project with Makefile", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md4", null ],
@@ -15,13 +15,13 @@ var annotated_dup =
         [ "Solution", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md12", null ],
         [ "Result", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md13", null ]
       ] ],
-      [ "Matrix Cache for Object Transformations", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md14", [
+      [ "2) Matrix Cache for Object Transformations", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md14", [
         [ "Problem", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md15", null ],
         [ "Solution", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md16", null ],
         [ "Result", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md17", null ]
       ] ]
     ] ],
-    [ "📖 References:", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md18", null ],
+    [ "📖 References", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md18", null ],
     [ "🫂 Acknowledgements", "md__home_ygorgsena_42_CURSUS_42_miniRT_README.html#autotoc_md19", null ],
     [ "s_camera", "structs__camera.html", "structs__camera" ],
     [ "s_canvas", "structs__canvas.html", "structs__canvas" ],

@@ -104,6 +104,7 @@ $(document).ready(function(){initNavTree('md__home_ygorgsena_42_CURSUS_42_miniRT
 📣 Introduction</h2>
 <p>The 11th project of 42's curriculum is an introduction to the beautiful world of Raytracing and it asks students to render simple Computer-Generated-Images so that they will never be afraid of implementing mathematical formulas again. This project makes possible to create scenes such as the one below, an image of our beautiful pale blue bot called Earth.</p>
 <p>🚨🚨 <a href="https://ygor-sena.github.io/42cursus-miniRT/">The detailed Doxygen documentation of this project can be read here</a>. 🚨🚨</p>
+<p>The aforementioned Doxygen documentation of this project was created with love and care. We hope that it can be a great asset to assist the 42 students currently working on this project. If you have any doubts, feel free to reach out to us!</p>
 <p><img src="https://github.com/ygor-sena/42cursus-miniRT/assets/102881479/402e660f-3ca7-4b66-a49a-fee296dc60cb" alt="" class="inline"/></p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 ⚒️ How to compile and run the project</h2>
@@ -122,8 +123,8 @@ $(document).ready(function(){initNavTree('md__home_ygorgsena_42_CURSUS_42_miniRT
 </div><!-- fragment --><p>If you want to run the scenes we've used to defend the project, it's possible to use any file between <code>img00.rt</code> and <code>img19.rt</code> located inside the folder <code>images</code>. For example:</p>
 <div class="fragment"><div class="line">./miniRT images/img18.rt</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md6"></a>
-⚙️ How to configure a .rt file to render an image</h2>
-<p>Every line will have an <code>&lt;id&gt;</code>, an <code>&lt;object_type&gt;</code> and one or more corresponding <code>&lt;parameters&gt;</code> to the given object type, in this order. The following table sums up how to build and render images and provides usage examples.</p>
+⚙️ How to configure a &lt;tt&gt;.rt&lt;/tt&gt; file to render an image</h2>
+<p>Every line will have an <code>&lt;id&gt;</code>, an <code>&lt;object_type&gt;</code> and one or more corresponding <code>&lt;parameters&gt;</code> to the given object type, in this order. The following table sums up how to build and render images and it also provides usage examples.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">ID   </th><th class="markdownTableHeadLeft">Object type   </th><th class="markdownTableHeadLeft">Parameter (arguments)   </th><th class="markdownTableHeadLeft">Usage example    </th></tr>
@@ -176,7 +177,7 @@ $(document).ready(function(){initNavTree('md__home_ygorgsena_42_CURSUS_42_miniRT
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft" colspan="2"></td><td class="markdownTableBodyLeft">RGB color (red, green, blue)(0-255)   </td><td class="markdownTableBodyLeft"><code>122,23,230</code>   </td></tr>
 </table>
-<p>If the user wants to create a blue (<code>0,0,255</code>) light source (<code>L</code>) located at <code>-10,10-10</code> with maximum brightness (<code>1</code>), the configuration as follows: </p><div class="fragment"><div class="line">L   -10,10,-10    1   0,0,255</div>
+<p>If the user wants to create a blue (<code>0,0,255</code>) light source (<code>L</code>) located at <code>-10,10-10</code> with maximum brightness (<code>1</code>), the configuration is as follows: </p><div class="fragment"><div class="line">L   -10,10,-10    1   0,0,255</div>
 </div><!-- fragment --><p><b>‼️Important notes:</b> after the mandatory parameters above, it's possible to pass some extra parameters to any given shape (sphere, cylinder, cone or plane) so that it can have a checkerboard pattern or a bumpmap applied to its surface. To assign a checkerboard pattern to a given shape, the extra parameters are:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -195,7 +196,7 @@ $(document).ready(function(){initNavTree('md__home_ygorgsena_42_CURSUS_42_miniRT
 <p>For instance, to render a sphere with the same configurations and a bumpmap applied to its surface instead, the setting is: </p><div class="fragment"><div class="line">sp   1.5,0.5,-0.5   1   255,255,255   bumpmap textures/earth.xpm</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
 📜 Requirements</h2>
-<p><img src="https://github.com/ygor-sena/42cursus-miniRT/assets/102881479/708fa7d4-f6fe-4272-9f14-d9b443ddcd80" alt="miniRT" class="inline" height="1500"/>
+<p><img src="https://github.com/ygor-sena/42cursus-miniRT/assets/102881479/708fa7d4-f6fe-4272-9f14-d9b443ddcd80" alt="miniRT" class="inline" width="1500"/>
 <h2><a class="anchor" id="autotoc_md8"></a>
 📈 About how we implemented the project</h2>
 <p>To develop this project, we closely followed the book <a href="http://raytracerchallenge.com/">The Ray Tracer Challenge: a test-driven guide to your first 3D Renderer</a>. The unit tests were created using <a href="https://github.com/Snaipe/Criterion">Criterion</a>, a dead-simple, yet extensible, C and C++ unit testing framework. Lastly, to generate an automated documentation we used Doxygen, which is the <em>de facto</em> standard tool for generating documentation from annotated C sources and many other languages.</p>
@@ -227,7 +228,7 @@ $(document).ready(function(){initNavTree('md__home_ygorgsena_42_CURSUS_42_miniRT
 🚀 Optimizations</h2>
 <p>The program underwent several optimizations to improve performance and efficiency. Two of these optimizations include:</p>
 <h3><a class="anchor" id="autotoc_md10"></a>
-Memory Pool for Intersection Storage</h3>
+1) Memory Pool for Intersection Storage</h3>
 <h4><a class="anchor" id="autotoc_md11"></a>
 Problem</h4>
 <p>Previously, the linked list of ray intersections with objects was dynamically allocated using <code>malloc</code> and freed with <code>free</code> when no longer needed. This approach resulted in repeated system calls, negatively impacting the program's performance.</p>
@@ -238,7 +239,7 @@ Solution</h4>
 Result</h4>
 <p>This optimization significantly reduced the time spent on memory allocation and deallocation. In a test using a standard image containing a sphere, ambient light, and a focal point light, the intersection recording was called an average of 149,000 times. Prior to the optimization, each call resulted in a <code>malloc</code> and <code>free</code> call for each node, negatively impacting the program's performance. With the implementation of the memory pool, the <code>malloc</code> and <code>free</code> calls were eliminated, resulting in a significant performance improvement.</p>
 <h3><a class="anchor" id="autotoc_md14"></a>
-Matrix Cache for Object Transformations</h3>
+2) Matrix Cache for Object Transformations</h3>
 <h4><a class="anchor" id="autotoc_md15"></a>
 Problem</h4>
 <p>Matrix operations, such as inverse and transpose calculations, accounted for a significant portion of the program's execution time, consuming approximately 40% of the total time. This resulted in a high performance cost, especially considering that the object transformation matrices remain constant during the rendering of static images.</p>
@@ -249,7 +250,7 @@ Solution</h4>
 Result</h4>
 <p>With the implementation of the matrix cache, the time spent on matrix calculations was significantly reduced. The calculations are now performed only once, and the results are stored in the cache, improving the efficiency of object transformation calculations. This optimization contributed to an overall improvement in program performance, especially in scenes with multiple transformations.</p>
 <h2><a class="anchor" id="autotoc_md18"></a>
-📖 References:</h2>
+📖 References</h2>
 <ul>
 <li>General references:<ul>
 <li><a href="http://raytracerchallenge.com/">BUCK, Jamis. The Ray Tracer Challenge: a test-driven guide to your first 3D Renderer</a>.</li>
