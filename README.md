@@ -16,6 +16,8 @@ The 11th project of 42's curriculum is an introduction to the beautiful world of
 
 🚨🚨 [The detailed Doxygen documentation of this project can be read here](https://ygor-sena.github.io/42cursus-miniRT/). 🚨🚨
 
+The aforementioned Doxygen documentation of this project was created with love and care. We hope that it can be a great asset to assist the 42 students currently working on this project. If you have any doubts, feel free to reach out to us!
+
 ![](https://github.com/ygor-sena/42cursus-miniRT/assets/102881479/402e660f-3ca7-4b66-a49a-fee296dc60cb)
 
 ⚒️ How to compile and run the project
