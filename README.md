@@ -54,7 +54,7 @@ If you want to run the scenes we've used to defend the project, it's possible to
 ⚙️ How to configure a `.rt` file to render an image
 ----------------------------------------------------
 
-Every line will have an `<id>`, an `<object_type>` and one or more corresponding `<parameters>` to the given object type, in this order. The following table sums up how to build and render images and provides usage examples.
+Every line will have an `<id>`, an `<object_type>` and one or more corresponding `<parameters>` to the given object type, in this order. The following table sums up how to build and render images and it also provides usage examples.
 
 |ID|Object type|Parameter (arguments)|Usage example|
 |:--|:--|:--|:--|
@@ -83,7 +83,7 @@ Every line will have an `<id>`, an `<object_type>` and one or more corresponding
 |||The cone height|`2`|
 |||RGB color (red, green, blue)(0-255)| `122,23,230`|
 
-If the user wants to create a blue (`0,0,255`) light source (`L`) located at `-10,10-10` with maximum brightness (`1`), the configuration as follows:
+If the user wants to create a blue (`0,0,255`) light source (`L`) located at `-10,10-10` with maximum brightness (`1`), the configuration is as follows:
 ```
 L   -10,10,-10    1   0,0,255
 ```
@@ -150,7 +150,7 @@ There are seven main folders at projects's root directory, they are:
 
 The program underwent several optimizations to improve performance and efficiency. Two of these optimizations include:
 
-### Memory Pool for Intersection Storage
+### 1) Memory Pool for Intersection Storage
 
 #### Problem
 
@@ -164,7 +164,7 @@ To avoid the repeated calls to `malloc` and `free`, we implemented a memory pool
 
 This optimization significantly reduced the time spent on memory allocation and deallocation. In a test using a standard image containing a sphere, ambient light, and a focal point light, the intersection recording was called an average of 149,000 times. Prior to the optimization, each call resulted in a `malloc` and `free` call for each node, negatively impacting the program's performance. With the implementation of the memory pool, the `malloc` and `free` calls were eliminated, resulting in a significant performance improvement.
 
-### Matrix Cache for Object Transformations
+### 2) Matrix Cache for Object Transformations
 
 #### Problem
 
@@ -178,7 +178,7 @@ To optimize performance, we implemented a matrix cache. When assigning a transfo
 
 With the implementation of the matrix cache, the time spent on matrix calculations was significantly reduced. The calculations are now performed only once, and the results are stored in the cache, improving the efficiency of object transformation calculations. This optimization contributed to an overall improvement in program performance, especially in scenes with multiple transformations.
 
-📖 References:
+📖 References
 --------------
 
 *   General references:
