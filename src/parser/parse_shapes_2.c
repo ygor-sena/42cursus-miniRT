@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_shapes_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdias-ma <mdias-ma@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:27:09 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/06/11 10:27:33 by mdias-ma         ###   ########.fr       */
+/*   Updated: 2024/04/04 09:33:36 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-typedef struct s_param
-{
-	t_point		origin;
-	t_vector	direction;
-	double		diameter;
-	double		height;
-	float		radius;
-	float		minimum;
-	float		maximum;
-}	t_param;
 
 static void	set_cone_attributes(t_shape *shape, t_param param);
 static void	set_cylinder_attributes(t_shape *shape, t_param param);

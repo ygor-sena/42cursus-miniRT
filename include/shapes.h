@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:05:41 by mdias-ma          #+#    #+#             */
-/*   Updated: 2023/06/16 13:40:21 by yde-goes         ###   ########.fr       */
+/*   Updated: 2024/04/04 09:30:35 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ typedef t_tuple				(*t_normal_at)(t_shape *, t_tuple);
  */
 typedef struct s_shape
 {
-	union {
+	union
+	{
 		t_sphere	sphere;
 		t_plane		plane;
 		t_cylinder	cylinder;
