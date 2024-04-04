@@ -6,7 +6,7 @@
 /*   By: yde-goes <yde-goes@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:11:15 by mdias-ma          #+#    #+#             */
-/*   Updated: 2024/04/04 09:50:05 by yde-goes         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:28:12 by yde-goes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,16 @@ typedef enum e_token
 }	t_token;
 
 /**
- * @brief Stores the parameters of the shapes cone and cylinder from configuration
- * file after they have been verified by the scanner. 
+ * @brief Stores the parameters of the shapes cone and cylinder from
+ * configuration file after they have been verified by the scanner. 
  *
  * @param origin Stores the origin of the cone or cylinder.
  * @param direction Stores the direction of the cone or cylinder.
  * @param diameter Stores the diameter of the cone or cylinder.
  * @param height Stores the height of the cone or cylinder.
  * @param radius Stores the radius of the cone or cylinder.
- * @param minimum Stores the cone or cylinder minimum height, i.e, lowest height.
- * @param maximum Stores the cone or cylinder maxinum height, i.e, highest height.
+ * @param minimum Stores the cone or cylinder minimum height/lowest height.
+ * @param maximum Stores the cone or cylinder maxinum height/highest height.
  */
 typedef struct s_param
 {
